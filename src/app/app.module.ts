@@ -2,9 +2,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { Routes, RouterModule } from '@angular/router';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+
+const routes: Routes = [
+    {
+        path: '',
+        children: [],
+    },
+];
 
 
 @NgModule({
@@ -15,7 +23,7 @@ import { AppComponent } from './app.component';
         BrowserModule,
         FormsModule,
         HttpModule,
-        AppRoutingModule,
+        RouterModule.forRoot(routes),
     ],
     providers: [],
     bootstrap: [AppComponent],
