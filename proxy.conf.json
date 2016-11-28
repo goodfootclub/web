@@ -1,0 +1,5 @@
+[{
+    "context": ["/api/**", "/auth/**", "/static/**", "/media/**"],
+    "target": "http://localhost:8000",
+    "secure": false
+}]
