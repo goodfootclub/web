@@ -69,6 +69,12 @@
         "semicolon": [
             "always"
         ],
+        "trailing-comma": [
+            true, {
+                "multiline": "always",
+                "singleline": "never"
+            }
+        ],
         "triple-equals": [
             true,
             "allow-null-check"
@@ -92,8 +98,8 @@
             "check-type"
         ],
 
-        "directive-selector-prefix": [true, "app"],
-        "component-selector-prefix": [true, "app"],
+        "directive-selector-prefix": [false, "app"],
+        "component-selector-prefix": [false, "app"],
         "directive-selector-name": [true, "camelCase"],
         "component-selector-name": [true, "kebab-case"],
         "directive-selector-type": [true, "attribute"],

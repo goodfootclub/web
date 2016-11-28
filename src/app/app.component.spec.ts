@@ -10,12 +10,12 @@ describe('AppComponent', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [
-                AppComponent
+                AppComponent,
             ],
             imports: [
                 RouterTestingModule.withRoutes([
-                    { path: '', component: AppComponent }
-                ])
+                    { path: '', component: AppComponent },
+                ]),
             ],
         });
     });

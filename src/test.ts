@@ -9,10 +9,11 @@ import 'zone.js/dist/fake-async-test';
 import { getTestBed } from '@angular/core/testing';
 import {
     BrowserDynamicTestingModule,
-    platformBrowserDynamicTesting
+    platformBrowserDynamicTesting,
 } from '@angular/platform-browser-dynamic/testing';
 
-// Unfortunately there's no typing for the `__karma__` variable. Just declare it as any.
+// Unfortunately there's no typing for the `__karma__` variable.
+// Just declare it as any.
 declare var __karma__: any;
 declare var require: any;
 
