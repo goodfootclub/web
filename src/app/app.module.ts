@@ -3,11 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
+import { MaterialModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 
 
-const routes: Routes = [
+export const ROUTES: Routes = [
     {
         path: '',
         children: [],
@@ -23,7 +24,8 @@ const routes: Routes = [
         BrowserModule,
         FormsModule,
         HttpModule,
-        RouterModule.forRoot(routes),
+        MaterialModule.forRoot(),
+        RouterModule.forRoot(ROUTES),
     ],
     providers: [],
     bootstrap: [AppComponent],

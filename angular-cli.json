@@ -17,6 +17,7 @@
         "prefix": "app",
         "mobile": false,
         "styles": [
+            "../node_modules/@angular/material/core/theming/prebuilt/deeppurple-amber.css",
             "styles.styl"
         ],
         "scripts": [],
