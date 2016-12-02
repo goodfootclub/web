@@ -1,27 +1,26 @@
 
 <md-sidenav-layout>
-    <md-sidenav #start (open)="closeStartButton.focus()">
-        Start Sidenav.
+    <md-sidenav #menu (open)="closeMenuButton.focus()">
+        <md-nav-list>
+           <a md-list-item [routerLink]="['']">Home</a>
+           <a md-list-item [routerLink]="['']">Profile</a>
+           <a md-list-item [routerLink]="['']">Players</a>
+           <a md-list-item [routerLink]="['']">Teams</a>
+        </md-nav-list>
         <br>
-        <button md-button #closeStartButton (click)="start.close()">
+        <button md-button #closeMenuButton (click)="menu.close()">
             Close
         </button>
     </md-sidenav>
-    <md-sidenav #end align="end">
-        End Sidenav.
-        <button md-button (click)="end.close()">Close</button>
-    </md-sidenav>
 
-
-    <h1>
-        {{title}}
-    </h1>
+    <md-toolbar>
+        <button md-icon-button (click)="menu.toggle()">
+            <md-icon>menu</md-icon>
+        </button>
+        <span>{{title}}</span>
+    </md-toolbar>
     <router-outlet></router-outlet>
-
-    <button md-button (click)="start.open()">
-        Open start sidenav
-    </button>
-    <button md-button (click)="end.open()">
-        Open end sidenav
+    <button md-button (click)="menu.open()">
+        Open menu
     </button>
 </md-sidenav-layout>
