@@ -4,7 +4,7 @@ import { createNewHosts } from '@angularclass/hmr';
 
 export function hmrBootstrap(
     module: any,
-    bootstrap: () => Promise<NgModuleRef<any>>
+    bootstrap: () => Promise<NgModuleRef<any>>,
 ) {
     let ngModule: NgModuleRef<any>;
     module.hot.accept();
