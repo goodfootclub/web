@@ -6,20 +6,46 @@ import { Routes, RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
-import { TitleService } from './title.service';
+import { AuthComponent, AuthService } from './auth';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { TitleService } from './title.service';
 
-export const ROUTES: Routes = [
-    {
-        path: '',
-        children: [],
-    },
-];
+import { ErrorHandlingModule, FourxxErrorComponent } from './error-handling';
+
+
+export const ROUTES: Routes = [{
+    path: 'signup',
+    component: AuthComponent,
+}, {
+    path: '',
+    loadChildren: 'app/events/events.module#EventsModule',
+    canActivate: [AuthService],
+    canActivateChild: [AuthService],
+}, {
+    path: 'profile',
+    loadChildren: 'app/profile/profile.module#ProfileModule',
+    canActivate: [AuthService],
+    canActivateChild: [AuthService],
+}, {
+    path: 'players',
+    loadChildren: 'app/players/players.module#PlayersModule',
+    canActivate: [AuthService],
+    canActivateChild: [AuthService],
+}, {
+    path: 'teams',
+    loadChildren: 'app/teams/teams.module#TeamsModule',
+    canActivate: [AuthService],
+    canActivateChild: [AuthService],
+}, {
+    path: '**',
+    component: FourxxErrorComponent,
+}];
 
 
 @NgModule({
     declarations: [
         AppComponent,
+        AuthComponent,
         SidenavComponent,
     ],
     imports: [
@@ -28,8 +54,11 @@ export const ROUTES: Routes = [
         HttpModule,
         MaterialModule.forRoot(),
         RouterModule.forRoot(ROUTES),
+
+        ErrorHandlingModule,
     ],
     providers: [
+        AuthService,
         TitleService,
     ],
     bootstrap: [AppComponent],
