@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { TitleService } from './title.service';
 
 @Component({
     selector: 'app-root',
@@ -9,5 +9,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
     closeMenuButton: any;
     menu: any;
-    title = 'app works!';
+
+    constructor(public title: TitleService) {
+        title.setTitle('app works!');
+    }
 }

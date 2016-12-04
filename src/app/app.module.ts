@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
-
+import { TitleService } from './title.service';
 
 export const ROUTES: Routes = [
     {
@@ -27,7 +27,9 @@ export const ROUTES: Routes = [
         MaterialModule.forRoot(),
         RouterModule.forRoot(ROUTES),
     ],
-    providers: [],
+    providers: [
+        TitleService,
+    ],
     bootstrap: [AppComponent],
 })
 export class AppModule { }
