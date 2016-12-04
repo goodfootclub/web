@@ -1,0 +1,12 @@
+<md-nav-list>
+    <a md-list-item (click)="menu.close()"><md-icon>menu</md-icon></a>
+
+    <a
+        *ngFor="let item of navItems" md-list-item
+        [routerLink]="item.path"
+        (click)="menu.close()"
+    >
+        <md-icon>{{ item.icon }}</md-icon>
+        {{ item.text }}
+    </a>
+</md-nav-list>

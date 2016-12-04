@@ -1,21 +1,6 @@
 <md-sidenav-layout>
-    <md-sidenav #menu (open)="closeMenuButton.focus()">
-        <md-nav-list>
-            <button
-                md-list-item md-icon-button
-                #closeMenuButton (click)="menu.close()"
-            >
-                <md-icon>menu</md-icon>
-            </button>
-            <a md-list-item [routerLink]="['']">Home</a>
-            <a md-list-item [routerLink]="['profile']">Profile</a>
-            <a md-list-item [routerLink]="['players']">Players</a>
-            <a md-list-item [routerLink]="['teams']">Teams</a>
-        </md-nav-list>
-        <br>
-        <button md-button #closeMenuButton (click)="menu.close()">
-            Close
-        </button>
+    <md-sidenav #menu>
+        <app-sidenav [menu]='menu'></app-sidenav>
     </md-sidenav>
     <md-toolbar>
         <button md-icon-button (click)="menu.toggle()">

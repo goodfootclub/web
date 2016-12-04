@@ -7,6 +7,7 @@ import { MaterialModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { TitleService } from './title.service';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 export const ROUTES: Routes = [
     {
@@ -19,6 +20,7 @@ export const ROUTES: Routes = [
 @NgModule({
     declarations: [
         AppComponent,
+        SidenavComponent,
     ],
     imports: [
         BrowserModule,
