@@ -98,22 +98,19 @@
             "check-type"
         ],
 
-        "directive-selector-prefix": [false, "app"],
-        "component-selector-prefix": [false, "app"],
-        "directive-selector-name": [true, "camelCase"],
-        "component-selector-name": [true, "kebab-case"],
-        "directive-selector-type": [true, "attribute"],
-        "component-selector-type": [true, "element"],
-        "use-input-property-decorator": true,
-        "use-output-property-decorator": true,
-        "use-host-property-decorator": true,
+        "component-class-suffix": true,
+        "component-selector": false,
+        "directive-class-suffix": true,
+        "directive-selector": false,
+        "invoke-injectable": true,
+        "no-access-missing-member": true,
         "no-input-rename": true,
         "no-output-rename": true,
-        "use-life-cycle-interface": true,
-        "use-pipe-transform-interface": true,
-        "component-class-suffix": true,
-        "directive-class-suffix": true,
         "templates-use-public": true,
-        "invoke-injectable": true
+        "use-host-property-decorator": true,
+        "use-input-property-decorator": true,
+        "use-life-cycle-interface": true,
+        "use-output-property-decorator": true,
+        "use-pipe-transform-interface": true
     }
 }

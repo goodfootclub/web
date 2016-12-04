@@ -12,9 +12,10 @@ describe('AppComponent', () => {
         TestBed.configureTestingModule({
             imports: [
                 AppModule,
-                RouterTestingModule.withRoutes(ROUTES),
+                RouterTestingModule,
             ],
         });
+        TestBed.compileComponents();
     });
 
     it('should create the app', async(() => {
@@ -33,7 +34,7 @@ describe('AppComponent', () => {
         let fixture = TestBed.createComponent(AppComponent);
         fixture.detectChanges();
         let compiled = fixture.debugElement.nativeElement;
-        expect(compiled.querySelector('h1').textContent)
+        expect(compiled.querySelector('.toolbar-title').textContent)
             .toContain('app works!');
     }));
 });

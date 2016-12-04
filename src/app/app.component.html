@@ -1,11 +1,10 @@
-
 <md-sidenav-layout>
     <md-sidenav #menu (open)="closeMenuButton.focus()">
         <md-nav-list>
            <a md-list-item [routerLink]="['']">Home</a>
-           <a md-list-item [routerLink]="['']">Profile</a>
-           <a md-list-item [routerLink]="['']">Players</a>
-           <a md-list-item [routerLink]="['']">Teams</a>
+           <a md-list-item [routerLink]="['profile']">Profile</a>
+           <a md-list-item [routerLink]="['players']">Players</a>
+           <a md-list-item [routerLink]="['teams']">Teams</a>
         </md-nav-list>
         <br>
         <button md-button #closeMenuButton (click)="menu.close()">
@@ -17,7 +16,7 @@
         <button md-icon-button (click)="menu.toggle()">
             <md-icon>menu</md-icon>
         </button>
-        <span>{{title}}</span>
+        <span class='toolbar-title'>{{title}}</span>
     </md-toolbar>
     <router-outlet></router-outlet>
     <button md-button (click)="menu.open()">
