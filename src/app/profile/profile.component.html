@@ -1,3 +1,28 @@
-<p>
-  profile works!
-</p>
+<div class="cover" [style.background-image]='coverUrl'>
+</div>
+<div class="info">
+
+    <div class="profile-pic" [style.background-image]='profilePicUrl'></div>
+
+    <div class="name-container">
+        <div></div>
+        <div>
+            <h1 class="name">
+                {{ user.firstName }}
+                {{ user.lastName }}
+            </h1>
+            <span class="gender" *ngIf="user.gender != null">
+                {{ ['MALE', 'FEMALE'][user.gender] }}
+            </span>
+            <span class="birthday" *ngIf="user.birthday != null">
+                {{ user.birthday | date:'mediumDate' }}
+            </span>
+        </div>
+    </div>
+</div>
+<div class="bio">
+    <h1>BIO</h1>
+    <p>
+        {{ user.bio }}
+    </p>
+</div>

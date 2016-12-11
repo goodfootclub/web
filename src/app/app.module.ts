@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AuthComponent, AuthService } from './auth';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { TitleService } from './title.service';
+import { ProfileService } from 'app/profile';
 
 import { ErrorHandlingModule, FourxxErrorComponent } from './error-handling';
 
@@ -59,6 +60,7 @@ export const ROUTES: Routes = [{
     ],
     providers: [
         AuthService,
+        ProfileService,
         TitleService,
     ],
     bootstrap: [AppComponent],

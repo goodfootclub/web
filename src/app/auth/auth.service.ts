@@ -11,24 +11,24 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/do';
 
 import { HealthService } from '../error-handling';
 import { User } from 'app/types';
+import { ProfileService } from 'app/profile';
 
 
 @Injectable()
 export class AuthService implements CanActivate, CanActivateChild {
 
-    currentUser: User = undefined;
     nextUrl: string;  // store the URL so we can redirect after logging in
     canActivateChild = this.canActivate;
 
     constructor(
+        private health: HealthService,
         private http: Http,
         private router: Router,
-        private health: HealthService
+        public profile: ProfileService,
     ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -54,40 +54,7 @@ export class AuthService implements CanActivate, CanActivateChild {
             return user != null;
         };
 
-        let user = this.getCurrentUser();
-
-        if (user != null && 'map' in user) {
-            return (user as Observable<User>).map(checkAndRedirect);
-        } else {
-            return checkAndRedirect(user);
-        }
-    }
-
-    /**
-     * Get current user data from the server
-     */
-    getCurrentUser(): User | Observable<User> {
-
-        if (this.currentUser !== undefined) {
-            return this.currentUser;
-        }
-
-        return this.http.get('/api/users/current').map(data => {
-            let {id, username, first_name, last_name} = data.json();
-            this.currentUser = {
-                id: id,
-                username: username,
-                firstName: first_name,
-                lastName: last_name,
-            };
-            return this.currentUser;
-        }).catch((err, caught) => {
-            if (err.status === 403) {
-                this.currentUser = null;
-                return Observable.of(null);
-            };
-            this.health.criticalError(JSON.stringify(err, null, 4));
-            throw err;
-        });
+        let user = this.profile.getCurrentUser();
+        return (user as Observable<User>).map(checkAndRedirect);
     }
 }

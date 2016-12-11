@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { TitleService } from 'app/title.service';
+
 
 @Component({
-  selector: 'app-teams',
-  templateUrl: './teams.component.html',
-  styleUrls: ['./teams.component.css']
+    selector: 'app-teams',
+    templateUrl: './teams.component.html',
+    styleUrls: ['./teams.component.css'],
 })
 export class TeamsComponent implements OnInit {
 
-  constructor() { }
+    constructor(public title: TitleService) {
+        title.setTitle('Teams');
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
 }

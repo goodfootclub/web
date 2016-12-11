@@ -11,6 +11,6 @@ export class AppComponent {
     menu: any;
 
     constructor(public title: TitleService) {
-        title.setTitle('app works!');
+        title.setTitle('Your Games');
     }
 }

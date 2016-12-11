@@ -74,13 +74,13 @@ export type GameEvent = {
     myStatus?: UserStatus;
     name?: string;
     players?: Player[];
-    playersById?: {number: Player};
+    playersById?: { number: Player };
     playersCount?: PlayersCount;
     playersNeeded?: PlayersCount;
     team?: number;
     result?: Result;
     organizer?: any;
-}
+};
 
 
 export type League = {
@@ -94,7 +94,7 @@ export type League = {
     numberOfTeams: number;
     playersPerTeam: PlayersCount; // Minimum
     teams: Team[];
-}
+};
 
 
 // Field
@@ -104,7 +104,7 @@ export type Location = {
     lat?: number;
     lng?: number;
     name?: string;  // Alias like "Field near the Don's house"
-}
+};
 
 
 // Simple player model
@@ -115,7 +115,7 @@ export type Player = {
     position: FieldPosition | FieldPosition[];
     age: number;
     name: string;
-}
+};
 
 
 export type PlayersCount = {
@@ -139,25 +139,31 @@ export type Profile = {
     role?: PlayerRole;
     skill?: SkillLevel;
     teams?: Team[];
-}
+};
 
 
 export type Result = {
     winner: Team;
     score: string;
-}
+};
 
 
 export type Team = {
     name: string;
     img: string;
     players: Player[];
-}
+};
 
 
-export type User {
+export type User = {
     id?: number;
-    username: string;
     firstName: string;
     lastName: string;
-}
+    bio?: string;
+    birthday?: Date;
+    cover?: string;
+    email?: string;
+    gender?: Gender;
+    img?: string;
+    phone?: string;
+};

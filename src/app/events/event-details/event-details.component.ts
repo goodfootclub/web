@@ -33,7 +33,9 @@ export class EventDetailsComponent implements OnInit {
         this.route.params.forEach((params: Params) => {
             let id = +params['id'];
             this.events.get(id).subscribe(event => {
-                this.user = event.playersById[this.auth.currentUser.id];
+                this.user = event.playersById[
+                    this.auth.profile.currentUser.id
+                ];
                 this.event = event;
             });
         });
@@ -42,7 +44,9 @@ export class EventDetailsComponent implements OnInit {
     setStatus(status: number) {
         this.events.setStatus(this.event, this.user, status).subscribe(() => {
             this.events.get(this.event.id).subscribe(event => {
-                this.user = event.playersById[this.auth.currentUser.id];
+                this.user = event.playersById[
+                    this.auth.profile.currentUser.id
+                ];
                 this.event = event;
             });
         });
