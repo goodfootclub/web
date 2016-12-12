@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { MenuService } from './menu.service';
 
 
 @Component({
@@ -6,7 +7,7 @@ import { Component, Input } from '@angular/core';
     templateUrl: './sidenav.component.html',
     styleUrls: ['./sidenav.component.styl'],
 })
-export class SidenavComponent {
+export class SidenavComponent implements OnInit {
 
     @Input() menu: any;
 
@@ -28,5 +29,9 @@ export class SidenavComponent {
         path: ['teams'],
     }];
 
-    constructor() { }
+    constructor(private menuService: MenuService) {}
+
+    ngOnInit() {
+        this.menuService.setReference(this.menu);
+    }
 }

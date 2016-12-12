@@ -39,6 +39,17 @@ export class ProfileService {
                 gender = data['gender'] === 'M' ? Gender.Male : Gender.Female;
             }
 
+            if (data['cover'] == null) {
+                data['cover'] = (`https://placekitten.com/` +
+                               `${600 + data['id'] % 50}/` +
+                               `${300 + data['id'] % 50}/`);
+            }
+            if (data['img'] == null) {
+                data['img'] = (`https://placekitten.com/` +
+                               `${150 + data['id'] % 50}/` +
+                               `${150 + data['id'] % 50}/`);
+            }
+
             this.currentUser = {
                 id: data['id'],
                 firstName: data['first_name'],

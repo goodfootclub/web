@@ -2,14 +2,6 @@
     <md-sidenav #menu>
         <app-sidenav [menu]='menu'></app-sidenav>
     </md-sidenav>
-    <md-toolbar>
-        <button md-icon-button (click)="menu.toggle()">
-            <md-icon>menu</md-icon>
-        </button>
-        <span class='toolbar-title'>{{title.value}}</span>
 
-        <span class='right-spacer'></span>
-
-    </md-toolbar>
     <router-outlet></router-outlet>
 </md-sidenav-layout>

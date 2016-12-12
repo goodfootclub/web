@@ -7,7 +7,7 @@ import { MaterialModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { AuthComponent, AuthService } from './auth';
-import { SidenavComponent } from './sidenav/sidenav.component';
+import { SidenavComponent, MenuService } from './sidenav';
 import { TitleService } from './title.service';
 import { ProfileService } from 'app/profile';
 
@@ -60,7 +60,9 @@ export const ROUTES: Routes = [{
     ],
     providers: [
         AuthService,
+        MenuService,
         ProfileService,
+        SidenavComponent,
         TitleService,
     ],
     bootstrap: [AppComponent],

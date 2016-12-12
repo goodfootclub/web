@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TitleService } from 'app/title.service';
 import { ProfileService } from './profile.service';
 import { User } from 'app/types';
+import { MenuService } from 'app/sidenav';
 
 
 @Component({
@@ -15,16 +16,14 @@ export class ProfileComponent {
     coverUrl: string;
     profilePicUrl: string;
 
-    constructor(title: TitleService, public profile: ProfileService) {
+    constructor(
+        title: TitleService,
+        public profile: ProfileService,
+        public menu: MenuService,
+    ) {
         title.setTitle('Profile');
         profile.getCurrentUser().subscribe(user => {
             this.user = user;
-            if (user.cover == null) {
-                user.cover = 'https://placekitten.com/600/300';
-            }
-            if (user.img == null) {
-                user.img = 'https://placekitten.com/150/150';
-            }
             this.coverUrl = `url(${user.cover})`;
             this.profilePicUrl = `url(${user.img})`;
         });
