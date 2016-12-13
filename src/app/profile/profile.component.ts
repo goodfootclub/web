@@ -17,9 +17,9 @@ export class ProfileComponent {
     profilePicUrl: string;
 
     constructor(
-        title: TitleService,
-        public profile: ProfileService,
         public menu: MenuService,
+        public profile: ProfileService,
+        public title: TitleService,
     ) {
         title.setTitle('Profile');
         profile.getCurrentUser().subscribe(user => {

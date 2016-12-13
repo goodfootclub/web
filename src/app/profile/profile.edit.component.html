@@ -1,0 +1,55 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <md-input
+        #firstName
+        [dividerColor]="
+            form.controls.firstName.valid ||
+            form.controls.firstName.pristine ?
+            'primary' : 'warn'
+        "
+        [type]='text'
+        formControlName="firstName"
+        placeholder="First name"
+        required
+    >
+        <md-hint *ngIf="firstName.focused" align="end">
+            <span *ngIf="form.controls.firstName.errors?.required">
+                required
+            </span>
+            <span *ngIf="!form.controls.firstName.errors?.required">
+                {{ firstName.characterCount }} / 30
+            </span>
+        </md-hint>
+    </md-input>
+    <md-input
+        [type]='text'
+        formControlName="lastName"
+        placeholder='Last name'
+    ></md-input>
+
+    <button type="submit">Save</button>
+</form>
+
+
+    <!-- bio -->
+    <!-- <md-textarea></md-textarea> -->
+
+    <!-- birthday -->
+    <!-- <md-input placeholder='Date of birth' [type]='date'></md-input> -->
+
+    <!-- cover -->
+
+    <!-- email -->
+    <!-- <md-input placeholder='Email' [type]='email'></md-input> -->
+
+
+    <!-- first_name -->
+
+    <!-- gender -->
+
+    <!-- img -->
+
+    <!-- last_name -->
+
+
+    <!-- phone -->
+    <!-- <md-input [type]='tel'></md-input> -->

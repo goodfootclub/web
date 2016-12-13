@@ -3,21 +3,17 @@
     <button md-icon-button (click)="menu.toggle()">
         <md-icon>menu</md-icon>
     </button>
-    <span class='toolbar-title'> Profile </span>
+    <span class='toolbar-title'> {{ title.observable | async }} </span>
 
-    <button md-icon-button (click)="menu.toggle()">
+    <button md-icon-button [routerLink]="['edit']">
         <md-icon>edit</md-icon>
     </button>
-
 </md-toolbar>
-
 
 <div class="cover" [style.background-image]='coverUrl'>
 </div>
 <div class="info">
-
     <div class="profile-pic" [style.background-image]='profilePicUrl'></div>
-
     <div class="name-container">
         <div></div>
         <div>
