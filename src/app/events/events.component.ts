@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EventsService } from './events.service';
 import { GameEvent } from './../types';
-
+import { TitleService } from 'app/title.service';
+import { MenuService } from 'app/sidenav';
 
 @Component({
     selector: 'game-events',
@@ -18,9 +19,14 @@ export class EventsComponent implements OnInit {
         'I\'m not going',
     ];
 
-    constructor(private _events: EventsService) { }
+    constructor(
+        private _events: EventsService,
+        public title: TitleService,
+        public menu: MenuService,
+    ) { }
 
     ngOnInit() {
+        this.title.setTitle('Your Games');
         this._events.all().subscribe(events => {
             this.events = events;
         });

@@ -1,3 +1,11 @@
+<md-toolbar>
+    <button md-icon-button (click)="menu.toggle()">
+        <md-icon>menu</md-icon>
+    </button>
+    <span class="toolbar-title"> {{ title.observable | async }} </span>
+    <span class="toolbar-icon-spacer"></span>
+</md-toolbar>
+
 <div class="container">
     <div *ngIf="!events" class='no-games'>
         <div class="alert alert-info" role="alert">

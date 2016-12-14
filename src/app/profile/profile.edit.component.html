@@ -1,4 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <!-- First name -->
     <md-input
         #firstName
         [dividerColor]="
@@ -6,10 +7,10 @@
             form.controls.firstName.pristine ?
             'primary' : 'warn'
         "
-        [type]='text'
         formControlName="firstName"
         placeholder="First name"
         required
+        type='text'
     >
         <md-hint *ngIf="firstName.focused" align="end">
             <span *ngIf="form.controls.firstName.errors?.required">
@@ -20,26 +21,63 @@
             </span>
         </md-hint>
     </md-input>
+    <br>
+
+    <!-- Last name -->
     <md-input
-        [type]='text'
+        #lastName
+        [dividerColor]="
+            form.controls.lastName.valid ||
+            form.controls.lastName.pristine ?
+            'primary' : 'warn'
+        "
         formControlName="lastName"
-        placeholder='Last name'
+        placeholder="Last name"
+        required
+        type='text'
+    >
+        <md-hint *ngIf="lastName.focused" align="end">
+            <span *ngIf="form.controls.lastName.errors?.required">
+                required
+            </span>
+            <span *ngIf="!form.controls.lastName.errors?.required">
+                {{ lastName.characterCount }} / 30
+            </span>
+        </md-hint>
+    </md-input>
+    <br>
+
+    <!-- Bio -->
+    <md-textarea
+        #bio
+        [dividerColor]="form.controls.bio.valid ? 'primary' : 'warn'"
+        type='text'
+        formControlName="bio"
+        placeholder="Tell us about your soccer skillz..."
+    >
+        <md-hint *ngIf="bio.focused" align="end">
+            {{ bio.characterCount }} / 1000
+        </md-hint>
+    </md-textarea>
+    <br>
+
+    <!-- birthday -->
+    <md-input
+        placeholder='Date of birth'
+        type='date'
+        formControlName='birthday'
     ></md-input>
+    <br>
+
 
     <button type="submit">Save</button>
 </form>
 
 
-    <!-- bio -->
-    <!-- <md-textarea></md-textarea> -->
-
-    <!-- birthday -->
-    <!-- <md-input placeholder='Date of birth' [type]='date'></md-input> -->
-
     <!-- cover -->
 
     <!-- email -->
-    <!-- <md-input placeholder='Email' [type]='email'></md-input> -->
+    <!-- <md-input placeholder='Email' type='email'></md-input> -->
 
 
     <!-- first_name -->
@@ -52,4 +90,4 @@
 
 
     <!-- phone -->
-    <!-- <md-input [type]='tel'></md-input> -->
+    <!-- <md-input type='tel'></md-input> -->

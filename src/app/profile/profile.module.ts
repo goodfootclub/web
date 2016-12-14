@@ -20,8 +20,8 @@ const ROUTES: Routes = [{
 @NgModule({
     imports: [
         CommonModule,
+        MaterialModule,
         ReactiveFormsModule,
-        MaterialModule.forRoot(),
         RouterModule.forChild(ROUTES),
     ],
     declarations: [ProfileComponent, ProfileEditComponent],

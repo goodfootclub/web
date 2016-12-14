@@ -7,6 +7,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { MaterialModule } from '@angular/material';
 
 import { EventsComponent } from './events.component';
 import { EventDetailsComponent } from './event-details';
@@ -22,6 +23,7 @@ const ROUTER_CONFIG = [
 @NgModule({
     imports: [
         CommonModule,
+        MaterialModule,
         RouterModule.forChild(ROUTER_CONFIG),
     ],
     providers: [EventsService],
