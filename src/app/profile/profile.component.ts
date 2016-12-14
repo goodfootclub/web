@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { TitleService } from 'app/title.service';
+import { TitleService } from '../title.service';
 import { ProfileService } from './profile.service';
-import { User } from 'app/types';
-import { MenuService } from 'app/sidenav';
+import { User } from '../types';
+import { MenuService } from '../sidenav';
 
 
 @Component({

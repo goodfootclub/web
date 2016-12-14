@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 
 import { HealthService } from '../error-handling';
-import { User, Gender } from 'app/types';
+import { User, Gender } from '../types';
 
 
 /**

@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { AuthComponent, AuthService } from './auth';
 import { SidenavComponent, MenuService } from './sidenav';
 import { TitleService } from './title.service';
-import { ProfileService } from 'app/profile';
+import { ProfileService } from './profile';
 
 import { ErrorHandlingModule, FourxxErrorComponent } from './error-handling';
 

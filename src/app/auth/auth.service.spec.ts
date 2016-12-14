@@ -13,6 +13,7 @@ import {
 } from '@angular/router';
 import { AuthService } from './auth.service';
 import { HealthService } from '../error-handling';
+import { ProfileService } from '../profile';
 
 
 class HttpStub {
@@ -47,6 +48,7 @@ describe('Service: Auth', () => {
                 // { provide: APP_BASE_HREF, useValue: '/' }
                 AuthService,
                 HealthService,
+                ProfileService,
                 { provide: Http, useClass: HttpStub },
                 { provide: Router, useClass: RouterStub },
             ],
@@ -61,24 +63,25 @@ describe('Service: Auth', () => {
         inject([AuthService, Http], (service: AuthService, http: HttpStub) => {
             service.canActivate(
                 <ActivatedRouteSnapshot>{},
-                <RouterStateSnapshot>{ url: '' }
+                <RouterStateSnapshot>{ url: '' },
             );
             expect(http.requestDidHappen).toBeTruthy();
-            expect(http.url).toEqual('/api/users/current');
-        })
+            expect(http.url).toEqual('/api/users/me/');
+        }),
     ));
 
     it('should navigate to login page if user is not logged in', async(
         inject(
             [AuthService, Router],
             (service: AuthService, router: RouterStub) => {
-                service.currentUser = null;
+                service.profile.currentUser = null;
                 service.canActivate(
                     <ActivatedRouteSnapshot>{},
-                    <RouterStateSnapshot>{ url: '' }
-                );
-                expect(router.path).toEqual(['signup']);
-            }
-        )
+                    <RouterStateSnapshot>{ url: '' },
+                ).subscribe(() => {
+                    expect(router.path).toEqual(['signup']);
+                });
+            },
+        ),
     ));
 });

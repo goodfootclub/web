@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TitleService } from 'app/title.service';
+import { TitleService } from '../title.service';
 import { PlayersService } from './players.service';
 
 

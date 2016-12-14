@@ -14,8 +14,8 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 
 import { HealthService } from '../error-handling';
-import { User } from 'app/types';
-import { ProfileService } from 'app/profile';
+import { User } from '../types';
+import { ProfileService } from '../profile';
 
 
 @Injectable()
