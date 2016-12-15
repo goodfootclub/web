@@ -17,7 +17,7 @@ export class EventsService {
 
     constructor(
         private http: Http,
-        private health: HealthService
+        private health: HealthService,
     ) { }
 
     all(): Observable<GameEvent[]> {

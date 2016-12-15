@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EventsService } from './events.service';
 import { GameEvent } from './../types';
-import { TitleService } from 'app/title.service';
-import { MenuService } from 'app/sidenav';
+import { TitleService } from '../title.service';
+import { MenuService } from '../sidenav';
 
 @Component({
     selector: 'game-events',

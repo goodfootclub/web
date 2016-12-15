@@ -1,9 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MaterialModule } from '@angular/material';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { PlayersComponent } from './players.component';
 import { PlayersService } from './players.service';
+
 
 const ROUTER_CONFIG = [
     { path: '', component: PlayersComponent },
@@ -13,6 +15,7 @@ const ROUTER_CONFIG = [
 @NgModule({
   imports: [
     CommonModule,
+    MaterialModule,
     RouterModule.forChild(ROUTER_CONFIG),
   ],
   declarations: [PlayersComponent],

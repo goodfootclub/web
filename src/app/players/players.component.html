@@ -1,3 +1,11 @@
-<p>
-    players works!
-</p>
+<md-card *ngFor="let player of players">
+    <md-card-header>
+        <img md-card-avatar [src]="player.img">
+        <md-card-title>
+            {{ player.firstName }} {{ player.lastName }}
+        </md-card-title>
+        <md-card-subtitle>
+            {{ player.bio }}
+        </md-card-subtitle>
+    </md-card-header>
+</md-card>

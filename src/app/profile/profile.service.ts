@@ -40,14 +40,18 @@ export class ProfileService {
             }
 
             if (data['cover'] == null) {
-                data['cover'] = (`https://placekitten.com/` +
-                               `${600 + data['id'] % 50}/` +
-                               `${300 + data['id'] % 50}/`);
+                data['cover'] = (
+                    `https://placekitten.com/` +
+                    `${600 + data['id'] % 50}/` +
+                    `${300 + data['id'] % 50}/`
+                );
             }
             if (data['img'] == null) {
-                data['img'] = (`https://placekitten.com/` +
-                               `${150 + data['id'] % 50}/` +
-                               `${150 + data['id'] % 50}/`);
+                data['img'] = (
+                    `https://placekitten.com/` +
+                    `${150 + data['id'] % 50}/` +
+                    `${150 + data['id'] % 50}/`
+                );
             }
 
             this.currentUser = {
