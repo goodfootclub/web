@@ -13,8 +13,6 @@ import { MenuService } from '../sidenav';
 export class ProfileComponent {
 
     user: User;
-    coverUrl: string;
-    profilePicUrl: string;
 
     constructor(
         public menu: MenuService,
@@ -24,8 +22,6 @@ export class ProfileComponent {
         title.setTitle('Profile');
         profile.getCurrentUser().subscribe(user => {
             this.user = user;
-            this.coverUrl = `url(${user.cover})`;
-            this.profilePicUrl = `url(${user.img})`;
         });
     }
 }

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule } from 'app/common';
 import { CriticalErrorComponent } from './critical-error.component';
 import { FourxxErrorComponent } from './4xx-error.component';
 import { HealthService } from './health.service';

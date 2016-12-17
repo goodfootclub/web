@@ -155,7 +155,7 @@ export type Team = {
 };
 
 
-export type User = {
+export class User {
     id?: number;
     firstName: string;
     lastName: string;
@@ -166,4 +166,35 @@ export type User = {
     gender?: Gender;
     img?: string;
     phone?: string;
+
+    /**
+     * Transform API user represetation API to use in the app:
+     *     use mixedCase
+     *     replace non existing cover and user images with defaults
+     *
+     * @param  {any}  data user data as it comes from the api
+     */
+    constructor(data: any) {
+        this.id = data['id'];
+        this.phone = data['phone'];
+        this.bio = data['bio'];
+        this.birthday = data['birthday'];
+        this.email = data['email'];
+        this.firstName = data['first_name'];
+        this.lastName = data['last_name'];
+
+        if (data['gender'] != null) {
+            this.gender = data['gender'] === 'M' ?
+                Gender.Male :
+                Gender.Female;
+        }
+
+        let hash = data['id'] % 50;
+        this.cover = data['cover'] == null ?
+            `https://placekitten.com/${600 + hash}/${300 + hash}/` :
+            data['cover'];
+        this.img = data['img'] == null ?
+            `https://placekitten.com/${150 + hash}/${150 + hash}/` :
+            data['img'];
+    }
 };

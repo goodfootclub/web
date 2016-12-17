@@ -2,13 +2,14 @@
  * Player (user) profile
  */
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
 
+import { CommonModule } from 'app/common';
 import { ProfileComponent } from './profile.component';
 import { ProfileEditComponent } from './profile.edit.component';
+
 
 
 const ROUTES: Routes = [{
@@ -24,6 +25,9 @@ const ROUTES: Routes = [{
         ReactiveFormsModule,
         RouterModule.forChild(ROUTES),
     ],
-    declarations: [ProfileComponent, ProfileEditComponent],
+    declarations: [
+        ProfileComponent,
+        ProfileEditComponent,
+    ],
 })
 export class ProfileModule { }

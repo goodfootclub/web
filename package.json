@@ -12,6 +12,8 @@
     "test": "ng test --watch=false"
   },
   "browser": {
+    "app/common": "./src/app/common",
+    "app/error-handling": "./src/app/error-handling",
     "app/games": "./src/app/games",
     "app/players": "./src/app/players",
     "app/profile": "./src/app/profile",

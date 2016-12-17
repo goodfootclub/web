@@ -55,7 +55,6 @@ export const ROUTES: Routes = [{
         HttpModule,
         MaterialModule.forRoot(),
         RouterModule.forRoot(ROUTES),
-
         ErrorHandlingModule,
     ],
     providers: [

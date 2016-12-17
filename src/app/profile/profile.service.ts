@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 
 import { HealthService } from '../error-handling';
-import { User, Gender } from '../types';
+import { User } from '../types';
 
 
 /**
@@ -33,39 +33,7 @@ export class ProfileService {
         }
 
         return this.http.get('/api/users/me/').map(response => {
-            let data = response.json();
-            let gender: Gender;
-            if (data['gender'] != null) {
-                gender = data['gender'] === 'M' ? Gender.Male : Gender.Female;
-            }
-
-            if (data['cover'] == null) {
-                data['cover'] = (
-                    `https://placekitten.com/` +
-                    `${600 + data['id'] % 50}/` +
-                    `${300 + data['id'] % 50}/`
-                );
-            }
-            if (data['img'] == null) {
-                data['img'] = (
-                    `https://placekitten.com/` +
-                    `${150 + data['id'] % 50}/` +
-                    `${150 + data['id'] % 50}/`
-                );
-            }
-
-            this.currentUser = {
-                id: data['id'],
-                firstName: data['first_name'],
-                lastName: data['last_name'],
-                bio: data['bio'],
-                birthday: new Date(data['birthday']),
-                cover: data['cover'],
-                email: data['email'],
-                gender: gender,
-                img: data['img'],
-                phone: data['phone'],
-            };
+            this.currentUser = new User(response.json());
             return this.currentUser;
         }).catch((err, caught) => {
             if (err.status === 403) {

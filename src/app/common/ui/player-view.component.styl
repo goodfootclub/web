@@ -1,0 +1,61 @@
+$left-indent = 24px
+$userpic-dia = 98px
+
+$cover-height = 200px
+$info-height = 128px
+$info-block-top = 128px
+
+// Colors
+$hr-color = #E2E2E2
+$h-color = black
+$sh-color = #AAA
+
+
+.info, .bio
+    max-width: 640px
+    margin: 0 auto
+
+.cover
+    height: $cover-height
+    background-size: cover
+    background-position: center
+
+.info
+    display: flex
+    align-items: center
+    height: $info-height
+    margin-top: $info-height * -.5
+    border-bottom: 1px solid $hr-color
+
+.profile-pic
+    height: $userpic-dia
+    width: $userpic-dia
+    margin-left: $left-indent
+    border-radius: 50%
+    border: 2px solid white
+    background-size: cover
+    flex: none
+
+.name-container
+    display: flex
+    flex-direction: column
+    height: 100%
+
+    > div
+        height: $info-height * .5
+        flex: none
+
+    .name
+        padding-left: $left-indent * .5
+        padding-top: $left-indent * .5
+        margin-bottom: 0
+        color: $h-color
+        font-size: 22px
+
+    .gender, .birthday
+        font-size: 14px
+        padding-left: $left-indent * .5
+        color: $sh-color
+
+.bio
+    padding: $left-indent

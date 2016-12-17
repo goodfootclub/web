@@ -5,7 +5,7 @@
  * namespace, GameEvent is used instead
  */
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule } from 'app/common';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 
