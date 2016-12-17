@@ -11,6 +11,14 @@
     "start": "npm run serve:hmr",
     "test": "ng test --watch=false"
   },
+  "browser": {
+    "app/games": "./src/app/games",
+    "app/players": "./src/app/players",
+    "app/profile": "./src/app/profile",
+    "app/sidenav": "./src/app/sidenav",
+    "app/sidenav": "./src/app/sidenav",
+    "app/types": "./src/app/types"
+  },
   "private": true,
   "dependencies": {
     "@angular/common": "2.2.3",
@@ -35,7 +43,7 @@
     "@angularclass/hmr": "1.2.2",
     "@types/jasmine": "2.5.38",
     "@types/node": "^6.0.42",
-    "angular-cli": "1.0.0-beta.22",
+    "angular-cli": "1.0.0-beta.22-1",
     "codelyzer": "~2.0.0-beta.1",
     "jasmine-core": "2.5.2",
     "jasmine-spec-reporter": "2.5.0",
