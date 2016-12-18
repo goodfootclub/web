@@ -2,19 +2,19 @@
     <app-menu-button></app-menu-button>
     <span class='toolbar-title'> {{ title.observable | async }} </span>
 
-    <button md-icon-button [routerLink]="['edit']">
-        <md-icon>edit</md-icon>
-    </button>
+    <div class="toolbar-icon-spacer"></div>
     <md-toolbar-row>
-        <md-input placeholder="Search" [style.width]="'100%'">
-
-        </md-input>
+        <md-input
+            placeholder="Search"
+            [style.width]="'100%'"
+            #searchField
+        ></md-input>
     </md-toolbar-row>
 </md-toolbar>
 
 
 <md-card
-    *ngFor="let player of players"
+    *ngFor="let player of players | textSearch: searchField.value"
     [routerLink]="['/players', player.id]"
 >
     <img [src]="player.img" alt="" class="player-pic">
