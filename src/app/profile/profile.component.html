@@ -1,7 +1,5 @@
 <md-toolbar>
-    <button md-icon-button (click)="menu.toggle()">
-        <md-icon>menu</md-icon>
-    </button>
+    <app-menu-button></app-menu-button>
     <span class='toolbar-title'> {{ title.observable | async }} </span>
 
     <button md-icon-button [routerLink]="['edit']">

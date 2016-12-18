@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EventsService } from './events.service';
 import { GameEvent } from './../types';
 import { TitleService } from '../title.service';
-import { MenuService } from '../sidenav';
+
 
 @Component({
     selector: 'game-events',
@@ -22,7 +22,6 @@ export class EventsComponent implements OnInit {
     constructor(
         private _events: EventsService,
         public title: TitleService,
-        public menu: MenuService,
     ) { }
 
     ngOnInit() {

@@ -7,9 +7,10 @@ import { MaterialModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { AuthComponent, AuthService } from './auth';
-import { SidenavComponent, MenuService } from './sidenav';
-import { TitleService } from './title.service';
+import { MenuService } from './common';
 import { ProfileService } from './profile';
+import { SidenavComponent } from './sidenav';
+import { TitleService } from './title.service';
 
 import { ErrorHandlingModule, FourxxErrorComponent } from './error-handling';
 

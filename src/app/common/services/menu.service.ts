@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 
 /**
- * Service to hold reference to the sidemenu component
+ * Service to keep the reference to the md-sidenav component
  */
 @Injectable()
 export class MenuService {

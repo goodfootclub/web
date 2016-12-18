@@ -1,4 +1,23 @@
-<md-card *ngFor="let player of players">
+<md-toolbar>
+    <app-menu-button></app-menu-button>
+    <span class='toolbar-title'> {{ title.observable | async }} </span>
+
+    <button md-icon-button [routerLink]="['edit']">
+        <md-icon>edit</md-icon>
+    </button>
+</md-toolbar>
+
+<md-input type="search" placeholder="search"></md-input>
+
+<md-card
+    *ngFor="let player of players"
+    [routerLink]="['/players', player.id]"
+>
+    <img [src]="player.img" alt="" class="player-pic">
+    <div class="player-name">
+        {{ player.firstName }} {{ player.lastName }}
+    </div>
+
     <md-card-header>
         <img md-card-avatar [src]="player.img">
         <md-card-title>

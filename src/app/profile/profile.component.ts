@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { TitleService } from '../title.service';
 import { ProfileService } from './profile.service';
 import { User } from '../types';
-import { MenuService } from '../sidenav';
 
 
 @Component({
@@ -15,7 +14,6 @@ export class ProfileComponent {
     user: User;
 
     constructor(
-        public menu: MenuService,
         public profile: ProfileService,
         public title: TitleService,
     ) {

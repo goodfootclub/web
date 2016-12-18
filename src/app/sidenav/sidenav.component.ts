@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MenuService } from './menu.service';
+import { MenuService } from 'app/common/services';
 
 
 @Component({
@@ -18,15 +18,15 @@ export class SidenavComponent implements OnInit {
     }, {
         icon: 'star',
         text: 'Profile',
-        path: ['profile'],
+        path: ['/profile'],
     }, {
         icon: 'person',
         text: 'Players',
-        path: ['players'],
+        path: ['/players'],
     }, {
         icon: 'people',
         text: 'Teams',
-        path: ['teams'],
+        path: ['/teams'],
     }];
 
     constructor(private menuService: MenuService) {}
