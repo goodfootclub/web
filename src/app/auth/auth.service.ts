@@ -21,6 +21,7 @@ import { ProfileService } from '../profile';
 @Injectable()
 export class AuthService implements CanActivate, CanActivateChild {
 
+    activationsChecks = 0;
     nextUrl: string;  // store the URL so we can redirect after logging in
     canActivateChild = this.canActivate;
 
@@ -32,6 +33,7 @@ export class AuthService implements CanActivate, CanActivateChild {
     ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        this.activationsChecks += 1;
         this.nextUrl = state.url;
         return this.isAuthenticated();
     }

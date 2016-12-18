@@ -14,7 +14,7 @@ export class SidenavComponent implements OnInit {
     navItems = [{
         icon: 'home',
         text: 'Home',
-        path: [''],
+        path: ['/'],
     }, {
         icon: 'star',
         text: 'Profile',
