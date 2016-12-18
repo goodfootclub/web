@@ -5,9 +5,13 @@
     <button md-icon-button [routerLink]="['edit']">
         <md-icon>edit</md-icon>
     </button>
+    <md-toolbar-row>
+        <md-input placeholder="Search" [style.width]="'100%'">
+
+        </md-input>
+    </md-toolbar-row>
 </md-toolbar>
 
-<md-input type="search" placeholder="search"></md-input>
 
 <md-card
     *ngFor="let player of players"

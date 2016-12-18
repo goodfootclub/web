@@ -1,5 +1,4 @@
 import { CommonModule } from 'app/common';
-import { MaterialModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -17,7 +16,6 @@ const ROUTER_CONFIG = [
 @NgModule({
     imports: [
         CommonModule,
-        MaterialModule,
         RouterModule.forChild(ROUTER_CONFIG),
     ],
     declarations: [
