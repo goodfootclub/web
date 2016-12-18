@@ -18,17 +18,8 @@
     [routerLink]="['/players', player.id]"
 >
     <img [src]="player.img" alt="" class="player-pic">
-    <div class="player-name">
-        {{ player.firstName }} {{ player.lastName }}
+    <div class="player-info">
+        <h1> {{ player.firstName }} {{ player.lastName }} </h1>
+        <div class="bio"> {{ player.bio }} </div>
     </div>
-
-    <md-card-header>
-        <img md-card-avatar [src]="player.img">
-        <md-card-title>
-            {{ player.firstName }} {{ player.lastName }}
-        </md-card-title>
-        <md-card-subtitle>
-            {{ player.bio }}
-        </md-card-subtitle>
-    </md-card-header>
 </md-card>

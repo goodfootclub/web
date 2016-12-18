@@ -1,3 +1,28 @@
+$card-height = 72px
+$pic-dia = 50px
+
+
 md-card
+    height: $card-height
     margin: 15px
+    padding: 12px
     overflow: hidden
+    display: flex
+
+    .player-info
+        padding: 0 12px
+
+    h1
+        margin: 6px 0 0 0
+        font-size: 16px
+
+    .bio
+        font-size: 11px
+        color: #aaa
+        max-height: 32px;
+        overflow: hidden;
+
+.player-pic
+    border-radius: 50%
+    width: $pic-dia
+    height: $pic-dia
