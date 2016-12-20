@@ -31,10 +31,15 @@ export enum Gender {
 
 
 export enum PlayerRole {
-    Coach,
-    Captain,
-    Field,
-    Substitute,
+    // Active players
+    Captain = 3,
+    Field = 2,
+    Substitute = 1,
+
+    // Inactive
+    Inactive = 0,
+    Invited = -1,
+    RequestedToJoin = -2,
 }
 
 
@@ -52,12 +57,18 @@ export enum SkillLevel {
 }
 
 
+export enum TeamType {
+    Coed,
+    Female,
+    Male,
+}
+
+
 export enum UserStatus {
     Going,
     NotSure,
     NotGoing,
 }
-
 
 /**
  * Personalized (your team, players on your team) game event.
@@ -108,13 +119,34 @@ export type Location = {
 
 
 // Simple player model
-export type Player = {
+export class Player {
+    age?: number;
+    firstName?: string;
+    id: number;
     img?: string;
-    gender: Gender;
+    lastName?: string;
+    position?: FieldPosition | FieldPosition[];
     role: PlayerRole;
-    position: FieldPosition | FieldPosition[];
-    age: number;
-    name: string;
+    roleId: number;
+
+    /**
+     * Transform API player represetation to use in the app:
+     *
+     * @param  {any}  data user data as it comes from the api
+     */
+    constructor(data: any) {
+
+        return {
+            age: data['age'],
+            firstName: data['first_name'],
+            id: data['id'],
+            img: data['img'],
+            lastName: data['last_name'],
+            role: data['role'],
+            roleId: data['role_id'],
+        };
+
+    }
 };
 
 
@@ -148,10 +180,46 @@ export type Result = {
 };
 
 
-export type Team = {
+export class Team {
+    id: number;
+    info?: string;
+    managers?: User[];
     name: string;
-    img: string;
-    players: Player[];
+    players?: Player[];
+    slotsFemale?: string;
+    slotsMale?: string;
+    type?: TeamType;
+
+    /**
+     * Transform API team represetation to use in the app:
+     *     use mixedCase
+     *     transform nested objects
+     *
+     * @param  {any}  data user data as it comes from the api
+     */
+    constructor(data: any) {
+
+        let managers = [];
+        if (data['managers'] != null) {
+            managers = data['managers'].map(item => new User(item));
+        }
+
+        let players = [];
+        if (data['players'] != null) {
+            players = data['players'].map(item => new Player(item));
+        }
+
+        return {
+            id: data['id'],
+            info: data['info'],
+            managers: managers,
+            name: data['name'],
+            players: players,
+            slotsFemale: data['slots_female'],
+            slotsMale: data['slots_male'],
+            type: data['type'],
+        };
+    }
 };
 
 
@@ -168,7 +236,7 @@ export class User {
     phone?: string;
 
     /**
-     * Transform API user represetation API to use in the app:
+     * Transform API user represetation to use in the app:
      *     use mixedCase
      *     replace non existing cover and user images with defaults
      *
