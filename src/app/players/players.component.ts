@@ -13,8 +13,10 @@ export class PlayersComponent implements OnInit {
 
     players: User[];
 
-    constructor(public _players: PlayersService,
-                public title: TitleService) {
+    constructor(
+        public _players: PlayersService,
+        public title: TitleService,
+    ) {
         title.setTitle('Players');
     }
 

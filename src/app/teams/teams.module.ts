@@ -3,6 +3,7 @@ import { CommonModule } from 'app/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { TeamsComponent } from './teams.component';
+import { TeamsService } from './teams.service';
 
 
 const ROUTES: Routes = [{
@@ -11,11 +12,13 @@ const ROUTES: Routes = [{
     path: '/:id', component: TeamsComponent,
 }];
 
+
 @NgModule({
     imports: [
         CommonModule,
         RouterModule.forChild(ROUTES),
     ],
+    providers: [TeamsService],
     declarations: [TeamsComponent],
 })
 export class TeamsModule { }
