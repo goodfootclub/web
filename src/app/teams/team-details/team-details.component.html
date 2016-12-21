@@ -2,34 +2,49 @@
     <button md-icon-button (click)="back()">
         <md-icon>chevron_left</md-icon>
     </button>
-
     <span class='toolbar-title'> {{ team?.name }} </span>
-
     <button md-button color="primary">
         Ask to join
     </button>
 </md-toolbar>
 
+<md-tab-group>
+    <md-tab label="Info">
+        <md-card class="team-info">
+            <h1> {{ team?.name }} </h1>
+            <hr>
+            <div class="info">
+                [{{ ['coed', 'female', 'male'][team?.type] }}]
+                {{ team?.info }}
+            </div>
+        </md-card>
+        <md-card>
+            <h1> Roster </h1>
+            <hr>
+            <md-list>
+            <a
+                md-list-item
+                class="player"
+                *ngFor="let player of team?.players"
+                [routerLink]="['/players', player.id]"
+            >
+                <img [src]="player.img" alt="" class="player-pic">
+                <div class="player-info">
+                    <h1> {{ player.firstName }} {{ player.lastName }} </h1>
+                    <div class="role">
+                        {{ ROLES[player.role] }}
+                    </div>
+                </div>
+            </a>
+            </md-list>
+        </md-card>
+    </md-tab>
 
-<md-card class="team-info">
-    <h1> {{ team?.name }} </h1>
-    <div class="info">
-        [{{ ['coed', 'female', 'male'][team?.type] }}]
-        {{ team?.info }}
-    </div>
-</md-card>
+    <md-tab label="Schedule">
+        Coming SOON™
+    </md-tab>
 
-
-<md-card
-    class="player"
-    *ngFor="let player of team?.players"
-    [routerLink]="['/players', player.id]"
->
-    <img [src]="player.img" alt="" class="player-pic">
-    <div class="player-info">
-        <h1> {{ player.firstName }} {{ player.lastName }} </h1>
-        <div class="role">
-            {{ ROLES[player.role] }}
-        </div>
-    </div>
-</md-card>
+    <md-tab label="Chat">
+        Coming SOON™
+    </md-tab>
+</md-tab-group>
