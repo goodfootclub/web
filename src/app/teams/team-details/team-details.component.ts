@@ -16,10 +16,10 @@ import { TeamsService } from '../teams.service';
 export class TeamDetailsComponent implements OnInit {
 
     ROLES = {
-        3: 'Captain',
-        2: 'Player',
-        1: 'Substitute',
-        0: 'Inactive',
+        [3]: 'Captain',
+        [2]: 'Player',
+        [1]: 'Substitute',
+        [0]: 'Inactive',
         [-1]: 'Invited',
         [-2]: 'Asked to join',
     };

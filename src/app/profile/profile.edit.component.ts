@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 import { ProfileService } from './profile.service';
 import { User } from 'app/types';
-import {
-    FormGroup,
-    FormBuilder,
-    Validators,
-} from '@angular/forms';
 
 
 @Component({

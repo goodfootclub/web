@@ -2,7 +2,10 @@
     <app-menu-button></app-menu-button>
     <span class='toolbar-title'> {{ title.observable | async }} </span>
 
-    <div class="toolbar-icon-spacer"></div>
+    <button md-icon-button [routerLink]="['add']">
+        <md-icon>add_circle_outline</md-icon>
+    </button>
+
     <md-toolbar-row>
         <md-input
             placeholder="Search"
