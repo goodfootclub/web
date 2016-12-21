@@ -22,5 +22,4 @@ export class TeamsComponent implements OnInit {
             this.teams = teams;
         });
     }
-
 }

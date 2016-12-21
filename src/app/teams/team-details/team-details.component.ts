@@ -4,25 +4,34 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { AuthService } from 'app/auth';
 import { TitleService } from 'app/title.service';
-import { PlayersService } from '../players.service';
-import { User } from 'app/types';
+import { Team } from 'app/types';
+import { TeamsService } from '../teams.service';
 
 
 @Component({
-    selector: 'app-player-details',
-    templateUrl: './player-details.component.html',
-    styleUrls: [],
+    selector: 'app-team-details',
+    styleUrls: ['./team-details.component.styl'],
+    templateUrl: './team-details.component.html',
 })
-export class PlayerDetailsComponent implements OnInit {
+export class TeamDetailsComponent implements OnInit {
 
-    player: User;
+    ROLES = {
+        3: 'Captain',
+        2: 'Player',
+        1: 'Substitute',
+        0: 'Inactive',
+        [-1]: 'Invited',
+        [-2]: 'Asked to join',
+    };
+
+    team: Team;
 
     constructor(
         public auth: AuthService,
         public location: Location,
-        public players: PlayersService,
         public route: ActivatedRoute,
         public router: Router,
+        public teams: TeamsService,
         public title: TitleService,
     ) {
         title.setTitle('Player ');
@@ -31,8 +40,8 @@ export class PlayerDetailsComponent implements OnInit {
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
             let id = +params['id'];
-            this.players.get(id).subscribe(player => {
-                this.player = player;
+            this.teams.get(id).subscribe(team => {
+                this.team = team;
             });
         });
     }
