@@ -6,7 +6,8 @@ import { TeamsService } from '../teams.service';
 
 @Component({
     selector: 'app-team-add',
-    template: 'Add your team man!',
+    styleUrls: ['./team-add.component.styl'],
+    templateUrl: './team-add.component.html',
 })
 export class TeamAddComponent {
 

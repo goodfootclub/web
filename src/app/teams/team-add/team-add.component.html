@@ -1,0 +1,63 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <!-- First name -->
+    <md-input
+        width="100%"
+        #name
+        [dividerColor]="
+            form.controls.name.valid ||
+            form.controls.name.pristine ?
+            'primary' : 'warn'
+        "
+        [style.width]="'100%'"
+        formControlName="name"
+        placeholder="Team name"
+        required
+        type='text'
+    >
+        <md-hint *ngIf="name.focused" align="end">
+            <span *ngIf="form.controls.name.errors?.required">
+                required
+            </span>
+            <span *ngIf="!form.controls.name.errors?.required">
+                {{ name.characterCount }} / 30
+            </span>
+        </md-hint>
+    </md-input>
+    <br>
+
+    <md-textarea
+        #info
+        [dividerColor]="form.controls.info.valid ? 'primary' : 'warn'"
+        [style.width]="'100%'"
+        type='text'
+        formControlName="info"
+        placeholder="Info"
+    >
+        <md-hint *ngIf="info.focused">
+            Describe your team for potential players
+        </md-hint>
+        <md-hint *ngIf="info.focused" align="end">
+            {{ info.characterCount }} / 1000
+        </md-hint>
+    </md-textarea>
+    <br>
+
+    <md-radio-group>
+        <!--
+            Couple divs on each side to make something in the middle between
+            justify-content: center and justify-content: space-around
+        -->
+        <div></div>
+        <div></div>
+        <md-radio-button value="2">Men</md-radio-button>
+        <md-radio-button value="1">Women</md-radio-button>
+        <md-radio-button value="0">Coed</md-radio-button>
+        <div></div>
+        <div></div>
+    </md-radio-group>
+    <br>
+
+    <button md-raised-button color="primary" type="submit">
+        Save
+    </button>
+</form>
