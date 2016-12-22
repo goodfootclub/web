@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { MaterialModule } from '@angular/material';
 import { CommonModule as NgCommonModule } from '@angular/common';
-import { PlayerViewComponent, MenuButtonComponent } from './ui';
+
+import {
+    BackButtonComponent,
+    MenuButtonComponent,
+    PlayerViewComponent,
+} from './ui';
 import { TextSearchPipe } from './pipes';
 
 
@@ -14,11 +19,13 @@ import { TextSearchPipe } from './pipes';
         NgCommonModule,
     ],
     declarations: [
+        BackButtonComponent,
         MenuButtonComponent,
         PlayerViewComponent,
         TextSearchPipe,
     ],
     exports: [
+        BackButtonComponent,
         MaterialModule,
         MenuButtonComponent,
         NgCommonModule,

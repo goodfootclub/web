@@ -1,3 +1,11 @@
+<md-toolbar>
+    <app-back-button></app-back-button>
+
+    <span class='toolbar-title'>Add a team</span>
+
+</md-toolbar>
+
+
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <!-- First name -->
     <md-input
@@ -42,7 +50,7 @@
     </md-textarea>
     <br>
 
-    <md-radio-group>
+    <md-radio-group formControlName="type">
         <!--
             Couple divs on each side to make something in the middle between
             justify-content: center and justify-content: space-around
@@ -57,7 +65,12 @@
     </md-radio-group>
     <br>
 
-    <button md-raised-button color="primary" type="submit">
-        Save
-    </button>
+    <div class="buttons">
+        <button md-raised-button>
+            Cancel
+        </button>
+        <button md-raised-button color="primary" type="submit">
+            Save
+        </button>
+    </div>
 </form>

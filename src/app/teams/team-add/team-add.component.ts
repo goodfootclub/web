@@ -23,6 +23,7 @@ export class TeamAddComponent {
                 Validators.maxLength(30),
             ])],
             info: ['', Validators.maxLength(255)],
+            type: ['2', Validators.required],
         });
     }
 
