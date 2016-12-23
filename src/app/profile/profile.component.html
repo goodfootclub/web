@@ -1,7 +1,6 @@
 <md-toolbar>
     <app-menu-button></app-menu-button>
-    <span class='toolbar-title'> {{ title.observable | async }} </span>
-
+    <app-title></app-title>
     <button md-icon-button [routerLink]="['edit']">
         <md-icon>edit</md-icon>
     </button>

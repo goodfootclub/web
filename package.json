@@ -12,6 +12,7 @@
     "test": "ng test --watch=false"
   },
   "browser": {
+    "app": "./src/app",
     "app/auth": "./src/app/auth",
     "app/common": "./src/app/common",
     "app/error-handling": "./src/app/error-handling",

@@ -30,5 +30,7 @@ md-card
 
 .player-pic
     border-radius: 50%
-    height: $pic-dia
-    width: $pic-dia
+    max-height: $pic-dia  //
+    max-width: $pic-dia   // Workournd flexbox bug that causes avatars
+    min-height: $pic-dia  // to apear with random size
+    min-width: $pic-dia   //

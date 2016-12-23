@@ -6,6 +6,7 @@ import {
     BackButtonComponent,
     MenuButtonComponent,
     PlayerViewComponent,
+    TitleComponent,
 } from './ui';
 import { TextSearchPipe } from './pipes';
 
@@ -23,6 +24,7 @@ import { TextSearchPipe } from './pipes';
         MenuButtonComponent,
         PlayerViewComponent,
         TextSearchPipe,
+        TitleComponent,
     ],
     exports: [
         BackButtonComponent,
@@ -31,6 +33,7 @@ import { TextSearchPipe } from './pipes';
         NgCommonModule,
         PlayerViewComponent,
         TextSearchPipe,
+        TitleComponent,
     ],
 })
 export class CommonModule { }
