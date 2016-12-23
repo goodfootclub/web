@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import {
+    Http,
+    Request,
+    CookieXSRFStrategy,
+    RequestMethod,
+} from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -35,7 +40,15 @@ export class TeamsService {
     }
 
     create(data): Observable<Team> {
-        return this.http.post(`/api/teams/`, data).map(res => {
+        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
+        let request = new Request({
+            method: RequestMethod.Post,
+            url: `/api/teams/`,
+            body: data,
+        });
+        csrf.configureRequest(request);
+
+        return this.http.request(request).map(res => {
             return new Team(res.json());
         }).catch((err, caught) => {
             this.health.criticalError(JSON.stringify(err, null, 4));

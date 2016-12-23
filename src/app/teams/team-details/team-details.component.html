@@ -17,7 +17,24 @@
             </div>
         </md-card>
         <md-card>
-            <h1> Roster </h1>
+            <h1>Managers</h1>
+            <hr>
+            <md-list>
+            <a
+                md-list-item
+                class="player"
+                *ngFor="let player of team?.managers"
+                [routerLink]="['/players', player.id]"
+            >
+                <img [src]="player.img" alt="" class="player-pic">
+                <div class="player-info">
+                    <h1> {{ player.firstName }} {{ player.lastName }} </h1>
+                </div>
+            </a>
+            </md-list>
+        </md-card>
+        <md-card>
+            <h1>Roster</h1>
             <hr>
             <md-list>
             <a

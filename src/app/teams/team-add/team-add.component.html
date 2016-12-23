@@ -1,7 +1,10 @@
 <md-toolbar>
-    <app-back-button></app-back-button>
+    <app-back-button
+        #backButton
+        [disabled]="isPosting"
+    ></app-back-button>
     <app-title></app-title>
-
+    <div class="toolbar-icon-spacer"></div>
 </md-toolbar>
 
 
@@ -65,10 +68,19 @@
     <br>
 
     <div class="buttons">
-        <button md-raised-button>
+        <button
+            (click)="backButton.back()"
+            [disabled]="isPosting"
+            md-raised-button
+        >
             Cancel
         </button>
-        <button md-raised-button color="primary" type="submit">
+        <button
+            [disabled]="form.invalid || isPosting"
+            color="primary"
+            md-raised-button
+            type="submit"
+        >
             Save
         </button>
     </div>

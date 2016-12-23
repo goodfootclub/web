@@ -8,7 +8,7 @@ import { AuthService } from 'app/auth';
 @Component({
     selector: 'app-back-button',
     template: `
-        <button md-icon-button (click)="back()">
+        <button md-icon-button (click)="back()" [disabled]="disabled">
             <md-icon>chevron_left</md-icon>
         </button>
     `,
@@ -21,6 +21,7 @@ export class BackButtonComponent {
      * views that need a back button it's 2
      */
     @Input() depth: number = 2;
+    @Input() disabled;
 
     constructor(
         @Inject(forwardRef(() => AuthService)) public auth: AuthService,
