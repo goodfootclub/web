@@ -4,41 +4,15 @@
     <span class="toolbar-icon-spacer"></span>
 </md-toolbar>
 
-<div class="container">
-    <div *ngIf="!events" class='no-games'>
-        <div class="alert alert-info" role="alert">
-            <p>It seems, that you don't have any games lined up.</p>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-12 col-md-5">
-                <input
-                    class="form-control"
-                    id="search"
-                    placeholder="Find some..."
-                    type="search"
-                >
-            </div>
-            <div class="col-sm-12 col-md-2" style="text-align: center">
-                — OR —
-            </div>
-            <div class="col-sm-12 col-md-5">
-                <button
-                    (click)="showExamples()"
-                    class="btn btn-primary btn-block"
-                    type="button"
-                >
-                    Create one
-                </button>
-            </div>
-        </div>
-    </div>
+<div class="no-games">
+    <p>You don't have any games yet</p>
 
-    <div *ngIf="events" class='row'>
-        <div class="col-md-12 events-header">
-            <h1>Here are your games</h1>
-        </div>
-    </div>
-    <table  *ngIf="events" class='table events-list'>
+    <button [routerLink]="['/teams']" color=primary md-raised-button>
+        Find a team
+    </button>
+</div>
+<div class="container">
+    <table  *ngIf="!empty" class='table events-list'>
         <thead class="thead-inverse">
             <tr>
                 <th>Team(s)</th>

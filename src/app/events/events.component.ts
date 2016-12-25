@@ -12,6 +12,7 @@ import { TitleService } from '../title.service';
 export class EventsComponent implements OnInit {
 
     events: GameEvent[];
+    empty: boolean = true;
 
     statusMessages =  [
         'I\'m going',
@@ -28,6 +29,7 @@ export class EventsComponent implements OnInit {
         this.title.setTitle('Your Games');
         this._events.all().subscribe(events => {
             this.events = events;
+            this.empty = !events.length;
         });
     }
 
