@@ -1,8 +1,18 @@
 <md-toolbar>
     <app-back-button></app-back-button>
     <app-title></app-title>
-    <button md-button color="primary">
+    <button
+        *ngIf="!isPlayer && !isManager"
+        md-button color="primary"
+        [disabled]="!canAskToJoin"
+    >
         Ask to join
+    </button>
+    <button *ngIf="isPlayer || isManager" md-button color="primary">
+        Invite players
+    </button>
+    <button *ngIf="isManager" md-icon-button [routerLink]="['edit']">
+        <md-icon>edit</md-icon>
     </button>
 </md-toolbar>
 

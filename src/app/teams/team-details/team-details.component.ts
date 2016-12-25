@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { TitleService } from 'app/title.service';
-import { Team } from 'app/types';
+import { ProfileService } from 'app/profile';
+import { Team, PlayerRole } from 'app/types';
 import { TeamsService } from '../teams.service';
+
+
 
 
 @Component({
@@ -23,11 +26,16 @@ export class TeamDetailsComponent implements OnInit {
     };
 
     team: Team;
+    isManager: boolean = false;
+    isPlayer: boolean = false;
+    canAskToJoin: boolean = true;
+
 
     constructor(
         public route: ActivatedRoute,
         public teams: TeamsService,
         public title: TitleService,
+        public profile: ProfileService,
     ) {
         title.setTitle('Player');
     }
@@ -37,6 +45,19 @@ export class TeamDetailsComponent implements OnInit {
             let id = +params['id'];
             this.teams.get(id).subscribe(team => {
                 this.team = team;
+                for (let player of team.players) {
+                    if (player.id === this.profile.currentUser.id) {
+                        this.canAskToJoin = false;
+                        this.isPlayer = player.role >= PlayerRole.Substitute;
+                        break;
+                    }
+                }
+                for (let manager of team.managers) {
+                    if (manager.id === this.profile.currentUser.id) {
+                        this.isManager = true;
+                        break;
+                    }
+                }
             });
         });
     }
