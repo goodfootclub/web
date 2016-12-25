@@ -38,19 +38,18 @@ before_deploy:
   - ssh-add .ssh
 
 deploy:
-  provider: script
-  skip_cleanup: true
-  script: >-
-    rsync -r --delete-after --quiet --rsync-path="sudo rsync" dist
-    ubuntu@dev.goodfoot.club:/home/ubuntu/web
-  on:
-    branch: develop
+  - provider: script
+    skip_cleanup: true
+    script: >-
+      rsync -r --delete-after --quiet --rsync-path="sudo rsync" dist
+      ubuntu@dev.goodfoot.club:/home/ubuntu/web
+    on:
+      branch: develop
 
-deploy:
-  provider: script
-  skip_cleanup: true
-  script: >-
-    rsync -r --delete-after --quiet --rsync-path="sudo rsync" dist
-    ubuntu@goodfoot.club:/home/ubuntu/web
-  on:
-    branch: master
+  - provider: script
+    skip_cleanup: true
+    script: >-
+      rsync -r --delete-after --quiet --rsync-path="sudo rsync" dist
+      ubuntu@goodfoot.club:/home/ubuntu/web
+    on:
+      branch: master
