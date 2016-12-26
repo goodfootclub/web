@@ -51,6 +51,11 @@ export class ProfileService {
     }
 
     update(data): Observable<User> {
+        data['first_name'] = data.firstName;
+        delete data['firstName'];
+        data['last_name'] = data.lastName;
+        delete data['lastName'];
+
         let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
         let request = new Request({
             method: RequestMethod.Put,
