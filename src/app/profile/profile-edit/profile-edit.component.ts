@@ -1,23 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
-import { ProfileService } from './profile.service';
+import { ProfileService } from '../profile.service';
 import { User } from 'app/types';
 
 
 @Component({
     selector: 'app-profile-edit',
-    templateUrl: './profile.edit.component.html',
-    styleUrls: ['./profile.component.styl'],
+    templateUrl: './profile-edit.component.html',
+    styleUrls: ['./profile-edit.component.styl'],
 })
 export class ProfileEditComponent implements OnInit {
 
     user: User;
     form: FormGroup;
+    isPosting: boolean = false;
 
     constructor(
-        public profile: ProfileService,
         public formBuilder: FormBuilder,
+        public profile: ProfileService,
+        public router: Router,
     ) {
         profile.getCurrentUser().subscribe(user => {
             this.user = user;
@@ -28,7 +31,11 @@ export class ProfileEditComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log(this.form);
+        this.isPosting = true;
+        this.form.disable();
+        this.profile.update(this.form.value).subscribe(() => {
+            this.router.navigate(['/profile']);
+        });
     }
 
     ngOnInit() {
@@ -44,15 +51,12 @@ export class ProfileEditComponent implements OnInit {
             bio: ['', Validators.maxLength(1000)],
 
             // Birthday
-            birthday: '',
-            // bDay: ['', Validators.maxLength(1000)],
-            // bMonth: ['', Validators.maxLength(1000)],
-            // bYear: ['', Validators.maxLength(1000)],
+            birthday: null,
 
-            gender: null,
-            cover: null,
-            img: null,
-            phone: ['', Validators.maxLength(12)],
+            // gender: null,
+            // cover: null,
+            // img: null,
+            // phone: ['', Validators.maxLength(12)],
         });
 
         this.form.patchValue(this.user);

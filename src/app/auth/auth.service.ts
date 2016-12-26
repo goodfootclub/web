@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, forwardRef } from '@angular/core';
 import {
     ActivatedRouteSnapshot,
     CanActivate,
@@ -26,7 +26,7 @@ export class AuthService implements CanActivate, CanActivateChild {
     canActivateChild = this.canActivate;
 
     constructor(
-        private health: HealthService,
+        @Inject(forwardRef(() => HealthService)) private health: HealthService,
         private http: Http,
         private router: Router,
         public profile: ProfileService,

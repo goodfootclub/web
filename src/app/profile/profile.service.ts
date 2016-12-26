@@ -1,5 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Injectable, Inject, forwardRef } from '@angular/core';
+import {
+    Http,
+    Request,
+    CookieXSRFStrategy,
+    RequestMethod,
+} from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
@@ -19,8 +24,8 @@ export class ProfileService {
     currentUser: User;
 
     constructor(
-        private health: HealthService,
-        private http: Http,
+        @Inject(forwardRef(() => HealthService)) public health: HealthService,
+        public http: Http,
     ) {}
 
     /**
@@ -40,6 +45,24 @@ export class ProfileService {
                 this.currentUser = null;
                 return Observable.of(null);
             };
+            this.health.criticalError(JSON.stringify(err, null, 4));
+            throw err;
+        });
+    }
+
+    update(data): Observable<User> {
+        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
+        let request = new Request({
+            method: RequestMethod.Put,
+            url: `/api/users/me/`,
+            body: data,
+        });
+        csrf.configureRequest(request);
+
+        return this.http.request(request).map(response => {
+            this.currentUser = new User(response.json());
+            return this.currentUser;
+        }).catch((err, caught) => {
             this.health.criticalError(JSON.stringify(err, null, 4));
             throw err;
         });

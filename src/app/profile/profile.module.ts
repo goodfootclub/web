@@ -8,8 +8,7 @@ import { MaterialModule } from '@angular/material';
 
 import { CommonModule } from 'app/common';
 import { ProfileComponent } from './profile.component';
-import { ProfileEditComponent } from './profile.edit.component';
-
+import { ProfileEditComponent } from './profile-edit';
 
 
 const ROUTES: Routes = [{

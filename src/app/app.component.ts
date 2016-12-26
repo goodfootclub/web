@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TitleService } from './title.service';
+// import { HealthService, HealthStatus } from './error-handling';
 
 
 @Component({
@@ -10,7 +11,12 @@ import { TitleService } from './title.service';
 export class AppComponent {
     menu: any;
 
-    constructor(public title: TitleService) {
+    // CRITICAL = HealthStatus.Critical;
+
+    constructor(
+        public title: TitleService,
+        // public health: HealthService,
+    ) {
         title.setTitle('Your Games');
     }
 }

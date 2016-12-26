@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 export enum HealthStatus {
     Healthy,
-    Critical
+    Critical,
 }
 
 @Injectable()
