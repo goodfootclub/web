@@ -12,10 +12,13 @@
     </md-toolbar-row>
 </md-toolbar>
 
-
 <md-card
     *ngFor="let player of players | textSearch: searchField.value"
-    [routerLink]="['/players', player.id]"
+    [routerLink]="
+        targetTeam?
+        ['/players', player.id, {targetTeam: targetTeam}] :
+        ['/players', player.id]
+    "
 >
     <img [src]="player.img" alt="" class="player-pic">
     <div class="player-info">

@@ -8,7 +8,11 @@
     >
         Ask to join
     </button>
-    <button *ngIf="isPlayer || isManager" md-button color="primary">
+    <button
+        *ngIf="isPlayer || isManager"
+        md-button color="primary"
+        [routerLink]="['/players', {targetTeam: team.id}]"
+    >
         Invite players
     </button>
     <button *ngIf="isManager" md-icon-button [routerLink]="['edit']">

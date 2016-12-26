@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+
 import { TitleService } from '../title.service';
 import { PlayersService } from './players.service';
 import { User } from '../types';
@@ -12,15 +14,22 @@ import { User } from '../types';
 export class PlayersComponent implements OnInit {
 
     players: User[];
+    targetTeam: number;
+
 
     constructor(
         public _players: PlayersService,
+        public route: ActivatedRoute,
         public title: TitleService,
     ) {
         title.setTitle('Players');
     }
 
     ngOnInit() {
+        this.route.params.forEach((params: Params) => {
+            this.targetTeam = +params['targetTeam'];
+        });
+
         this._players.all().subscribe(players => {
             this.players = players;
         });
