@@ -27,6 +27,10 @@ export class SidenavComponent implements OnInit {
         icon: 'people',
         text: 'Teams',
         path: ['/teams'],
+    }, {
+        icon: 'local_parking',
+        text: 'Pickup Games',
+        path: ['/games'],
     }];
 
     constructor(private menuService: MenuService) {}

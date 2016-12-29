@@ -39,6 +39,11 @@ export const ROUTES: Routes = [{
     canActivate: [AuthService],
     canActivateChild: [AuthService],
 }, {
+    path: 'games',
+    loadChildren: 'app/games/games.module#GamesModule',
+    canActivate: [AuthService],
+    canActivateChild: [AuthService],
+}, {
     path: '**',
     component: FourxxErrorComponent,
 }];
