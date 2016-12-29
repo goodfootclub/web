@@ -21,6 +21,7 @@
     "app/profile": "./src/app/profile",
     "app/sidenav": "./src/app/sidenav",
     "app/sidenav": "./src/app/sidenav",
+    "app/title.service": "./src/app/title.service",
     "app/types": "./src/app/types"
   },
   "private": true,

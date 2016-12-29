@@ -1,3 +1,19 @@
+<md-toolbar>
+    <app-menu-button></app-menu-button>
+    <app-title></app-title>
+    <button md-icon-button [routerLink]="['add']">
+        <md-icon>add_circle_outline</md-icon>
+    </button>
+
+    <md-toolbar-row>
+        <md-input
+            placeholder="Search"
+            [style.width]="'100%'"
+            #searchField
+        ></md-input>
+    </md-toolbar-row>
+</md-toolbar>
+
 <p>
   games works!
 </p>
