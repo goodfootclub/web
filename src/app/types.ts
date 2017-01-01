@@ -49,6 +49,15 @@ export enum PlayType {
 }
 
 
+export enum RsvpStatus {
+    Going = 2,
+    NotSure = 1,
+    NotGoing = 0,
+    Invited = -1,
+    AskedToJoin = -2,
+}
+
+
 export enum SkillLevel {
     Beginner,
     Casual,
@@ -64,33 +73,47 @@ export enum TeamType {
 }
 
 
-export enum UserStatus {
-    Going,
-    NotSure,
-    NotGoing,
-}
-
 /**
- * Personalized (your team, players on your team) game event.
- * @type {Object}
+ * Game events. Certain date, certain place...
  */
-export type GameEvent = {
+export class GameEvent {
     id: number;
     datetime: Date;
     duration?: number; // Minutes
     description?: string;
-    eventType?: GameType;
-    league?: League;
+    // eventType?: GameType;
+    // league?: League;
     location: Location;
-    myStatus?: UserStatus;
     name?: string;
     players?: Player[];
     playersById?: { number: Player };
-    playersCount?: PlayersCount;
-    playersNeeded?: PlayersCount;
-    team?: number;
-    result?: Result;
-    organizer?: any;
+    // playersCount?: PlayersCount;
+    // playersNeeded?: PlayersCount;
+    teams?: [any];
+    // result?: Result;
+    organizer?: User;
+
+    /**
+     * Transform API team represetation to use in the app:
+     *     use mixedCase
+     *     transform nested objects
+     *
+     * @param  {any}  data user data as it comes from the api
+     */
+    constructor(data: any) {
+        this.players = [];
+        if (data['players'] != null) {
+            this.players = data['players'].map(item => new Player(item));
+        }
+
+        this.id = data['id'];
+        this.organizer = new User(data['organizer']);
+        this.teams = data['teams'];
+        this.description = data['description'];
+        this.duration = data['duration'];
+        this.datetime = new Date(data['datetime']);
+        this.location = new Location(data['location']);
+    }
 };
 
 
@@ -109,12 +132,16 @@ export type League = {
 
 
 // Field
-export type Location = {
+export class Location {
+    id: number;
     address?: string;
-    fieldType?: FieldType;
-    lat?: number;
-    lng?: number;
+    // fieldType?: FieldType;
+    gis?: string;
     name?: string;  // Alias like "Field near the Don's house"
+
+    constructor(data: any) {
+        Object.assign(this, data);
+    }
 };
 
 
@@ -125,9 +152,11 @@ export class Player {
     id: number;
     img?: string;
     lastName?: string;
-    position?: FieldPosition | FieldPosition[];
-    role: PlayerRole;
-    roleId: number;
+    // position?: FieldPosition | FieldPosition[];
+    role?: PlayerRole;
+    roleId?: number;
+    rsvp?: RsvpStatus;
+    rsvpId?: number;
 
     /**
      * Transform API player represetation to use in the app:
@@ -135,17 +164,13 @@ export class Player {
      * @param  {any}  data user data as it comes from the api
      */
     constructor(data: any) {
-
-        return {
-            age: data['age'],
-            firstName: data['first_name'],
-            id: data['id'],
-            img: data['img'],
-            lastName: data['last_name'],
-            role: data['role'],
-            roleId: data['role_id'],
-        };
-
+        this.age = data['age'];
+        this.firstName = data['first_name'];
+        this.id = data['id'];
+        this.img = data['img'];
+        this.lastName = data['last_name'];
+        this.role = data['role'];
+        this.roleId = data['role_id'];
     }
 };
 
@@ -199,26 +224,22 @@ export class Team {
      */
     constructor(data: any) {
 
-        let managers = [];
+        this.managers = [];
         if (data['managers'] != null) {
-            managers = data['managers'].map(item => new User(item));
+            this.managers = data['managers'].map(item => new User(item));
         }
 
-        let players = [];
+        this.players = [];
         if (data['players'] != null) {
-            players = data['players'].map(item => new Player(item));
+            this.players = data['players'].map(item => new Player(item));
         }
 
-        return {
-            id: data['id'],
-            info: data['info'],
-            managers: managers,
-            name: data['name'],
-            players: players,
-            slotsFemale: data['slots_female'],
-            slotsMale: data['slots_male'],
-            type: data['type'],
-        };
+        this.id = data['id'];
+        this.info = data['info'];
+        this.name = data['name'];
+        this.slotsFemale = data['slots_female'];
+        this.slotsMale = data['slots_male'];
+        this.type = data['type'];
     }
 };
 
