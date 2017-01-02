@@ -14,6 +14,9 @@
     </md-toolbar-row>
 </md-toolbar>
 
-<p>
-  games works!
-</p>
+<md-card
+    *ngFor="let game of games | textSearch: searchField.value"
+    [routerLink]="['/games', game.id]"
+>
+    <h1> {{ game.name }} </h1>
+</md-card>
