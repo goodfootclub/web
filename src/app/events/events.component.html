@@ -4,7 +4,7 @@
     <span class="toolbar-icon-spacer"></span>
 </md-toolbar>
 
-<div class="no-games">
+<div *ngIf="empty" class="no-games">
     <p>You don't have any games yet</p>
 
     <button [routerLink]="['/teams']" color=primary md-raised-button>
@@ -12,7 +12,7 @@
     </button>
 </div>
 <div class="container">
-    <table  *ngIf="!empty" class='table events-list'>
+    <table *ngIf="!empty" class='table events-list'>
         <thead class="thead-inverse">
             <tr>
                 <th>Team(s)</th>
