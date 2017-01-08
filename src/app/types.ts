@@ -106,8 +106,11 @@ export class GameEvent {
             this.players = data['players'].map(item => new Player(item));
         }
 
+        if (data['organizer'] != null) {
+            this.organizer = new User(data['organizer']);
+        }
+
         this.id = data['id'];
-        this.organizer = new User(data['organizer']);
         this.teams = data['teams'];
         this.description = data['description'];
         this.duration = data['duration'];

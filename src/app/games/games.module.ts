@@ -3,6 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 import { CommonModule } from 'app/common';
+import { GamesService } from './games.service';
 import { GamesComponent } from './games.component';
 
 
@@ -21,6 +22,7 @@ const ROUTES: Routes = [{
         ReactiveFormsModule,
         RouterModule.forChild(ROUTES),
     ],
+    providers: [GamesService],
     declarations: [
         GamesComponent,
     ],

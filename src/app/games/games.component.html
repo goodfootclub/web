@@ -18,5 +18,19 @@
     *ngFor="let game of games | textSearch: searchField.value"
     [routerLink]="['/games', game.id]"
 >
-    <h1> {{ game.name }} </h1>
+    <h1>Pickup Game</h1>
+    <hr>
+    <div>
+        <h1>{{ game.datetime | date:'EEEE, h:mm a' }}</h1>
+        <span class="info">
+            {{ game.datetime | date:'MMMM d, y' }}
+        </span>
+    </div>
+    <div>
+        <h1>{{ game.location.name }}</h1>
+        <span class="info">
+            {{ game.location.address }}
+        </span>
+    </div>
+
 </md-card>
