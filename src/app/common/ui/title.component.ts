@@ -1,4 +1,10 @@
-import { Component, Inject, forwardRef } from '@angular/core';
+import {
+    Component,
+    Input,
+    Inject,
+    OnChanges,
+    forwardRef,
+} from '@angular/core';
 
 import { TitleService } from 'app';
 
@@ -7,9 +13,17 @@ import { TitleService } from 'app';
     selector: 'app-title',
     template: `{{ title.observable | async }}`,
 })
-export class TitleComponent {
+export class TitleComponent implements OnChanges {
+
+    @Input() value: string;
 
     constructor(
         @Inject(forwardRef(() => TitleService)) public title: TitleService,
     ) {}
+
+    ngOnChanges() {
+        if (this.value != null) {
+            this.title.setTitle(this.value);
+        }
+    }
 }
