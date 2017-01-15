@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+
 /**
  * Simple text search
- *
  */
 @Pipe({
     name: 'textSearch',

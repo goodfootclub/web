@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {
+    FormGroup,
+    FormBuilder,
+    Validators,
+    FormControl,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { Location } from 'app/types';
+import { TextSearchPipe } from 'app/common/pipes';
 import { GamesService } from '../games.service';
 import { LocationsService } from '../locations.service';
-
-import { Location } from 'app/types';
 
 
 @Component({
@@ -21,7 +26,10 @@ export class GameAddComponent {
     isPosting: boolean = false;
 
     controls: any;
-    locationControls: any;
+    locationControls: {
+        name: FormControl,
+        address: FormControl,
+    };
 
 
     constructor(
@@ -59,6 +67,11 @@ export class GameAddComponent {
 
         this.controls = this.form.controls;
         this.locationControls = this.form.controls['location']['controls'];
+
+        this.locationControls.name.valueChanges.subscribe(value => {
+
+        });
+
     }
 
     onSubmit() {

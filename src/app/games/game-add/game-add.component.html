@@ -7,7 +7,6 @@
     <div class="toolbar-icon-spacer"></div>
 </md-toolbar>
 
-
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div formGroupName="location">
         <md-input
@@ -76,31 +75,6 @@
             </md-hint>
         </md-input>
     </div>
-
-    <md-input
-        #name
-        [dividerColor]="
-            form.controls.name.valid ||
-            form.controls.name.pristine ?
-            'primary' : 'warn'
-        "
-        [style.width]="'100%'"
-        formControlName="name"
-        placeholder="Team name"
-        required
-        type='text'
-    >
-        <md-hint *ngIf="name.focused" align="end">
-            <span *ngIf="form.controls.name.errors?.required">
-                required
-            </span>
-            <span *ngIf="!form.controls.name.errors?.required">
-                {{ name.characterCount }} / 30
-            </span>
-        </md-hint>
-    </md-input>
-    <br>
-
 
     <div class="buttons">
         <button
