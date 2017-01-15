@@ -30,6 +30,8 @@ export class GameAddComponent {
         address: FormControl,
     };
 
+    tzName = /\(([\w\s]+)\)/.exec(new Date().toString())[1];
+
 
     constructor(
         public _locations: LocationsService,
@@ -40,6 +42,16 @@ export class GameAddComponent {
         _locations.all().subscribe(locations => {
             this.locations = locations;
         });
+
+        let now = new Date();
+        let hours = now.getHours();
+        let minutes = now.getMinutes();
+        let timeStr = `${
+            hours > 9 ? '' : '0'}${hours}:${
+            minutes > 9 ? '' :'0'}${minutes
+        }`;
+        now.setHours(now.getHours() - now.getTimezoneOffset() / 60);
+        let dateStr = now.toJSON().split('T')[0];
 
         this.form = this.formBuilder.group({
             location: this.formBuilder.group({
@@ -56,10 +68,8 @@ export class GameAddComponent {
                     ]),
                 ],
             }),
-            date: [
-                new Date().toJSON().split('T')[0],
-                Validators.required,
-            ],
+            date: [dateStr, Validators.required],
+            time: [timeStr, Validators.required],
         });
 
         this.controls = this.form.controls;

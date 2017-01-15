@@ -96,20 +96,11 @@
         </md-hint>
     </md-input-container>
 
-    <!--
-    <md-input-container
-        [dividerColor]="
-            form.controls.date?.valid ||
-            form.controls.date?.pristine ?
-            'primary' : 'warn'
-        "
-    >
+    <md-input-container [style.width]="'100%'">
         <input
             md-input
-            #date
-            [style.width]="'100%'"
-            formControlName="date"
-            placeholder="Game time"
+            formControlName="time"
+            [placeholder]="'Game time (' + tzName + ')'"
             required
             type='time'
         >
@@ -118,7 +109,7 @@
                 required
             </span>
         </md-hint>
-    </md-input-container> -->
+    </md-input-container>
 
     <div class="buttons">
         <button
