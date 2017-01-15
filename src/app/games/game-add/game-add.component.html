@@ -12,14 +12,11 @@
         <md-input
             #locationName
             [dividerColor]="
-                form.controls.name.valid ||
-                form.controls.name.pristine ?
+                locationControls.name.valid ||
+                locationControls.name.pristine ?
                 'primary' : 'warn'
             "
             [style.width]="'100%'"
-            (blur)="hideLocations()"
-            (focus)="showLocations()"
-            autocomplete="off"
             formControlName="name"
             placeholder="Game location"
             required
@@ -35,7 +32,7 @@
             </md-hint>
         </md-input>
 
-        <md-card class="locations-list" [hidden]="!showLocationsList">
+        <!-- <md-card class="locations-list" [hidden]="!showLocationsList">
             <md-list>
                 <md-list-item
                     *ngFor="
@@ -49,13 +46,13 @@
                     <p md-line>{{ location.address }}</p>
                 </md-list-item>
             </md-list>
-        </md-card>
+        </md-card> -->
 
         <md-input
             #locationAddress
             [dividerColor]="
-                form.controls.name.valid ||
-                form.controls.name.pristine ?
+                locationControls.address.valid ||
+                locationControls.address.pristine ?
                 'primary' : 'warn'
             "
             [style.width]="'100%'"
@@ -66,15 +63,62 @@
             type='text'
         >
             <md-hint *ngIf="locationAddress.focused" align="end">
-                <span *ngIf="locationControls.name.errors?.required">
+                <span *ngIf="locationControls.address.errors?.required">
                     required
                 </span>
-                <span *ngIf="!locationControls.name.errors?.required">
+                <span *ngIf="!locationControls.address.errors?.required">
                     {{ locationAddress.characterCount }} / 30
                 </span>
             </md-hint>
         </md-input>
     </div>
+
+    <md-input-container
+        [style.width]="'100%'"
+        [dividerColor]="
+            form.controls.date?.valid ||
+            form.controls.date?.pristine ?
+            'primary' : 'warn'
+        "
+    >
+        <input
+            md-input
+            #date
+            formControlName="date"
+            placeholder="Game date"
+            required
+            type='date'
+        >
+        <md-hint *ngIf="date.focused" align="end">
+            <span *ngIf="controls.date.errors?.required">
+                required
+            </span>
+        </md-hint>
+    </md-input-container>
+
+    <!--
+    <md-input-container
+        [dividerColor]="
+            form.controls.date?.valid ||
+            form.controls.date?.pristine ?
+            'primary' : 'warn'
+        "
+    >
+        <input
+            md-input
+            #date
+            [style.width]="'100%'"
+            formControlName="date"
+            placeholder="Game time"
+            required
+            type='time'
+        >
+        <md-hint *ngIf="date.focused" align="end">
+            <span *ngIf="controls.date.errors?.required">
+                required
+            </span>
+        </md-hint>
+    </md-input-container> -->
 
     <div class="buttons">
         <button

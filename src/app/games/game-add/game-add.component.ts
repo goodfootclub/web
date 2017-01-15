@@ -8,7 +8,6 @@ import {
 import { Router } from '@angular/router';
 
 import { Location } from 'app/types';
-import { TextSearchPipe } from 'app/common/pipes';
 import { GamesService } from '../games.service';
 import { LocationsService } from '../locations.service';
 
@@ -50,19 +49,17 @@ export class GameAddComponent {
                     Validators.maxLength(30),
                 ])],
                 address: [
-                    {value: '', disabled: true},
+                    {value: '', disabled: false},
                     Validators.compose([
                         Validators.required,
                         Validators.maxLength(255),
                     ]),
                 ],
             }),
-            name: ['', Validators.compose([
+            date: [
+                new Date().toJSON().split('T')[0],
                 Validators.required,
-                Validators.maxLength(30),
-            ])],
-            info: ['', Validators.maxLength(1000)],
-            type: ['2', Validators.required],
+            ],
         });
 
         this.controls = this.form.controls;
