@@ -59,7 +59,6 @@
             autocomplete="off"
             formControlName="address"
             placeholder="Address"
-            required
             type='text'
         >
             <md-hint *ngIf="locationAddress.focused" align="end">
@@ -67,7 +66,7 @@
                     required
                 </span>
                 <span *ngIf="!locationControls.address.errors?.required">
-                    {{ locationAddress.characterCount }} / 30
+                    {{ locationAddress.characterCount }} / 255
                 </span>
             </md-hint>
         </md-input>

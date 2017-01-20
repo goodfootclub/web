@@ -47,9 +47,15 @@ export class GameAddComponent {
         let hours = now.getHours();
         let minutes = now.getMinutes();
         let timeStr = `${
-            hours > 9 ? '' : '0'}${hours}:${
-            minutes > 9 ? '' :'0'}${minutes
+            hours > 9 ? '' : '0'
+        }${
+            hours
+        }:${
+            minutes > 9 ? '' :'0'
+        }${
+            minutes
         }`;
+
         now.setHours(now.getHours() - now.getTimezoneOffset() / 60);
         let dateStr = now.toJSON().split('T')[0];
 
@@ -63,7 +69,7 @@ export class GameAddComponent {
                 address: [
                     {value: '', disabled: false},
                     Validators.compose([
-                        Validators.required,
+                        // Validators.required,
                         Validators.maxLength(255),
                     ]),
                 ],
@@ -82,12 +88,27 @@ export class GameAddComponent {
     }
 
     onSubmit() {
-        console.log(this.form);
-        // this.isPosting = true;
-        // this.form.disable();
-        // this.games.create(this.form.value).subscribe(newGame => {
-        //     this.router.navigate(['/games', newGame.id]);
-        // });
+        console.log(this.form.value);
+
+        let dt = new Date(
+            this.form.value['date'] + 'T' + this.form.value['time'],
+        );
+        dt.setHours(dt.getHours() + dt.getTimezoneOffset() / 60);
+
+        this.isPosting = true;
+        this.form.disable();
+
+        let data = {
+            location: this.form.value['location'],
+            teams: [],
+            datetime: dt.toJSON(),
+        };
+
+        console.log(data);
+
+        this.games.create(data).subscribe(newGame => {
+            this.router.navigate(['/games', newGame.id]);
+        });
     }
 
     setLocation(location: Location) {

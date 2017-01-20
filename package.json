@@ -11,19 +11,6 @@
     "start": "npm run serve:hmr",
     "test": "ng test --watch=false"
   },
-  "browser": {
-    "app": "./src/app",
-    "app/auth": "./src/app/auth",
-    "app/common": "./src/app/common",
-    "app/error-handling": "./src/app/error-handling",
-    "app/games": "./src/app/games",
-    "app/players": "./src/app/players",
-    "app/profile": "./src/app/profile",
-    "app/sidenav": "./src/app/sidenav",
-    "app/sidenav": "./src/app/sidenav",
-    "app/title.service": "./src/app/title.service",
-    "app/types": "./src/app/types"
-  },
   "private": true,
   "dependencies": {
     "@angular/common": "2.3.1",
