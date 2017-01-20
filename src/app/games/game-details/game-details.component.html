@@ -1,23 +1,19 @@
+<md-toolbar>
+    <app-back-button></app-back-button>
+    <app-title value="Pickup Game"></app-title>
+    <button md-icon-button [routerLink]="['edit']" [disabled]="true">
+        <md-icon>edit</md-icon>
+    </button>
+</md-toolbar>
+
 <div class="container">
-    <div class="row">
-        <div class="col-md-12 events-header">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a [routerLink]="['']">Home</a>
-                </li>
-                <li class="breadcrumb-item active">{{ event?.id }}</li>
-            </ol>
-        </div>
-
-    </div>
-
     <div class='row'>
 
         <div class="col-md-2 col-sm-12">
             <strong>I'm</strong>
         </div>
         <div *ngIf="!user" class="col-md-10 col-sm-12">
-            Not invited :(
+            <a href="javascript:void(0)">Able to join!</a>
         </div>
         <div *ngIf="user" class="col-md-10 col-sm-12">
 
@@ -41,8 +37,8 @@
             <strong>When?</strong>
         </div>
         <div *ngIf="!editMode" class="col-md-10 col-sm-12">
-            {{ event?.datetime | date: 'shortTime' }}
-            {{ event?.datetime | date: 'fullDate' }}
+            {{ game?.datetime | date: 'shortTime' }}
+            {{ game?.datetime | date: 'fullDate' }}
         </div>
         <div *ngIf="editMode" class="col-md-10 col-sm-12">
             ---
@@ -54,21 +50,21 @@
             <strong>Where?</strong>
         </div>
         <div class="col-md-10 col-sm-12">
-            {{ event?.location.address }}
+            {{ game?.location.name }} ({{ game?.location.address }})
         </div>
     </div>
 
 
     <div class='row'>
         <div class="col-md-12">
-            <h2>Teams</h2>
+            <h2>Players</h2>
         </div>
     </div>
 
     <div class='row'>
         <div
             class="col-md-6 col-sm-12"
-            *ngFor="let team of event?.teams"
+            *ngFor="let team of game?.teams"
         >
             <h3>{{ team.name }}</h3>
             <h4>Managers</h4>
