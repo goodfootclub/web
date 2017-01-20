@@ -54,4 +54,22 @@ export class GamesService {
             throw err;
         });
     }
+
+    setStatus(game, user, status): Observable<any> {
+        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
+
+        let request = new Request({
+            method: RequestMethod.Put,
+            url: `/api/games/${game.id}/players/${user.id}/`,
+            body: {
+                'player': user.player,
+                'status': status,
+                'team': user.team,
+            },
+        });
+
+        csrf.configureRequest(request);
+
+        return this.http.request(request);
+    };
 }

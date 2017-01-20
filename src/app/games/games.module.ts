@@ -7,6 +7,7 @@ import { GamesService } from './games.service';
 import { LocationsService } from './locations.service';
 import { GamesComponent } from './games.component';
 import { GameAddComponent } from './game-add';
+import { GameDetailsComponent } from './game-details';
 
 
 const ROUTES: Routes = [{
@@ -14,7 +15,7 @@ const ROUTES: Routes = [{
 }, {
     path: 'add', component: GameAddComponent,
 }, {
-    path: ':id', component: GamesComponent,
+    path: ':id', component: GameDetailsComponent,
 }];
 
 
@@ -27,6 +28,7 @@ const ROUTES: Routes = [{
     providers: [GamesService, LocationsService],
     declarations: [
         GameAddComponent,
+        GameDetailsComponent,
         GamesComponent,
     ],
 })

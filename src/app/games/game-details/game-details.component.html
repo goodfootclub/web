@@ -1,0 +1,99 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 events-header">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a [routerLink]="['']">Home</a>
+                </li>
+                <li class="breadcrumb-item active">{{ event?.id }}</li>
+            </ol>
+        </div>
+
+    </div>
+
+    <div class='row'>
+
+        <div class="col-md-2 col-sm-12">
+            <strong>I'm</strong>
+        </div>
+        <div *ngIf="!user" class="col-md-10 col-sm-12">
+            Not invited :(
+        </div>
+        <div *ngIf="user" class="col-md-10 col-sm-12">
+
+            <div class="btn-group" data-toggle="buttons">
+                <label
+                    *ngFor="let status of [2, 0, 1];"
+                    [class.active]="status == user.status"
+                    class="btn btn-secondary"
+                >
+                    <input
+                        (click)="setStatus(status)"
+                        type="radio" name="options"
+                        id="option1" autocomplete="off">
+                    {{rsvpMessages[status]}}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <div class="col-md-2 col-sm-12">
+            <strong>When?</strong>
+        </div>
+        <div *ngIf="!editMode" class="col-md-10 col-sm-12">
+            {{ event?.datetime | date: 'shortTime' }}
+            {{ event?.datetime | date: 'fullDate' }}
+        </div>
+        <div *ngIf="editMode" class="col-md-10 col-sm-12">
+            ---
+        </div>
+    </div>
+
+    <div class='row'>
+        <div class="col-md-2 col-sm-12">
+            <strong>Where?</strong>
+        </div>
+        <div class="col-md-10 col-sm-12">
+            {{ event?.location.address }}
+        </div>
+    </div>
+
+
+    <div class='row'>
+        <div class="col-md-12">
+            <h2>Teams</h2>
+        </div>
+    </div>
+
+    <div class='row'>
+        <div
+            class="col-md-6 col-sm-12"
+            *ngFor="let team of event?.teams"
+        >
+            <h3>{{ team.name }}</h3>
+            <h4>Managers</h4>
+            <a *ngFor="let manager of team.managers" href="javascript:void(0)">
+                {{manager.first_name}} {{manager.last_name}}
+            </a><br>
+            <h4>Players</h4>
+            <ul style="padding: 0; margin: 0; list-style: none;">
+                <li *ngFor="let player of team.playersInGame">
+                    <a href="javascript:void(0)">
+                        {{player.first_name}} {{player.last_name}}
+                    </a>
+                    ({{rsvpMessages[player.status]}})
+                </li>
+            </ul>
+        </div>
+    </div>
+
+   <!--  <div class='row'>
+        <div class="col-md-2 col-sm-12">
+            <h2>Chat</h2>
+        </div>
+        <div class="col-md-10 col-sm-12">
+            todo
+        </div>
+    </div> -->
+
+</div>

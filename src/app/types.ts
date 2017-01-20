@@ -86,10 +86,10 @@ export class GameEvent {
     location: Location;
     name?: string;
     players?: Player[];
-    playersById?: { number: Player };
+    playersById?: { [id: number]: Player };
     // playersCount?: PlayersCount;
     // playersNeeded?: PlayersCount;
-    teams?: [any];
+    teams?: Team[];
     // result?: Result;
     organizer?: User;
 
@@ -106,16 +106,39 @@ export class GameEvent {
             this.players = data['players'].map(item => new Player(item));
         }
 
+        this.teams = [];
+        if (data['teams'] != null) {
+            this.teams = data['teams'].map(item => new Team(item));
+        }
+
         if (data['organizer'] != null) {
             this.organizer = new User(data['organizer']);
         }
 
         this.id = data['id'];
-        this.teams = data['teams'];
         this.description = data['description'];
         this.duration = data['duration'];
         this.datetime = new Date(data['datetime']);
         this.location = new Location(data['location']);
+
+        this.playersById = {};
+
+        for (let player of this.players) {
+            this.playersById[player.id] = player;
+            let team = this.teams[player.team];
+            if (team == null) {
+                continue;
+            }
+
+            if (team.playersInGame == null) {
+                team.playersInGame = [];
+            }
+
+            if (player.status >= 0) {
+                team.playersInGame.push(player);
+            }
+        }
+
     }
 };
 
@@ -160,6 +183,8 @@ export class Player {
     roleId?: number;
     rsvp?: RsvpStatus;
     rsvpId?: number;
+    status?: RsvpStatus;
+    team?: number;
 
     /**
      * Transform API player represetation to use in the app:
@@ -174,6 +199,8 @@ export class Player {
         this.lastName = data['last_name'];
         this.role = data['role'];
         this.roleId = data['role_id'];
+        this.team = data['team'];
+
     }
 };
 
@@ -214,6 +241,7 @@ export class Team {
     managers?: User[];
     name: string;
     players?: Player[];
+    playersInGame?: Player[];  // When team in a game
     slotsFemale?: string;
     slotsMale?: string;
     type?: TeamType;
