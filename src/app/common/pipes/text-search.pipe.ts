@@ -9,8 +9,19 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TextSearchPipe implements PipeTransform {
 
-    searchObject(obj, value) {
+    searchObject(obj: any, value: string) {
         for (let key in obj) {
+            if (!obj.hasOwnProperty(key)) {
+                continue;
+            }
+
+            if (
+                typeof obj[key] === 'object'
+                && this.searchObject(obj[key], value)
+            ) {
+                return true;
+            }
+
             if (typeof obj[key] !== 'string') {
                 continue;
             }
