@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { GamesService } from '../games.service';
 import { AuthService } from '../../auth/auth.service';
-import { GameEvent } from '../../types';
+import { GameEvent, RsvpStatus, Player } from '../../types';
 
 
 @Component({
@@ -15,7 +15,7 @@ export class GameDetailsComponent implements OnInit {
 
     game: GameEvent;
     editMode = false;
-    user;
+    user: Player;
     rsvpMessages = {
         2: 'In',
         1: 'Maybe',
@@ -41,8 +41,36 @@ export class GameDetailsComponent implements OnInit {
         });
     }
 
-    setStatus(status: number) {
+    setStatus(status: RsvpStatus) {
         this.games.setStatus(this.game, this.user, status).subscribe(() => {
+            this.games.get(this.game.id).subscribe(game => {
+                this.user = game.playersById[
+                    this.auth.profile.currentUser.id
+                ];
+                this.game = game;
+            });
+        });
+    }
+
+    join() {
+        this.games.addPlayer(
+            this.game,
+            this.auth.profile.currentUser,
+        ).subscribe(() => {
+            this.games.get(this.game.id).subscribe(game => {
+                this.user = game.playersById[
+                    this.auth.profile.currentUser.id
+                ];
+                this.game = game;
+            });
+        });
+    }
+
+    leave() {
+        this.games.removePlayer(
+            this.game,
+            this.user,
+        ).subscribe(() => {
             this.games.get(this.game.id).subscribe(game => {
                 this.user = game.playersById[
                     this.auth.profile.currentUser.id

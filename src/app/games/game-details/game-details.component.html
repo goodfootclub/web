@@ -1,8 +1,12 @@
 <md-toolbar>
     <app-back-button></app-back-button>
     <app-title value="Pickup Game"></app-title>
-    <button md-icon-button [routerLink]="['edit']" [disabled]="true">
-        <md-icon>edit</md-icon>
+
+    <button *ngIf="!user" md-button color="primary" (click)="join()">
+        Join
+    </button>
+    <button *ngIf="user" md-button color="primary" (click)="leave()">
+        Leave
     </button>
 </md-toolbar>
 

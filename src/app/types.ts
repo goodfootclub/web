@@ -172,6 +172,8 @@ export class Location {
 
 
 // Simple player model
+// TODO: too context dependent, should be splitted into something like
+// PlayerInList (with bio and avatar), PlayerInGame (with team and status)
 export class Player {
     age?: number;
     firstName?: string;
@@ -200,6 +202,7 @@ export class Player {
         this.role = data['role'];
         this.roleId = data['role_id'];
         this.rsvp = data['rsvp'];
+        this.rsvpId = data['rsvp_id'];
         this.team = data['team'];
     }
 };

@@ -8,7 +8,7 @@ import {
 
 import { Observable } from 'rxjs/Observable';
 
-import { GameEvent } from 'app/types';
+import { GameEvent, RsvpStatus, Player, User } from 'app/types';
 import { HealthService } from 'app/error-handling';
 
 
@@ -55,16 +55,20 @@ export class GamesService {
         });
     }
 
-    setStatus(game, user, status): Observable<any> {
+    setStatus(
+        game: GameEvent,
+        player: Player,
+        status: RsvpStatus,
+    ): Observable<any> {
         let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
 
         let request = new Request({
             method: RequestMethod.Put,
-            url: `/api/games/${game.id}/players/${user.id}/`,
+            url: `/api/games/${game.id}/players/${player.rsvpId}/`,
             body: {
-                'player': user.player,
-                'status': status,
-                'team': user.team,
+                'id': player.id,
+                'rsvp': status,
+                'team': player.team,
             },
         });
 
@@ -72,4 +76,35 @@ export class GamesService {
 
         return this.http.request(request);
     };
+
+    addPlayer(game: GameEvent, user: User): Observable<any> {
+        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
+
+        let request = new Request({
+            method: RequestMethod.Post,
+            url: `/api/games/${game.id}/players/`,
+            body: {
+                'id': user.id,
+                'rsvp': RsvpStatus.Going,
+            },
+        });
+
+        csrf.configureRequest(request);
+
+        return this.http.request(request);
+    };
+
+    removePlayer(game: GameEvent, player: Player): Observable<any> {
+        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
+
+        let request = new Request({
+            method: RequestMethod.Delete,
+            url: `/api/games/${game.id}/players/${player.rsvpId}/`,
+        });
+
+        csrf.configureRequest(request);
+
+        return this.http.request(request);
+    };
+
 }
