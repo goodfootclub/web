@@ -199,8 +199,8 @@ export class Player {
         this.lastName = data['last_name'];
         this.role = data['role'];
         this.roleId = data['role_id'];
+        this.rsvp = data['rsvp'];
         this.team = data['team'];
-
     }
 };
 

@@ -61,35 +61,15 @@
         </div>
     </div>
 
-    <div class='row'>
-        <div
-            class="col-md-6 col-sm-12"
-            *ngFor="let team of game?.teams"
-        >
-            <h3>{{ team.name }}</h3>
-            <h4>Managers</h4>
-            <a *ngFor="let manager of team.managers" href="javascript:void(0)">
-                {{manager.first_name}} {{manager.last_name}}
-            </a><br>
-            <h4>Players</h4>
-            <ul style="padding: 0; margin: 0; list-style: none;">
-                <li *ngFor="let player of team.playersInGame">
-                    <a href="javascript:void(0)">
-                        {{player.first_name}} {{player.last_name}}
-                    </a>
-                    ({{rsvpMessages[player.status]}})
-                </li>
-            </ul>
-        </div>
-    </div>
-
-   <!--  <div class='row'>
-        <div class="col-md-2 col-sm-12">
-            <h2>Chat</h2>
-        </div>
-        <div class="col-md-10 col-sm-12">
-            todo
-        </div>
-    </div> -->
+    <div class='row'><div class="col-md-12">
+        <ul style="padding: 0; margin: 0; list-style: none;">
+            <li *ngFor="let player of game?.players">
+                <a [routerLink]="['/players', player.id]">
+                    {{player.firstName}} {{player.lastName}}
+                </a>
+                ({{rsvpMessages[player.rsvp]}})
+            </li>
+        </ul>
+    </div></div>
 
 </div>
