@@ -17,17 +17,17 @@
             <strong>I'm</strong>
         </div>
         <div *ngIf="!user" class="col-md-10 col-sm-12">
-            <a href="javascript:void(0)">Able to join!</a>
+            <a href="javascript:void(0)" (click)="join()">Able to join!</a>
         </div>
         <div *ngIf="user" class="col-md-10 col-sm-12">
-
             <div class="btn-group" data-toggle="buttons">
                 <label
                     *ngFor="let status of [2, 0, 1];"
-                    [class.active]="status == user.status"
+                    [class.active]="status == user.rsvp"
                     class="btn btn-secondary"
                 >
                     <input
+                        [disabled]="status == user.rsvp"
                         (click)="setStatus(status)"
                         type="radio" name="options"
                         id="option1" autocomplete="off">
@@ -70,6 +70,7 @@
             <li *ngFor="let player of game?.players">
                 <a [routerLink]="['/players', player.id]">
                     {{player.firstName}} {{player.lastName}}
+                    <span *ngIf="player.id === user?.id">(You)</span>
                 </a>
                 ({{rsvpMessages[player.rsvp]}})
             </li>
