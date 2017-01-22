@@ -9,7 +9,16 @@
         Coming SOON™
     </md-tab>
     <md-tab label="Teams">
-        ... teams
+        <md-card
+            *ngFor="let team of user.managedTeams"
+            [routerLink]="['/teams', team.id]"
+        >
+            <h1> {{ team.name }} </h1>
+            <div class="info">
+                [{{ ['coed', 'female', 'male'][team.type] }}]
+                {{ team.info }}
+            </div>
+        </md-card>
     </md-tab>
 
     <md-tab>

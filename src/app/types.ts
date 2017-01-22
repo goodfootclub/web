@@ -279,15 +279,16 @@ export class Team {
 
 
 export class User {
-    id?: number;
-    firstName: string;
-    lastName: string;
     bio?: string;
     birthday?: Date;
     cover?: string;
     email?: string;
+    firstName: string;
     gender?: Gender;
+    id?: number;
     img?: string;
+    lastName: string;
+    managedTeams: Team[];
     phone?: string;
 
     /**
@@ -298,6 +299,14 @@ export class User {
      * @param  {any}  data user data as it comes from the api
      */
     constructor(data: any) {
+
+        this.managedTeams = [];
+        if (data['managed_teams'] != null) {
+            this.managedTeams = data['managed_teams'].map(
+                item => new Team(item),
+            );
+        }
+
         this.id = data['id'];
         this.phone = data['phone'];
         this.bio = data['bio'];
