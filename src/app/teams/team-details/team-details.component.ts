@@ -37,7 +37,7 @@ export class TeamDetailsComponent implements OnInit {
         public title: TitleService,
         public profile: ProfileService,
     ) {
-        title.setTitle('Player');
+        title.setTitle('Team');
     }
 
     ngOnInit() {
@@ -45,6 +45,7 @@ export class TeamDetailsComponent implements OnInit {
             let id = +params['id'];
             this.teams.get(id).subscribe(team => {
                 this.team = team;
+                this.title.setTitle(team.name);
                 for (let player of team.players) {
                     if (player.id === this.profile.currentUser.id) {
                         this.canAskToJoin = false;
