@@ -20,7 +20,7 @@ export const ROUTES: Routes = [{
     component: AuthComponent,
 }, {
     path: '',
-    loadChildren: 'app/events/events.module#EventsModule',
+    loadChildren: 'app/home/home.module#HomeModule',
     canActivate: [AuthService],
     canActivateChild: [AuthService],
 }, {
