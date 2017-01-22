@@ -6,10 +6,31 @@
 
 <md-tab-group>
     <md-tab label="Games">
-        Coming SOON™
+
+        <md-card
+            class="game-card"
+            *ngFor="let game of user.games"
+            [routerLink]="['/games', game.id]"
+        >
+            <h1>Pickup Game</h1>
+            <hr>
+            <div>
+                <h1>{{ game.datetime | date:'EEEE, h:mm a' }}</h1>
+                <span class="info">
+                    {{ game.datetime | date:'MMMM d, y' }}
+                </span>
+            </div>
+            <div>
+                <h1>{{ game.location.name }}</h1>
+                <span class="info">
+                    {{ game.location.address }}
+                </span>
+            </div>
+        </md-card>
     </md-tab>
     <md-tab label="Teams">
         <md-card
+            class="team-card"
             *ngFor="let team of user.managedTeams"
             [routerLink]="['/teams', team.id]"
         >

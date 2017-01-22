@@ -289,6 +289,7 @@ export class User {
     img?: string;
     lastName: string;
     managedTeams: Team[];
+    games?: GameEvent[];
     phone?: string;
 
     /**
@@ -304,6 +305,12 @@ export class User {
         if (data['managed_teams'] != null) {
             this.managedTeams = data['managed_teams'].map(
                 item => new Team(item),
+            );
+        }
+        this.games = [];
+        if (data['games'] != null) {
+            this.games = data['games'].map(
+                item => new GameEvent(item),
             );
         }
 
