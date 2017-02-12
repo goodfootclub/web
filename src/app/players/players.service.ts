@@ -23,9 +23,9 @@ export class PlayersService {
 
     all(search?: string, limit?: number, offset?: number): Observable<User[]> {
         const params: URLSearchParams = new URLSearchParams();
-        if(limit) { params.set('limit', limit.toString()); }
-        if(offset) { params.set('offset', offset.toString()); }
-        if(search) { params.set('search', search); }
+        if (limit) { params.set('limit', limit.toString()); }
+        if (offset) { params.set('offset', offset.toString()); }
+        if (search) { params.set('search', search); }
         return this.http.get('/api/users/players/', {search: params})
             .map(res => res.json().results.map(data => new User(data)))
             .catch((err, caught) => {
