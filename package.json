@@ -9,7 +9,7 @@
     "serve": "ng serve --proxy-config proxy.conf.json",
     "serve:hmr": "ng serve --proxy-config proxy.conf.json --hmr -e=hmr",
     "start": "npm run serve:hmr",
-    "test": "ng test --watch=false",
+    "test": "ng test --watch=false"
   },
   "private": true,
   "dependencies": {
