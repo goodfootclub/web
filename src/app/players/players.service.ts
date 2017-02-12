@@ -4,6 +4,7 @@ import {
     Request,
     CookieXSRFStrategy,
     RequestMethod,
+    URLSearchParams,
 } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
@@ -20,8 +21,12 @@ export class PlayersService {
         private health: HealthService,
     ) { }
 
-    all(): Observable<User[]> {
-        return this.http.get('/api/users/players/')
+    all(search?: string, limit?: number, offset?: number): Observable<User[]> {
+        const params: URLSearchParams = new URLSearchParams();
+        if(limit) { params.set('limit', limit.toString()); }
+        if(offset) { params.set('offset', offset.toString()); }
+        if(search) { params.set('search', search); }
+        return this.http.get('/api/users/players/', {search: params})
             .map(res => res.json().map(data => new User(data)))
             .catch((err, caught) => {
                 this.health.criticalError(JSON.stringify(err, null, 4));

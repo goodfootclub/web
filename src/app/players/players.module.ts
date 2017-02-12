@@ -1,6 +1,7 @@
 import { CommonModule } from 'app/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { PlayersComponent } from './players.component';
 import { PlayerDetailsComponent } from './player-details';
@@ -16,6 +17,7 @@ const ROUTER_CONFIG = [
 @NgModule({
     imports: [
         CommonModule,
+        ReactiveFormsModule,
         RouterModule.forChild(ROUTER_CONFIG),
     ],
     declarations: [

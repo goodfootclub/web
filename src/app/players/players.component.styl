@@ -1,4 +1,5 @@
 $card-height = 72px
+$load-more-card-height = 42px
 $pic-dia = 50px
 $sub-color = #aaa
 
@@ -27,6 +28,24 @@ md-card
         font-size: 11px
         max-height: 32px
         overflow: hidden
+
+md-card.load-more-container
+    height: $load-more-card-height
+    text-align: center
+
+    &.clickable
+        cursor: pointer
+
+    &.non-clickable
+        cursor: auto
+
+    .load-more
+        margin: auto
+
+    md-spinner
+        height: 30px
+        width: 30px
+        padding-bottom: 5px
 
 .player-pic
     border-radius: 50%
