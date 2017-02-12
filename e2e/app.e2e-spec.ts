@@ -1,7 +1,7 @@
 import { GfcPage } from './app.po';
 
 
-describe('gfc App', function() {
+describe('gfc App', () => {
     let page: GfcPage;
 
     beforeEach(() => {
@@ -10,6 +10,6 @@ describe('gfc App', function() {
 
     it('should display message saying app works', () => {
         page.navigateTo();
-        expect(page.getTitleText()).toEqual('app works!');
+        expect(page.getParagraphText()).toEqual('app works!');
     });
 });
