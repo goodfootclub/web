@@ -3,7 +3,7 @@ sudo: required
 dist: trusty
 language: node_js
 node_js:
-  - '5.12'
+  - '6.9'
 
 notifications:
   slack: gffc:oVo9Dqq6azm2JGu6Wa052sQC
