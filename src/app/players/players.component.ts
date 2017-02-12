@@ -7,7 +7,7 @@ import { TitleService } from '../title.service';
 import { PlayersService } from './players.service';
 import { User } from '../types';
 
-import "rxjs/add/operator/debounceTime"
+import 'rxjs/add/operator/debounceTime';
 
 @Component({
     selector: 'app-players',
@@ -18,8 +18,8 @@ export class PlayersComponent implements OnInit {
 
     get limit(): number { return 50; };
     get searchDebounceTime(): number { return 750; };
-    isLoading: boolean = false;
-    canLoadMore: boolean = true;
+    isLoading = false;
+    canLoadMore = true;
 
     form: FormGroup;
     search: AbstractControl;
@@ -59,14 +59,15 @@ export class PlayersComponent implements OnInit {
 
     loadMore() {
         this.isLoading = true;
-        this.loadData(this.search.value, this.players.length).subscribe(players => {
+        this.loadData(this.search.value, this.players.length)
+            .subscribe(players => {
             this.players = this.players.concat(players);
             this.canLoadMore = players.length === this.limit;
             this.isLoading = false;
         });
     }
 
-    loadData(search?:string, offset?:number):Observable<User[]> {
+    loadData(search?: string, offset?: number): Observable<User[]> {
         return this._players.all(search ? search : '', this.limit, offset);
     }
 }
