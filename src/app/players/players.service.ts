@@ -27,7 +27,7 @@ export class PlayersService {
         if(offset) { params.set('offset', offset.toString()); }
         if(search) { params.set('search', search); }
         return this.http.get('/api/users/players/', {search: params})
-            .map(res => res.json().map(data => new User(data)))
+            .map(res => res.json().results.map(data => new User(data)))
             .catch((err, caught) => {
                 this.health.criticalError(JSON.stringify(err, null, 4));
                 throw err;
