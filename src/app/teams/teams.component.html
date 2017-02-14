@@ -6,16 +6,19 @@
     </button>
 
     <md-toolbar-row>
-        <md-input
-            placeholder="Search"
-            [style.width]="'100%'"
-            #searchField
-        ></md-input>
+        <form [formGroup]="form">
+            <md-input
+                formControlName="search"
+                placeholder="Search"
+                [style.width]="'100%'"
+                #search>
+            </md-input>
+        </form>
     </md-toolbar-row>
 </md-toolbar>
 
 <md-card
-    *ngFor="let team of teams | textSearch: searchField.value"
+    *ngFor="let team of teams"
     [routerLink]="['/teams', team.id]"
 >
     <h1> {{ team.name }} </h1>
