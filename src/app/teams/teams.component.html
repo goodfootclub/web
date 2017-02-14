@@ -24,3 +24,12 @@
         {{ team.info }}
     </div>
 </md-card>
+
+<md-card class="load-more-container" [ngClass]="isLoading ? 'non-clickable' : 'clickable'" (click)="loadMore()" *ngIf="canLoadMore">
+    <div class="load-more player-info" *ngIf="!isLoading">
+        <span>Load more</span>
+    </div>
+    <div class="load-more player-info" *ngIf="isLoading">
+        <md-spinner></md-spinner>
+    </div>
+</md-card>

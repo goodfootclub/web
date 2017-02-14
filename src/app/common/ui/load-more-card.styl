@@ -1,0 +1,21 @@
+$load-more-card-height = 42px
+
+md-card.load-more-container
+    height: $load-more-card-height
+    text-align: center
+
+    &.clickable
+        cursor: pointer
+
+    &.non-clickable
+        cursor: auto
+
+    .load-more
+        margin: auto
+        padding: auto
+
+    md-spinner
+        margin: auto
+        height: 30px
+        width: 30px
+        padding-bottom: 5px
