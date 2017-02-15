@@ -41,7 +41,6 @@ export class GameAddComponent {
         public router: Router,
     ) {
         _locations.all().subscribe(locations => {
-            console.log(locations);
             this.locations = locations;
         });
         const now = new Date();
@@ -71,14 +70,14 @@ export class GameAddComponent {
 
         this.locationControls.name.valueChanges
             .debounceTime(this.searchDebounceTime).subscribe(value => {
-            console.log(value);
+            _locations.all(value).subscribe(locations => {
+                this.locations = locations;
+            });
         });
 
     }
 
     onSubmit() {
-        console.log(this.form.value);
-
         let dt = new Date(
             `${this.form.value['date']}T${this.form.value['time']}`);
         dt.setHours(dt.getHours() + dt.getTimezoneOffset() / 60);
@@ -92,8 +91,6 @@ export class GameAddComponent {
             datetime: dt.toJSON(),
         };
 
-        console.log(data);
-
         this.games.create(data).subscribe(newGame => {
             this.router.navigate(['/games', newGame.id]);
         });
@@ -101,16 +98,5 @@ export class GameAddComponent {
 
     setLocation(location: Location) {
         this.form.patchValue({location: location});
-        this.showLocationsList = false;
-    }
-
-    showLocations() {
-        this.showLocationsList = true;
-    }
-
-    hideLocations() {
-        setTimeout(() => {
-            this.showLocationsList = false;
-        }, 0);
     }
 }

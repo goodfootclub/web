@@ -14,14 +14,14 @@
             [dividerColor]="
                 locationControls.name.valid ||
                 locationControls.name.pristine ?
-                'primary' : 'warn'
-            "
+                'primary' : 'warn'"
             [style.width]="'100%'"
             formControlName="name"
             placeholder="Game location"
+            (focus)="showLocationsList = true"
+            (blur)="showLocationsList = false"
             required
-            type='text'
-        >
+            type='text'>
             <md-hint *ngIf="locationName.focused" align="end">
                 <span *ngIf="locationControls.name.errors?.required">
                     required
@@ -32,7 +32,7 @@
             </md-hint>
         </md-input>
 
-        <!-- <md-card class="locations-list" [hidden]="!showLocationsList">
+        <md-card class="locations-list" [class.show]="showLocationsList">
             <md-list>
                 <md-list-item
                     *ngFor="
@@ -40,13 +40,12 @@
                         | textSearch:locationName.value
                         | slice:0:5
                     "
-                    (click)="setLocation(location)"
-                >
+                    (click)="setLocation(location)">
                     <h3 md-line>{{ location.name }}</h3>
                     <p md-line>{{ location.address }}</p>
                 </md-list-item>
             </md-list>
-        </md-card> -->
+        </md-card>
 
         <md-input
             #locationAddress
