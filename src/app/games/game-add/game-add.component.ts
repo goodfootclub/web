@@ -12,6 +12,7 @@ import { Location } from 'app/types';
 import { GamesService } from '../games.service';
 import { LocationsService } from '../locations.service';
 
+import 'rxjs/add/operator/debounceTime';
 
 @Component({
     selector: 'app-game-add',
@@ -20,10 +21,12 @@ import { LocationsService } from '../locations.service';
 })
 export class GameAddComponent {
 
+    get searchDebounceTime(): number { return 750; }
     form: FormGroup;
     locations: Location[];
     showLocationsList = false;
     isPosting = false;
+    datePipe = new DatePipe('en-US');
 
     controls: any;
     locationControls: {
@@ -38,13 +41,12 @@ export class GameAddComponent {
         public router: Router,
     ) {
         _locations.all().subscribe(locations => {
+            console.log(locations);
             this.locations = locations;
         });
-
-        const datePipe = new DatePipe('en-US');
         const now = new Date();
-        const timeStr = datePipe.transform(now, 'HH:mm');
-        const dateStr = datePipe.transform(now, 'yyyy-MM-dd');
+        const timeStr = this.datePipe.transform(now, 'HH:mm');
+        const dateStr = this.datePipe.transform(now, 'yyyy-MM-dd');
         this.form = this.formBuilder.group({
             location: this.formBuilder.group({
                 id: null,
@@ -67,8 +69,9 @@ export class GameAddComponent {
         this.controls = this.form.controls;
         this.locationControls = this.form.controls['location']['controls'];
 
-        this.locationControls.name.valueChanges.subscribe(value => {
-
+        this.locationControls.name.valueChanges
+            .debounceTime(this.searchDebounceTime).subscribe(value => {
+            console.log(value);
         });
 
     }
@@ -77,8 +80,7 @@ export class GameAddComponent {
         console.log(this.form.value);
 
         let dt = new Date(
-            this.form.value['date'] + 'T' + this.form.value['time'],
-        );
+            `${this.form.value['date']}T${this.form.value['time']}`);
         dt.setHours(dt.getHours() + dt.getTimezoneOffset() / 60);
 
         this.isPosting = true;
@@ -98,7 +100,6 @@ export class GameAddComponent {
     }
 
     setLocation(location: Location) {
-        console.log(location);
         this.form.patchValue({location: location});
         this.showLocationsList = false;
     }
