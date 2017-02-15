@@ -6,16 +6,19 @@
     </button>
 
     <md-toolbar-row>
-        <md-input
-            placeholder="Search"
-            [style.width]="'100%'"
-            #searchField
-        ></md-input>
+        <form [formGroup]="form">
+            <md-input
+                formControlName="search"
+                placeholder="Search"
+                [style.width]="'100%'"
+                #search>
+            </md-input>
+        </form>
     </md-toolbar-row>
 </md-toolbar>
 
 <md-card
-    *ngFor="let team of teams | textSearch: searchField.value"
+    *ngFor="let team of teams"
     [routerLink]="['/teams', team.id]"
 >
     <h1> {{ team.name }} </h1>
@@ -25,11 +28,13 @@
     </div>
 </md-card>
 
-<md-card class="load-more-container" [ngClass]="isLoading ? 'non-clickable' : 'clickable'" (click)="loadMore()" *ngIf="canLoadMore">
-    <div class="load-more player-info" *ngIf="!isLoading">
-        <span>Load more</span>
-    </div>
-    <div class="load-more player-info" *ngIf="isLoading">
+<div class="load-more-container" *ngIf="canLoadMore">
+    <md-card class="clickable" *ngIf="!isLoading" (click)="loadMore()">
+        <div class="load-more">
+            <span>Load more</span>
+        </div>
+    </md-card>
+    <div class="load-more" *ngIf="isLoading">
         <md-spinner></md-spinner>
     </div>
-</md-card>
+</div>
