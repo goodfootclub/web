@@ -18,7 +18,7 @@ export class LocationsService {
 
     all(): Observable<Location[]> {
         return this.http.get('/api/games/locations/')
-            .map(res => res.json().map(data => new Location(data)))
+            .map(res => res.json().results.map(data => new Location(data)))
             .catch((err, caught) => {
                 this.health.criticalError(JSON.stringify(err, null, 4));
                 throw err;
