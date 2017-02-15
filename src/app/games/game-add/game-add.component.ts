@@ -6,6 +6,7 @@ import {
     FormControl,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 import { Location } from 'app/types';
 import { GamesService } from '../games.service';
@@ -21,17 +22,14 @@ export class GameAddComponent {
 
     form: FormGroup;
     locations: Location[];
-    showLocationsList: boolean = false;
-    isPosting: boolean = false;
+    showLocationsList = false;
+    isPosting = false;
 
     controls: any;
     locationControls: {
         name: FormControl,
         address: FormControl,
     };
-
-    tzName = /\(([\w\s]+)\)/.exec(new Date().toString())[1];
-
 
     constructor(
         public _locations: LocationsService,
@@ -43,22 +41,10 @@ export class GameAddComponent {
             this.locations = locations;
         });
 
-        let now = new Date();
-        let hours = now.getHours();
-        let minutes = now.getMinutes();
-        let timeStr = `${
-            hours > 9 ? '' : '0'
-        }${
-            hours
-        }:${
-            minutes > 9 ? '' :'0'
-        }${
-            minutes
-        }`;
-
-        now.setHours(now.getHours() - now.getTimezoneOffset() / 60);
-        let dateStr = now.toJSON().split('T')[0];
-
+        const datePipe = new DatePipe('en-US');
+        const now = new Date();
+        const timeStr = datePipe.transform(now, 'HH:mm');
+        const dateStr = datePipe.transform(now, 'yyyy-MM-dd');
         this.form = this.formBuilder.group({
             location: this.formBuilder.group({
                 id: null,
