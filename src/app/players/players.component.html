@@ -4,13 +4,14 @@
     <div class="toolbar-icon-spacer"></div>
 
     <md-toolbar-row>
-        <form [formGroup]="form">
-            <md-input
-                formControlName="search"
-                placeholder="Search"
-                [style.width]="'100%'"
-                #search>
-            </md-input>
+        <form [formGroup]="form" class="full-width">
+            <md-input-container>
+                <input mdInput
+                    formControlName="search"
+                    placeholder="Search"
+                    [style.width]="'100%'"
+                    #search>
+            </md-input-container>
         </form>
     </md-toolbar-row>
 </md-toolbar>

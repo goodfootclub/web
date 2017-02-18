@@ -1,10 +1,10 @@
 <!-- <critical-error-page *ngIf="health.status == CRITICAL"></critical-error-page> -->
 
 <!-- <md-sidenav-layout fullscreen *ngIf="health.status != CRITICAL"> -->
-<md-sidenav-layout fullscreen>
+<md-sidenav-container fullscreen>
     <md-sidenav #menu> <!-- Needs to be here for the backdrop to work -->
         <app-sidenav [menu]='menu'></app-sidenav>
     </md-sidenav>
 
     <router-outlet></router-outlet>
-</md-sidenav-layout>
+</md-sidenav-container>
