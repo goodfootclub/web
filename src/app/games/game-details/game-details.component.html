@@ -24,8 +24,7 @@
                 <label
                     *ngFor="let status of [2, 0, 1];"
                     [class.active]="status == user.rsvp"
-                    class="btn btn-secondary"
-                >
+                    class="btn btn-secondary">
                     <input
                         [disabled]="status == user.rsvp"
                         (click)="setStatus(status)"
