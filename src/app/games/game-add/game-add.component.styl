@@ -14,11 +14,16 @@ form
     margin-top: 12px
     padding: 0
     max-width: 592px
+    display: none
     opacity: 0
-    transition: .5s ease-in-out all
 
     &.show
-        opacity: 1 !important;
+        display: block
+        opacity: 1
+        -webkit-animation: fadeInFromNone 0.5s ease-out;
+        -moz-animation: fadeInFromNone 0.5s ease-out;
+        -o-animation: fadeInFromNone 0.5s ease-out;
+        animation: fadeInFromNone 0.5s ease-out;
 
     md-list-item:hover
         background: $hover-color
@@ -35,3 +40,47 @@ form
     button
         margin-left: 24px
 
+// animation
+@-webkit-keyframes fadeInFromNone
+    0%
+        display: none
+        opacity: 0
+    1%
+        display: block
+        opacity: 0
+    100%
+        display: block
+        opacity: 1
+
+@-moz-keyframes fadeInFromNone
+    0%
+        display: none
+        opacity: 0
+    1%
+        display: block
+        opacity: 0
+    100%
+        display: block
+        opacity: 1
+
+@-o-keyframes fadeInFromNone
+    0%
+        display: none
+        opacity: 0
+    1%
+        display: block
+        opacity: 0
+    100%
+        display: block
+        opacity: 1
+
+@keyframes fadeInFromNone
+    0%
+        display: none
+        opacity: 0
+    1%
+        display: block
+        opacity: 0
+    100%
+        display: block
+        opacity: 1

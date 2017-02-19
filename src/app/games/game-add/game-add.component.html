@@ -18,8 +18,7 @@
                 formControlName="name"
                 placeholder="Game location"
                 required
-                (focus)="showLocationsList = true"
-                (blur)="showLocationsList = false"
+                (click)="openLocationsPopup($event)"
                 type='text'>
             <md-hint *ngIf="locationName.focused" align="end">
                 <span *ngIf="locationControls.name.errors?.required">
@@ -39,12 +38,12 @@
                         | textSearch:locationName.value
                         | slice:0:5
                     "
-                    (click)="setLocation(location)">
+                    (click)="setLocation($event, location)">
                     <h3 md-line>{{ location.name }}</h3>
                     <p md-line>{{ location.address }}</p>
                 </md-list-item>
             </md-list>
-        </md-card> -->
+        </md-card>
         <md-input-container [dividerColor]="
                     locationControls.address.valid ||
                     locationControls.address.pristine ?

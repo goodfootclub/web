@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import {
     FormGroup,
     FormBuilder,
@@ -96,7 +96,17 @@ export class GameAddComponent {
         });
     }
 
-    setLocation(location: Location) {
+    setLocation(event: Event, location: Location) {
         this.form.patchValue({location: location});
+    }
+
+    @HostListener('window:click')
+    closeLocationsPopup() {
+        this.showLocationsList = false;
+    }
+
+    openLocationsPopup(event: Event) {
+        this.showLocationsList = true;
+        event.stopPropagation();
     }
 }
