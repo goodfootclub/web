@@ -10,45 +10,43 @@
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <!-- Team name -->
-    <md-input
-        #name
-        [dividerColor]="
-            form.controls.name.valid ||
-            form.controls.name.pristine ?
-            'primary' : 'warn'
-        "
-        [style.width]="'100%'"
-        formControlName="name"
-        placeholder="Team name"
-        required
-        type='text'
-    >
-        <md-hint *ngIf="name.focused" align="end">
-            <span *ngIf="form.controls.name.errors?.required">
-                required
-            </span>
-            <span *ngIf="!form.controls.name.errors?.required">
-                {{ name.characterCount }} / 30
-            </span>
-        </md-hint>
-    </md-input>
+    <md-input-container [dividerColor]="
+                form.controls.name.valid ||
+                form.controls.name.pristine ?
+                'primary' : 'warn'">
+        <input mdInput
+            #name
+            [style.width]="'100%'"
+            formControlName="name"
+            placeholder="Team name"
+            required
+            type='text'>
+            <md-hint *ngIf="name.focused" align="end">
+                <span *ngIf="form.controls.name.errors?.required">
+                    required
+                </span>
+                <span *ngIf="!form.controls.name.errors?.required">
+                    {{ name.characterCount }} / 30
+                </span>
+            </md-hint>
+    </md-input-container>
     <br>
 
-    <md-textarea
-        #info
-        [dividerColor]="form.controls.info.valid ? 'primary' : 'warn'"
-        [style.width]="'100%'"
-        type='text'
-        formControlName="info"
-        placeholder="Info"
-    >
-        <md-hint *ngIf="info.focused">
-            Describe your team for potential players
-        </md-hint>
-        <md-hint *ngIf="info.focused" align="end">
-            {{ info.characterCount }} / 1000
-        </md-hint>
-    </md-textarea>
+    <md-input-container [dividerColor]="form.controls.info.valid ? 'primary' : 'warn'">
+        <textarea mdInput
+            #info
+            [style.width]="'100%'"
+            type='text'
+            formControlName="info"
+            placeholder="Info">
+            <md-hint *ngIf="info.focused">
+                Describe your team for potential players
+            </md-hint>
+            <md-hint *ngIf="info.focused" align="end">
+                {{ info.characterCount }} / 1000
+            </md-hint>
+        </textarea>
+    </md-input-container>
     <br>
 
     <md-radio-group formControlName="type">
@@ -70,16 +68,14 @@
         <button
             (click)="backButton.back()"
             [disabled]="isPosting"
-            md-raised-button
-        >
+            md-raised-button>
             Cancel
         </button>
         <button
             [disabled]="form.invalid || isPosting"
             color="primary"
             md-raised-button
-            type="submit"
-        >
+            type="submit">
             Save
         </button>
     </div>

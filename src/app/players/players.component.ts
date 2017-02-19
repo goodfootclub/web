@@ -18,7 +18,7 @@ export class PlayersComponent implements OnInit {
 
     get limit(): number { return 50; };
     get searchDebounceTime(): number { return 750; };
-    isLoading = false;
+    isLoading = true;
     canLoadMore = true;
 
     form: FormGroup;
@@ -54,6 +54,7 @@ export class PlayersComponent implements OnInit {
         this.loadData().subscribe(players => {
             this.players = players;
             this.canLoadMore = players.length === this.limit;
+            this.isLoading = false;
         });
     }
 

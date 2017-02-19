@@ -7,18 +7,16 @@
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <!-- First name -->
-    <md-input
-        #firstName
-        [dividerColor]="
-            form.controls.firstName.valid ||
-            form.controls.firstName.pristine ?
-            'primary' : 'warn'
-        "
-        formControlName="firstName"
-        placeholder="First name"
-        required
-        type='text'
-    >
+    <md-input-container [dividerColor]="
+                form.controls.firstName.valid ||
+                form.controls.firstName.pristine ?
+                'primary' : 'warn'">
+        <input mdInput
+            #firstName
+            formControlName="firstName"
+            placeholder="First name"
+            required
+            type='text'>
         <md-hint *ngIf="firstName.focused" align="end">
             <span *ngIf="form.controls.firstName.errors?.required">
                 required
@@ -27,22 +25,20 @@
                 {{ firstName.characterCount }} / 30
             </span>
         </md-hint>
-    </md-input>
+    </md-input-container>
     <br>
 
     <!-- Last name -->
-    <md-input
-        #lastName
-        [dividerColor]="
+    <md-input-container [dividerColor]="
             form.controls.lastName.valid ||
             form.controls.lastName.pristine ?
-            'primary' : 'warn'
-        "
-        formControlName="lastName"
-        placeholder="Last name"
-        required
-        type='text'
-    >
+            'primary' : 'warn'">
+        <input mdInput
+            #lastName
+            formControlName="lastName"
+            placeholder="Last name"
+            required
+            type='text'>
         <md-hint *ngIf="lastName.focused" align="end">
             <span *ngIf="form.controls.lastName.errors?.required">
                 required
@@ -51,45 +47,44 @@
                 {{ lastName.characterCount }} / 30
             </span>
         </md-hint>
-    </md-input>
+    </md-input-container>
     <br>
 
     <!-- Bio -->
-    <md-textarea
-        #bio
-        [dividerColor]="form.controls.bio.valid ? 'primary' : 'warn'"
-        type='text'
-        formControlName="bio"
-        placeholder="Tell us about your soccer skillz..."
-    >
-        <md-hint *ngIf="bio.focused" align="end">
-            {{ bio.characterCount }} / 1000
-        </md-hint>
-    </md-textarea>
+    <md-input-container [dividerColor]="form.controls.bio.valid ? 'primary' : 'warn'">
+        <textarea mdInput
+            #bio
+            type='text'
+            formControlName="bio"
+            placeholder="Tell us about your soccer skillz...">
+            <md-hint *ngIf="bio.focused" align="end">
+                {{ bio.characterCount }} / 1000
+            </md-hint>
+        </textarea>
+    </md-input-container>
     <br>
 
     <!-- birthday -->
-    <md-input
-        placeholder='Date of birth'
-        type='date'
-        formControlName='birthday'
-    ></md-input>
+    <md-input-container>
+        <input mdInput
+            placeholder='Date of birth'
+            type='date'
+            formControlName='birthday'>
+    </md-input-container>
     <br>
 
     <div class="buttons">
         <button
             (click)="backButton.back()"
             [disabled]="isPosting"
-            md-raised-button
-        >
+            md-raised-button>
             Cancel
         </button>
         <button
             [disabled]="form.invalid || isPosting"
             color="primary"
             md-raised-button
-            type="submit"
-        >
+            type="submit">
             Save
         </button>
     </div>

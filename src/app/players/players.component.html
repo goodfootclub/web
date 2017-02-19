@@ -4,13 +4,14 @@
     <div class="toolbar-icon-spacer"></div>
 
     <md-toolbar-row>
-        <form [formGroup]="form">
-            <md-input
-                formControlName="search"
-                placeholder="Search"
-                [style.width]="'100%'"
-                #search>
-            </md-input>
+        <form [formGroup]="form" class="full-width">
+            <md-input-container>
+                <input mdInput
+                    formControlName="search"
+                    placeholder="Search"
+                    [style.width]="'100%'"
+                    #search>
+            </md-input-container>
         </form>
     </md-toolbar-row>
 </md-toolbar>
@@ -28,11 +29,13 @@
     </div>
 </md-card>
 
-<md-card class="load-more-container" [ngClass]="isLoading ? 'non-clickable' : 'clickable'" (click)="loadMore()" *ngIf="canLoadMore">
-    <div class="load-more player-info" *ngIf="!isLoading">
-        <span>Load more</span>
-    </div>
-    <div class="load-more player-info" *ngIf="isLoading">
+<div class="load-more-container" *ngIf="canLoadMore">
+    <md-card class="clickable" *ngIf="!isLoading" (click)="loadMore()">
+        <div class="load-more">
+            <span>Load more</span>
+        </div>
+    </md-card>
+    <div class="load-more" *ngIf="isLoading">
         <md-spinner></md-spinner>
     </div>
-</md-card>
+</div>

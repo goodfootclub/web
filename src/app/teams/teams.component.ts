@@ -15,9 +15,9 @@ import 'rxjs/add/operator/debounceTime';
 })
 export class TeamsComponent implements OnInit {
 
-    get limit(): number { return 10; };
+    get limit(): number { return 50; };
     get searchDebounceTime(): number { return 750; };
-    isLoading = false;
+    isLoading = true;
     canLoadMore = true;
 
     form: FormGroup;
@@ -45,6 +45,7 @@ export class TeamsComponent implements OnInit {
         this.loadData().subscribe(teams => {
             this.teams = teams;
             this.canLoadMore = teams.length === this.limit;
+            this.isLoading = false;
         });
     }
     loadMore() {
