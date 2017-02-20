@@ -66,43 +66,60 @@
         </md-input-container>
     </div>
 
-    <md-input-container
-        class="full-width"
-        [dividerColor]="
-            form.controls.date?.valid ||
-            form.controls.date?.pristine ?
-            'primary' : 'warn'
-        "
-    >
-        <input
-            mdInput
-            #date
-            formControlName="date"
-            placeholder="Game date"
-            required
-            type='date'
-        >
-        <md-hint *ngIf="date.focused" align="end">
-            <span *ngIf="controls.date.errors?.required">
-                required
-            </span>
-        </md-hint>
-    </md-input-container>
+    <br/>
 
-    <md-input-container class="full-width">
-        <input
-            mdInput
-            formControlName="time"
-            [placeholder]="'Game time (' + tzName + ')'"
-            required
-            type='time'
-        >
-        <md-hint *ngIf="date.focused" align="end">
-            <span *ngIf="controls.date.errors?.required">
-                required
-            </span>
-        </md-hint>
-    </md-input-container>
+    <div formArrayName="dates">
+        <md-card *ngFor="let date of form.controls.dates.controls; let i=index">
+            <md-card-content [formGroupName]="i">
+                <div class="date-container">
+                    <md-card-title>Date {{i + 1}}</md-card-title>
+                    <md-input-container
+                        class="full-width"
+                        [dividerColor]="
+                        form.controls.date?.valid ||
+                        form.controls.date?.pristine ?
+                        'primary' : 'warn'">
+                        <input
+                            mdInput
+                            #date
+                            formControlName="date"
+                            placeholder="Game date"
+                            required
+                            type='date'>
+                        <md-hint *ngIf="date.focused" align="end">
+                        <span *ngIf="controls.date.errors?.required">
+                            required
+                        </span>
+                        </md-hint>
+                    </md-input-container>
+                </div>
+                <md-input-container class="full-width">
+                    <input
+                        mdInput
+                        formControlName="time"
+                        [placeholder]="'Game time (' + tzName + ')'"
+                        required
+                        type='time'
+                    >
+                    <md-hint *ngIf="date.focused" align="end">
+                    <span *ngIf="controls.date.errors?.required">
+                        required
+                    </span>
+                    </md-hint>
+                </md-input-container>
+            </md-card-content>
+            <md-card-actions>
+                <button md-button type="button" (click)="removeDate(i)" *ngIf="form.controls.dates.controls.length > 1">
+                    Remove
+                </button>
+                <button md-button type="button" (click)="addDate()">
+                    Add more
+                </button>
+            </md-card-actions>
+        </md-card>
+    </div>
+
+    <br/>
 
     <div class="buttons">
         <button

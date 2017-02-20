@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import {
     FormGroup,
+    FormArray,
     FormBuilder,
     Validators,
     FormControl,
@@ -43,9 +44,6 @@ export class GameAddComponent {
         _locations.all().subscribe(locations => {
             this.locations = locations;
         });
-        const now = new Date();
-        const timeStr = this.datePipe.transform(now, 'HH:mm');
-        const dateStr = this.datePipe.transform(now, 'yyyy-MM-dd');
         this.form = this.formBuilder.group({
             location: this.formBuilder.group({
                 id: null,
@@ -61,8 +59,9 @@ export class GameAddComponent {
                     ]),
                 ],
             }),
-            date: [dateStr, Validators.required],
-            time: [timeStr, Validators.required],
+            dates: this.formBuilder.array([
+                this.initMatchDate()
+            ])
         });
 
         this.controls = this.form.controls;
@@ -74,26 +73,47 @@ export class GameAddComponent {
                 this.locations = locations;
             });
         });
+    }
 
+    initMatchDate(date?: string, time?: string): FormGroup {
+        const now = new Date();
+        const timeStr = date ? date : this.datePipe.transform(now, 'HH:mm');
+        const dateStr = time ? time :
+            this.datePipe.transform(now, 'yyyy-MM-dd');
+        return this.formBuilder.group({
+            date: [dateStr, Validators.required],
+            time: [timeStr, Validators.required],
+        });
     }
 
     onSubmit() {
-        let dt = new Date(
-            `${this.form.value['date']}T${this.form.value['time']}`);
-        dt.setHours(dt.getHours() + dt.getTimezoneOffset() / 60);
-
         this.isPosting = true;
         this.form.disable();
-
+        const dates: string[] = this.form.value['dates'].map((val) => {
+            let dt = new Date(
+                `${val['date']}T${val['time']}`);
+            dt.setHours(dt.getHours() + dt.getTimezoneOffset() / 60);
+            return dt.toJSON();
+        });
         let data = {
             location: this.form.value['location'],
             teams: [],
-            datetime: dt.toJSON(),
+            dates: dates,
         };
 
         this.games.create(data).subscribe(newGame => {
             this.router.navigate(['/games', newGame.id]);
         });
+    }
+
+    addDate() {
+        const control = <FormArray>this.form.controls['dates'];
+        control.push(this.initMatchDate());
+    }
+
+    removeDate(index: number) {
+        const control = <FormArray>this.form.controls['dates'];
+        control.removeAt(index);
     }
 
     setLocation(event: Event, location: Location) {
