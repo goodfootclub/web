@@ -83,8 +83,8 @@ export class GameAddComponent {
 
     initMatchDate(date?: string, time?: string): FormGroup {
         const now = new Date();
-        const timeStr = date ? date : this.datePipe.transform(now, 'HH:mm');
-        const dateStr = time ? time :
+        const timeStr = time ? time : this.datePipe.transform(now, 'HH:mm');
+        const dateStr = date ? date :
             this.datePipe.transform(now, 'yyyy-MM-dd');
         return this.formBuilder.group({
             date: [dateStr, Validators.required],
@@ -114,7 +114,13 @@ export class GameAddComponent {
 
     addDate() {
         const control = <FormArray>this.form.controls['dates'];
-        control.push(this.initMatchDate());
+        const lastIndex = control.controls.length - 1;
+        const previousDate: FormControl =
+            control.controls[lastIndex]['controls'].date as FormControl;
+        const nextDate = new Date(previousDate.value);
+        nextDate.setDate(nextDate.getDate() + 7);
+        const nextDateStr = this.datePipe.transform(nextDate, 'yyyy-MM-dd');
+        control.push(this.initMatchDate(nextDateStr));
     }
 
     removeDate(index: number) {
