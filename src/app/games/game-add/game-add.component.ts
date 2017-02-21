@@ -104,7 +104,7 @@ export class GameAddComponent {
         let data = {
             location: this.form.value['location'],
             teams: [],
-            dates: dates,
+            datetimes: dates,
         };
 
         this.games.create(data).subscribe(newGame => {
