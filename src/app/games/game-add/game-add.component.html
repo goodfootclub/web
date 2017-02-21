@@ -20,12 +20,12 @@
                 required
                 (click)="openLocationsPopup($event)"
                 type='text'>
-            <md-hint *ngIf="locationName.focused" align="end">
+            <md-hint align="end">
                 <span *ngIf="locationControls.name.errors?.required">
                     required
                 </span>
                 <span *ngIf="!locationControls.name.errors?.required">
-                    {{ locationName.characterCount }} / 30
+                    {{ locationName.value.length }} / 30
                 </span>
             </md-hint>
         </md-input-container>
@@ -55,12 +55,53 @@
                 formControlName="address"
                 placeholder="Address"
                 type='text'>
-            <md-hint *ngIf="locationAddress.focused" align="end">
+            <md-hint align="end">
                 <span *ngIf="locationControls.address.errors?.required">
                     required
                 </span>
                 <span *ngIf="!locationControls.address.errors?.required">
-                    {{ locationAddress.characterCount }} / 255
+                    {{ locationAddress.value.length }} / 255
+                </span>
+            </md-hint>
+        </md-input-container>
+    </div>
+
+    <div formGroupName="teams">
+        <md-input-container [dividerColor]="
+                    form.controls.teams.controls.team1Name.valid ||
+                    form.controls.teams.controls.team1Name.pristine ?
+                    'primary' : 'warn'">
+            <input mdInput
+                   #team1Name
+                   formControlName="team1Name"
+                   placeholder="First team"
+                   required
+                   type='text'>
+            <md-hint align="end">
+                <span *ngIf="form.controls.teams.controls.team1Name.errors?.required">
+                    required
+                </span>
+                <span *ngIf="!form.controls.teams.controls.team1Name.errors?.required">
+                    {{ team1Name.value.length }} / 30
+                </span>
+            </md-hint>
+        </md-input-container>
+        <md-input-container [dividerColor]="
+                    form.controls.teams.controls.team2Name.valid ||
+                    form.controls.teams.controls.team2Name.pristine ?
+                    'primary' : 'warn'">
+            <input mdInput
+                   #team2Name
+                   formControlName="team2Name"
+                   placeholder="Second team"
+                   required
+                   type='text'>
+            <md-hint align="end">
+                <span *ngIf="form.controls.teams.controls.team2Name.errors?.required">
+                    required
+                </span>
+                <span *ngIf="!form.controls.teams.controls.team2Name.errors?.required">
+                    {{ team2Name.value.length }} / 30
                 </span>
             </md-hint>
         </md-input-container>
@@ -76,20 +117,19 @@
                     <md-input-container
                         class="full-width"
                         [dividerColor]="
-                        form.controls.date?.valid ||
-                        form.controls.date?.pristine ?
+                        form.controls.dates.controls[i].controls.date.valid ||
+                        form.controls.dates.controls[i].controls.date.pristine ?
                         'primary' : 'warn'">
-                        <input
+                        <input #date
                             mdInput
-                            #date
                             formControlName="date"
                             placeholder="Game date"
                             required
                             type='date'>
-                        <md-hint *ngIf="date.focused" align="end">
-                        <span *ngIf="controls.date.errors?.required">
-                            required
-                        </span>
+                        <md-hint align="end">
+                            <span *ngIf="form.controls.dates.controls[i].controls.date.errors?.required">
+                                required
+                            </span>
                         </md-hint>
                     </md-input-container>
                 </div>
@@ -99,12 +139,11 @@
                         formControlName="time"
                         [placeholder]="'Game time (' + tzName + ')'"
                         required
-                        type='time'
-                    >
-                    <md-hint *ngIf="date.focused" align="end">
-                    <span *ngIf="controls.date.errors?.required">
-                        required
-                    </span>
+                        type='time'>
+                    <md-hint align="end">
+                        <span *ngIf="form.controls.dates.controls[i].controls.time.errors?.required">
+                            required
+                        </span>
                     </md-hint>
                 </md-input-container>
             </md-card-content>

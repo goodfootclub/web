@@ -28,6 +28,8 @@ export class GameAddComponent {
     showLocationsList = false;
     isPosting = false;
     datePipe = new DatePipe('en-US');
+    tzOffset = -new Date().getTimezoneOffset() / 60;
+    tzName = `GMT${this.tzOffset >= 0 ? '+' : '-'}${this.tzOffset}`;
 
     controls: any;
     locationControls: {
@@ -59,9 +61,13 @@ export class GameAddComponent {
                     ]),
                 ],
             }),
+            teams: this.formBuilder.group({
+                team1Name: ['', Validators.required],
+                team2Name: ['', Validators.required],
+            }),
             dates: this.formBuilder.array([
-                this.initMatchDate()
-            ])
+                this.initMatchDate(),
+            ]),
         });
 
         this.controls = this.form.controls;
