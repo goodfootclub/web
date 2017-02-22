@@ -13,7 +13,7 @@
     <md-input-container [dividerColor]="
                 form.controls.name.valid ||
                 form.controls.name.pristine ?
-                'primary' : 'warn'">
+                'primary' : 'warn'" #nameContainer>
         <input mdInput
             #name
             [style.width]="'100%'"
@@ -21,29 +21,29 @@
             placeholder="Team name"
             required
             type='text'>
-            <md-hint *ngIf="name.focused" align="end">
+            <md-hint *ngIf="nameContainer._mdInputChild.focused" align="end">
                 <span *ngIf="form.controls.name.errors?.required">
                     required
                 </span>
                 <span *ngIf="!form.controls.name.errors?.required">
-                    {{ name.characterCount }} / 30
+                    {{ name.value.length }} / 30
                 </span>
             </md-hint>
     </md-input-container>
     <br>
 
-    <md-input-container [dividerColor]="form.controls.info.valid ? 'primary' : 'warn'">
+    <md-input-container [dividerColor]="form.controls.info.valid ? 'primary' : 'warn'" #infoContainer>
         <textarea mdInput
             #info
             [style.width]="'100%'"
             type='text'
             formControlName="info"
             placeholder="Info">
-            <md-hint *ngIf="info.focused">
+            <md-hint *ngIf="infoContainer._mdInputChild.focused">
                 Describe your team for potential players
             </md-hint>
-            <md-hint *ngIf="info.focused" align="end">
-                {{ info.characterCount }} / 1000
+            <md-hint *ngIf="infoContainer._mdInputChild.focused" align="end">
+                {{ info.value.length }} / 1000
             </md-hint>
         </textarea>
     </md-input-container>
