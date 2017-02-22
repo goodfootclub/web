@@ -12,7 +12,7 @@
         <md-input-container [dividerColor]="
                     locationControls.name.valid ||
                     locationControls.name.pristine ?
-                    'primary' : 'warn'">
+                    'primary' : 'warn'" #locationNameContainer>
             <input mdInput
                 #locationName
                 formControlName="name"
@@ -20,7 +20,7 @@
                 required
                 (click)="openLocationsPopup($event)"
                 type='text'>
-            <md-hint align="end">
+            <md-hint align="end" *ngIf="locationNameContainer._mdInputChild.focused">
                 <span *ngIf="locationControls.name.errors?.required">
                     required
                 </span>
@@ -47,7 +47,7 @@
         <md-input-container [dividerColor]="
                     locationControls.address.valid ||
                     locationControls.address.pristine ?
-                    'primary' : 'warn'">
+                    'primary' : 'warn'" #locationAddressContainer>
             <input mdInput
                 #locationAddress
                 [style.width]="'100%'"
@@ -55,7 +55,7 @@
                 formControlName="address"
                 placeholder="Address"
                 type='text'>
-            <md-hint align="end">
+            <md-hint align="end" *ngIf="locationAddressContainer._mdInputChild.focused">
                 <span *ngIf="locationControls.address.errors?.required">
                     required
                 </span>
@@ -68,40 +68,21 @@
 
     <div formGroupName="teams">
         <md-input-container [dividerColor]="
-                    form.controls.teams.controls.team1Name.valid ||
-                    form.controls.teams.controls.team1Name.pristine ?
-                    'primary' : 'warn'">
+                    form.controls.teams.controls.teamName.valid ||
+                    form.controls.teams.controls.teamName.pristine ?
+                    'primary' : 'warn'" #teamNameContainer>
             <input mdInput
-                   #team1Name
-                   formControlName="team1Name"
-                   placeholder="First team"
+                   #teamName
+                   formControlName="teamName"
+                   placeholder="Select team"
                    required
                    type='text'>
-            <md-hint align="end">
-                <span *ngIf="form.controls.teams.controls.team1Name.errors?.required">
+            <md-hint align="end" *ngIf="teamNameContainer._mdInputChild.focused">
+                <span *ngIf="form.controls.teams.controls.teamName.errors?.required">
                     required
                 </span>
-                <span *ngIf="!form.controls.teams.controls.team1Name.errors?.required">
-                    {{ team1Name.value.length }} / 30
-                </span>
-            </md-hint>
-        </md-input-container>
-        <md-input-container [dividerColor]="
-                    form.controls.teams.controls.team2Name.valid ||
-                    form.controls.teams.controls.team2Name.pristine ?
-                    'primary' : 'warn'">
-            <input mdInput
-                   #team2Name
-                   formControlName="team2Name"
-                   placeholder="Second team"
-                   required
-                   type='text'>
-            <md-hint align="end">
-                <span *ngIf="form.controls.teams.controls.team2Name.errors?.required">
-                    required
-                </span>
-                <span *ngIf="!form.controls.teams.controls.team2Name.errors?.required">
-                    {{ team2Name.value.length }} / 30
+                <span *ngIf="!form.controls.teams.controls.teamName.errors?.required">
+                    {{ teamName.value.length }} / 30
                 </span>
             </md-hint>
         </md-input-container>
@@ -119,28 +100,28 @@
                         [dividerColor]="
                         form.controls.dates.controls[i].controls.date.valid ||
                         form.controls.dates.controls[i].controls.date.pristine ?
-                        'primary' : 'warn'">
+                        'primary' : 'warn'" #dateContainer>
                         <input #date
                             mdInput
                             formControlName="date"
                             placeholder="Game date"
                             required
                             type='date'>
-                        <md-hint align="end">
+                        <md-hint align="end" *ngIf="dateContainer._mdInputChild.focused">
                             <span *ngIf="form.controls.dates.controls[i].controls.date.errors?.required">
                                 required
                             </span>
                         </md-hint>
                     </md-input-container>
                 </div>
-                <md-input-container class="full-width">
-                    <input
+                <md-input-container class="full-width" #timeContainer>
+                    <input #time
                         mdInput
                         formControlName="time"
                         [placeholder]="'Game time (' + tzName + ')'"
                         required
                         type='time'>
-                    <md-hint align="end">
+                    <md-hint align="end" *ngIf="timeContainer._mdInputChild.focused">
                         <span *ngIf="form.controls.dates.controls[i].controls.time.errors?.required">
                             required
                         </span>

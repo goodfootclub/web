@@ -62,8 +62,7 @@ export class GameAddComponent {
                 ],
             }),
             teams: this.formBuilder.group({
-                team1Name: ['', Validators.required],
-                team2Name: ['', Validators.required],
+                teamName: ['', Validators.required],
             }),
             dates: this.formBuilder.array([
                 this.initMatchDate(),
