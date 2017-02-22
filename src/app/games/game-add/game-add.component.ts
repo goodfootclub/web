@@ -122,9 +122,9 @@ export class GameAddComponent {
         control.push(this.initMatchDate(nextDateStr));
     }
 
-    removeDate(index: number) {
+    removeDate() {
         const control = <FormArray>this.form.controls['dates'];
-        control.removeAt(index);
+        control.removeAt(control.length - 1);
     }
 
     setLocation(event: Event, location: Location) {

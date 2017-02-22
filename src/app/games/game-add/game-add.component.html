@@ -91,29 +91,26 @@
     <br/>
 
     <div formArrayName="dates">
-        <md-card *ngFor="let date of form.controls.dates.controls; let i=index">
-            <md-card-content [formGroupName]="i">
-                <div class="date-container">
-                    <md-card-title>Date {{i + 1}}</md-card-title>
-                    <md-input-container
-                        class="full-width"
-                        [dividerColor]="
-                        form.controls.dates.controls[i].controls.date.valid ||
-                        form.controls.dates.controls[i].controls.date.pristine ?
-                        'primary' : 'warn'" #dateContainer>
-                        <input #date
-                            mdInput
-                            formControlName="date"
-                            placeholder="Game date"
+        <div *ngFor="let date of form.controls.dates.controls; let i=index">
+            <div [formGroupName]="i">
+                <md-input-container
+                    class="full-width"
+                    [dividerColor]="
+                    form.controls.dates.controls[i].controls.date.valid ||
+                    form.controls.dates.controls[i].controls.date.pristine ?
+                    'primary' : 'warn'" #dateContainer>
+                    <input #date
+                        mdInput
+                        formControlName="date"
+                        placeholder="Game date"
+                        required
+                        type='date'>
+                    <md-hint align="end" *ngIf="dateContainer._mdInputChild.focused">
+                        <span *ngIf="form.controls.dates.controls[i].controls.date.errors?.required">
                             required
-                            type='date'>
-                        <md-hint align="end" *ngIf="dateContainer._mdInputChild.focused">
-                            <span *ngIf="form.controls.dates.controls[i].controls.date.errors?.required">
-                                required
-                            </span>
-                        </md-hint>
-                    </md-input-container>
-                </div>
+                        </span>
+                    </md-hint>
+                </md-input-container>
                 <md-input-container class="full-width" #timeContainer>
                     <input #time
                         mdInput
@@ -127,21 +124,19 @@
                         </span>
                     </md-hint>
                 </md-input-container>
-            </md-card-content>
-            <md-card-actions>
-                <button md-button type="button" (click)="removeDate(i)" *ngIf="form.controls.dates.controls.length > 1">
-                    Remove
-                </button>
-                <button md-button type="button" (click)="addDate()">
-                    Add more
-                </button>
-            </md-card-actions>
-        </md-card>
+            </div>
+        </div>
     </div>
 
     <br/>
 
     <div class="buttons">
+        <button md-button type="button" (click)="removeDate()" *ngIf="form.controls.dates.controls.length > 1">
+            Remove last
+        </button>
+        <button md-button type="button" (click)="addDate()">
+            Add one more
+        </button>
         <button
             (click)="backButton.back()"
             [disabled]="isPosting"
