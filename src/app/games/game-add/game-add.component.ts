@@ -9,11 +9,12 @@ import {
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
-import { Location } from 'app/types';
+import {Location, Team} from 'app/types';
 import { GamesService } from '../games.service';
 import { LocationsService } from '../locations.service';
 
 import 'rxjs/add/operator/debounceTime';
+import {ProfileService} from "../../profile/profile.service";
 
 @Component({
     selector: 'app-game-add',
@@ -25,7 +26,7 @@ export class GameAddComponent {
     get searchDebounceTime(): number { return 750; }
     form: FormGroup;
     locations: Location[];
-    showLocationsList = false;
+    managedTeams: Team[];
     isPosting = false;
     datePipe = new DatePipe('en-US');
     tzOffset = -new Date().getTimezoneOffset() / 60;
@@ -39,12 +40,16 @@ export class GameAddComponent {
 
     constructor(
         public _locations: LocationsService,
+        public _profile: ProfileService,
         public formBuilder: FormBuilder,
         public games: GamesService,
         public router: Router,
     ) {
         _locations.all().subscribe(locations => {
             this.locations = locations;
+        });
+        _profile.getCurrentUser().subscribe(user => {
+            this.managedTeams = user.managedTeams;
         });
         this.form = this.formBuilder.group({
             location: this.formBuilder.group({
@@ -70,13 +75,17 @@ export class GameAddComponent {
         });
 
         this.controls = this.form.controls;
-        this.locationControls = this.form.controls['location']['controls'];
+        this.locationControls = this.controls['location']['controls'];
 
         this.locationControls.name.valueChanges
             .debounceTime(this.searchDebounceTime).subscribe(value => {
-            _locations.all(value).subscribe(locations => {
-                this.locations = locations;
-            });
+            if (value instanceof Location) {
+                this.locationControls.address.patchValue(value.address);
+            } else {
+                _locations.all(value).subscribe(locations => {
+                    this.locations = locations;
+                });
+            }
         });
     }
 
@@ -91,6 +100,14 @@ export class GameAddComponent {
         });
     }
 
+    displayTeam(team: Team) {
+        return team.name ? team.name : team;
+    }
+
+    displayLocation(location: Location) {
+        return location.name ? location.name : location;
+    }
+
     onSubmit() {
         this.isPosting = true;
         this.form.disable();
@@ -102,7 +119,7 @@ export class GameAddComponent {
         });
         let data = {
             location: this.form.value['location'],
-            teams: [],
+            teams: [this.form.value['teams']['teamName']],
             datetimes: dates,
         };
 
@@ -125,19 +142,5 @@ export class GameAddComponent {
     removeDate() {
         const control = <FormArray>this.form.controls['dates'];
         control.removeAt(control.length - 1);
-    }
-
-    setLocation(event: Event, location: Location) {
-        this.form.patchValue({location: location});
-    }
-
-    @HostListener('window:click')
-    closeLocationsPopup() {
-        this.showLocationsList = false;
-    }
-
-    openLocationsPopup(event: Event) {
-        this.showLocationsList = true;
-        event.stopPropagation();
     }
 }

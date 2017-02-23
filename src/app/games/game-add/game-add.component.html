@@ -18,7 +18,7 @@
                 formControlName="name"
                 placeholder="Game location"
                 required
-                (click)="openLocationsPopup($event)"
+                [mdAutocomplete]="locationAutoComplete"
                 type='text'>
             <md-hint align="end" *ngIf="locationNameContainer._mdInputChild.focused">
                 <span *ngIf="locationControls.name.errors?.required">
@@ -30,20 +30,12 @@
             </md-hint>
         </md-input-container>
 
-        <md-card class="locations-list" [class.show]="showLocationsList">
-            <md-list>
-                <md-list-item
-                    *ngFor="
-                        let location of locations
-                        | textSearch:locationName.value
-                        | slice:0:5
-                    "
-                    (click)="setLocation($event, location)">
-                    <h3 md-line>{{ location.name }}</h3>
-                    <p md-line>{{ location.address }}</p>
-                </md-list-item>
-            </md-list>
-        </md-card>
+        <md-autocomplete #locationAutoComplete="mdAutocomplete" [displayWith]="displayLocation">
+            <md-option *ngFor="let location of locations" [value]="location">
+                {{ location.name }} - {{ location.address }}
+            </md-option>
+        </md-autocomplete>
+
         <md-input-container [dividerColor]="
                     locationControls.address.valid ||
                     locationControls.address.pristine ?
@@ -73,6 +65,7 @@
                     'primary' : 'warn'" #teamNameContainer>
             <input mdInput
                    #teamName
+                   [mdAutocomplete]="teamAutoComplete"
                    formControlName="teamName"
                    placeholder="Select team"
                    required
@@ -86,6 +79,13 @@
                 </span>
             </md-hint>
         </md-input-container>
+        <md-autocomplete #teamAutoComplete="mdAutocomplete" [displayWith]="displayTeam">
+            <md-option *ngFor="let team of managedTeams
+                        | textSearch:teamName.value
+                        | slice:0:5" [value]="team">
+                {{ team.name }} - {{ team.info }}
+            </md-option>
+        </md-autocomplete>
     </div>
 
     <br/>
@@ -132,10 +132,10 @@
 
     <div class="buttons">
         <button md-button type="button" (click)="removeDate()" *ngIf="form.controls.dates.controls.length > 1">
-            Remove last
+            Remove last date
         </button>
         <button md-button type="button" (click)="addDate()">
-            Add one more
+            Add one more date
         </button>
         <button
             (click)="backButton.back()"
