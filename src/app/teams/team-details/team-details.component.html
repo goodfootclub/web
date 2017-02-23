@@ -20,7 +20,7 @@
     </button>
 </md-toolbar>
 
-<md-tab-group>
+<md-tab-group #tabGroup (selectedIndexChange)="selectedIndexChange($event)">
     <md-tab label="Info">
         <md-card class="team-info">
             <h1> {{ team?.name }} </h1>
@@ -70,7 +70,24 @@
     </md-tab>
 
     <md-tab label="Schedule">
-        Coming SOON™
+        <md-card
+            *ngFor="let game of scheduledGames"
+            [routerLink]="['/games', game.id]">
+            <h1>Pickup Game</h1>
+            <hr>
+            <div>
+                <h1>{{ game.datetime | date:'EEEE, h:mm a' }}</h1>
+                <span class="info">
+                    {{ game.datetime | date:'MMMM d, y' }}
+                </span>
+            </div>
+            <div>
+                <h1>{{ game.location.name }}</h1>
+                <span class="info">
+                    {{ game.location.address }}
+                </span>
+            </div>
+        </md-card>
     </md-tab>
 
     <md-tab label="Chat">
