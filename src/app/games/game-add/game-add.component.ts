@@ -48,9 +48,7 @@ export class GameAddComponent {
         _locations.all().subscribe(locations => {
             this.locations = locations;
         });
-        _profile.getCurrentUser().subscribe(user => {
-            this.managedTeams = user.managedTeams;
-        });
+        this.managedTeams = _profile.currentUser.managedTeams;
         this.form = this.formBuilder.group({
             location: this.formBuilder.group({
                 id: null,
