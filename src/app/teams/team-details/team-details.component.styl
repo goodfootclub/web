@@ -1,6 +1,9 @@
 $card-height = 72px
 $player-pic-dia = 50px
 $sub-color = #aaa
+$header-font-size = 24px
+$subheader-font-size = 18px
+$card-width = 640px;
 
 
 md-card
@@ -9,7 +12,7 @@ md-card
     padding: 12px
 
     h1
-        font-size: 24px
+        font-size: $header-font-size
         margin: 5px 0 0
 
     .info
@@ -19,7 +22,7 @@ md-card
 .player
     display: flex
     height: $card-height
-    max-width: 640px
+    max-width: $card-width
     padding: 0
     margin: 0
 
@@ -42,3 +45,30 @@ md-card
         border-radius: 50%
         height: $player-pic-dia
         width: $player-pic-dia
+
+.header-content
+    margin: 15px auto;
+    max-width: $card-width
+    padding: 12px;
+    align-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 8px 20px;
+    font-size: $header-font-size
+
+    .header-text
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+
+        .team-info
+            color: $sub-color
+            font-size: $subheader-font-size
+
