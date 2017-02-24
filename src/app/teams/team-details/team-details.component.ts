@@ -5,7 +5,7 @@ import { TitleService } from 'app/title.service';
 import { ProfileService } from 'app/profile';
 import {Team, PlayerRole, GameEvent} from 'app/types';
 import { TeamsService } from '../teams.service';
-import {GamesService} from "../../games/games.service";
+import {GamesService} from '../../games/games.service';
 
 
 
@@ -33,7 +33,7 @@ export class TeamDetailsComponent implements OnInit {
     };
 
     team: Team;
-    scheduledGames: GameEvent[];
+    scheduledGames: GameEvent[] = [];
     isManager = false;
     isPlayer = false;
     canAskToJoin = true;
@@ -70,9 +70,10 @@ export class TeamDetailsComponent implements OnInit {
                     }
                 }
             });
+            /* TODO for testing:
             this.games.all().subscribe(games => {
                 this.scheduledGames = games;
-            });
+            }); */
         });
     }
 
