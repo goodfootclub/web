@@ -6,7 +6,7 @@ import {
     Validators,
     FormControl,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
 import {Location, Team} from 'app/types';
@@ -14,7 +14,7 @@ import { GamesService } from '../games.service';
 import { LocationsService } from '../locations.service';
 
 import 'rxjs/add/operator/debounceTime';
-import {ProfileService} from "../../profile/profile.service";
+import {ProfileService} from '../../profile/profile.service';
 
 @Component({
     selector: 'app-game-add',
@@ -27,6 +27,7 @@ export class GameAddComponent {
     form: FormGroup;
     locations: Location[];
     managedTeams: Team[];
+    targetTeam = null;
     isPosting = false;
     datePipe = new DatePipe('en-US');
     tzOffset = -new Date().getTimezoneOffset() / 60;
@@ -44,9 +45,13 @@ export class GameAddComponent {
         public formBuilder: FormBuilder,
         public games: GamesService,
         public router: Router,
+        public route: ActivatedRoute,
     ) {
         _locations.all().subscribe(locations => {
             this.locations = locations;
+        });
+        this.route.params.forEach((params: Params) => {
+            this.targetTeam = +params['targetTeam'];
         });
         this.managedTeams = _profile.currentUser.managedTeams;
         this.form = this.formBuilder.group({
@@ -74,6 +79,12 @@ export class GameAddComponent {
 
         this.controls = this.form.controls;
         this.locationControls = this.controls['location']['controls'];
+
+        if (this.targetTeam) {
+            this.controls['teams'].controls['teamName'].patchValue(
+                this.managedTeams.find((team) => team.id === this.targetTeam));
+            this.controls['teams'].controls['teamName'].disable();
+        }
 
         this.locationControls.name.valueChanges
             .debounceTime(this.searchDebounceTime).subscribe(value => {

@@ -26,12 +26,18 @@ export class TeamDetailsComponent implements OnInit {
         [-2]: 'Asked to join',
     };
 
+    TABS = {
+        '0': 'Info',
+        '1': 'Schedule',
+        '2': 'Chat',
+    };
+
     team: Team;
     scheduledGames: GameEvent[];
     isManager = false;
     isPlayer = false;
     canAskToJoin = true;
-    selectedIndex = 0;
+    selectedTab = this.TABS['0'];
 
 
     constructor(
@@ -71,6 +77,6 @@ export class TeamDetailsComponent implements OnInit {
     }
 
     selectedIndexChange(index) {
-        this.selectedIndex = index;
+        this.selectedTab = this.TABS[+index];
     }
 }

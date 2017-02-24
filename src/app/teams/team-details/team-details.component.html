@@ -15,8 +15,11 @@
     >
         Invite players
     </button>
-    <button *ngIf="isManager" md-icon-button [routerLink]="['edit']">
+    <button *ngIf="isManager && selectedTab != 'Schedule'" md-icon-button [routerLink]="['edit']">
         <md-icon>edit</md-icon>
+    </button>
+    <button *ngIf="isManager && selectedTab == 'Schedule'" md-icon-button [routerLink]="['/games/add', {targetTeam: team.id}]">
+        <md-icon>add</md-icon>
     </button>
 </md-toolbar>
 
