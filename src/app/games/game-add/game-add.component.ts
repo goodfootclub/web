@@ -24,9 +24,16 @@ import {ProfileService} from '../../profile/profile.service';
 export class GameAddComponent {
 
     get searchDebounceTime(): number { return 750; }
+    get noTeam(): Team {
+        return {
+            id: -1,
+            info: '(Pickup game)',
+            name: 'No team',
+        } as Team;
+    };
     form: FormGroup;
     locations: Location[];
-    managedTeams: Team[];
+    managedTeams: Team[] = [this.noTeam];
     targetTeam = null;
     isPosting = false;
     datePipe = new DatePipe('en-US');
@@ -53,7 +60,8 @@ export class GameAddComponent {
         this.route.params.forEach((params: Params) => {
             this.targetTeam = +params['targetTeam'];
         });
-        this.managedTeams = _profile.currentUser.managedTeams;
+        this.managedTeams =
+            this.managedTeams.concat(_profile.currentUser.managedTeams);
         this.form = this.formBuilder.group({
             location: this.formBuilder.group({
                 id: null,
@@ -126,9 +134,11 @@ export class GameAddComponent {
             dt.setHours(dt.getHours() + dt.getTimezoneOffset() / 60);
             return dt.toJSON();
         });
+        const selectedTeam = this.form.value['teams']['teamName'] as Team;
+        const teamsArray = selectedTeam.id === -1 ? [] : [selectedTeam];
         let data = {
             location: this.form.value['location'],
-            teams: [this.form.value['teams']['teamName']],
+            teams: teamsArray,
             datetimes: dates,
         };
 

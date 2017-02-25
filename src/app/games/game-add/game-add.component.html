@@ -80,9 +80,7 @@
             </md-hint>
         </md-input-container>
         <md-autocomplete #teamAutoComplete="mdAutocomplete" [displayWith]="displayTeam">
-            <md-option *ngFor="let team of managedTeams
-                        | textSearch:teamName.value
-                        | slice:0:5" [value]="team">
+            <md-option *ngFor="let team of managedTeams" [value]="team">
                 {{ team.name }} - {{ team.info }}
             </md-option>
         </md-autocomplete>
