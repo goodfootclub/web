@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+//@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+
+$main-theme-color = #2DB5FF
 
 html, body, app-root
     background: #eee
@@ -38,3 +41,9 @@ app-title
 // Autocomplete list with full width of input
 div.mat-autocomplete-panel
     max-width 100%
+
+.main-theme-color
+    color $main-theme-color
+
+.mat-icon-button
+    color $main-theme-color!important
