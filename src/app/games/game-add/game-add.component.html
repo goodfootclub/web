@@ -70,39 +70,43 @@
 
     <div formArrayName="dates">
         <div *ngFor="let date of form.controls.dates.controls; let i=index">
-            <div [formGroupName]="i">
-                <md-input-container
-                    class="full-width"
-                    [dividerColor]="
-                    form.controls.dates.controls[i].controls.date.valid ||
-                    form.controls.dates.controls[i].controls.date.pristine ?
-                    'primary' : 'warn'" #dateContainer>
-                    <input #date
-                        mdInput
-                        formControlName="date"
-                        placeholder="Game date"
-                        required
-                        type='date'>
-                    <md-hint align="end" *ngIf="dateContainer._mdInputChild.focused">
-                        <span *ngIf="form.controls.dates.controls[i].controls.date.errors?.required">
-                            required
-                        </span>
-                    </md-hint>
-                </md-input-container>
-                <md-input-container class="full-width" #timeContainer>
-                    <input #time
-                        mdInput
-                        formControlName="time"
-                        [placeholder]="'Game time (' + tzName + ')'"
-                        required
-                        type='time'>
-                    <md-hint align="end" *ngIf="timeContainer._mdInputChild.focused">
-                        <span *ngIf="form.controls.dates.controls[i].controls.time.errors?.required">
-                            required
-                        </span>
-                    </md-hint>
-                </md-input-container>
-            </div>
+            <md-grid-list cols="2" rowHeight="80px" [formGroupName]="i">
+                <md-grid-tile>
+                    <md-input-container
+                        class="full-width"
+                        [dividerColor]="
+                        form.controls.dates.controls[i].controls.date.valid ||
+                        form.controls.dates.controls[i].controls.date.pristine ?
+                        'primary' : 'warn'" #dateContainer>
+                        <input #date
+                               mdInput
+                               formControlName="date"
+                               placeholder="Game date"
+                               required
+                               type='date'>
+                        <md-hint align="end" *ngIf="dateContainer._mdInputChild.focused">
+                            <span *ngIf="form.controls.dates.controls[i].controls.date.errors?.required">
+                                required
+                            </span>
+                        </md-hint>
+                    </md-input-container>
+                </md-grid-tile>
+                <md-grid-tile>
+                    <md-input-container class="full-width" #timeContainer>
+                        <input #time
+                               mdInput
+                               formControlName="time"
+                               [placeholder]="'Game time (' + tzName + ')'"
+                               required
+                               type='time'>
+                        <md-hint align="end" *ngIf="timeContainer._mdInputChild.focused">
+                            <span *ngIf="form.controls.dates.controls[i].controls.time.errors?.required">
+                                required
+                            </span>
+                        </md-hint>
+                    </md-input-container>
+                </md-grid-tile>
+            </md-grid-list>
         </div>
     </div>
 
