@@ -91,7 +91,6 @@ export class GameAddComponent {
         if (this.targetTeam) {
             this.controls['teams'].controls['teamName'].patchValue(
                 this.managedTeams.find((team) => team.id === this.targetTeam));
-            this.controls['teams'].controls['teamName'].disable();
         }
 
         this.locationControls.name.valueChanges
