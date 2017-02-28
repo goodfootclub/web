@@ -60,4 +60,10 @@ export class GamesComponent implements OnInit {
     loadData(search?: string, offset?: number): Observable<GameEvent[]> {
         return this._games.all(search ? search : '', this.limit, offset);
     }
+    getGameName(game: GameEvent): string {
+        if (game.teams && game.teams.length > 0) {
+            return game.teams.map((team) => team.name).join(', ');
+        }
+        return 'Pickup game';
+    }
 }
