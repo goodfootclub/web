@@ -14,13 +14,15 @@
     <md-tab label="Info">
         <div class="header-content">
             <div class="header-text"><p>{{ team?.name }}</p><p class="team-info">[{{ ['coed', 'female', 'male'][team?.type] }}] {{ team?.info }}</p></div>
-            <button md-mini-fab *ngIf="isPlayer || isManager" [routerLink]="['/players', {targetTeam: team.id}]"><md-icon>add</md-icon></button>
-            <span style="width: 10px"></span>
             <button md-mini-fab *ngIf="isManager" [routerLink]="['edit']"><md-icon>edit</md-icon></button>
         </div>
         <hr/>
         <md-card>
-            <h1>Managers</h1>
+            <div class="header-content">
+                <div class="header-text">
+                    <h1>Managers</h1>
+                </div>
+            </div>
             <hr>
             <md-list>
             <a
@@ -37,7 +39,12 @@
             </md-list>
         </md-card>
         <md-card>
-            <h1>Roster</h1>
+            <div class="header-content">
+                <div class="header-text">
+                    <h1>Roster</h1>
+                </div>
+                <button md-mini-fab *ngIf="isPlayer || isManager" [routerLink]="['/players', {targetTeam: team.id}]"><md-icon>add</md-icon></button>
+            </div>
             <hr>
             <md-list>
             <a
