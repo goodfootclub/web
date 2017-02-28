@@ -34,7 +34,7 @@ export class GameAddComponent {
     form: FormGroup;
     locations: Location[];
     managedTeams: Team[] = [this.noTeam];
-    targetTeam = null;
+    targetTeam: number = null;
     isPosting = false;
     datePipe = new DatePipe('en-US');
     tzOffset = -new Date().getTimezoneOffset() / 60;
@@ -88,10 +88,9 @@ export class GameAddComponent {
         this.controls = this.form.controls;
         this.locationControls = this.controls['location']['controls'];
 
-        if (this.targetTeam) {
-            this.controls['teams'].controls['teamName'].patchValue(
-                this.managedTeams.find((team) => team.id === this.targetTeam));
-        }
+        this.controls['teams'].controls['teamName'].patchValue(
+            this.managedTeams.find((team) =>
+                team.id === (this.targetTeam ? this.targetTeam : -1)));
 
         this.locationControls.name.valueChanges
             .debounceTime(this.searchDebounceTime).subscribe(value => {
@@ -158,7 +157,6 @@ export class GameAddComponent {
         const previousTime: FormControl =
             control.controls[lastIndex]['controls'].time as FormControl;
         const nextDate = new Date(previousDate.value);
-        console.log(previousDate.value);
         nextDate.setDate(nextDate.getDate() + 7);
         const nextDateStr = this.datePipe.transform(nextDate, 'yyyy-MM-dd');
         control.push(this.initMatchDate(nextDateStr, previousTime.value));

@@ -59,31 +59,11 @@
     </div>
 
     <div formGroupName="teams">
-        <md-input-container [dividerColor]="
-                    form.controls.teams.controls.teamName.valid ||
-                    form.controls.teams.controls.teamName.pristine ?
-                    'primary' : 'warn'" #teamNameContainer>
-            <input mdInput
-                   #teamName
-                   [mdAutocomplete]="teamAutoComplete"
-                   formControlName="teamName"
-                   placeholder="Select team"
-                   required
-                   type='text'>
-            <md-hint align="end" *ngIf="teamNameContainer._mdInputChild.focused">
-                <span *ngIf="form.controls.teams.controls.teamName.errors?.required">
-                    required
-                </span>
-                <span *ngIf="!form.controls.teams.controls.teamName.errors?.required">
-                    {{ teamName.value.length }} / 30
-                </span>
-            </md-hint>
-        </md-input-container>
-        <md-autocomplete #teamAutoComplete="mdAutocomplete" [displayWith]="displayTeam">
-            <md-option *ngFor="let team of managedTeams" [value]="team">
-                {{ team.name }} - {{ team.info }}
-            </md-option>
-        </md-autocomplete>
+        <div class="mat-input-wrapper">
+            <md-select placeholder="Select team" #teamName formControlName="teamName">
+                <md-option *ngFor="let team of managedTeams" [value]="team">{{ team.name }} - {{ team.info }}</md-option>
+            </md-select>
+        </div>
     </div>
 
     <br/>
