@@ -152,10 +152,13 @@ export class GameAddComponent {
         const lastIndex = control.controls.length - 1;
         const previousDate: FormControl =
             control.controls[lastIndex]['controls'].date as FormControl;
+        const previousTime: FormControl =
+            control.controls[lastIndex]['controls'].time as FormControl;
         const nextDate = new Date(previousDate.value);
+        console.log(previousDate.value);
         nextDate.setDate(nextDate.getDate() + 7);
         const nextDateStr = this.datePipe.transform(nextDate, 'yyyy-MM-dd');
-        control.push(this.initMatchDate(nextDateStr));
+        control.push(this.initMatchDate(nextDateStr, previousTime.value));
     }
 
     removeDate() {
