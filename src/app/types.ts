@@ -78,7 +78,7 @@ export enum TeamType {
  */
 export class GameEvent {
     id: number;
-    datetimes: string[];
+    datetime: string|string[];
     // datetime: Date;
     duration?: number; // Minutes
     description?: string;
@@ -119,7 +119,7 @@ export class GameEvent {
         this.id = data['id'];
         this.description = data['description'];
         this.duration = data['duration'];
-        this.datetimes = [data['datetimes']];
+        this.datetime = [data['datetime']];
         this.location = new Location(data['location']);
 
         this.playersById = {};

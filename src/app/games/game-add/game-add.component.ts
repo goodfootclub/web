@@ -131,14 +131,18 @@ export class GameAddComponent {
             let dt = new Date(
                 `${val['date']}T${val['time']}`);
             dt.setHours(dt.getHours() + dt.getTimezoneOffset() / 60);
-            return dt.toJSON();
+            return dt;
         });
         const selectedTeam = this.form.value['teams']['teamName'] as Team;
         const teamsArray = selectedTeam.id === -1 ? [] : [selectedTeam];
+        const selectedLocation: Location =
+            this.form.value['location'].name instanceof Location ?
+                this.form.value['location'].name :
+                this.form.value['location'] as Location;
         let data = {
-            location: this.form.value['location'],
+            location: selectedLocation,
             teams: teamsArray,
-            datetimes: dates,
+            datetime: dates,
         };
 
         this.games.create(data).subscribe(newGame => {
