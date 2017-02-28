@@ -67,7 +67,7 @@
         <md-card
             *ngFor="let game of scheduledGames"
             [routerLink]="['/games', game.id]">
-            <h1>Pickup Game</h1>
+            <h1>{{ game.name }}</h1>
             <hr>
             <div>
                 <h1>{{ game.datetime | date:'EEEE, h:mm a' }}</h1>
