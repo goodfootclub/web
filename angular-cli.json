@@ -40,6 +40,7 @@
   "lint": [
     {
       "files": "src/**/*.ts",
+      "exclude": ["src/polyfills.ts", "src/test.ts"],
       "project": "src/tsconfig.json"
     },
     {

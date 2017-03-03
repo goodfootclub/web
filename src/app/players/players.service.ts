@@ -26,7 +26,7 @@ export class PlayersService {
         if (limit) { params.set('limit', limit.toString()); }
         if (offset) { params.set('offset', offset.toString()); }
         if (search) { params.set('search', search); }
-        return this.http.get('/api/users/players/', {search: params})
+        return this.http.get('/api/users/players/', { search: params })
             .map(res => res.json().results.map(data => new User(data)))
             .catch((err, caught) => {
                 this.health.criticalError(JSON.stringify(err, null, 4));
@@ -48,7 +48,7 @@ export class PlayersService {
         let request = new Request({
             method: RequestMethod.Post,
             url: `/api/teams/${teamId}/players/`,
-            body: {id: playerId, role: -1},
+            body: { id: playerId, role: -1 },
         });
         csrf.configureRequest(request);
 

@@ -33,7 +33,7 @@ export class GamesComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.form = this.formBuilder.group({'search': ['']});
+        this.form = this.formBuilder.group({ 'search': [''] });
         this.search = this.form.controls['search'];
         this.search.valueChanges.debounceTime(this.searchDebounceTime)
             .subscribe((value) => {

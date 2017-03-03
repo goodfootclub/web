@@ -6,7 +6,7 @@ import { HealthService } from './health.service';
 let injuryImg = require('./img/injury.jpg');
 
 @Component({
-    selector: 'critical-error-page',
+    selector: 'app-critical-error-page',
     templateUrl: './error-page.html',
     styleUrls: ['./error-page.styl'],
 })
@@ -18,5 +18,5 @@ export class CriticalErrorComponent {
     messageB = 'Doing our best to fix it ASAP. Sit tight!';
     title = 'SERVER IS DOWN';
 
-    constructor(private health: HealthService) { }
+    constructor(public health: HealthService) { }
 }

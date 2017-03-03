@@ -147,7 +147,7 @@ export class GameEvent {
 };
 
 
-export type League = {
+export class League {
     age: number | [number, number];
     description: string;
     duration: number; // Weeks
@@ -219,7 +219,7 @@ export type PlayersCount = {
 
 
 // Detailed player model
-export type Profile = {
+export class Profile {
     age?: number;
     availability?: any;
     coed?: boolean;
@@ -236,7 +236,7 @@ export type Profile = {
 };
 
 
-export type Result = {
+export class Result {
     winner: Team;
     score: string;
 };

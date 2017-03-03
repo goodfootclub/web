@@ -19,7 +19,7 @@ export class LocationsService {
     all(search?: string): Observable<Location[]> {
         const params: URLSearchParams = new URLSearchParams();
         if (search) { params.set('search', search); }
-        return this.http.get('/api/games/locations/', {search: params})
+        return this.http.get('/api/games/locations/', { search: params })
             .map(res => res.json().results.map(data => new Location(data)))
             .catch((err, caught) => {
                 this.health.criticalError(JSON.stringify(err, null, 4));

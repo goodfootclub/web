@@ -14,7 +14,7 @@ import { TeamsService } from '../teams.service';
 export class TeamAddComponent {
 
     form: FormGroup;
-    isPosting: boolean = false;
+    isPosting = false;
 
     constructor(
         public teams: TeamsService,

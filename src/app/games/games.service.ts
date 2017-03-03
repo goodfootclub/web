@@ -21,12 +21,13 @@ export class GamesService {
         private health: HealthService,
     ) { }
 
-    all(search?: string, limit?: number, offset?: number): Observable<GameEvent[]> {
+    all(search?: string, limit?: number, offset?: number):
+    Observable<GameEvent[]> {
         const params: URLSearchParams = new URLSearchParams();
         if (limit) { params.set('limit', limit.toString()); }
         if (offset) { params.set('offset', offset.toString()); }
         if (search) { params.set('search', search); }
-        return this.http.get('/api/games/', {search: params})
+        return this.http.get('/api/games/', { search: params })
             .map(res => res.json().results.map(data => new GameEvent(data)))
             .catch((err, caught) => {
                 this.health.criticalError(JSON.stringify(err, null, 4));

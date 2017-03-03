@@ -5,14 +5,14 @@ import { TitleService } from '../title.service';
 
 
 @Component({
-    selector: 'game-events',
+    selector: 'app-game-events',
     templateUrl: './events.component.html',
     styleUrls: ['./events.component.styl'],
 })
 export class EventsComponent implements OnInit {
 
     events: GameEvent[];
-    empty: boolean = true;
+    empty = true;
 
     statusMessages =  [
         'I\'m going',
