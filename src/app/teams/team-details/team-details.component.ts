@@ -3,9 +3,9 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import { TitleService } from 'app/title.service';
 import { ProfileService } from 'app/profile';
-import {Team, PlayerRole, GameEvent} from 'app/types';
+import { Team, PlayerRole, GameEvent } from 'app/types';
 import { TeamsService } from '../teams.service';
-import {GamesService} from '../../games/games.service';
+import { GamesService } from '../../games/games.service';
 
 
 

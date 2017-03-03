@@ -9,12 +9,12 @@ import {
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
-import {Location, Team} from 'app/types';
+import { Location, Team } from 'app/types';
 import { GamesService } from '../games.service';
 import { LocationsService } from '../locations.service';
 
 import 'rxjs/add/operator/debounceTime';
-import {ProfileService} from '../../profile/profile.service';
+import { ProfileService } from '../../profile/profile.service';
 
 @Component({
     selector: 'app-game-add',
@@ -26,7 +26,7 @@ export class GameAddComponent {
     get searchDebounceTime(): number { return 750; }
     get noTeam(): Team {
         return {
-            id: -1,
+            id: null,
             info: '(Pickup game)',
             name: 'No team',
         } as Team;
@@ -90,7 +90,7 @@ export class GameAddComponent {
 
         this.controls['teams'].controls['teamName'].patchValue(
             this.managedTeams.find((team) =>
-                team.id === (this.targetTeam ? this.targetTeam : -1)));
+                team.id === (this.targetTeam ? this.targetTeam : null)));
 
         this.locationControls.name.valueChanges
             .debounceTime(this.searchDebounceTime).subscribe(value => {
