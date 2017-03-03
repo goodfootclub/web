@@ -27,7 +27,7 @@ export class TeamsService {
         if (limit) { params.set('limit', limit.toString()); }
         if (offset) { params.set('offset', offset.toString()); }
         if (search) { params.set('search', search); }
-        return this.http.get('/api/teams/', {search: params})
+        return this.http.get('/api/teams/', { search: params })
             .map(res => res.json().results.map(data => new Team(data)))
             .catch((err, caught) => {
                 this.health.criticalError(JSON.stringify(err, null, 4));

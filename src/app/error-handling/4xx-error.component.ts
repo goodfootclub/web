@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { HealthService } from './health.service';
 
 
 let yellowCard = require('./img/yellow-card.jpg');
 
 @Component({
-    selector: 'fourxx-error-page',
+    selector: 'app-fourxx-error-page',
     templateUrl: './error-page.html',
     styleUrls: ['./error-page.styl'],
 })
@@ -15,5 +16,6 @@ export class FourxxErrorComponent {
     messageA = 'Bad url. If there ever was something, it\'s gone';
     messageB = false;
     title = 'PAGE NOT FOUND';
-    constructor() { }
+
+    constructor(public health: HealthService) { }
 }

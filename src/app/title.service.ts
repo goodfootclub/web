@@ -11,7 +11,7 @@ import { Subscriber } from 'rxjs/Subscriber';
 export class TitleService {
 
     observable: Observable<string>;
-    value: string = '';
+    value = '';
 
     private _subs: Subscriber<string>[] = [];
 

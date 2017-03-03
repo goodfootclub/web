@@ -15,7 +15,7 @@ export class ProfileEditComponent implements OnInit {
 
     user: User;
     form: FormGroup;
-    isPosting: boolean = false;
+    isPosting = false;
 
     constructor(
         public formBuilder: FormBuilder,

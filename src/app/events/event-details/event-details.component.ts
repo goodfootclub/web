@@ -7,7 +7,7 @@ import { GameEvent } from '../../types';
 
 
 @Component({
-    selector: 'event-details',
+    selector: 'app-event-details',
     templateUrl: './event-details.component.html',
     styleUrls: ['./event-details.component.styl'],
 })

@@ -32,6 +32,7 @@ export class GameAddComponent {
         } as Team;
     };
     form: FormGroup;
+    locationAutoComplete: FormControl;
     locations: Location[];
     managedTeams: Team[] = [this.noTeam];
     targetTeam: number = null;
@@ -70,7 +71,7 @@ export class GameAddComponent {
                     Validators.maxLength(30),
                 ])],
                 address: [
-                    {value: '', disabled: false},
+                    { value: '', disabled: false },
                     Validators.compose([
                         // Validators.required,
                         Validators.maxLength(255),

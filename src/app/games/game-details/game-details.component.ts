@@ -7,7 +7,7 @@ import { GameEvent, RsvpStatus, Player } from '../../types';
 
 
 @Component({
-    selector: 'game-details',
+    selector: 'app-game-details',
     templateUrl: './game-details.component.html',
     styleUrls: [],
 })

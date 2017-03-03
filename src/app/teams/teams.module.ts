@@ -7,7 +7,7 @@ import { TeamsComponent } from './teams.component';
 import { TeamAddComponent } from './team-add';
 import { TeamDetailsComponent } from './team-details';
 import { TeamsService } from './teams.service';
-import {GamesService} from '../games/games.service';
+import { GamesService } from '../games/games.service';
 
 
 const ROUTES: Routes = [{

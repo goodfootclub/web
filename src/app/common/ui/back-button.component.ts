@@ -20,7 +20,7 @@ export class BackButtonComponent {
      * invoked to get to a view with the back button. For most
      * views that need a back button it's 2
      */
-    @Input() depth: number = 2;
+    @Input() depth = 2;
     @Input() disabled;
 
     constructor(
