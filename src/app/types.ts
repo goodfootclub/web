@@ -1,7 +1,6 @@
 // App types. All in one place for the start, later should go to separate
 // respective modules
 
-
 export enum FieldPosition {
     Attacker,
     Midfielder,
@@ -78,13 +77,13 @@ export enum TeamType {
  */
 export class GameEvent {
     id: number;
-    datetime: Date;
+    datetime: string|string[];
+    // datetime: Date;
     duration?: number; // Minutes
     description?: string;
     // eventType?: GameType;
     // league?: League;
     location: Location;
-    name?: string;
     players?: Player[];
     playersById?: { [id: number]: Player };
     // playersCount?: PlayersCount;
@@ -92,6 +91,12 @@ export class GameEvent {
     teams?: Team[];
     // result?: Result;
     organizer?: User;
+    get name(): string {
+        if (this.teams && this.teams.length > 0) {
+            return this.teams.map((team) => team.name).join(', ');
+        }
+        return 'Pickup game';
+    };
 
     /**
      * Transform API team represetation to use in the app:
@@ -118,7 +123,7 @@ export class GameEvent {
         this.id = data['id'];
         this.description = data['description'];
         this.duration = data['duration'];
-        this.datetime = new Date(data['datetime']);
+        this.datetime = [data['datetime']];
         this.location = new Location(data['location']);
 
         this.playersById = {};
@@ -138,7 +143,6 @@ export class GameEvent {
                 team.playersInGame.push(player);
             }
         }
-
     }
 };
 

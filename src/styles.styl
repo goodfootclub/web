@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+//@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+
+$main-theme-color = #2DB5FF
 
 html, body, app-root
     background: #eee
@@ -10,7 +13,7 @@ md-sidenav-container
     margin: auto
     box-shadow: 0px 0px 5px 0px rgba(100, 100, 100, 0.75)
 
-md-input-container
+md-input-container, md-select
     width: 100%
 
 html, body
@@ -34,3 +37,13 @@ app-title
 // Tabs
 .mat-tab-labels
     justify-content: space-around
+
+// Autocomplete list with full width of input
+div.mat-autocomplete-panel
+    max-width 100%
+
+.main-theme-color
+    color $main-theme-color
+
+.mat-icon-button
+    color $main-theme-color!important

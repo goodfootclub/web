@@ -3,8 +3,9 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import { TitleService } from 'app/title.service';
 import { ProfileService } from 'app/profile';
-import { Team, PlayerRole } from 'app/types';
+import { Team, PlayerRole, GameEvent } from 'app/types';
 import { TeamsService } from '../teams.service';
+import { GamesService } from '../../games/games.service';
 
 
 
@@ -25,15 +26,24 @@ export class TeamDetailsComponent implements OnInit {
         [-2]: 'Asked to join',
     };
 
+    TABS = {
+        '0': 'Info',
+        '1': 'Schedule',
+        '2': 'Chat',
+    };
+
     team: Team;
-    isManager: boolean = false;
-    isPlayer: boolean = false;
-    canAskToJoin: boolean = true;
+    scheduledGames: GameEvent[] = [];
+    isManager = false;
+    isPlayer = false;
+    canAskToJoin = true;
+    selectedTab = this.TABS['0'];
 
 
     constructor(
         public route: ActivatedRoute,
         public teams: TeamsService,
+        public games: GamesService,
         public title: TitleService,
         public profile: ProfileService,
     ) {
@@ -60,6 +70,14 @@ export class TeamDetailsComponent implements OnInit {
                     }
                 }
             });
+            /* TODO for testing:
+            this.games.all().subscribe(games => {
+                this.scheduledGames = games;
+            }); */
         });
+    }
+
+    selectedIndexChange(index) {
+        this.selectedTab = this.TABS[+index];
     }
 }
