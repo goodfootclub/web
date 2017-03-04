@@ -1,0 +1,52 @@
+$card-height = 72px
+$player-pic-dia = 50px
+$sub-color = #aaa
+$header-font-size = 20px
+$subheader-font-size = 16px
+$card-width = 640px;
+
+.edit-input-line
+    display flex
+
+.mat-card
+    box-shadow none
+
+md-card
+    margin: 15px auto
+    max-width: 640px
+    padding: 12px
+
+    h1
+        font-size: $header-font-size
+        margin: 5px 0 0
+
+    .info
+        color: $sub-color
+
+
+.player
+    display: flex
+    height: $card-height
+    max-width: $card-width
+    padding: 0
+    margin: 0
+
+    &:hover
+        text-decoration: none
+        background: #fafafa
+
+    .player-info
+        padding: 0 12px
+
+    h1
+        font-size: 16px
+        margin: 5px 0 0
+
+    .role
+        color: $sub-color
+        font-size: 11px
+
+    .player-pic
+        border-radius: 50%
+        height: $player-pic-dia
+        width: $player-pic-dia

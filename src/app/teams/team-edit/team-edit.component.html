@@ -1,0 +1,105 @@
+<md-toolbar>
+    <app-back-button
+        #backButton
+        [disabled]="isPosting"
+    ></app-back-button>
+    <app-title></app-title>
+    <div class="toolbar-icon-spacer"></div>
+</md-toolbar>
+
+<md-card>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="edit-input-line">
+            <md-input-container [dividerColor]="
+                    form.controls.name.valid ||
+                    form.controls.name.pristine ?
+                    'primary' : 'warn'" #nameContainer>
+                <input mdInput
+                       #name
+                       formControlName="name"
+                       placeholder="Enter team name"
+                       required
+                       type='text'>
+                <md-hint align="end" *ngIf="nameContainer._mdInputChild.focused">
+                <span *ngIf="form.controls.name.errors?.required">
+                    required
+                </span>
+                <span *ngIf="!form.controls.name.errors?.required">
+                    {{ name.value.length }} / 30
+                </span>
+                </md-hint>
+            </md-input-container>
+            <div class="edit-input-button">
+                <button md-icon-button (click)="editField('name')">
+                    <md-icon>edit</md-icon>
+                </button>
+            </div>
+        </div>
+        <div class="edit-input-line">
+            <md-input-container [dividerColor]="
+                    form.controls.info.valid ||
+                    form.controls.info.pristine ?
+                    'primary' : 'warn'" #infoContainer>
+                <input mdInput
+                       #info
+                       formControlName="info"
+                       placeholder="Enter team info"
+                       required
+                       type='text'>
+                <md-hint align="end" *ngIf="infoContainer._mdInputChild.focused">
+                <span *ngIf="form.controls.info.errors?.required">
+                    required
+                </span>
+                <span *ngIf="!form.controls.info.errors?.required">
+                    {{ info.value.length }} / 1000
+                </span>
+                </md-hint>
+            </md-input-container>
+            <div class="edit-input-button">
+                <button md-icon-button (click)="editField('info')">
+                    <md-icon>edit</md-icon>
+                </button>
+            </div>
+        </div>
+    </form>
+</md-card>
+
+<md-tab-group #tabGroup>
+    <md-tab label="Line-up">
+        <md-card>
+            <md-list>
+                <a md-list-item class="player"
+                    *ngFor="let player of players"
+                    [routerLink]="['/players', player.id]">
+                    <img [src]="player.img" alt="" class="player-pic">
+                    <div class="player-info">
+                        <h1> {{ player.firstName }} {{ player.lastName }} </h1>
+                        <div class="role">
+                            {{ ROLES[player.role] }}
+                        </div>
+                    </div>
+                </a>
+            </md-list>
+        </md-card>
+    </md-tab>
+
+    <md-tab label="Applicants">
+        <md-card>
+            <md-list>
+                <a
+                    md-list-item
+                    class="player"
+                    *ngFor="let player of applicants"
+                    [routerLink]="['/players', player.id]">
+                    <img [src]="player.img" alt="" class="player-pic">
+                    <div class="player-info">
+                        <h1> {{ player.firstName }} {{ player.lastName }} </h1>
+                        <div class="role">
+                            {{ ROLES[player.role] }}
+                        </div>
+                    </div>
+                </a>
+            </md-list>
+        </md-card>
+    </md-tab>
+</md-tab-group>

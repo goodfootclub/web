@@ -4,7 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { TitleService } from 'app/title.service';
 import { ProfileService } from 'app/profile';
 import { Team, PlayerRole, GameEvent } from 'app/types';
-import { TeamsService } from '../teams.service';
+import { TeamsService, playerRoles } from '../teams.service';
 import { GamesService } from '../../games/games.service';
 
 
@@ -17,21 +17,12 @@ import { GamesService } from '../../games/games.service';
 })
 export class TeamDetailsComponent implements OnInit {
 
-    ROLES = {
-        [3]: 'Captain',
-        [2]: 'Player',
-        [1]: 'Substitute',
-        [0]: 'Inactive',
-        [-1]: 'Invited',
-        [-2]: 'Asked to join',
-    };
-
     TABS = {
         '0': 'Info',
         '1': 'Schedule',
         '2': 'Chat',
     };
-
+    ROLES = playerRoles;
     team: Team;
     scheduledGames: GameEvent[] = [];
     isManager = false;
@@ -69,6 +60,8 @@ export class TeamDetailsComponent implements OnInit {
                         break;
                     }
                 }
+                // TODO for testing:
+                this.isManager = true;
             });
             /* TODO for testing:
             this.games.all().subscribe(games => {

@@ -61,3 +61,12 @@ export class TeamsService {
         });
     }
 }
+
+export const playerRoles = {
+    [3]: 'Captain',
+    [2]: 'Player',
+    [1]: 'Substitute',
+    [0]: 'Inactive',
+    [-1]: 'Invited',
+    [-2]: 'Asked to join',
+};
