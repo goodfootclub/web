@@ -3,8 +3,9 @@
     <app-title></app-title>
     <button
         *ngIf="!isPlayer && !isManager"
-        md-button color="primary"
+        (click)="askToJoin()"
         [disabled]="!canAskToJoin"
+        md-button color="primary"
     >
         Ask to join
     </button>

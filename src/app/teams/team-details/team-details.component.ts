@@ -8,8 +8,6 @@ import { TeamsService } from '../teams.service';
 import { GamesService } from '../../games/games.service';
 
 
-
-
 @Component({
     selector: 'app-team-details',
     styleUrls: ['./team-details.component.styl'],
@@ -75,6 +73,12 @@ export class TeamDetailsComponent implements OnInit {
                 this.scheduledGames = games;
             }); */
         });
+    }
+
+    askToJoin() {
+        this.teams.askToJoin(
+            this.team.id, this.profile.currentUser.id
+        ).subscribe(console.log);
     }
 
     selectedIndexChange(index) {
