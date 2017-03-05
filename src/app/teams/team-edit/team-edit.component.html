@@ -30,8 +30,11 @@
                 </md-hint>
             </md-input-container>
             <div class="edit-input-button">
-                <button md-icon-button (click)="editField('name')">
+                <button md-icon-button (click)="editField('name')" *ngIf="isEditVisible('name')">
                     <md-icon>edit</md-icon>
+                </button>
+                <button md-icon-button (click)="saveField('name')" *ngIf="isSaveVisible('name')">
+                    <md-icon>save</md-icon>
                 </button>
             </div>
         </div>
@@ -56,8 +59,11 @@
                 </md-hint>
             </md-input-container>
             <div class="edit-input-button">
-                <button md-icon-button (click)="editField('info')">
+                <button md-icon-button (click)="editField('info')" *ngIf="isEditVisible('info')">
                     <md-icon>edit</md-icon>
+                </button>
+                <button md-icon-button (click)="saveField('info')" *ngIf="isSaveVisible('info')">
+                    <md-icon>save</md-icon>
                 </button>
             </div>
         </div>

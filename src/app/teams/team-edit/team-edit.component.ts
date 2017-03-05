@@ -21,6 +21,9 @@ export class TeamEditComponent implements OnInit {
     players: Player[] = [];
     applicants: Player[] = [];
 
+    isEdit = false;
+    fieldToUpdate: string = null;
+
     constructor(
         public teams: TeamsService,
         public formBuilder: FormBuilder,
@@ -61,7 +64,24 @@ export class TeamEditComponent implements OnInit {
     }
 
     editField(fieldName: string): void {
+        this.isEdit = true;
+        this.fieldToUpdate = fieldName;
         this.form.controls[fieldName].enable();
+    }
+
+    saveField(fieldName: string): void {
+        const newValue = this.form.controls[fieldName].value;
+        this.isEdit = false;
+        this.fieldToUpdate = null;
+        this.form.controls[fieldName].disable();
+    }
+
+    isEditVisible(fieldName: string): boolean {
+        return !this.isEdit;
+    }
+
+    isSaveVisible(fieldName: string): boolean {
+        return this.isEdit && this.fieldToUpdate === fieldName;
     }
 
     onSubmit(): void {
