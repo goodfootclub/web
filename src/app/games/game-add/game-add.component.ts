@@ -134,7 +134,7 @@ export class GameAddComponent {
             return dt;
         });
         const selectedTeam = this.form.value['teams']['teamName'] as Team;
-        const teamsArray = selectedTeam.id === -1 ? [] : [selectedTeam];
+        const teamsArray = selectedTeam.id == null ? [] : [selectedTeam.id];
         const selectedLocation: Location =
             this.form.value['location'].name instanceof Location ?
                 this.form.value['location'].name :
@@ -142,7 +142,7 @@ export class GameAddComponent {
         let data = {
             location: selectedLocation,
             teams: teamsArray,
-            datetime: dates,
+            datetimes: dates,
         };
 
         this.games.create(data).subscribe(newGame => {

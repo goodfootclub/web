@@ -21,7 +21,7 @@ export class EventsService {
     ) { }
 
     all(): Observable<GameEvent[]> {
-        return this.http.get('/api/games/?details').map(data => {
+        return this.http.get('/api/games/').map(data => {
             return data.json();
         }).catch((err, caught) => {
             this.health.criticalError(JSON.stringify(err, null, 4));
@@ -30,7 +30,7 @@ export class EventsService {
     }
 
     get(id: number): Observable<GameEvent> {
-        return this.http.get(`/api/games/${id}/?details`).map(res => {
+        return this.http.get(`/api/games/${id}/`).map(res => {
             let data = res.json();
 
             data.playersById = {};

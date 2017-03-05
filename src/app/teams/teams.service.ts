@@ -36,7 +36,7 @@ export class TeamsService {
     }
 
     get(id: number): Observable<Team> {
-        return this.http.get(`/api/teams/${id}/?details`).map(res => {
+        return this.http.get(`/api/teams/${id}/`).map(res => {
             return new Team(res.json());
         }).catch((err, caught) => {
             this.health.criticalError(JSON.stringify(err, null, 4));

@@ -36,7 +36,7 @@ export class GamesService {
     }
 
     get(id: number): Observable<GameEvent> {
-        return this.http.get(`/api/games/${id}/?details`).map(res => {
+        return this.http.get(`/api/games/${id}/`).map(res => {
             return new GameEvent(res.json());
         }).catch((err, caught) => {
             this.health.criticalError(JSON.stringify(err, null, 4));
