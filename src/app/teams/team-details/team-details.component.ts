@@ -68,10 +68,9 @@ export class TeamDetailsComponent implements OnInit {
                     }
                 }
             });
-            /* TODO for testing:
-            this.games.all().subscribe(games => {
+            this.games.getByTeam(id).subscribe(games => {
                 this.scheduledGames = games;
-            }); */
+            });
         });
     }
 

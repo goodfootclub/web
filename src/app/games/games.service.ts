@@ -35,6 +35,15 @@ export class GamesService {
             });
     }
 
+    getByTeam(teamId: number): Observable<GameEvent[]> {
+        return this.http.get(`/api/teams/${teamId}/games/`)
+            .map(res => res.json().results.map(data => new GameEvent(data)))
+            .catch((err, caught) => {
+                this.health.criticalError(JSON.stringify(err, null, 4));
+                throw err;
+            });
+    }
+
     get(id: number): Observable<GameEvent> {
         return this.http.get(`/api/games/${id}/`).map(res => {
             return new GameEvent(res.json());
