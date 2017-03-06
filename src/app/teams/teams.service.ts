@@ -9,8 +9,8 @@ import {
 
 import { Observable } from 'rxjs/Observable';
 
-import { Team, PlayerRole } from 'app/types';
-import { HealthService } from 'app/error-handling';
+import { Team, PlayerRole, GameEvent } from 'app/types';
+import { HealthService } from '../error-handling/health.service';
 
 
 @Injectable()
@@ -29,6 +29,15 @@ export class TeamsService {
         if (search) { params.set('search', search); }
         return this.http.get('/api/teams/', { search: params })
             .map(res => res.json().results.map(data => new Team(data)))
+            .catch((err, caught) => {
+                this.health.criticalError(JSON.stringify(err, null, 4));
+                throw err;
+            });
+    }
+
+    getGames(teamId: number): Observable<GameEvent[]> {
+        return this.http.get(`/api/teams/${teamId}/games/`)
+            .map(res => res.json().results.map(data => new GameEvent(data)))
             .catch((err, caught) => {
                 this.health.criticalError(JSON.stringify(err, null, 4));
                 throw err;

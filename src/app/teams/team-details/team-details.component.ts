@@ -5,8 +5,6 @@ import { TitleService } from 'app/title.service';
 import { ProfileService } from 'app/profile';
 import { Team, PlayerRole, GameEvent } from 'app/types';
 import { TeamsService } from '../teams.service';
-import { GamesService } from '../../games/games.service';
-
 
 @Component({
     selector: 'app-team-details',
@@ -41,7 +39,6 @@ export class TeamDetailsComponent implements OnInit {
     constructor(
         public route: ActivatedRoute,
         public teams: TeamsService,
-        public games: GamesService,
         public title: TitleService,
         public profile: ProfileService,
     ) {
@@ -68,7 +65,7 @@ export class TeamDetailsComponent implements OnInit {
                     }
                 }
             });
-            this.games.getByTeam(id).subscribe(games => {
+            this.teams.getGames(id).subscribe(games => {
                 this.scheduledGames = games;
             });
         });
@@ -76,8 +73,8 @@ export class TeamDetailsComponent implements OnInit {
 
     askToJoin() {
         this.teams.askToJoin(
-            this.team.id, this.profile.currentUser.id
-        ).subscribe(console.log);
+            this.team.id, this.profile.currentUser.id)
+            .subscribe(console.log);
     }
 
     selectedIndexChange(index) {
