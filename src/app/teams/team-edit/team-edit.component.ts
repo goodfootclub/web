@@ -4,7 +4,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { TitleService } from 'app/title.service';
 import { TeamsService, playerRoles } from '../teams.service';
-import { Team, Player } from '../../types';
+import { Team, Player, PlayerRole } from '../../types';
+import { ProfileService } from '../../profile/profile.service';
 
 
 @Component({
@@ -16,13 +17,11 @@ export class TeamEditComponent implements OnInit {
 
     ROLES = playerRoles;
     form: FormGroup;
-    isPosting = false;
     team: Team;
     players: Player[] = [];
-    applicants: Player[] = [];
 
-    isEdit = false;
-    fieldToUpdate: string = null;
+    isPlayer = false;
+    isManager = false;
 
     constructor(
         public teams: TeamsService,
@@ -30,13 +29,13 @@ export class TeamEditComponent implements OnInit {
         public router: Router,
         public route: ActivatedRoute,
         public title: TitleService,
+        public profile: ProfileService,
     ) {
         title.setTitle('Edit a team');
     }
 
     ngOnInit(): void {
         this.form = this.createForm();
-        this.form.disable();
         this.route.params.forEach((params: Params) => {
             let id = +params['id'];
             this.teams.get(id).subscribe(team => {
@@ -47,10 +46,6 @@ export class TeamEditComponent implements OnInit {
 
     createForm(): FormGroup {
         return this.formBuilder.group({
-            name: ['', Validators.compose([
-                Validators.required,
-                Validators.maxLength(30),
-            ])],
             info: ['', Validators.maxLength(1000)],
         });
     }
@@ -61,30 +56,22 @@ export class TeamEditComponent implements OnInit {
         this.form.patchValue(team);
         // players list:
         this.players = team.players;
+        for (let player of team.players) {
+            if (player.id === this.profile.currentUser.id) {
+                this.isPlayer = player.role >= PlayerRole.Substitute;
+                break;
+            }
+        }
+        for (let manager of team.managers) {
+            if (manager.id === this.profile.currentUser.id) {
+                this.isManager = true;
+                break;
+            }
+        }
     }
 
-    editField(fieldName: string): void {
-        this.isEdit = true;
-        this.fieldToUpdate = fieldName;
-        this.form.controls[fieldName].enable();
-    }
-
-    saveField(fieldName: string): void {
-        const newValue = this.form.controls[fieldName].value;
-        this.isEdit = false;
-        this.fieldToUpdate = null;
-        this.form.controls[fieldName].disable();
-    }
-
-    isEditVisible(fieldName: string): boolean {
-        return !this.isEdit;
-    }
-
-    isSaveVisible(fieldName: string): boolean {
-        return this.isEdit && this.fieldToUpdate === fieldName;
-    }
-
-    onSubmit(): void {
-        // TODO handle submit
+    saveInfo(): void {
+        const newValue = this.form.controls['info'].value;
+        // TODO post new info
     }
 }
