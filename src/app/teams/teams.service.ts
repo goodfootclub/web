@@ -9,7 +9,7 @@ import {
 
 import { Observable } from 'rxjs/Observable';
 
-import { Team } from 'app/types';
+import { Team, PlayerRole } from 'app/types';
 import { HealthService } from 'app/error-handling';
 
 
@@ -36,7 +36,7 @@ export class TeamsService {
     }
 
     get(id: number): Observable<Team> {
-        return this.http.get(`/api/teams/${id}/?details`).map(res => {
+        return this.http.get(`/api/teams/${id}/`).map(res => {
             return new Team(res.json());
         }).catch((err, caught) => {
             this.health.criticalError(JSON.stringify(err, null, 4));
@@ -56,6 +56,22 @@ export class TeamsService {
         return this.http.request(request).map(res => {
             return new Team(res.json());
         }).catch((err, caught) => {
+            this.health.criticalError(JSON.stringify(err, null, 4));
+            throw err;
+        });
+    }
+
+    askToJoin(teamId: number, playerId: number): Observable<any> {
+        // FIXME: dirty example needs more work @bsko
+        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
+        let request = new Request({
+            method: RequestMethod.Post,
+            url: `/api/teams/${teamId}/players/`,
+            body: { id: playerId, role: PlayerRole.RequestedToJoin },
+        });
+        csrf.configureRequest(request);
+
+        return this.http.request(request).catch((err, caught) => {
             this.health.criticalError(JSON.stringify(err, null, 4));
             throw err;
         });

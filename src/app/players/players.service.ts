@@ -9,7 +9,7 @@ import {
 
 import { Observable } from 'rxjs/Observable';
 
-import { User } from 'app/types';
+import { User, PlayerRole } from 'app/types';
 import { HealthService } from 'app/error-handling';
 
 
@@ -48,7 +48,7 @@ export class PlayersService {
         let request = new Request({
             method: RequestMethod.Post,
             url: `/api/teams/${teamId}/players/`,
-            body: { id: playerId, role: -1 },
+            body: { id: playerId, role: PlayerRole.Invited },
         });
         csrf.configureRequest(request);
 
