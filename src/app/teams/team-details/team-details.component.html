@@ -68,7 +68,7 @@
 
     <md-tab label="Schedule">
         <div class="header-content">
-            <div class="header-text"><p>{{ team?.name }}</p><p class="team-info">Games schedule:</p></div>
+            <div class="header-text"><p>{{ team?.name }}</p><p class="team-info">Games schedule</p></div>
             <button md-mini-fab *ngIf="isManager" [routerLink]="['/games/add', {targetTeam: team.id}]"><md-icon>add</md-icon></button>
         </div>
         <hr/>
