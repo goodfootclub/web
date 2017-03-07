@@ -28,8 +28,9 @@ export class TeamDetailsComponent implements OnInit {
         '2': 'Chat',
     };
 
+    teamId: number;
     team: Team;
-    scheduledGames: GameEvent[] = [];
+    scheduledGames: GameEvent[];
     isManager = false;
     isPlayer = false;
     canAskToJoin = true;
@@ -47,8 +48,8 @@ export class TeamDetailsComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
-            let id = +params['id'];
-            this.teams.get(id).subscribe(team => {
+            this.teamId = +params['id'];
+            this.teams.get(this.teamId).subscribe(team => {
                 this.team = team;
                 this.title.setTitle(team.name);
                 for (let player of team.players) {
@@ -65,9 +66,6 @@ export class TeamDetailsComponent implements OnInit {
                     }
                 }
             });
-            this.teams.getGames(id).subscribe(games => {
-                this.scheduledGames = games;
-            });
         });
     }
 
@@ -79,5 +77,10 @@ export class TeamDetailsComponent implements OnInit {
 
     selectedIndexChange(index) {
         this.selectedTab = this.TABS[+index];
+        if (this.selectedTab === 'Schedule' && !this.scheduledGames) {
+            this.teams.getGames(this.teamId).subscribe(games => {
+                this.scheduledGames = games;
+            });
+        }
     }
 }
