@@ -3,10 +3,17 @@ $player-pic-dia = 50px
 $sub-color = #aaa
 $header-font-size = 20px
 $subheader-font-size = 16px
+$control-font-size = 14px
 $card-width = 640px;
 
 .edit-input-line
     display flex
+
+    .edit-input-button
+        height 40px
+
+    md-radio-group
+        width 100%
 
 .mat-card
     box-shadow none
@@ -20,9 +27,6 @@ md-card
         font-size: $header-font-size
         margin: 5px 0 0
 
-    .info
-        color: $sub-color
-
 .inline-roaster-header
     display inline-block
     width 100%
@@ -33,6 +37,13 @@ md-card
     button
         float right
 
+md-radio-group
+    margin-left auto
+
+    md-radio-button
+        font-size $control-font-size
+        margin-right 5px
+
 .player
     display: flex
     height: $card-height
@@ -40,9 +51,16 @@ md-card
     padding: 0
     margin: 0
 
+    .clickable-player
+        display flex
+        cursor pointer
+
     &:hover
         text-decoration: none
         background: #fafafa
+
+    .mat-list-item-content
+        width: 100%
 
     .player-info
         padding: 0 12px

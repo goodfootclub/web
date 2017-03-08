@@ -70,8 +70,8 @@ export class TeamDetailsComponent implements OnInit {
 
     askToJoin() {
         this.teams.askToJoin(
-            this.team.id, this.profile.currentUser.id
-        ).subscribe(console.log);
+            this.team.id, this.profile.currentUser.id)
+            .subscribe(console.log);
     }
 
     selectedIndexChange(index) {

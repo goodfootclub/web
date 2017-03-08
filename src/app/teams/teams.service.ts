@@ -44,11 +44,13 @@ export class TeamsService {
         });
     }
 
-    create(data): Observable<Team> {
+    createOrUpdate(data, method: RequestMethod): Observable<Team> {
         let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
+        const url = method === RequestMethod.Put ?
+            `/api/teams/${data.id}` : `/api/teams`;
         let request = new Request({
-            method: RequestMethod.Post,
-            url: `/api/teams/`,
+            method: method,
+            url: url,
             body: data,
         });
         csrf.configureRequest(request);
@@ -59,6 +61,14 @@ export class TeamsService {
             this.health.criticalError(JSON.stringify(err, null, 4));
             throw err;
         });
+    }
+
+    create(data): Observable<Team> {
+        return this.createOrUpdate(data, RequestMethod.Post);
+    }
+
+    update(data): Observable<Team> {
+        return this.createOrUpdate(data, RequestMethod.Put);
     }
 
     askToJoin(teamId: number, playerId: number): Observable<any> {
