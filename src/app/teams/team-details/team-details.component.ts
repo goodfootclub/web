@@ -5,8 +5,6 @@ import { TitleService } from 'app/title.service';
 import { ProfileService } from 'app/profile';
 import { Team, PlayerRole, GameEvent } from 'app/types';
 import { TeamsService, playerRoles } from '../teams.service';
-import { GamesService } from '../../games/games.service';
-
 
 @Component({
     selector: 'app-team-details',
@@ -20,9 +18,11 @@ export class TeamDetailsComponent implements OnInit {
         '1': 'Schedule',
         '2': 'Chat',
     };
+
     ROLES = playerRoles;
+    teamId: number;
     team: Team;
-    scheduledGames: GameEvent[] = [];
+    scheduledGames: GameEvent[];
     isManager = false;
     isPlayer = false;
     canAskToJoin = true;
@@ -32,7 +32,6 @@ export class TeamDetailsComponent implements OnInit {
     constructor(
         public route: ActivatedRoute,
         public teams: TeamsService,
-        public games: GamesService,
         public title: TitleService,
         public profile: ProfileService,
     ) {
@@ -41,8 +40,8 @@ export class TeamDetailsComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
-            let id = +params['id'];
-            this.teams.get(id).subscribe(team => {
+            this.teamId = +params['id'];
+            this.teams.get(this.teamId).subscribe(team => {
                 this.team = team;
                 this.title.setTitle(team.name);
                 for (let player of team.players) {
@@ -59,10 +58,6 @@ export class TeamDetailsComponent implements OnInit {
                     }
                 }
             });
-            /* TODO for testing:
-            this.games.all().subscribe(games => {
-                this.scheduledGames = games;
-            }); */
         });
     }
 
@@ -74,5 +69,10 @@ export class TeamDetailsComponent implements OnInit {
 
     selectedIndexChange(index) {
         this.selectedTab = this.TABS[+index];
+        if (this.selectedTab === 'Schedule' && !this.scheduledGames) {
+            this.teams.getGames(this.teamId).subscribe(games => {
+                this.scheduledGames = games;
+            });
+        }
     }
 }
