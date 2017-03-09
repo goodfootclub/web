@@ -96,7 +96,7 @@ export class TeamsService {
         let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
         let request = new Request({
             method: RequestMethod.Delete,
-            url: `/api/teams/${teamId}/players/${playerId}`
+            url: `/api/teams/${teamId}/players/${playerId}`,
         });
         csrf.configureRequest(request);
         return this.http.request(request);
