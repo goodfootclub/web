@@ -25,7 +25,7 @@ export class TeamEditComponent implements OnInit {
 
     sourceTeam = {
         info: '',
-        type: null,
+        type: 2,
     };
 
     constructor(
