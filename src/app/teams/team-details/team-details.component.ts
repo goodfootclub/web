@@ -58,8 +58,6 @@ export class TeamDetailsComponent implements OnInit {
                         break;
                     }
                 }
-                // TODO for testing:
-                this.isManager = true;
             });
             /* TODO for testing:
             this.games.all().subscribe(games => {

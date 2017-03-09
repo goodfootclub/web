@@ -71,13 +71,20 @@ export class TeamEditComponent implements OnInit {
     updatePlayerRole(player: Player, role: number) {
         if (player.role !== role) {
             player.role = role;
+            this.teams.updateTeamPlayer(this.team.id, player.roleId, player)
+                .subscribe((result) => {
+                    Object.assign(player, result);
+                });
         }
     }
 
     exclude(player: Player): void {
         const index = this.team.players.indexOf(player);
-        this.team.players.splice(index, 1);
-        // TODO fix  it ! this.updateTeam();
+        this.teams.excludeTeamPlayer(this.team.id, player.roleId)
+            .subscribe((result) => {
+                console.log(result);
+                this.team.players.splice(index, 1);
+            });
     }
 
     save(): void {

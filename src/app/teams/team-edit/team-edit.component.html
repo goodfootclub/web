@@ -68,11 +68,20 @@
                         </div>
                     </div>
                 </div>
-                <md-radio-group value="{{player.role}}">
+                <md-radio-group value="{{player.role}}" *ngIf="player.role > 0">
                     <md-radio-button *ngFor="let role of roasterRoles" (click)="updatePlayerRole(player, role)" value="{{role}}">{{ROLES[role]}}</md-radio-button>
                 </md-radio-group>
-                <button md-button (click)="exclude()">
+                <button md-button (click)="exclude(player)" *ngIf="player.role >= 0">
                     Exclude
+                </button>
+                <button class="flex-right" md-button (click)="updatePlayerRole(player, 1)" *ngIf="player.role == -2">
+                    Accept
+                </button>
+                <button md-button (click)="exclude(player)" *ngIf="player.role == -2">
+                    Decline
+                </button>
+                <button class="flex-right" md-button (click)="exclude(player)" *ngIf="player.role == -1">
+                    Cancel
                 </button>
             </a>
         </md-list>

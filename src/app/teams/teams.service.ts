@@ -9,7 +9,7 @@ import {
 
 import { Observable } from 'rxjs/Observable';
 
-import { Team, PlayerRole } from 'app/types';
+import { Team, PlayerRole, Player } from 'app/types';
 import { HealthService } from 'app/error-handling';
 
 
@@ -69,6 +69,28 @@ export class TeamsService {
 
     update(data): Observable<Team> {
         return this.createOrUpdate(data, RequestMethod.Put);
+    }
+
+    updateTeamPlayer(teamId: number,
+                     playerId: number, data): Observable<Player> {
+        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
+        let request = new Request({
+            method: RequestMethod.Put,
+            url: `/api/teams/${teamId}/players/${playerId}`,
+            body: data,
+        });
+        csrf.configureRequest(request);
+        return this.http.request(request).map(res => new Player(res.json()));
+    }
+
+    excludeTeamPlayer(teamId: number, playerId: number): Observable<any> {
+        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
+        let request = new Request({
+            method: RequestMethod.Delete,
+            url: `/api/teams/${teamId}/players/${playerId}`
+        });
+        csrf.configureRequest(request);
+        return this.http.request(request);
     }
 
     askToJoin(teamId: number, playerId: number): Observable<any> {
