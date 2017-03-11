@@ -1,0 +1,110 @@
+<md-toolbar>
+    <app-back-button
+        #backButton
+    ></app-back-button>
+    <app-title></app-title>
+    <div class="toolbar-icon-spacer"></div>
+</md-toolbar>
+
+<form [formGroup]="form">
+    <md-card>
+        <div class="edit-input-line">
+            <md-input-container
+                [dividerColor]="form.controls.info.valid ? 'primary' : 'warn'"
+                #infoContainer>
+                <textarea mdInput
+                          #info
+                          [style.width]="'100%'"
+                          type='text'
+                          formControlName="info"
+                          placeholder="Enter team info">
+                    <md-hint *ngIf="infoContainer._mdInputChild.focused">
+                        Describe your team for potential players
+                    </md-hint>
+                    <md-hint *ngIf="infoContainer._mdInputChild.focused" align="end">
+                        {{ info.value.length }} / 1000
+                    </md-hint>
+                </textarea>
+            </md-input-container>
+            <div class="edit-input-button">
+                <button md-icon-button (click)="save()"
+                        *ngIf="form.controls.info.value != sourceTeam.info">
+                    <md-icon>save</md-icon>
+                </button>
+                <div class="mat-icon-button"
+                     *ngIf="form.controls.info.value == sourceTeam.info"></div>
+            </div>
+        </div>
+        <div class="edit-input-line">
+            <md-radio-group formControlName="type">
+                <md-radio-button value="2">Men</md-radio-button>
+                <md-radio-button value="1">Women</md-radio-button>
+                <md-radio-button value="0">Coed</md-radio-button>
+            </md-radio-group>
+            <div class="edit-input-button">
+                <button md-icon-button (click)="save()"
+                        *ngIf="form.controls.type.value != sourceTeam.type">
+                    <md-icon>save</md-icon>
+                </button>
+                <div class="mat-icon-button"
+                     *ngIf="form.controls.type.value == sourceTeam.type"></div>
+            </div>
+        </div>
+    </md-card>
+</form>
+<form [formGroup]="roaster">
+    <md-card>
+        <div class="header-content">
+            <div class="header-text">
+                <h1>Roster</h1>
+                <button
+                    md-mini-fab
+                    *ngIf="isPlayer || isManager"
+                    [routerLink]="['/players', {targetTeam: team.id}]">
+                    <md-icon>add</md-icon>
+                </button>
+            </div>
+        </div>
+        <hr>
+        <md-list formArrayName="players">
+            <a md-list-item class="player"
+                *ngFor="let player of team?.players; let i=index" [formGroupName]="i">
+                <div class="clickable-player" [routerLink]="['/players', player.id]">
+                    <img [src]="player.img" alt="" class="player-pic">
+                    <div class="player-info">
+                        <h1> {{ player.firstName }} {{ player.lastName }} </h1>
+                        <div class="role">
+                            {{ ROLES[player.role] }}
+                        </div>
+                    </div>
+                </div>
+                <md-select *ngIf="player.role > 0" formControlName="role"
+                           placeholder="Select role" class="flex-right"
+                           (change)="updatePlayerRole(player, $event)">
+                    <md-option
+                        *ngFor="let role of roasterRoles"
+                        value="{{+role}}">{{ROLES[role]}}</md-option>
+                </md-select>
+                <button md-button
+                        (click)="exclude(player)"
+                        *ngIf="player.role == 0"
+                        class="flex-right">
+                    Exclude
+                </button>
+                <button class="flex-right"
+                        md-button
+                        (click)="updatePlayerRole(player, 1)"
+                        *ngIf="player.role == -2">
+                    Accept
+                </button>
+                <button md-button (click)="exclude(player)" *ngIf="player.role == -2">
+                    Decline
+                </button>
+                <button class="flex-right"
+                        md-button (click)="exclude(player)" *ngIf="player.role == -1">
+                    Cancel
+                </button>
+            </a>
+        </md-list>
+    </md-card>
+</form>

@@ -9,8 +9,8 @@ import {
 
 import { Observable } from 'rxjs/Observable';
 
-import { Team, PlayerRole, GameEvent } from 'app/types';
-import { HealthService } from '../error-handling/health.service';
+import { Team, PlayerRole, Player, GameEvent } from 'app/types';
+import { HealthService } from 'app/error-handling';
 
 
 @Injectable()
@@ -53,11 +53,13 @@ export class TeamsService {
         });
     }
 
-    create(data): Observable<Team> {
+    createOrUpdate(data, method: RequestMethod): Observable<Team> {
         let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
+        const url = method === RequestMethod.Put ?
+            `/api/teams/${data.id}` : `/api/teams`;
         let request = new Request({
-            method: RequestMethod.Post,
-            url: `/api/teams/`,
+            method: method,
+            url: url,
             body: data,
         });
         csrf.configureRequest(request);
@@ -68,6 +70,36 @@ export class TeamsService {
             this.health.criticalError(JSON.stringify(err, null, 4));
             throw err;
         });
+    }
+
+    create(data): Observable<Team> {
+        return this.createOrUpdate(data, RequestMethod.Post);
+    }
+
+    update(data): Observable<Team> {
+        return this.createOrUpdate(data, RequestMethod.Put);
+    }
+
+    updateTeamPlayer(teamId: number,
+                     playerId: number, data): Observable<Player> {
+        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
+        let request = new Request({
+            method: RequestMethod.Put,
+            url: `/api/teams/${teamId}/players/${playerId}`,
+            body: data,
+        });
+        csrf.configureRequest(request);
+        return this.http.request(request).map(res => new Player(res.json()));
+    }
+
+    excludeTeamPlayer(teamId: number, playerId: number): Observable<any> {
+        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
+        let request = new Request({
+            method: RequestMethod.Delete,
+            url: `/api/teams/${teamId}/players/${playerId}`,
+        });
+        csrf.configureRequest(request);
+        return this.http.request(request);
     }
 
     askToJoin(teamId: number, playerId: number): Observable<any> {
@@ -86,3 +118,12 @@ export class TeamsService {
         });
     }
 }
+
+export const playerRoles = {
+    [3]: 'Captain',
+    [2]: 'Player',
+    [1]: 'Substitute',
+    [0]: 'Inactive',
+    [-1]: 'Invited',
+    [-2]: 'Asked to join',
+};
