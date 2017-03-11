@@ -10,16 +10,16 @@
     </button>
 </md-toolbar>
 
-<div class="container">
-    <div class='row'>
 
-        <div class="col-md-2 col-sm-12">
+<md-card>
+    <div class="data-row">
+        <div>
             <strong>I'm</strong>
         </div>
-        <div *ngIf="!user" class="col-md-10 col-sm-12">
+        <div *ngIf="!user">
             <a href="javascript:void(0)" (click)="join()">Able to join!</a>
         </div>
-        <div *ngIf="user" class="col-md-10 col-sm-12">
+        <div *ngIf="user">
             <div class="btn-group" data-toggle="buttons">
                 <label
                     *ngFor="let status of [2, 0, 1];"
@@ -35,34 +35,71 @@
             </div>
         </div>
     </div>
-    <div class='row'>
-        <div class="col-md-2 col-sm-12">
+    <div class="data-row">
+        <div>
             <strong>When?</strong>
         </div>
-        <div *ngIf="!editMode" class="col-md-10 col-sm-12">
+        <div *ngIf="!editMode">
             {{ game?.datetime | date: 'shortTime' }}
             {{ game?.datetime | date: 'fullDate' }}
         </div>
-        <div *ngIf="editMode" class="col-md-10 col-sm-12">
+        <div *ngIf="editMode">
             ---
         </div>
     </div>
-
-    <div class='row'>
-        <div class="col-md-2 col-sm-12">
+    <div class="data-row">
+        <div>
             <strong>Where?</strong>
         </div>
-        <div class="col-md-10 col-sm-12">
+        <div>
             {{ game?.location.name }} ({{ game?.location.address }})
         </div>
     </div>
-
-
-    <div class='row'>
-        <div class="col-md-12">
-            <h2>Players</h2>
+</md-card>
+<md-card>
+    <div class="header-content">
+        <div class="header-text">
+            <p>Players</p>
         </div>
     </div>
+    <hr/>
+    <md-list>
+        <a
+            md-list-item
+            class="player"
+            *ngFor="let player of game?.players"
+            [routerLink]="['/players', player.id]"
+        >
+            <img [src]="player.img" alt="" class="player-pic">
+            <div class="player-info">
+                <h1> {{ player.firstName }} {{ player.lastName }} </h1>
+            </div>
+        </a>
+    </md-list>
+</md-card>
+<!--md-card>
+    <div class="header-content">
+        <div class="header-text">
+            <h1>Managers</h1>
+        </div>
+    </div>
+    <hr>
+    <md-list>
+        <a
+            md-list-item
+            class="player"
+            *ngFor="let player of game?.players"
+            [routerLink]="['/players', player.id]"
+        >
+            <img [src]="player.img" alt="" class="player-pic">
+            <div class="player-info">
+                <h1> {{ player.firstName }} {{ player.lastName }} </h1>
+            </div>
+        </a>
+    </md-list>
+</md-card-->
+
+<!--div class="container">
 
     <div class='row'><div class="col-md-12">
         <ul style="padding: 0; margin: 0; list-style: none;">
@@ -76,4 +113,4 @@
         </ul>
     </div></div>
 
-</div>
+</div-->

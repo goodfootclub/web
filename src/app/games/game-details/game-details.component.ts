@@ -9,7 +9,7 @@ import { GameEvent, RsvpStatus, Player } from '../../types';
 @Component({
     selector: 'app-game-details',
     templateUrl: './game-details.component.html',
-    styleUrls: [],
+    styleUrls: ['../games.component.styl', './game-details.component.styl'],
 })
 export class GameDetailsComponent implements OnInit {
 
