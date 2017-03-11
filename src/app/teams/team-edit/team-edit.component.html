@@ -9,7 +9,9 @@
 <form [formGroup]="form">
     <md-card>
         <div class="edit-input-line">
-            <md-input-container [dividerColor]="form.controls.info.valid ? 'primary' : 'warn'" #infoContainer>
+            <md-input-container
+                [dividerColor]="form.controls.info.valid ? 'primary' : 'warn'"
+                #infoContainer>
                 <textarea mdInput
                           #info
                           [style.width]="'100%'"
@@ -25,10 +27,12 @@
                 </textarea>
             </md-input-container>
             <div class="edit-input-button">
-                <button md-icon-button (click)="save()" *ngIf="form.controls.info.value != sourceTeam.info">
+                <button md-icon-button (click)="save()"
+                        *ngIf="form.controls.info.value != sourceTeam.info">
                     <md-icon>save</md-icon>
                 </button>
-                <div class="mat-icon-button" *ngIf="form.controls.info.value == sourceTeam.info"></div>
+                <div class="mat-icon-button"
+                     *ngIf="form.controls.info.value == sourceTeam.info"></div>
             </div>
         </div>
         <div class="edit-input-line">
@@ -38,10 +42,12 @@
                 <md-radio-button value="0">Coed</md-radio-button>
             </md-radio-group>
             <div class="edit-input-button">
-                <button md-icon-button (click)="save()" *ngIf="form.controls.type.value != sourceTeam.type">
+                <button md-icon-button (click)="save()"
+                        *ngIf="form.controls.type.value != sourceTeam.type">
                     <md-icon>save</md-icon>
                 </button>
-                <div class="mat-icon-button" *ngIf="form.controls.type.value == sourceTeam.type"></div>
+                <div class="mat-icon-button"
+                     *ngIf="form.controls.type.value == sourceTeam.type"></div>
             </div>
         </div>
     </md-card>
@@ -50,7 +56,12 @@
     <md-card>
         <div class="inline-roaster-header">
             <h1>Roaster</h1>
-            <button md-mini-fab *ngIf="isPlayer || isManager" [routerLink]="['/players', {targetTeam: team.id}]"><md-icon>add</md-icon></button>
+            <button
+                md-mini-fab
+                *ngIf="isPlayer || isManager"
+                [routerLink]="['/players', {targetTeam: team.id}]">
+                <md-icon>add</md-icon>
+            </button>
         </div>
     </md-card>
     <hr/>
@@ -72,18 +83,27 @@
                 <md-select *ngIf="player.role > 0" formControlName="role"
                            placeholder="Select role" class="flex-right"
                            (change)="updatePlayerRole(player, $event)">
-                    <md-option *ngFor="let role of roasterRoles" value="{{+role}}">{{ROLES[role]}}</md-option>
+                    <md-option
+                        *ngFor="let role of roasterRoles"
+                        value="{{+role}}">{{ROLES[role]}}</md-option>
                 </md-select>
-                <button md-button (click)="exclude(player)" *ngIf="player.role == 0" class="flex-right">
+                <button md-button
+                        (click)="exclude(player)"
+                        *ngIf="player.role == 0"
+                        class="flex-right">
                     Exclude
                 </button>
-                <button class="flex-right" md-button (click)="updatePlayerRole(player, 1)" *ngIf="player.role == -2">
+                <button class="flex-right"
+                        md-button
+                        (click)="updatePlayerRole(player, 1)"
+                        *ngIf="player.role == -2">
                     Accept
                 </button>
                 <button md-button (click)="exclude(player)" *ngIf="player.role == -2">
                     Decline
                 </button>
-                <button class="flex-right" md-button (click)="exclude(player)" *ngIf="player.role == -1">
+                <button class="flex-right"
+                        md-button (click)="exclude(player)" *ngIf="player.role == -1">
                     Cancel
                 </button>
             </a>
