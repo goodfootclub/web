@@ -51,23 +51,21 @@
             </div>
         </div>
     </md-card>
-
-    <hr/>
-    <md-card>
-        <div class="inline-roaster-header">
-            <h1>Roaster</h1>
-            <button
-                md-mini-fab
-                *ngIf="isPlayer || isManager"
-                [routerLink]="['/players', {targetTeam: team.id}]">
-                <md-icon>add</md-icon>
-            </button>
-        </div>
-    </md-card>
-    <hr/>
 </form>
 <form [formGroup]="roaster">
     <md-card>
+        <div class="header-content">
+            <div class="header-text">
+                <h1>Roster</h1>
+                <button
+                    md-mini-fab
+                    *ngIf="isPlayer || isManager"
+                    [routerLink]="['/players', {targetTeam: team.id}]">
+                    <md-icon>add</md-icon>
+                </button>
+            </div>
+        </div>
+        <hr>
         <md-list formArrayName="players">
             <a md-list-item class="player"
                 *ngFor="let player of team?.players; let i=index" [formGroupName]="i">
