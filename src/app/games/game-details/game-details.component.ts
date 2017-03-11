@@ -14,7 +14,6 @@ import { GameEvent, RsvpStatus, Player } from '../../types';
 export class GameDetailsComponent implements OnInit {
 
     game: GameEvent;
-    editMode = false;
     user: Player;
     rsvpMessages = {
         2: 'In',

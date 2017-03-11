@@ -39,12 +39,9 @@
         <div>
             <strong>When?</strong>
         </div>
-        <div *ngIf="!editMode">
+        <div>
             {{ game?.datetime | date: 'shortTime' }}
             {{ game?.datetime | date: 'fullDate' }}
-        </div>
-        <div *ngIf="editMode">
-            ---
         </div>
     </div>
     <div class="data-row">
@@ -77,40 +74,3 @@
         </a>
     </md-list>
 </md-card>
-<!--md-card>
-    <div class="header-content">
-        <div class="header-text">
-            <h1>Managers</h1>
-        </div>
-    </div>
-    <hr>
-    <md-list>
-        <a
-            md-list-item
-            class="player"
-            *ngFor="let player of game?.players"
-            [routerLink]="['/players', player.id]"
-        >
-            <img [src]="player.img" alt="" class="player-pic">
-            <div class="player-info">
-                <h1> {{ player.firstName }} {{ player.lastName }} </h1>
-            </div>
-        </a>
-    </md-list>
-</md-card-->
-
-<!--div class="container">
-
-    <div class='row'><div class="col-md-12">
-        <ul style="padding: 0; margin: 0; list-style: none;">
-            <li *ngFor="let player of game?.players">
-                <a [routerLink]="['/players', player.id]">
-                    {{player.firstName}} {{player.lastName}}
-                    <span *ngIf="player.id === user?.id">(You)</span>
-                </a>
-                ({{rsvpMessages[player.rsvp]}})
-            </li>
-        </ul>
-    </div></div>
-
-</div-->
