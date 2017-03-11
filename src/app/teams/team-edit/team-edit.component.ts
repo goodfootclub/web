@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { TitleService } from 'app/title.service';
@@ -18,6 +18,7 @@ export class TeamEditComponent implements OnInit {
     ROLES = playerRoles;
     roasterRoles = [];
     form: FormGroup;
+    roaster: FormGroup;
     team: Team;
 
     isPlayer = false;
@@ -37,11 +38,12 @@ export class TeamEditComponent implements OnInit {
         public profile: ProfileService,
     ) {
         title.setTitle('Edit a team');
-        this.roasterRoles = Object.keys(this.ROLES).filter((key) => +key > 0);
+        this.roasterRoles = Object.keys(this.ROLES).filter((key) => +key >= 0);
     }
 
     ngOnInit(): void {
         this.form = this.createForm();
+        this.roaster = this.createRoasterForm();
         this.route.params.forEach((params: Params) => {
             let id = +params['id'];
             this.teams.get(id).subscribe(team => this.initTeam(team));
@@ -55,11 +57,22 @@ export class TeamEditComponent implements OnInit {
         });
     }
 
+    createRoasterForm(): FormGroup {
+        return this.formBuilder.group({
+            players: this.formBuilder.array([]),
+        });
+    }
+
     initTeam(team: Team): void {
         this.title.setTitle(team.name);
         this.team = team;
         this.sourceTeam = { info: team.info, type: team.type };
         this.form.patchValue(team);
+        const control = <FormArray>this.roaster.controls['players'];
+        team.players.forEach((player) => {
+            control.push(
+                this.formBuilder.group({ role: [player.role.toString()] }));
+        });
         // players list:
         this.isPlayer = !!team.players.find(
             (player) => player.id === this.profile.currentUser.id
@@ -68,7 +81,8 @@ export class TeamEditComponent implements OnInit {
             (manager) => manager.id === this.profile.currentUser.id);
     }
 
-    updatePlayerRole(player: Player, role: number) {
+    updatePlayerRole(player: Player, event: any) {
+        const role = +event.value;
         if (player.role !== role) {
             player.role = role;
             this.teams.updateTeamPlayer(this.team.id, player.roleId, player)
@@ -82,7 +96,6 @@ export class TeamEditComponent implements OnInit {
         const index = this.team.players.indexOf(player);
         this.teams.excludeTeamPlayer(this.team.id, player.roleId)
             .subscribe((result) => {
-                console.log(result);
                 this.team.players.splice(index, 1);
             });
     }
