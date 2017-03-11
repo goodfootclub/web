@@ -16,7 +16,7 @@ const ROUTES: Routes = [{
 }, {
     path: 'add', component: TeamAddComponent,
 }, {
-    path: 'edit/:id', component: TeamEditComponent,
+    path: ':id/edit', component: TeamEditComponent,
 }, {
     path: ':id', component: TeamDetailsComponent,
 }];
