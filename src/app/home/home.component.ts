@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { ProfileService } from 'app/profile';
-import { User } from 'app/types';
+import { User, GameEvent } from 'app/types';
+import { Observable } from 'rxjs/Observable';
 
 
 @Component({
@@ -9,13 +10,38 @@ import { User } from 'app/types';
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.styl'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+
+    get limit(): number { return 50; };
 
     user: User;
+    games: GameEvent[] = [];
 
-    constructor(profile: ProfileService) {
-        profile.getCurrentUser().subscribe(user => {
+    isLoading = true;
+    canLoadMore = true;
+
+    constructor(private profile: ProfileService) {}
+
+    ngOnInit(): void {
+        this.profile.getCurrentUser().subscribe(user => {
             this.user = user;
         });
+        this.loadGames().subscribe((games) => {
+            this.games = games;
+            this.canLoadMore = games.length === this.limit;
+            this.isLoading = false;
+        });
+    }
+    loadMore() {
+        this.isLoading = true;
+        this.loadGames(this.games.length)
+            .subscribe(games => {
+                this.games = this.games.concat(games);
+                this.canLoadMore = games.length === this.limit;
+                this.isLoading = false;
+            });
+    }
+    loadGames(offset?: number): Observable<GameEvent[]> {
+        return this.profile.getCurrentUserGames(this.limit, offset);
     }
 }

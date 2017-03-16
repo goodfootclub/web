@@ -8,8 +8,7 @@
     <md-tab label="Games">
 
         <md-card
-            class="game-card"
-            *ngFor="let game of user.games"
+            *ngFor="let game of games"
             [routerLink]="['/games', game.id]"
         >
             <h1>{{ game.name }}</h1>
@@ -27,6 +26,17 @@
                 </span>
             </div>
         </md-card>
+
+        <div class="load-more-container" *ngIf="canLoadMore">
+            <md-card class="clickable" *ngIf="!isLoading" (click)="loadMore()">
+                <div class="load-more">
+                    <span>Load more</span>
+                </div>
+            </md-card>
+            <div class="load-more" *ngIf="isLoading">
+                <md-spinner></md-spinner>
+            </div>
+        </div>
     </md-tab>
     <md-tab label="Teams">
         <md-card

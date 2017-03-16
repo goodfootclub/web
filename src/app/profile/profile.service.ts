@@ -4,15 +4,15 @@ import {
     Request,
     CookieXSRFStrategy,
     RequestMethod,
+    URLSearchParams,
 } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
+import { HealthService } from '../error-handling';
+import { User, GameEvent } from '../types';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
-
-import { HealthService } from '../error-handling';
-import { User } from '../types';
 
 
 /**
@@ -32,11 +32,9 @@ export class ProfileService {
      * Get current user data (from the server if needed)
      */
     getCurrentUser(): Observable<User> {
-
         if (this.currentUser !== undefined) {
             return Observable.of(this.currentUser);
         }
-
         return this.http.get('/api/users/me/').map(response => {
             this.currentUser = new User(response.json());
             return this.currentUser;
@@ -48,6 +46,15 @@ export class ProfileService {
             this.health.criticalError(JSON.stringify(err, null, 4));
             throw err;
         });
+    }
+
+    getCurrentUserGames(limit?: number, offset?: number):
+    Observable<GameEvent[]> {
+        const params: URLSearchParams = new URLSearchParams();
+        if (limit) { params.set('limit', limit.toString()); }
+        if (offset) { params.set('offset', offset.toString()); }
+        return this.http.get('/api/games/my/', { search: params })
+            .map(res => res.json().results.map(data => new GameEvent(data)));
     }
 
     update(data): Observable<User> {
