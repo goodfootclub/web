@@ -8,7 +8,10 @@ import { AuthService } from 'app/auth';
 @Component({
     selector: 'app-back-button',
     template: `
-        <button type="button" md-icon-button (click)="back()" [disabled]="disabled">
+        <button type="button" 
+        md-icon-button 
+        (click)="back()" 
+        [disabled]="disabled">
             <md-icon>chevron_left</md-icon>
         </button>
     `,
