@@ -8,6 +8,7 @@ import { MaterialModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { AuthComponent, AuthService } from './auth';
 import { MenuService } from './common';
+import { HttpProvider } from './common/services/app.http';
 import { ProfileService } from './profile';
 import { SidenavComponent } from './sidenav';
 import { TitleService } from './title.service';
@@ -64,6 +65,7 @@ export const ROUTES: Routes = [{
         ErrorHandlingModule,
     ],
     providers: [
+        HttpProvider,
         AuthService,
         MenuService,
         ProfileService,

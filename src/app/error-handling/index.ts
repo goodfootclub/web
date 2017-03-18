@@ -3,6 +3,7 @@ import { CommonModule } from 'app/common';
 import { CriticalErrorComponent } from './critical-error.component';
 import { FourxxErrorComponent } from './4xx-error.component';
 import { HealthService } from './health.service';
+import { HttpErrorHandler } from './http-error.service';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { HealthService } from './health.service';
     ],
     providers: [
         HealthService,
+        HttpErrorHandler,
     ],
     exports: [
         CriticalErrorComponent,
