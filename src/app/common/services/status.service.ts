@@ -4,19 +4,26 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 export class StatusService {
 
-    requestingCounter = 0;
+    private _requestingCounter = 0;
     loading = new BehaviorSubject<any>(false);
     observeLoading = this.loading.asObservable();
 
     constructor() {}
 
     startRequesting(): void {
-        this.loading.next(true);
         this.requestingCounter++;
     }
 
     stopRequesting(): void {
-        this.loading.next(false);
         this.requestingCounter--;
+    }
+
+    get requestingCounter(): number {
+        return this._requestingCounter;
+    }
+
+    set requestingCounter(value: number) {
+        this._requestingCounter = value;
+        this.loading.next(this._requestingCounter !== 0);
     }
 }
