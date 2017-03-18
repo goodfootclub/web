@@ -1,5 +1,9 @@
-<!-- <critical-error-page *ngIf="health.status == CRITICAL"></critical-error-page> -->
-
+<!-- overlay & loader -->
+<div class="cdk-overlay-container">
+    <div class="cdk-overlay-pane app-global-overlay" *ngIf="status.observeLoading | async">
+        <md-spinner class="progress-bar"></md-spinner>
+    </div>
+</div>
 <!-- <md-sidenav-layout fullscreen *ngIf="health.status != CRITICAL"> -->
 <md-sidenav-container fullscreen>
     <md-sidenav #menu> <!-- Needs to be here for the backdrop to work -->

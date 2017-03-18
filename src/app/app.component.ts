@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TitleService } from './title.service';
-// import { HealthService, HealthStatus } from './error-handling';
+import { StatusService } from './common/services/status.service';
 
 
 @Component({
@@ -11,11 +11,9 @@ import { TitleService } from './title.service';
 export class AppComponent {
     menu: any;
 
-    // CRITICAL = HealthStatus.Critical;
-
     constructor(
         public title: TitleService,
-        // public health: HealthService,
+        public status: StatusService,
     ) {
         title.setTitle('Your Games');
     }
