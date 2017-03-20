@@ -8,9 +8,9 @@ import { Http,
     RequestMethod,
     XHRBackend,
 } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
 import { StatusService } from './status.service';
-import { HttpErrorHandler } from './../../error-handling/http-error.service';
+import { HttpErrorHandler } from '../../error-handling/http-error.service';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AppHttp extends Http {

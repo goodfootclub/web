@@ -28,7 +28,10 @@ const ROUTES: Routes = [{
         ReactiveFormsModule,
         RouterModule.forChild(ROUTES),
     ],
-    providers: [TeamsService, GamesService],
+    providers: [
+        TeamsService,
+        GamesService,
+    ],
     declarations: [
         TeamAddComponent,
         TeamEditComponent,
