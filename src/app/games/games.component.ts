@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder } from '@angular/forms';
 import { GamesService } from './games.service';
 import { TitleService } from 'app/title.service';
+import { StatusService } from '../common/services/status.service';
 import { GameEvent } from 'app/types';
 import { Observable } from 'rxjs/Observable';
 
@@ -16,7 +17,6 @@ export class GamesComponent implements OnInit {
 
     get limit(): number { return 50; };
     get searchDebounceTime(): number { return 750; };
-    isLoading = true;
     canLoadMore = true;
 
     form: FormGroup;
@@ -28,6 +28,7 @@ export class GamesComponent implements OnInit {
         public _games: GamesService,
         public formBuilder: FormBuilder,
         public title: TitleService,
+        public status: StatusService,
     ) {
         title.setTitle('Find a game');
     }
@@ -45,16 +46,13 @@ export class GamesComponent implements OnInit {
         this.loadData().subscribe(games => {
             this.games = games;
             this.canLoadMore = games.length === this.limit;
-            this.isLoading = false;
         });
     }
     loadMore() {
-        this.isLoading = true;
         this.loadData(this.search.value, this.games.length)
             .subscribe(games => {
                 this.games = this.games.concat(games);
                 this.canLoadMore = games.length === this.limit;
-                this.isLoading = false;
             });
     }
     loadData(search?: string, offset?: number): Observable<GameEvent[]> {

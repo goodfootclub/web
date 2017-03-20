@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { TitleService } from '../title.service';
 import { PlayersService } from './players.service';
+import { StatusService } from '../common/services/status.service';
 import { User } from '../types';
 
 import 'rxjs/add/operator/debounceTime';
@@ -18,7 +19,6 @@ export class PlayersComponent implements OnInit {
 
     get limit(): number { return 50; };
     get searchDebounceTime(): number { return 750; };
-    isLoading = true;
     canLoadMore = true;
 
     form: FormGroup;
@@ -32,6 +32,7 @@ export class PlayersComponent implements OnInit {
         public formBuilder: FormBuilder,
         public route: ActivatedRoute,
         public title: TitleService,
+        public status: StatusService,
     ) {
         title.setTitle('Players');
     }
@@ -54,17 +55,14 @@ export class PlayersComponent implements OnInit {
         this.loadData().subscribe(players => {
             this.players = players;
             this.canLoadMore = players.length === this.limit;
-            this.isLoading = false;
         });
     }
 
     loadMore() {
-        this.isLoading = true;
         this.loadData(this.search.value, this.players.length)
             .subscribe(players => {
             this.players = this.players.concat(players);
             this.canLoadMore = players.length === this.limit;
-            this.isLoading = false;
         });
     }
 

@@ -39,12 +39,14 @@
 </md-card>
 
 <div class="load-more-container" *ngIf="canLoadMore">
-    <md-card class="clickable" *ngIf="!isLoading" (click)="loadMore()">
+    <md-card class="clickable" (click)="loadMore()" *ngIf="!(status.observeLoading | async)">
         <div class="load-more">
             <span>Load more</span>
         </div>
     </md-card>
-    <div class="load-more" *ngIf="isLoading">
-        <md-spinner></md-spinner>
-    </div>
+    <md-card *ngIf="status.observeLoading | async">
+        <div class="load-more">
+            <span>Loading ...</span>
+        </div>
+    </md-card>
 </div>

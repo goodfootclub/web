@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from 'app/profile';
 import { User, GameEvent } from 'app/types';
 import { Observable } from 'rxjs/Observable';
+import { StatusService } from '../common/services/status.service';
 
 
 @Component({
@@ -17,10 +18,12 @@ export class HomeComponent implements OnInit {
     user: User;
     games: GameEvent[] = [];
 
-    isLoading = true;
     canLoadMore = true;
 
-    constructor(private profile: ProfileService) {}
+    constructor(
+        private profile: ProfileService,
+        private status: StatusService,
+    ) {}
 
     ngOnInit(): void {
         this.profile.getCurrentUser().subscribe(user => {
@@ -29,16 +32,13 @@ export class HomeComponent implements OnInit {
         this.loadGames().subscribe((games) => {
             this.games = games;
             this.canLoadMore = games.length === this.limit;
-            this.isLoading = false;
         });
     }
     loadMore() {
-        this.isLoading = true;
         this.loadGames(this.games.length)
             .subscribe(games => {
                 this.games = this.games.concat(games);
                 this.canLoadMore = games.length === this.limit;
-                this.isLoading = false;
             });
     }
     loadGames(offset?: number): Observable<GameEvent[]> {
