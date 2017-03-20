@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder } from '@angular/forms';
 import { GamesService } from './games.service';
 import { TitleService } from 'app/title.service';
-import { StatusService } from '../common/services/status.service';
 import { GameEvent } from 'app/types';
 import { Observable } from 'rxjs/Observable';
 
@@ -28,7 +27,6 @@ export class GamesComponent implements OnInit {
         public _games: GamesService,
         public formBuilder: FormBuilder,
         public title: TitleService,
-        public status: StatusService,
     ) {
         title.setTitle('Find a game');
     }

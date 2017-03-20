@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from 'app/profile';
 import { User, GameEvent } from 'app/types';
 import { Observable } from 'rxjs/Observable';
-import { StatusService } from '../common/services/status.service';
-
 
 @Component({
     selector: 'app-home',
@@ -22,7 +20,6 @@ export class HomeComponent implements OnInit {
 
     constructor(
         private profile: ProfileService,
-        private status: StatusService,
     ) {}
 
     ngOnInit(): void {

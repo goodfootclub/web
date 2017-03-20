@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TitleService } from './title.service';
-import { StatusService } from './common/services/status.service.ts';
+import { StatusService } from './common/services/status.service';
 
 
 @Component({

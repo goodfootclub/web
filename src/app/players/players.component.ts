@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/Observable';
 
 import { TitleService } from '../title.service';
 import { PlayersService } from './players.service';
-import { StatusService } from '../common/services/status.service';
 import { User } from '../types';
 
 import 'rxjs/add/operator/debounceTime';
@@ -32,7 +31,6 @@ export class PlayersComponent implements OnInit {
         public formBuilder: FormBuilder,
         public route: ActivatedRoute,
         public title: TitleService,
-        public status: StatusService,
     ) {
         title.setTitle('Players');
     }

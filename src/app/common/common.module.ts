@@ -4,6 +4,7 @@ import { CommonModule as NgCommonModule } from '@angular/common';
 
 import {
     BackButtonComponent,
+    LoadMoreComponent,
     MenuButtonComponent,
     PlayerViewComponent,
     TitleComponent,
@@ -22,6 +23,7 @@ import { HttpProvider } from './services/app.http';
     ],
     declarations: [
         BackButtonComponent,
+        LoadMoreComponent,
         MenuButtonComponent,
         PlayerViewComponent,
         TextSearchPipe,
@@ -32,6 +34,7 @@ import { HttpProvider } from './services/app.http';
     ],
     exports: [
         BackButtonComponent,
+        LoadMoreComponent,
         MaterialModule,
         MenuButtonComponent,
         NgCommonModule,

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder } from '@angular/forms';
 import { TitleService } from 'app/title.service';
 import { TeamsService } from './teams.service';
-import { StatusService } from '../common/services/status.service';
 import { Team } from 'app/types';
 import { Observable } from 'rxjs/Observable';
 
@@ -29,7 +28,6 @@ export class TeamsComponent implements OnInit {
         public teamsService: TeamsService,
         public formBuilder: FormBuilder,
         public title: TitleService,
-        public status: StatusService,
     ) {
         title.setTitle('Teams');
     }

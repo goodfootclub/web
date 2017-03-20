@@ -1,15 +1,16 @@
 $load-more-card-height = 42px
 
-md-spinner
-    display: flex
-    height: $load-more-card-height
-    margin: 15px auto
-    max-width: 640px
-    padding: 8px
-
 .load-more-container md-card
     height: $load-more-card-height
     text-align: center
+    margin: 15px auto
+    max-width: 640px
+    overflow: hidden
+    padding: 12px
+
+    &:hover
+        text-decoration: none
+        background: #fafafa
 
     &.clickable
         cursor: pointer
