@@ -25,7 +25,7 @@ export class TeamsComponent implements OnInit {
     teams: Team[];
 
     constructor(
-        public teamsService: TeamsService,
+        public _teams: TeamsService,
         public formBuilder: FormBuilder,
         public title: TitleService,
     ) {
@@ -55,6 +55,6 @@ export class TeamsComponent implements OnInit {
             });
     }
     loadData(search?: string, offset?: number): Observable<Team[]> {
-        return this.teamsService.all(search ? search : '', this.limit, offset);
+        return this._teams.all(search ? search : '', this.limit, offset);
     }
 }

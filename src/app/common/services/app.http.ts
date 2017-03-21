@@ -34,7 +34,7 @@ export class AppHttp extends Http {
     request(request: Request,
             options?: RequestOptionsArgs): Observable<Response> {
         if (request && this.securedMethods.indexOf(request.method) > -1) {
-            let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
+            const csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
             csrf.configureRequest(request);
         }
         this.statusService.startRequesting();
