@@ -10,7 +10,6 @@ import {
 import { Observable } from 'rxjs/Observable';
 
 import { User, PlayerRole } from 'app/types';
-import { HealthService } from 'app/error-handling';
 
 
 @Injectable()
@@ -18,7 +17,6 @@ export class PlayersService {
 
     constructor(
         private http: Http,
-        private health: HealthService,
     ) { }
 
     all(search?: string, limit?: number, offset?: number): Observable<User[]> {
@@ -29,7 +27,6 @@ export class PlayersService {
         return this.http.get('/api/users/players/', { search: params })
             .map(res => res.json().results.map(data => new User(data)))
             .catch((err, caught) => {
-                this.health.criticalError(JSON.stringify(err, null, 4));
                 throw err;
             });
     }
@@ -38,7 +35,6 @@ export class PlayersService {
         return this.http.get(`/api/users/players/${id}/`).map(res => {
             return new User(res.json());
         }).catch((err, caught) => {
-            this.health.criticalError(JSON.stringify(err, null, 4));
             throw err;
         });
     }
@@ -53,7 +49,6 @@ export class PlayersService {
         csrf.configureRequest(request);
 
         return this.http.request(request).catch((err, caught) => {
-            this.health.criticalError(JSON.stringify(err, null, 4));
             throw err;
         });
     }

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from 'app/common';
 import { CriticalErrorComponent } from './critical-error.component';
 import { FourxxErrorComponent } from './4xx-error.component';
-import { HealthService } from './health.service';
 import { HttpErrorHandler } from './http-error.service';
 
 
@@ -15,7 +14,6 @@ import { HttpErrorHandler } from './http-error.service';
         FourxxErrorComponent,
     ],
     providers: [
-        HealthService,
         HttpErrorHandler,
     ],
     exports: [
@@ -25,5 +23,4 @@ import { HttpErrorHandler } from './http-error.service';
 })
 export class ErrorHandlingModule { }
 
-export { HealthService, HealthStatus } from './health.service';
 export { FourxxErrorComponent };

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { HealthService } from './health.service';
 
 
 let yellowCard = require('./img/yellow-card.jpg');
@@ -17,5 +16,5 @@ export class FourxxErrorComponent {
     messageB = false;
     title = 'PAGE NOT FOUND';
 
-    constructor(public health: HealthService) { }
+    constructor() { }
 }

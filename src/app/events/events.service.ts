@@ -9,22 +9,18 @@ import {
 import { Observable } from 'rxjs/Observable';
 
 import { GameEvent } from './../types';
-import { HealthService } from '../error-handling';
-
 
 @Injectable()
 export class EventsService {
 
     constructor(
         private http: Http,
-        private health: HealthService,
     ) { }
 
     all(): Observable<GameEvent[]> {
         return this.http.get('/api/games/').map(data => {
             return data.json();
         }).catch((err, caught) => {
-            this.health.criticalError(JSON.stringify(err, null, 4));
             throw err;
         });
     }
@@ -52,7 +48,6 @@ export class EventsService {
             }
             return data;
         }).catch((err, caught) => {
-            this.health.criticalError(JSON.stringify(err, null, 4));
             throw err;
         });
     }

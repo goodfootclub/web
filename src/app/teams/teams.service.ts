@@ -10,7 +10,6 @@ import {
 import { Observable } from 'rxjs/Observable';
 
 import { Team, PlayerRole, Player, GameEvent } from 'app/types';
-import { HealthService } from 'app/error-handling';
 
 
 @Injectable()
@@ -18,7 +17,6 @@ export class TeamsService {
 
     constructor(
         private http: Http,
-        private health: HealthService,
     ) { }
 
 
@@ -30,7 +28,6 @@ export class TeamsService {
         return this.http.get('/api/teams/', { search: params })
             .map(res => res.json().results.map(data => new Team(data)))
             .catch((err, caught) => {
-                this.health.criticalError(JSON.stringify(err, null, 4));
                 throw err;
             });
     }
@@ -39,7 +36,6 @@ export class TeamsService {
         return this.http.get(`/api/teams/${teamId}/games/`)
             .map(res => res.json().results.map(data => new GameEvent(data)))
             .catch((err, caught) => {
-                this.health.criticalError(JSON.stringify(err, null, 4));
                 throw err;
             });
     }
@@ -48,7 +44,6 @@ export class TeamsService {
         return this.http.get(`/api/teams/${id}/`).map(res => {
             return new Team(res.json());
         }).catch((err, caught) => {
-            this.health.criticalError(JSON.stringify(err, null, 4));
             throw err;
         });
     }
@@ -67,7 +62,6 @@ export class TeamsService {
         return this.http.request(request).map(res => {
             return new Team(res.json());
         }).catch((err, caught) => {
-            this.health.criticalError(JSON.stringify(err, null, 4));
             throw err;
         });
     }
@@ -113,7 +107,6 @@ export class TeamsService {
         csrf.configureRequest(request);
 
         return this.http.request(request).catch((err, caught) => {
-            this.health.criticalError(JSON.stringify(err, null, 4));
             throw err;
         });
     }
