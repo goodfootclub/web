@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
+import { ToastyModule } from 'ng2-toasty';
 
 import { AppComponent } from './app.component';
 import { AuthComponent, AuthService } from './auth';
@@ -61,6 +62,7 @@ export const ROUTES: Routes = [{
         FormsModule,
         HttpModule,
         MaterialModule.forRoot(),
+        ToastyModule.forRoot(),
         RouterModule.forRoot(ROUTES),
         ErrorHandlingModule,
     ],
