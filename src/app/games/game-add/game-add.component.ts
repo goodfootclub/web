@@ -36,7 +36,6 @@ export class GameAddComponent {
     locations: Location[];
     managedTeams: Team[] = [this.noTeam];
     targetTeam: number = null;
-    isPosting = false;
     datePipe = new DatePipe('en-US');
     tzOffset = -new Date().getTimezoneOffset() / 60;
     tzName = `GMT${this.tzOffset >= 0 ? '+' : '-'}${this.tzOffset}`;
@@ -125,8 +124,6 @@ export class GameAddComponent {
     }
 
     onSubmit() {
-        this.isPosting = true;
-        this.form.disable();
         const dates: string[] = this.form.value['dates'].map((val) => {
             let dt = new Date(
                 `${val['date']}T${val['time']}`);

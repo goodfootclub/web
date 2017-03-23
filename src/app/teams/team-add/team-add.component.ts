@@ -14,7 +14,6 @@ import { TeamsService } from '../teams.service';
 export class TeamAddComponent {
 
     form: FormGroup;
-    isPosting = false;
 
     constructor(
         public teams: TeamsService,
@@ -34,7 +33,6 @@ export class TeamAddComponent {
     }
 
     onSubmit() {
-        this.isPosting = true;
         this.form.disable();
         this.teams.create(this.form.value).subscribe(newTeam => {
             this.router.navigate(['/teams', newTeam.id]);

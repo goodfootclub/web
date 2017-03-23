@@ -15,7 +15,6 @@ export class ProfileEditComponent implements OnInit {
 
     user: User;
     form: FormGroup;
-    isPosting = false;
 
     constructor(
         public formBuilder: FormBuilder,
@@ -31,7 +30,6 @@ export class ProfileEditComponent implements OnInit {
     }
 
     onSubmit() {
-        this.isPosting = true;
         this.form.disable();
         this.profile.update(this.form.value).subscribe(() => {
             this.router.navigate(['/profile']);
