@@ -1,0 +1,35 @@
+@import "variables.styl"
+
+$card-height = 72px
+$card-width = 640px
+$pic-dia = 50px
+
+md-card
+    max-width: $card-width
+    overflow: hidden
+    padding: 12px
+    margin: 15px auto
+
+    &:hover
+        text-decoration: none
+        background: $hover-color
+
+    &.fixed-height
+        height: $card-height
+
+    h1
+        font-size: 16px
+        margin: 5px 0 0
+
+    .info
+        color: $sub-color
+        font-size: $info-font-size
+        max-height: 32px
+        overflow: hidden
+
+.player-pic
+    border-radius: 50%
+    max-height: $pic-dia  //
+    max-width: $pic-dia   // Workournd flexbox bug that causes avatars
+    min-height: $pic-dia  // to apear with random size
+    min-width: $pic-dia   //
