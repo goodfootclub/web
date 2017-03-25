@@ -113,12 +113,15 @@
     <br/>
 
     <div class="buttons">
-        <button md-button type="button" (click)="removeDate()" *ngIf="form.controls.dates.controls.length > 1">
+        <button md-button class="huge-button" type="button" (click)="removeDate()" *ngIf="form.controls.dates.controls.length > 1">
             Remove last date
         </button>
-        <button md-button type="button" (click)="addDate()">
+        <button md-button class="huge-button" type="button" (click)="addDate()">
             Add one more date
         </button>
+    </div>
+    <div class="clearfix"></div>
+    <div class="buttons">
         <button type="button"
             (click)="backButton.back()"
             [disabled]="isPosting"
