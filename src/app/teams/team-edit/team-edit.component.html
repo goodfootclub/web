@@ -57,7 +57,7 @@
         <div class="header-content">
             <div class="header-text">
                 <h1>Roster</h1>
-                <button
+                <button class="float-right"
                     md-mini-fab
                     *ngIf="isPlayer || isManager"
                     [routerLink]="['/players', {targetTeam: team.id}]">

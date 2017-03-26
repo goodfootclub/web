@@ -1,14 +1,11 @@
+@import "../styles/variables.styl"
+
 $left-indent = 24px
 $userpic-dia = 98px
 
 $cover-height = 200px
 $info-height = 128px
 $info-block-top = 128px
-
-// Colors
-$hr-color = #E2E2E2
-$h-color = black
-$sh-color = #AAA
 
 
 .info, .bio
@@ -25,7 +22,7 @@ $sh-color = #AAA
     align-items: center
     height: $info-height
     margin-top: $info-height * -.5
-    border-bottom: 1px solid $hr-color
+    border-bottom: 1px solid $general-background-color
 
 .profile-pic
     height: $userpic-dia
@@ -49,13 +46,12 @@ $sh-color = #AAA
         padding-left: $left-indent * .5
         padding-top: $left-indent * .5
         margin-bottom: 0
-        color: $h-color
-        font-size: 22px
+        font-size: $title-font-size
 
     .gender, .birthday
-        font-size: 14px
+        font-size: $general-font-size
         padding-left: $left-indent * .5
-        color: $sh-color
+        color: $sub-color
 
 .bio
     padding: $left-indent

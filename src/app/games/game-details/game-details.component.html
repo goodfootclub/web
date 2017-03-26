@@ -19,20 +19,10 @@
         <div *ngIf="!user">
             <a href="javascript:void(0)" (click)="join()">Able to join!</a>
         </div>
-        <div *ngIf="user">
-            <div class="btn-group" data-toggle="buttons">
-                <label
-                    *ngFor="let status of [2, 0, 1];"
-                    [class.active]="status == user.rsvp"
-                    class="btn btn-secondary">
-                    <input
-                        [disabled]="status == user.rsvp"
-                        (click)="setStatus(status)"
-                        type="radio" name="options"
-                        id="option1" autocomplete="off">
-                    {{rsvpMessages[status]}}
-                </label>
-            </div>
+        <div [hidden]="!user">
+            <md-radio-group>
+                <md-radio-button *ngFor="let status of [2, 0, 1];" [value]="status">{{rsvpMessages[status]}}  </md-radio-button>
+            </md-radio-group>
         </div>
     </div>
     <div class="data-row">

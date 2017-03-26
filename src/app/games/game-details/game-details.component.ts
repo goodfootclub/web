@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { GamesService } from '../games.service';
 import { AuthService } from '../../auth/auth.service';
 import { GameEvent, RsvpStatus, Player } from '../../types';
+import { MdRadioGroup } from '@angular/material';
 
 
 @Component({
@@ -21,6 +22,9 @@ export class GameDetailsComponent implements OnInit {
         0: 'Out',
     };
 
+    @ViewChild(MdRadioGroup)
+    statusRadioBlock: MdRadioGroup;
+
     constructor(
         private games: GamesService,
         private route: ActivatedRoute,
@@ -36,6 +40,11 @@ export class GameDetailsComponent implements OnInit {
                     this.auth.profile.currentUser.id
                 ];
                 this.game = game;
+                this.statusRadioBlock.registerOnChange(
+                    this.setStatus.bind(this));
+                if (this.user) {
+                    this.statusRadioBlock.value = '' + this.user.rsvp;
+                }
             });
         });
     }
@@ -61,6 +70,9 @@ export class GameDetailsComponent implements OnInit {
                     this.auth.profile.currentUser.id
                 ];
                 this.game = game;
+                if (this.user) {
+                    this.statusRadioBlock.value = '' + this.user.rsvp;
+                }
             });
         });
     }

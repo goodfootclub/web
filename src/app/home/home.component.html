@@ -31,7 +31,7 @@
     </md-tab>
     <md-tab label="Teams">
         <md-card
-            class="team-card"
+            class="fixed-height"
             *ngFor="let team of user.managedTeams"
             [routerLink]="['/teams', team.id]"
         >
