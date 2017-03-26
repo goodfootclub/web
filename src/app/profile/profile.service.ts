@@ -8,7 +8,6 @@ import {
 } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
-import { HealthService } from '../error-handling';
 import { User, GameEvent } from '../types';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
@@ -24,7 +23,6 @@ export class ProfileService {
     currentUser: User;
 
     constructor(
-        @Inject(forwardRef(() => HealthService)) public health: HealthService,
         public http: Http,
     ) {}
 
@@ -43,7 +41,6 @@ export class ProfileService {
                 this.currentUser = null;
                 return Observable.of(null);
             };
-            this.health.criticalError(JSON.stringify(err, null, 4));
             throw err;
         });
     }
@@ -75,7 +72,6 @@ export class ProfileService {
             this.currentUser = new User(response.json());
             return this.currentUser;
         }).catch((err, caught) => {
-            this.health.criticalError(JSON.stringify(err, null, 4));
             throw err;
         });
     }

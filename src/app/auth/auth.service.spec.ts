@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { APP_BASE_HREF } from '@angular/common';
 import { Http } from '@angular/http';
 import {
     ActivatedRouteSnapshot,
@@ -12,7 +11,6 @@ import {
     Router,
 } from '@angular/router';
 import { AuthService } from './auth.service';
-import { HealthService } from '../error-handling';
 import { ProfileService } from '../profile';
 
 
@@ -47,7 +45,6 @@ describe('Service: Auth', () => {
             providers: [
                 // { provide: APP_BASE_HREF, useValue: '/' }
                 AuthService,
-                HealthService,
                 ProfileService,
                 { provide: Http, useClass: HttpStub },
                 { provide: Router, useClass: RouterStub },

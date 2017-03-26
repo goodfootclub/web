@@ -10,7 +10,6 @@ import {
 import { Observable } from 'rxjs/Observable';
 
 import { GameEvent, RsvpStatus, Player, User } from 'app/types';
-import { HealthService } from 'app/error-handling';
 
 
 @Injectable()
@@ -18,7 +17,6 @@ export class GamesService {
 
     constructor(
         private http: Http,
-        private health: HealthService,
     ) { }
 
     all(search?: string, limit?: number, offset?: number):
@@ -30,7 +28,6 @@ export class GamesService {
         return this.http.get('/api/games/', { search: params })
             .map(res => res.json().results.map(data => new GameEvent(data)))
             .catch((err, caught) => {
-                this.health.criticalError(JSON.stringify(err, null, 4));
                 throw err;
             });
     }
@@ -39,7 +36,6 @@ export class GamesService {
         return this.http.get(`/api/games/${id}/`).map(res => {
             return new GameEvent(res.json());
         }).catch((err, caught) => {
-            this.health.criticalError(JSON.stringify(err, null, 4));
             throw err;
         });
     }
@@ -56,7 +52,6 @@ export class GamesService {
         return this.http.request(request).map(res => {
             return new GameEvent(res.json());
         }).catch((err, caught) => {
-            this.health.criticalError(JSON.stringify(err, null, 4));
             throw err;
         });
     }

@@ -1,7 +1,6 @@
 <md-toolbar>
     <app-back-button
         #backButton
-        [disabled]="isPosting"
     ></app-back-button>
     <app-title [value]="'Create a game'"></app-title>
     <div class="toolbar-icon-spacer"></div>
@@ -124,13 +123,12 @@
     <div class="buttons">
         <button type="button"
             (click)="backButton.back()"
-            [disabled]="isPosting"
             md-raised-button
         >
             Cancel
         </button>
-            <!-- [disabled]="form.invalid || isPosting" -->
         <button
+            [disabled]="form.invalid"
             color="primary"
             md-raised-button
             type="submit"

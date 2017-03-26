@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 
-import { HealthService } from './health.service';
-
-
 let injuryImg = require('./img/injury.jpg');
 
 @Component({
@@ -18,5 +15,5 @@ export class CriticalErrorComponent {
     messageB = 'Doing our best to fix it ASAP. Sit tight!';
     title = 'SERVER IS DOWN';
 
-    constructor(public health: HealthService) { }
+    constructor() { }
 }

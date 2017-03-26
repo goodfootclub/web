@@ -1,4 +1,4 @@
-import { Injectable, Inject, forwardRef } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
     ActivatedRouteSnapshot,
     CanActivate,
@@ -6,14 +6,12 @@ import {
     Router,
     RouterStateSnapshot,
 } from '@angular/router';
-import { Http } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 
-import { HealthService } from '../error-handling';
 import { User } from '../types';
 import { ProfileService } from '../profile';
 
@@ -26,8 +24,6 @@ export class AuthService implements CanActivate, CanActivateChild {
     canActivateChild = this.canActivate;
 
     constructor(
-        @Inject(forwardRef(() => HealthService)) private health: HealthService,
-        private http: Http,
         private router: Router,
         public profile: ProfileService,
     ) { }

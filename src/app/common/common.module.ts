@@ -11,6 +11,7 @@ import {
 } from './ui';
 import { TextSearchPipe } from './pipes';
 import { HttpProvider } from './services/app.http';
+import { AppToastyService } from './services/toasty.service';
 
 
 /**
@@ -31,6 +32,7 @@ import { HttpProvider } from './services/app.http';
     ],
     providers: [
         HttpProvider,
+        AppToastyService,
     ],
     exports: [
         BackButtonComponent,

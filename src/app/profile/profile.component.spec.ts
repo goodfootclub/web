@@ -1,12 +1,9 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 import { MaterialModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { MenuService } from '../sidenav';
-import { HealthService } from '../error-handling';
 import { ProfileComponent } from './profile.component';
 import { ProfileService } from './profile.service';
 import { TitleService } from '../title.service';
@@ -25,7 +22,6 @@ describe('ProfileComponent', () => {
                 ProfileModule,
             ],
             providers: [
-                HealthService,
                 MenuService,
                 ProfileService,
                 TitleService,
