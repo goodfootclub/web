@@ -1,21 +1,26 @@
 import { Injectable, OnInit } from '@angular/core';
-import { ToastyService,
-    ToastyConfig,
-    ToastOptions } from 'ng2-toasty';
+import { ToastyService, ToastyConfig, ToastOptions } from 'ng2-toasty';
+
 
 @Injectable()
 export class AppToastyService implements OnInit {
 
     get defaultOptions(): ToastOptions {
         return {
+            title: 'Error!',
             showClose: true,
             timeout: 5000,
             theme: 'material',
-        } as ToastOptions;
+        };
     }
 
     constructor(private toastyService: ToastyService,
-                private toastyConfig: ToastyConfig) {}
+                private toastyConfig: ToastyConfig) {
+        this.error = this.error.bind(this);
+        this.info = this.info.bind(this);
+        this.success = this.success.bind(this);
+        this.warning = this.warning.bind(this);
+    }
 
     ngOnInit(): void {
         this.toastyConfig.theme = 'material';
