@@ -4,7 +4,50 @@
     <md-icon></md-icon>
 </md-toolbar>
 
-<md-tab-group>
+<md-grid-list cols="2" rowHeight="80px" class="bordered-grid">
+    <md-grid-tile colspan="2">
+        <app-games-tile></app-games-tile>
+        <!--md-card
+            *ngFor="let game of games"
+            [routerLink]="['/games', game.id]"
+        >
+            <h1>{{ game.name }}</h1>
+            <hr>
+            <div>
+                <h1>{{ game.datetime | date:'EEEE, h:mm a' }}</h1>
+                <span class="info">
+                    {{ game.datetime | date:'MMMM d, y' }}
+                </span>
+            </div>
+            <div>
+                <h1>{{ game.location.name }}</h1>
+                <span class="info">
+                    {{ game.location.address }}
+                </span>
+            </div>
+        </md-card-->
+    </md-grid-tile>
+    <md-grid-tile>
+        <app-profile-tile></app-profile-tile>
+    </md-grid-tile>
+    <md-grid-tile>
+        <app-teams-tile></app-teams-tile>
+    </md-grid-tile>
+    <md-grid-tile colspan="2">
+        <app-pickup-games-tile></app-pickup-games-tile>
+    </md-grid-tile>
+    <md-grid-tile>
+        <app-players-tile></app-players-tile>
+    </md-grid-tile>
+    <md-grid-tile>
+        <app-subs-tile></app-subs-tile>
+    </md-grid-tile>
+    <md-grid-tile colspan="2">
+        <app-contactus-tile></app-contactus-tile>
+    </md-grid-tile>
+</md-grid-list>
+
+<!--md-tab-group>
     <md-tab label="Games">
 
         <md-card
@@ -49,4 +92,4 @@
         </template>
         Coming SOON™
     </md-tab>
-</md-tab-group>
+</md-tab-group-->
