@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MaterialModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { MenuService } from '../sidenav';
+import { MenuService } from '../common/services/menu.service';
 import { ProfileComponent } from './profile.component';
 import { ProfileService } from './profile.service';
 import { TitleService } from '../title.service';

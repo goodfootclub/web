@@ -72,12 +72,17 @@ describe('Service: Auth', () => {
             [AuthService, Router],
             (service: AuthService, router: RouterStub) => {
                 service.profile.currentUser = null;
-                service.canActivate(
+                const result = service.canActivate(
                     <ActivatedRouteSnapshot>{},
                     <RouterStateSnapshot>{ url: '' },
-                ).subscribe(() => {
+                );
+                if (result instanceof Observable) {
+                    result.subscribe(() => {
+                        expect(router.path).toEqual(['signup']);
+                    });
+                } else {
                     expect(router.path).toEqual(['signup']);
-                });
+                }
             },
         ),
     ));
