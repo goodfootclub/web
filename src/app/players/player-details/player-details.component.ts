@@ -9,7 +9,6 @@ import { User } from 'app/types';
 @Component({
     selector: 'app-player-details',
     templateUrl: './player-details.component.html',
-    styleUrls: [],
 })
 export class PlayerDetailsComponent implements OnInit {
 
