@@ -21,7 +21,7 @@ export class PlayerViewComponent implements OnChanges {
     coverUrl: string;
     profilePicUrl: string;
 
-    ngOnChanges() {
+    ngOnChanges(param: any) {
         if (this.player == null) {
             return;
         }

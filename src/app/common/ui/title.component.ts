@@ -21,7 +21,7 @@ export class TitleComponent implements OnChanges {
         @Inject(forwardRef(() => TitleService)) public title: TitleService,
     ) {}
 
-    ngOnChanges() {
+    ngOnChanges(param: any) {
         if (this.value != null) {
             this.title.setTitle(this.value);
         }

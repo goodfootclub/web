@@ -68,14 +68,14 @@
     <br/>
 
     <div formArrayName="dates">
-        <div *ngFor="let date of form.controls.dates.controls; let i=index">
+        <div *ngFor="let date of form.controls.dates['controls']; let i=index">
             <md-grid-list cols="2" rowHeight="80px" [formGroupName]="i">
                 <md-grid-tile>
                     <md-input-container
                         class="full-width"
                         [dividerColor]="
-                        form.controls.dates.controls[i].controls.date.valid ||
-                        form.controls.dates.controls[i].controls.date.pristine ?
+                        form.controls.dates['controls'][i]['controls'].date.valid ||
+                        form.controls.dates['controls'][i]['controls'].date.pristine ?
                         'primary' : 'warn'" #dateContainer>
                         <input #date
                                mdInput
@@ -84,7 +84,7 @@
                                required
                                type='date'>
                         <md-hint align="end" *ngIf="dateContainer._mdInputChild.focused">
-                            <span *ngIf="form.controls.dates.controls[i].controls.date.errors?.required">
+                            <span *ngIf="form.controls.dates['controls'][i]['controls'].date.errors?.required">
                                 required
                             </span>
                         </md-hint>
@@ -99,7 +99,7 @@
                                required
                                type='time'>
                         <md-hint align="end" *ngIf="timeContainer._mdInputChild.focused">
-                            <span *ngIf="form.controls.dates.controls[i].controls.time.errors?.required">
+                            <span *ngIf="form.controls.dates['controls'][i]['controls'].time.errors?.required">
                                 required
                             </span>
                         </md-hint>
@@ -113,7 +113,7 @@
 
     <div class="buttons">
         <div>
-            <button md-button type="button" (click)="removeDate()" *ngIf="form.controls.dates.controls.length > 1">
+            <button md-button type="button" (click)="removeDate()" *ngIf="form.controls.dates['controls'].length > 1">
                 Remove last
             </button>
             <button md-button type="button" (click)="addDate()">
