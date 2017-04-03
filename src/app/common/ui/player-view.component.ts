@@ -12,7 +12,6 @@ import { User } from 'app/types';
 @Component({
     selector: 'app-player',
     templateUrl: './player-view.component.html',
-    styleUrls: ['./player-view.component.styl'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerViewComponent implements OnChanges {
