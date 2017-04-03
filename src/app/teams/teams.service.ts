@@ -51,7 +51,7 @@ export class TeamsService {
     createOrUpdate(data, method: RequestMethod): Observable<Team> {
         let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
         const url = method === RequestMethod.Put ?
-            `/api/teams/${data.id}` : `/api/teams`;
+            `/api/teams/${data.id}` : `/api/teams/`;
         let request = new Request({
             method: method,
             url: url,
