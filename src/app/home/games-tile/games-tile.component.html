@@ -1,5 +1,16 @@
 <div>
-    <p>
-        games-tile works!
-    </p>
+    <div *ngIf="game">
+        <h1>Next game</h1>
+        <hr>
+        <h1>{{ game.name }}</h1>
+        <div>
+            <h1>{{ game.datetime | date:'EEEE, h:mm a' }}</h1>
+            <span class="info">
+                {{ game.datetime | date:'MMMM d, y' }}
+            </span>
+        </div>
+        <div>
+            <h1>{{ game.location.name }}</h1>
+        </div>
+    </div>
 </div>

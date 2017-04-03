@@ -11,6 +11,8 @@ import { PickupGamesTileComponent } from './pickup-games-tile/pickup-games-tile.
 import { PlayersTileComponent } from './players-tile/players-tile.component';
 import { SubsTileComponent } from './subs-tile/subs-tile.component';
 import { ContactusTileComponent } from './contactus-tile/contactus-tile.component';
+import { PlayersService } from '../players/players.service';
+import { GamesService } from 'app/games/games.service';
 
 
 const ROUTES: Routes = [{
@@ -33,5 +35,9 @@ const ROUTES: Routes = [{
         SubsTileComponent,
         ContactusTileComponent,
     ],
+    providers: [
+        PlayersService,
+        GamesService,
+    ]
 })
 export class HomeModule { }

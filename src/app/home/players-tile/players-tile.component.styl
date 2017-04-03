@@ -1,0 +1,26 @@
+@import "../../common/styles/variables.styl"
+
+.players-tile
+    height 100%
+
+    display flex
+    flex-flow column
+
+    .players-content > div
+        display flex
+        flex-flow row
+
+        .player-info
+            padding-left 10px
+
+            .info.bio
+                max-height none
+                overflow auto
+
+    & > .players-tile-header
+        font-size $title-font-size
+        padding-bottom 10px
+
+    & > .players-tile-footer
+        margin-top auto
+        margin-bottom auto

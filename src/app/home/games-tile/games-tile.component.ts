@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProfileService } from '../../profile/profile.service';
+import { GameEvent } from '../../types';
 
 @Component({
   selector: 'app-games-tile',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GamesTileComponent implements OnInit {
 
-  constructor() { }
+    game: GameEvent;
 
-  ngOnInit() {
-  }
+    constructor(
+      private profile: ProfileService,
+    ) { }
+
+    ngOnInit() {
+      this.profile.getCurrentUserGames(1).subscribe((games) => {
+          this.game = games[0];
+      });
+    }
 
 }

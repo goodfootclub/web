@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ProfileService } from '../../profile/profile.service';
 import { User } from '../../types';
 
@@ -9,22 +9,20 @@ import { User } from '../../types';
       './profile-tile.component.styl',
   ]
 })
-export class ProfileTileComponent implements OnInit {
+export class ProfileTileComponent implements OnChanges {
 
+    @Input('user')
     user: User;
+
     profilePicUrl: string;
 
     constructor(
         private profile: ProfileService,
     ) { }
 
-    ngOnInit() {
-        this.profile.getCurrentUser().subscribe(user => {
-            this.user = user;
-            if (this.user == null) {
-                return;
-            }
+    ngOnChanges(changes: SimpleChanges): void {
+        if (this.user != null) {
             this.profilePicUrl = `url(${this.user.img})`;
-        });
+        }
     }
 }

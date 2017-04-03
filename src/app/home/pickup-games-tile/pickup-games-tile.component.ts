@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GamesService } from '../../games/games.service';
+import { GameEvent } from '../../types';
 
 @Component({
   selector: 'app-pickup-games-tile',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PickupGamesTileComponent implements OnInit {
 
-  constructor() { }
+    games: GameEvent[];
 
-  ngOnInit() {
-  }
+    constructor(
+        private gamesService: GamesService,
+    ) { }
+
+    ngOnInit() {
+        this.gamesService.all('', 2).subscribe((games) => {
+            this.games = games;
+        });
+    }
 
 }
