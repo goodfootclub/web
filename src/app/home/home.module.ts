@@ -13,6 +13,7 @@ import { SubsTileComponent } from './subs-tile/subs-tile.component';
 import { ContactusTileComponent } from './contactus-tile/contactus-tile.component';
 import { PlayersService } from '../players/players.service';
 import { GamesService } from 'app/games/games.service';
+import { ProfileService } from '../profile/profile.service';
 
 
 const ROUTES: Routes = [{
@@ -38,6 +39,7 @@ const ROUTES: Routes = [{
     providers: [
         PlayersService,
         GamesService,
+        ProfileService,
     ]
 })
 export class HomeModule { }
