@@ -11,8 +11,4 @@ export class ContactusTileComponent implements OnInit {
 
     ngOnInit() {
     }
-
-    sendMail() {
-        // TODO mailTo:team@goodfoot.club
-    }
 }

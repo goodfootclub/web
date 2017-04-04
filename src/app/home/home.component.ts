@@ -21,4 +21,8 @@ export class HomeComponent implements OnInit {
             this.user = user;
         });
     }
+
+    sendMail() {
+        // TODO mailTo:team@goodfoot.club
+    }
 }
