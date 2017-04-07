@@ -43,7 +43,7 @@
         </div>
     </div>
 </md-card>
-<md-card>
+<md-card class="players-list">
     <div class="header-content">
         <div class="header-text">
             <p>Players</p>
@@ -59,7 +59,10 @@
         >
             <img [src]="player.img" alt="" class="player-pic">
             <div class="player-info">
-                <h1> {{ player.firstName }} {{ player.lastName }} </h1>
+                <div class="inline-info">
+                    <h1> {{ player.firstName }} {{ player.lastName }} </h1>
+                    <span class="rsvp-status">{{ rsvpMessages[player.rsvp] }}</span>
+                </div>
             </div>
         </a>
     </md-list>
