@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { GamesService } from '../../games/games.service';
+import { Component, Input, OnInit } from '@angular/core';
 import { GameEvent } from '../../types';
 
 @Component({
@@ -11,14 +10,13 @@ export class PickupGamesTileComponent implements OnInit {
 
     games: GameEvent[];
 
-    constructor(
-        private gamesService: GamesService,
-    ) { }
+    constructor() { }
 
     ngOnInit() {
-        this.gamesService.all('', 2).subscribe((games) => {
-            this.games = games;
-        });
     }
 
+    @Input('nextGames')
+    set nextGames(games: GameEvent[]) {
+        this.games = games;
+    }
 }

@@ -8,7 +8,9 @@ import { AuthService } from '../../auth/auth.service';
 @Component({
     selector: 'app-my-games',
     templateUrl: './my-games.component.html',
-    styleUrls: ['./my-games.component.styl']
+    styleUrls: [
+        './my-games.component.styl',
+    ]
 })
 export class MyGamesComponent implements OnInit {
 

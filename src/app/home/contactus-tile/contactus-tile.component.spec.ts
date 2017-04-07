@@ -8,7 +8,9 @@ describe('ContactusTileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContactusTileComponent ]
+      declarations: [
+          ContactusTileComponent,
+      ]
     })
     .compileComponents();
   }));

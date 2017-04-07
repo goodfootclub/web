@@ -30,7 +30,25 @@
             right 0px
             margin-top -20px
 
-            & > span
+            @media only screen and (max-width: $media-phone), only screen and (max-device-width: $media-phone)
+                display flex
+                flex-flow row wrap
+                justify-content center
+                align-items center
+                bottom 0px
+                margin-bottom 15px
+                padding 0 10px 0 0
+                max-width 100px
+
+            & > span.my-status
+                font-size $uppercased-extra-small
+                color $sub-color
+                text-transform uppercase
+
+            & > span.rsvp-status
                 font-size $header-font-size
                 color $main-theme-color
                 text-transform uppercase
+
+                @media only screen and (max-width: $media-phone), only screen and (max-device-width: $media-phone)
+                    font-size $subheader-font-size
