@@ -27,8 +27,6 @@
         <md-grid-tile [routerLink]="'/teams'">
             <app-teams-tile class="grid-tile"></app-teams-tile>
         </md-grid-tile>
-        <md-grid-tile colspan="2" (click)="sendMail()">
-            <app-contactus-tile class="grid-tile"></app-contactus-tile>
-        </md-grid-tile>
     </md-grid-list>
+    <app-contactus-tile></app-contactus-tile>
 </md-card>

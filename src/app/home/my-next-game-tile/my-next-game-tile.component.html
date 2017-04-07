@@ -1,10 +1,8 @@
 <div class="container">
     <h1>next game</h1>
-    <div class="games-container">
-        <div *ngIf="nextGame">
-            <h3>{{ nextGame.location.name }}</h3>
-            <h4>{{ nextGame.location.address }}</h4>
-            <span class="info">{{ nextGame.datetime | date:'EEEE, h:mm a' }}, {{ nextGame.datetime | date:'MMMM d, y' }}</span>
-        </div>
+    <div class="games-container" *ngIf="nextGame">
+        <h3>{{ nextGame.location.name }}</h3>
+        <h4>{{ nextGame.location.address }}</h4>
+        <span class="info">{{ nextGame.datetime | date:'EEEE, h:mm a' }}, {{ nextGame.datetime | date:'MMMM d, y' }}</span>
     </div>
 </div>

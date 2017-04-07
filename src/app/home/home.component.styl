@@ -1,8 +1,11 @@
 @import "../common/styles/variables.styl"
 
 md-card
-    margin 0 auto
     padding 0
+
+    @media only screen and (max-width: $media-phone), only screen and (max-device-width: $media-phone)
+        margin 0 auto
+
     &:hover
         background-color white
 
