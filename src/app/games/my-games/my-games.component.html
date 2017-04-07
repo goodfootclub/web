@@ -7,7 +7,10 @@
     *ngFor="let game of games"
     [routerLink]="['/games', game.id]"
 >
-    <h1>{{ game.name }}</h1>
+    <div class="game-header">
+        <h1>{{ game.name }}</h1>
+        <span>{{getRsvpStatus(game)}}</span>
+    </div>
     <hr>
     <div>
         <h1>{{ game.datetime | date:'EEEE, h:mm a' }}</h1>

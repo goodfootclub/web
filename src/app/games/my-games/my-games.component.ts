@@ -3,6 +3,7 @@ import { TitleService } from '../../title.service';
 import { ProfileService } from '../../profile/profile.service';
 import { GameEvent } from '../../types';
 import { Observable } from 'rxjs/Observable';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
     selector: 'app-my-games',
@@ -16,8 +17,15 @@ export class MyGamesComponent implements OnInit {
 
     canLoadMore = true;
 
+    rsvpMessages = {
+        2: 'In',
+        1: 'Maybe',
+        0: 'Out',
+    };
+
     constructor(
         private profileService: ProfileService,
+        private authService: AuthService,
         private title: TitleService,
     ) {
         this.title.setTitle('My games');
@@ -42,4 +50,12 @@ export class MyGamesComponent implements OnInit {
         return this.profileService.getCurrentUserGames(this.limit, offset);
     }
 
+    getRsvpStatus(game: GameEvent) {
+        const user = game.playersById[
+            this.authService.profile.currentUser.id
+        ];
+        if (user && user.rsvp) {
+            return this.rsvpMessages[user.rsvp];
+        }
+    }
 }
