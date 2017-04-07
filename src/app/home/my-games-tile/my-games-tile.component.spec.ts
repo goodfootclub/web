@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SubsTileComponent } from './subs-tile.component';
+import { MyGamesTileComponent } from './my-games-tile.component';
 
-describe('SubsTileComponent', () => {
-  // let component: SubsTileComponent;
-  // let fixture: ComponentFixture<SubsTileComponent>;
+describe('MyGamesTileComponent', () => {
+  // let component: MyGamesTileComponent;
+  // let fixture: ComponentFixture<MyGamesTileComponent>;
   //
   // beforeEach(async(() => {
   //   TestBed.configureTestingModule({
-  //     declarations: [ SubsTileComponent ]
+  //     declarations: [ MyGamesTileComponent ]
   //   })
   //   .compileComponents();
   // }));
   //
   // beforeEach(() => {
-  //   fixture = TestBed.createComponent(SubsTileComponent);
+  //   fixture = TestBed.createComponent(MyGamesTileComponent);
   //   component = fixture.componentInstance;
   //   fixture.detectChanges();
   // });

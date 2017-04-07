@@ -3,9 +3,9 @@ import { GamesService } from '../../games/games.service';
 import { GameEvent } from '../../types';
 
 @Component({
-  selector: 'app-pickup-games-tile',
-  templateUrl: './pickup-games-tile.component.html',
-  styleUrls: ['./pickup-games-tile.component.styl']
+    selector: 'app-pickup-games-tile',
+    templateUrl: './pickup-games-tile.component.html',
+    styleUrls: ['./pickup-games-tile.component.styl']
 })
 export class PickupGamesTileComponent implements OnInit {
 

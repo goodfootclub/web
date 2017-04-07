@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PickupGamesTileComponent } from './pickup-games-tile.component';
+import { MyGamesComponent } from './my-games.component';
 
-describe('PickupGamesTileComponent', () => {
-  // let component: PickupGamesTileComponent;
-  // let fixture: ComponentFixture<PickupGamesTileComponent>;
+describe('MyGamesComponent', () => {
+  // let component: MyGamesComponent;
+  // let fixture: ComponentFixture<MyGamesComponent>;
   //
   // beforeEach(async(() => {
   //   TestBed.configureTestingModule({
-  //     declarations: [ PickupGamesTileComponent ]
+  //     declarations: [ MyGamesComponent ]
   //   })
   //   .compileComponents();
   // }));
   //
   // beforeEach(() => {
-  //   fixture = TestBed.createComponent(PickupGamesTileComponent);
+  //   fixture = TestBed.createComponent(MyGamesComponent);
   //   component = fixture.componentInstance;
   //   fixture.detectChanges();
   // });

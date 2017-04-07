@@ -1,14 +1,3 @@
-<div>
-    <h1>You have {{count}} teams!</h1>
-    <hr/>
-    <div *ngFor="let team of teams">
-        <h1> {{ team.name }} </h1>
-        <div class="info">
-            [{{ ['coed', 'female', 'male'][team.type] }}]
-            {{ team.info }}
-        </div>
-    </div>
-    <div *ngIf="count > 2">
-        <h1>... and {{ count - 2}} more</h1>
-    </div>
+<div class="container">
+    <h1>Search for teams!</h1>
 </div>

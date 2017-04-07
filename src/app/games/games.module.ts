@@ -8,10 +8,14 @@ import { LocationsService } from './locations.service';
 import { GamesComponent } from './games.component';
 import { GameAddComponent } from './game-add';
 import { GameDetailsComponent } from './game-details';
+import { MyGamesComponent } from './my-games/my-games.component';
+import { ProfileService } from '../profile/profile.service';
 
 
 const ROUTES: Routes = [{
     path: '', component: GamesComponent,
+}, {
+    path: 'my', component: MyGamesComponent,
 }, {
     path: 'add', component: GameAddComponent,
 }, {
@@ -25,11 +29,16 @@ const ROUTES: Routes = [{
         ReactiveFormsModule,
         RouterModule.forChild(ROUTES),
     ],
-    providers: [GamesService, LocationsService],
+    providers: [
+        GamesService,
+        LocationsService,
+        ProfileService,
+    ],
     declarations: [
         GameAddComponent,
         GameDetailsComponent,
         GamesComponent,
+        MyGamesComponent,
     ],
 })
 export class GamesModule { }

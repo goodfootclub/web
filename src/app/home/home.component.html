@@ -9,70 +9,26 @@
         <md-grid-tile colspan="2" [routerLink]="'/profile'">
             <app-profile-tile class="grid-tile" [user]="user"></app-profile-tile>
         </md-grid-tile>
-        <md-grid-tile [routerLink]="'/games'">
-            <app-games-tile class="grid-tile right-border"></app-games-tile>
+        <md-grid-tile [routerLink]="'/games/my'">
+            <app-my-games-tile class="grid-tile right-border" [user]="user"></app-my-games-tile>
         </md-grid-tile>
         <md-grid-tile [routerLink]="'/teams'">
-            <app-teams-tile class="grid-tile" [user]="user"></app-teams-tile>
+            <app-my-teams-tile class="grid-tile" [user]="user"></app-my-teams-tile>
         </md-grid-tile>
-        <md-grid-tile colspan="2" [routerLink]="'/games'">
+        <md-grid-tile colspan="2" [routerLink]="'/games/my'">
+            <app-my-next-game-tile class="grid-tile"></app-my-next-game-tile>
+        </md-grid-tile>
+        <md-grid-tile colspan="2" (click)="sendMail()">
             <app-pickup-games-tile class="grid-tile"></app-pickup-games-tile>
         </md-grid-tile>
         <md-grid-tile [routerLink]="'/players'">
             <app-players-tile class="grid-tile right-border"></app-players-tile>
         </md-grid-tile>
-        <md-grid-tile>
-            <app-subs-tile class="grid-tile"></app-subs-tile>
+        <md-grid-tile [routerLink]="'/teams'">
+            <app-teams-tile class="grid-tile"></app-teams-tile>
         </md-grid-tile>
         <md-grid-tile colspan="2" (click)="sendMail()">
             <app-contactus-tile class="grid-tile"></app-contactus-tile>
         </md-grid-tile>
     </md-grid-list>
 </md-card>
-
-<!--md-tab-group>
-    <md-tab label="Games">
-
-        <md-card
-            *ngFor="let game of games"
-            [routerLink]="['/games', game.id]"
-        >
-            <h1>{{ game.name }}</h1>
-            <hr>
-            <div>
-                <h1>{{ game.datetime | date:'EEEE, h:mm a' }}</h1>
-                <span class="info">
-                    {{ game.datetime | date:'MMMM d, y' }}
-                </span>
-            </div>
-            <div>
-                <h1>{{ game.location.name }}</h1>
-                <span class="info">
-                    {{ game.location.address }}
-                </span>
-            </div>
-        </md-card>
-
-        <app-load-more-block [canLoadMore]="canLoadMore" (loadMoreCallback)="loadMore()"></app-load-more-block>
-    </md-tab>
-    <md-tab label="Teams">
-        <md-card
-            class="fixed-height"
-            *ngFor="let team of user.managedTeams"
-            [routerLink]="['/teams', team.id]"
-        >
-            <h1> {{ team.name }} </h1>
-            <div class="info">
-                [{{ ['coed', 'female', 'male'][team.type] }}]
-                {{ team.info }}
-            </div>
-        </md-card>
-    </md-tab>
-
-    <md-tab>
-        <template md-tab-label>
-            Invites
-        </template>
-        Coming SOON™
-    </md-tab>
-</md-tab-group-->

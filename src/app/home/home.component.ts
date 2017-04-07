@@ -22,6 +22,12 @@ export class HomeComponent implements OnInit {
         });
     }
 
+    areThereAnyNextGames(): boolean {
+        return this.user
+            && this.user.games instanceof Array
+            && this.user.games.length > 0;
+    }
+
     sendMail() {
         // TODO mailTo:team@goodfoot.club
     }
