@@ -1,17 +1,50 @@
 @import "../../common/styles/variables.styl"
 
 .player-details
+    width 100%
+    height 100%
+
     display flex
-    flex-flow row wrap
+    flex-flow row
+    justify-content center
+    align-items center
 
-    .info
-        max-height none
-        margin-top auto
-        border-bottom none
+    .first-part
+        padding 24px
 
-    .name-container h1
-        color $general-font-color
+        .profile-pic
+            margin-left 0
 
-    .bio h1
-        font-size $title-font-size
+    .second-part
+        margin-left 10px
 
+        .info
+            max-height none
+            height auto
+            margin-top auto
+            border-bottom none
+
+            .name-container
+                height auto
+
+                .name
+                    padding-left 0
+
+                h1
+                    color $general-font-color
+
+        .bio
+            padding 0
+
+            h1
+                font-size $title-font-size
+
+            p
+                max-height 80px
+                font-size $general-font-size
+                color $sub-color
+                padding-left 12px
+                margin-bottom 0
+
+                overflow hidden
+                text-overflow ellipsis
