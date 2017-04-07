@@ -18,7 +18,7 @@
         <md-grid-tile colspan="2" [routerLink]="'/games/my'">
             <app-my-next-game-tile class="grid-tile"></app-my-next-game-tile>
         </md-grid-tile>
-        <md-grid-tile colspan="2" (click)="sendMail()">
+        <md-grid-tile colspan="2" [routerLink]="'/games'">
             <app-pickup-games-tile class="grid-tile"></app-pickup-games-tile>
         </md-grid-tile>
         <md-grid-tile [routerLink]="'/players'">
