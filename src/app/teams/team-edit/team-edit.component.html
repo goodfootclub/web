@@ -53,11 +53,11 @@
     </md-card>
 </form>
 <form [formGroup]="roaster">
-    <md-card>
+    <md-card class="roaster-block">
         <div class="header-content">
             <div class="header-text">
                 <h1>Roster</h1>
-                <button class="float-right"
+                <button
                     md-mini-fab
                     *ngIf="isPlayer || isManager"
                     [routerLink]="['/players', {targetTeam: team.id}]">
