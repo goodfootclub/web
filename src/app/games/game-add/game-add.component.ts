@@ -136,13 +136,15 @@ export class GameAddComponent {
         return location.name ? location.name : location;
     }
 
+    dateFromInputValue(val: {date: string, time: string}): Date {
+        let dt = new Date(`${val['date']}T${val['time']}`);
+        dt.setHours(dt.getHours() + dt.getTimezoneOffset() / 60);
+        return dt;
+    }
+
     onSubmit() {
-        const dates: string[] = this.form.value['dates'].map((val) => {
-            let dt = new Date(
-                `${val['date']}T${val['time']}`);
-            dt.setHours(dt.getHours() + dt.getTimezoneOffset() / 60);
-            return dt;
-        });
+        const dates: string[] = this.form.value['dates']
+            .map(this.dateFromInputValue);
         const selectedTeam = this.form.value['teams']['teamName'] as Team;
         const teamsArray = selectedTeam.id == null ? [] : [selectedTeam.id];
         const selectedLocation: Location =
@@ -167,7 +169,12 @@ export class GameAddComponent {
             control.controls[lastIndex]['controls'].date as FormControl;
         const previousTime: FormControl =
             control.controls[lastIndex]['controls'].time as FormControl;
-        const nextDate = new Date(previousDate.value);
+
+        const nextDate = this.dateFromInputValue({
+            date: previousDate.value,
+            time: previousTime.value,
+        });
+
         nextDate.setDate(nextDate.getDate() + 7);
         const nextDateStr = this.datePipe.transform(nextDate, 'yyyy-MM-dd');
         control.push(this.initMatchDate(nextDateStr, previousTime.value));
