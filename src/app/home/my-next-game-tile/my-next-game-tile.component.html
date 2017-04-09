@@ -2,10 +2,11 @@
     <h1>next game</h1>
     <div class="games-container" *ngIf="nextGame">
         <div class="rsvp-title" *ngIf="rsvpStatus"><span class="my-status">my status</span> <span class="rsvp-status">{{rsvpMessages[rsvpStatus]}}</span></div>
-        <div>
-            <h3>{{ nextGame.location.name }}</h3>
-            <h4>{{ nextGame.location.address }}</h4>
-            <span class="info">{{ nextGame.datetime | date:'EEEE, h:mm a' }}, {{ nextGame.datetime | date:'MMMM d, y' }}</span>
+        <div class="game-description">
+            <h3>{{ nextGame.datetime | date:'EEEE, h:mm a' }}, {{ nextGame.datetime | date:'MMMM d, y' }}</h3>
+            <h4>{{ nextGame.location.name }}</h4>
+            <span class="info">{{ nextGame.location.address }}</span>
+            <h4 class="game-name-h4">{{ nextGame.name }}</h4>
         </div>
     </div>
 </div>
