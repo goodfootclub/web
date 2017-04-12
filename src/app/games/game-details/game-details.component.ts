@@ -18,9 +18,11 @@ export class GameDetailsComponent implements OnInit {
     game: GameEvent;
     user: Player;
     rsvpMessages = {
-        2: 'In',
-        1: 'Maybe',
-        0: 'Out',
+        '2': 'In',
+        '1': 'Maybe',
+        '0': 'Out',
+        '-1': 'Invited',
+        '-2': 'Asked to join',
     };
 
     @ViewChild(MdRadioGroup)
