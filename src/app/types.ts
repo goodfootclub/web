@@ -86,6 +86,7 @@ export class GameEvent {
     location: Location;
     players?: Player[];
     playersById?: { [id: number]: Player };
+    rsvp?: number;
     // playersCount?: PlayersCount;
     // playersNeeded?: PlayersCount;
     teams?: Team[];

@@ -7,22 +7,28 @@
 <md-card>
     <md-grid-list cols="2" rowHeight="200px">
         <md-grid-tile colspan="2" [routerLink]="'/profile'">
-            <app-profile-tile class="grid-tile" [user]="user"></app-profile-tile>
+            <app-profile-tile class="grid-tile" [user]="user">
+            </app-profile-tile>
         </md-grid-tile>
         <md-grid-tile [routerLink]="'/games/my'">
-            <app-my-games-tile class="grid-tile right-border" [user]="user"></app-my-games-tile>
+            <app-my-games-tile class="grid-tile right-border">
+            </app-my-games-tile>
         </md-grid-tile>
         <md-grid-tile [routerLink]="'/teams'">
-            <app-my-teams-tile class="grid-tile" [user]="user"></app-my-teams-tile>
+            <app-my-teams-tile class="grid-tile" [user]="user">
+            </app-my-teams-tile>
         </md-grid-tile>
         <md-grid-tile colspan="2" [routerLink]="'/games/my'">
-            <app-my-next-game-tile class="grid-tile" [game]="userNextGame"></app-my-next-game-tile>
+            <app-my-next-game-tile class="grid-tile" [game]="userNextGame">
+            </app-my-next-game-tile>
         </md-grid-tile>
         <md-grid-tile colspan="2" [routerLink]="'/games'">
-            <app-pickup-games-tile class="grid-tile" [nextGames]="nextGames"></app-pickup-games-tile>
+            <app-pickup-games-tile class="grid-tile" [nextGames]="nextGames">
+            </app-pickup-games-tile>
         </md-grid-tile>
         <md-grid-tile [routerLink]="'/players'">
-            <app-players-tile class="grid-tile right-border"></app-players-tile>
+            <app-players-tile class="grid-tile right-border">
+            </app-players-tile>
         </md-grid-tile>
         <md-grid-tile [routerLink]="'/teams'">
             <app-teams-tile class="grid-tile"></app-teams-tile>

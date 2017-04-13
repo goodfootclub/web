@@ -32,7 +32,7 @@ export class MyNextGameTileComponent implements OnInit {
             const user = this.nextGame.playersById[
                 this.authService.profile.currentUser.id
                 ];
-            this.rsvpStatus = user.rsvp;
+            this.rsvpStatus = this.nextGame.rsvp;
         }
     }
 }

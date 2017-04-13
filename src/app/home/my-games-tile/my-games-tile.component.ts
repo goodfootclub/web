@@ -1,29 +1,28 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from '../../types';
+import { ProfileService } from 'app/profile/profile.service';
+
 
 @Component({
     selector: 'app-my-games-tile',
     templateUrl: './my-games-tile.component.html',
     styleUrls: [
         './my-games-tile.component.styl',
-    ]
+    ],
 })
 export class MyGamesTileComponent implements OnInit {
 
     count: number;
 
-    constructor() { }
+    constructor(private profile: ProfileService) { }
 
     ngOnInit() {
+        this.profile.getCurrentUserGames(1).subscribe(res => {
+            console.log(res);
+            if (res != null) {
+                this.count = res.count;
+            } else {
+                this.count = 0;
+            }
+        });
     }
-
-    @Input('user')
-    set user(user: User) {
-        if (!user || !(user.games instanceof Array)) {
-            this.count = null;
-        } else {
-            this.count = user.games.length;
-        }
-    }
-
 }

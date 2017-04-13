@@ -10,7 +10,7 @@ import { AuthService } from '../../auth/auth.service';
     templateUrl: './my-games.component.html',
     styleUrls: [
         './my-games.component.styl',
-    ]
+    ],
 })
 export class MyGamesComponent implements OnInit {
 
@@ -49,7 +49,8 @@ export class MyGamesComponent implements OnInit {
     }
 
     loadData(offset?: number): Observable<GameEvent[]> {
-        return this.profileService.getCurrentUserGames(this.limit, offset);
+        return this.profileService.getCurrentUserGames(this.limit, offset)
+            .map(res => res.results);
     }
 
     getRsvpStatus(game: GameEvent) {

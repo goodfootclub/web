@@ -45,13 +45,19 @@ export class ProfileService {
         });
     }
 
+    // FIXME: I think this belongs in GameService
+    // Also define type for search result... or move count somewhere...
     getCurrentUserGames(limit?: number, offset?: number):
-    Observable<GameEvent[]> {
+    Observable<{count?: number, results: GameEvent[]}> {
         const params: URLSearchParams = new URLSearchParams();
         if (limit) { params.set('limit', limit.toString()); }
         if (offset) { params.set('offset', offset.toString()); }
         return this.http.get('/api/games/my/', { search: params })
-            .map(res => res.json().results.map(data => new GameEvent(data)));
+            .map(res => {
+                let data = res.json();
+                data.results = data.results.map(item => new GameEvent(item));
+                return data;
+            });
     }
 
     update(data): Observable<User> {
