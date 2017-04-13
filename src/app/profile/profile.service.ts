@@ -8,7 +8,7 @@ import {
 } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
-import { User, GameEvent } from '../types';
+import { User, GameEvent, Team } from '../types';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
@@ -56,6 +56,20 @@ export class ProfileService {
             .map(res => {
                 let data = res.json();
                 data.results = data.results.map(item => new GameEvent(item));
+                return data;
+            });
+    }
+
+    // FIXME: same as "my games" above
+    getCurrentUserTeams(limit?: number, offset?: number):
+    Observable<{count?: number, results: Team[]}> {
+        const params: URLSearchParams = new URLSearchParams();
+        if (limit) { params.set('limit', limit.toString()); }
+        if (offset) { params.set('offset', offset.toString()); }
+        return this.http.get('/api/teams/my/', { search: params })
+            .map(res => {
+                let data = res.json();
+                data.results = data.results.map(item => new Team(item));
                 return data;
             });
     }

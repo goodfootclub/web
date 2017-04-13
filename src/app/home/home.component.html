@@ -14,11 +14,11 @@
             <app-my-games-tile class="grid-tile right-border">
             </app-my-games-tile>
         </md-grid-tile>
-        <md-grid-tile [routerLink]="'/teams'">
-            <app-my-teams-tile class="grid-tile" [user]="user">
+        <md-grid-tile [routerLink]="'/teams/my'">
+            <app-my-teams-tile class="grid-tile">
             </app-my-teams-tile>
         </md-grid-tile>
-        <md-grid-tile colspan="2" [routerLink]="'/games/my'">
+        <md-grid-tile colspan="2" [routerLink]="['/games', userNextGame?.id]">
             <app-my-next-game-tile class="grid-tile" [game]="userNextGame">
             </app-my-next-game-tile>
         </md-grid-tile>

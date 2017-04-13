@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ProfileService } from 'app/profile/profile.service';
+import { ProfileService } from 'app/profile';
 
 
 @Component({
@@ -17,7 +17,6 @@ export class MyGamesTileComponent implements OnInit {
 
     ngOnInit() {
         this.profile.getCurrentUserGames(1).subscribe(res => {
-            console.log(res);
             if (res != null) {
                 this.count = res.count;
             } else {

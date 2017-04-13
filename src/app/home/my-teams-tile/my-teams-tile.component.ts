@@ -1,29 +1,27 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { User } from '../../types';
+import { ProfileService } from 'app/profile';
+
 
 @Component({
-  selector: 'app-my-teams-tile',
-  templateUrl: './my-teams-tile.component.html',
-  styleUrls: [
-      './my-teams-tile.component.styl',
-  ]
+    selector: 'app-my-teams-tile',
+    templateUrl: './my-teams-tile.component.html',
+    styleUrls: [
+        './my-teams-tile.component.styl',
+    ],
 })
 export class MyTeamsTileComponent implements OnInit {
 
     count: number;
 
-    constructor() { }
+    constructor(private profile: ProfileService) { }
 
     ngOnInit() {
+        this.profile.getCurrentUserTeams(1).subscribe(res => {
+            if (res != null) {
+                this.count = res.count;
+            } else {
+                this.count = 0;
+            }
+        });
     }
-
-    @Input('user')
-    set user(user: User) {
-        if (!user || !(user.managedTeams instanceof Array)) {
-            this.count = null;
-        } else {
-            this.count = user.managedTeams.length;
-        }
-    }
-
 }

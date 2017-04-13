@@ -86,7 +86,7 @@ export class GameEvent {
     location: Location;
     players?: Player[];
     playersById?: { [id: number]: Player };
-    rsvp?: number;
+    rsvp?: RsvpStatus;
     // playersCount?: PlayersCount;
     // playersNeeded?: PlayersCount;
     teams?: Team[];
@@ -126,6 +126,7 @@ export class GameEvent {
         this.duration = data['duration'];
         this.datetime = [data['datetime']];
         this.location = new Location(data['location']);
+        this.rsvp = data['rsvp'];
 
         this.playersById = {};
 
@@ -250,6 +251,7 @@ export class Team {
     name: string;
     players?: Player[];
     playersInGame?: Player[];  // When team in a game
+    role?: PlayerRole;
     slotsFemale?: string;
     slotsMale?: string;
     type?: TeamType;
@@ -276,6 +278,7 @@ export class Team {
         this.id = data['id'];
         this.info = data['info'];
         this.name = data['name'];
+        this.role = data['role'];
         this.slotsFemale = data['slots_female'];
         this.slotsMale = data['slots_male'];
         this.type = data['type'];
