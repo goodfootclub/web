@@ -5,6 +5,7 @@ import {
     FormBuilder,
     Validators,
     FormControl,
+    AbstractControl,
 } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { DatePipe } from '@angular/common';
@@ -15,6 +16,18 @@ import { LocationsService } from '../locations.service';
 
 import 'rxjs/add/operator/debounceTime';
 import { ProfileService } from '../../profile/profile.service';
+
+
+declare class GameAddFormControls {
+    dates?: FormArray;
+    teams?: FormArray;
+    [key: string]: AbstractControl;
+};
+
+declare class GameAddFormGroup extends FormGroup {
+    controls: GameAddFormControls;
+}
+
 
 @Component({
     selector: 'app-game-add',
@@ -31,7 +44,7 @@ export class GameAddComponent {
             name: 'No team',
         } as Team;
     };
-    form: FormGroup;
+    form: GameAddFormGroup;
     locationAutoComplete: FormControl;
     locations: Location[];
     managedTeams: Team[] = [this.noTeam];
@@ -40,7 +53,7 @@ export class GameAddComponent {
     tzOffset = -new Date().getTimezoneOffset() / 60;
     tzName = `GMT${this.tzOffset >= 0 ? '+' : '-'}${this.tzOffset}`;
 
-    controls: any;
+    controls: GameAddFormControls;
     locationControls: {
         name: FormControl,
         address: FormControl,
@@ -123,13 +136,15 @@ export class GameAddComponent {
         return location.name ? location.name : location;
     }
 
+    dateFromInputValue(val: {date: string, time: string}): Date {
+        let dt = new Date(`${val['date']}T${val['time']}`);
+        dt.setHours(dt.getHours() + dt.getTimezoneOffset() / 60);
+        return dt;
+    }
+
     onSubmit() {
-        const dates: string[] = this.form.value['dates'].map((val) => {
-            let dt = new Date(
-                `${val['date']}T${val['time']}`);
-            dt.setHours(dt.getHours() + dt.getTimezoneOffset() / 60);
-            return dt;
-        });
+        const dates: string[] = this.form.value['dates']
+            .map(this.dateFromInputValue);
         const selectedTeam = this.form.value['teams']['teamName'] as Team;
         const teamsArray = selectedTeam.id == null ? [] : [selectedTeam.id];
         const selectedLocation: Location =
@@ -154,7 +169,12 @@ export class GameAddComponent {
             control.controls[lastIndex]['controls'].date as FormControl;
         const previousTime: FormControl =
             control.controls[lastIndex]['controls'].time as FormControl;
-        const nextDate = new Date(previousDate.value);
+
+        const nextDate = this.dateFromInputValue({
+            date: previousDate.value,
+            time: previousTime.value,
+        });
+
         nextDate.setDate(nextDate.getDate() + 7);
         const nextDateStr = this.datePipe.transform(nextDate, 'yyyy-MM-dd');
         control.push(this.initMatchDate(nextDateStr, previousTime.value));

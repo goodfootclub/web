@@ -5,6 +5,7 @@ import { GamesService } from '../games.service';
 import { AuthService } from '../../auth/auth.service';
 import { GameEvent, RsvpStatus, Player } from '../../types';
 import { MdRadioGroup } from '@angular/material';
+import { TitleService } from '../../title.service';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class GameDetailsComponent implements OnInit {
 
     constructor(
         private games: GamesService,
+        private titleService: TitleService,
         private route: ActivatedRoute,
         private router: Router,
         private auth: AuthService,
@@ -36,6 +38,7 @@ export class GameDetailsComponent implements OnInit {
         this.route.params.forEach((params: Params) => {
             let id = +params['id'];
             this.games.get(id).subscribe(game => {
+                this.titleService.setTitle(game.name);
                 this.user = game.playersById[
                     this.auth.profile.currentUser.id
                 ];
