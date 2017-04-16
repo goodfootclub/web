@@ -25,4 +25,7 @@
 
             & > div
                 background-color $hover-color
-                //border: 1px solid $main-theme-color
+
+    @media only screen and (max-width: $iphone-5), only screen and (max-device-width: $iphone-5)
+        & > h1
+            font-size $header-font-size
