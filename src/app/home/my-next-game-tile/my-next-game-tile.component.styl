@@ -39,17 +39,6 @@
             right 0px
             margin-top -20px
 
-            @media only screen and (max-width: $media-phone), only screen and (max-device-width: $media-phone)
-                display flex
-                flex-flow row wrap
-                justify-content center
-                align-items center
-                bottom 0px
-                margin-bottom 10px
-                padding 0 10px 0 0
-                max-width 100px
-                line-height 1
-
             & > span.my-status
                 font-size $uppercased-extra-small
                 color $sub-color
@@ -60,5 +49,31 @@
                 color $main-theme-color
                 text-transform uppercase
 
-                @media only screen and (max-width: $media-phone), only screen and (max-device-width: $media-phone)
+    @media only screen and (max-width: $media-phone), only screen and (max-device-width: $media-phone)
+        .games-container
+            & > .rsvp-title
+                display flex
+                flex-flow row wrap
+                justify-content center
+                align-items center
+                bottom 0px
+                margin-bottom 10px
+                padding 0 20px 0 0
+                max-width 100px
+                line-height 1
+
+                & > span.rsvp-status
                     font-size $subheader-font-size
+
+    @media only screen and (max-width: $iphone-5), only screen and (max-device-width: $iphone-5)
+        h1
+            font-size $header-font-size
+
+        .games-container
+            padding 5px 0 5px 0
+
+            h1, h2, h3, h4
+                font-size 1em
+
+            & > .rsvp-title > span.my-status
+                display none
