@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from '../../types';
-
 
 @Component({
   selector: 'app-players-tile',
@@ -11,7 +11,9 @@ export class PlayersTileComponent implements OnInit {
 
     playersCount = 0;
 
-    constructor() { }
+    constructor(
+        private router: Router,
+    ) { }
 
     ngOnInit() {
     }
@@ -21,5 +23,10 @@ export class PlayersTileComponent implements OnInit {
         if (players && players instanceof Array) {
             this.playersCount = players.length;
         }
+    }
+
+    @HostListener('click')
+    onClick() {
+        this.router.navigate(['/players']);
     }
 }

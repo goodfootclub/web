@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import { GameEvent, RsvpStatus } from '../../types';
 import { AuthService } from '../../auth/auth.service';
 
@@ -20,6 +21,7 @@ export class MyNextGameTileComponent implements OnInit {
 
     constructor(
         private authService: AuthService,
+        private router: Router,
     ) { }
 
     ngOnInit() {
@@ -31,5 +33,12 @@ export class MyNextGameTileComponent implements OnInit {
             this.nextGame = game;
             this.rsvpStatus = this.nextGame.rsvp;
         }
+    }
+
+    @HostListener('click')
+    onClick() {
+        const redirect =
+            this.nextGame ? ['/games', this.nextGame.id] : ['/games'];
+        this.router.navigate(redirect);
     }
 }

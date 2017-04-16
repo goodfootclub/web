@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import { GameEvent } from '../../types';
 
 @Component({
@@ -10,7 +11,9 @@ export class PickupGamesTileComponent implements OnInit {
 
     games: GameEvent[];
 
-    constructor() { }
+    constructor(
+        private router: Router,
+    ) { }
 
     ngOnInit() {
     }
@@ -18,5 +21,10 @@ export class PickupGamesTileComponent implements OnInit {
     @Input('nextGames')
     set nextGames(games: GameEvent[]) {
         this.games = games;
+    }
+
+    @HostListener('click')
+    onClick() {
+        this.router.navigate(['/games']);
     }
 }

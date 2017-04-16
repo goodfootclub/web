@@ -1,8 +1,12 @@
-<div class="container">
-    <div class="first-part">
+<div class="container" *ngIf="!loading">
+    <div class="first-part" *ngIf="count > 0">
         <span>{{count}}</span>
     </div>
-    <div class="second-part">
+    <div class="second-part" *ngIf="count > 0">
         <span>teams</span>
+    </div>
+    <div class="no-data" *ngIf="count == 0">
+        <p>You have no teams!</p>
+        <p>You can find or create one!</p>
     </div>
 </div>
