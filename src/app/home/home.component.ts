@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from 'app/profile';
 import { User, GameEvent } from 'app/types';
 import { GamesService } from '../games/games.service';
+import { PlayersService } from '../players/players.service';
 
 @Component({
     selector: 'app-home',
@@ -14,10 +15,12 @@ export class HomeComponent implements OnInit {
     user: User;
     userNextGame: GameEvent;
     nextGames: GameEvent[];
+    players: User[];
 
     constructor(
         private profile: ProfileService,
         private gamesService: GamesService,
+        private playersService: PlayersService,
     ) {}
 
     ngOnInit(): void {
@@ -34,9 +37,8 @@ export class HomeComponent implements OnInit {
         this.gamesService.all('', 2).subscribe(games => {
             this.nextGames = games;
         });
-    }
-
-    sendMail() {
-        // TODO mailTo:team@goodfoot.club
+        this.playersService.all().subscribe(players => {
+            this.players = players;
+        });
     }
 }
