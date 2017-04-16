@@ -16,3 +16,18 @@
         padding-left 10px
         font-size $title-font-size
         text-transform uppercase
+
+    @media only screen and (max-width: $iphone-5), only screen and (max-device-width: $iphone-5)
+        flex-flow column
+
+        .first-part
+            text-align center
+            width auto
+            height 50%
+
+        .second-part
+            padding-left 0px
+            font-size $header-font-size
+            height 50%
+            margin-top 15px
+            text-align center
