@@ -9,7 +9,6 @@ import { GamesComponent } from './games.component';
 import { GameAddComponent } from './game-add';
 import { GameDetailsComponent } from './game-details';
 import { MyGamesComponent } from './my-games/my-games.component';
-import { ProfileService } from '../profile/profile.service';
 
 
 const ROUTES: Routes = [{
@@ -32,7 +31,6 @@ const ROUTES: Routes = [{
     providers: [
         GamesService,
         LocationsService,
-        ProfileService,
     ],
     declarations: [
         GameAddComponent,
