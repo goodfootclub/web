@@ -32,7 +32,6 @@ const ROUTES: Routes = [{
     providers: [
         GamesService,
         LocationsService,
-        ProfileService,
     ],
     declarations: [
         GameAddComponent,
