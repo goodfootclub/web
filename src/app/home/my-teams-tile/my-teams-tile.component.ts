@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProfileService } from 'app/profile';
 
 
@@ -11,17 +12,33 @@ import { ProfileService } from 'app/profile';
 })
 export class MyTeamsTileComponent implements OnInit {
 
-    count: number;
+    count = 0;
+    loading = true;
 
-    constructor(private profile: ProfileService) { }
+    constructor(
+        private profile: ProfileService,
+        private router: Router,
+    ) { }
 
     ngOnInit() {
         this.profile.getCurrentUserTeams(1).subscribe(res => {
+            this.loading = false;
             if (res != null) {
                 this.count = res.count;
             } else {
                 this.count = 0;
             }
         });
+    }
+
+    @HostListener('click')
+    onClick() {
+        if (!this.loading) {
+            if (this.count > 0) {
+                this.router.navigate(['/teams/my']);
+            } else {
+                this.router.navigate(['/teams']);
+            }
+        }
     }
 }

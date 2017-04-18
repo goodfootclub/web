@@ -1,4 +1,5 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProfileService } from '../../profile/profile.service';
 import { User } from '../../types';
 
@@ -18,11 +19,17 @@ export class ProfileTileComponent implements OnChanges {
 
     constructor(
         private profile: ProfileService,
+        private router: Router,
     ) { }
 
     ngOnChanges(changes: SimpleChanges): void {
         if (this.user != null) {
             this.profilePicUrl = `url(${this.user.img})`;
         }
+    }
+
+    @HostListener('click')
+    onClick() {
+        this.router.navigate(['/profile']);
     }
 }
