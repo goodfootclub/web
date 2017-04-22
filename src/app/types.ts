@@ -56,6 +56,15 @@ export enum RsvpStatus {
     AskedToJoin = -2,
 }
 
+export class RsvpStatuses {
+    public static readonly RSVP_MESSAGES = {
+        [2]: 'In',
+        [1]: 'Maybe',
+        [0]: 'Out',
+        [-1]: 'Invited',
+        [-2]: 'Asked to join',
+    };
+}
 
 export enum SkillLevel {
     Beginner,

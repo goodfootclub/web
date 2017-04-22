@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TitleService } from '../../title.service';
 import { ProfileService } from '../../profile/profile.service';
-import { GameEvent } from '../../types';
+import { GameEvent, RsvpStatuses } from '../../types';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -18,13 +18,7 @@ export class MyGamesComponent implements OnInit {
 
     canLoadMore = true;
 
-    rsvpMessages = {
-        [2]: 'In',
-        [1]: 'Maybe',
-        [0]: 'Out',
-        [-1]: 'Invited',
-        [-2]: 'Asked to join',
-    };
+    rsvpMessages = RsvpStatuses.RSVP_MESSAGES;
 
     constructor(
         private profileService: ProfileService,

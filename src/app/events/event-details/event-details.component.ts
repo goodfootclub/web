@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { EventsService } from '../events.service';
 import { AuthService } from '../../auth/auth.service';
-import { GameEvent } from '../../types';
+import { GameEvent, RsvpStatuses } from '../../types';
 
 
 @Component({
@@ -16,11 +16,7 @@ export class EventDetailsComponent implements OnInit {
     event: GameEvent;
     editMode = false;
     user;
-    rsvpMessages = {
-        2: 'In',
-        1: 'Maybe',
-        0: 'Out',
-    };
+    rsvpMessages = RsvpStatuses.RSVP_MESSAGES;
 
     constructor(
         private events: EventsService,
