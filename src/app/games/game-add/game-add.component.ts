@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
     FormGroup,
     FormArray,
@@ -16,6 +16,7 @@ import { LocationsService } from '../locations.service';
 
 import 'rxjs/add/operator/debounceTime';
 import { ProfileService } from '../../profile/profile.service';
+import { Subject } from 'rxjs/Subject';
 
 
 declare class GameAddFormControls {
@@ -34,7 +35,7 @@ declare class GameAddFormGroup extends FormGroup {
     styleUrls: ['./game-add.component.styl'],
     templateUrl: './game-add.component.html',
 })
-export class GameAddComponent {
+export class GameAddComponent implements OnInit {
 
     get searchDebounceTime(): number { return 750; }
     get noTeam(): Team {
@@ -66,15 +67,17 @@ export class GameAddComponent {
         public games: GamesService,
         public router: Router,
         public route: ActivatedRoute,
-    ) {
-        _locations.all().subscribe(locations => {
+    ) {}
+
+    ngOnInit(): void {
+        this._locations.all().subscribe(locations => {
             this.locations = locations;
         });
         this.route.params.forEach((params: Params) => {
             this.targetTeam = +params['targetTeam'];
         });
         this.managedTeams =
-            this.managedTeams.concat(_profile.currentUser.managedTeams);
+            this.managedTeams.concat(this._profile.currentUser.managedTeams);
         this.form = this.formBuilder.group({
             location: this.formBuilder.group({
                 id: null,
@@ -103,17 +106,20 @@ export class GameAddComponent {
 
         this.controls['teams'].controls['teamName'].patchValue(
             this.managedTeams.find((team) =>
-                team.id === (this.targetTeam ? this.targetTeam : null)));
+            team.id === (this.targetTeam ? this.targetTeam : null)));
 
-        this.locationControls.name.valueChanges
-            .debounceTime(this.searchDebounceTime).subscribe(value => {
+        const _locationSubject: Subject<string> = new Subject();
+        this.locationControls.name.valueChanges.subscribe(value => {
             if (value instanceof Location) {
                 this.locationControls.address.patchValue(value.address);
             } else {
-                _locations.all(value).subscribe(locations => {
-                    this.locations = locations;
-                });
+                _locationSubject.next(value);
             }
+        });
+        _locationSubject.debounceTime(this.searchDebounceTime).subscribe(value => {
+            this._locations.all(value).subscribe(locations => {
+                this.locations = locations;
+            });
         });
     }
 

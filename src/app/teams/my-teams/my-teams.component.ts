@@ -9,9 +9,9 @@ import { AuthService } from '../../auth/auth.service';
 @Component({
     selector: 'app-my-teams',
     templateUrl: './my-teams.component.html',
-    // styleUrls: [
-    //     './my-teams.component.styl',
-    // ],
+    styleUrls: [
+        './my-teams.component.styl',
+    ],
 })
 export class MyTeamsComponent implements OnInit {
 

@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { GamesService } from '../games.service';
 import { AuthService } from '../../auth/auth.service';
-import { GameEvent, RsvpStatus, Player } from '../../types';
+import { GameEvent, RsvpStatus, Player, RsvpStatuses } from '../../types';
 import { MdRadioGroup } from '@angular/material';
 import { TitleService } from '../../title.service';
 
@@ -17,13 +17,7 @@ export class GameDetailsComponent implements OnInit {
 
     game: GameEvent;
     user: Player;
-    rsvpMessages = {
-        [2]: 'In',
-        [1]: 'Maybe',
-        [0]: 'Out',
-        [-1]: 'Invited',
-        [-2]: 'Asked to join',
-    };
+    rsvpMessages = RsvpStatuses.RSVP_MESSAGES;
 
     @ViewChild(MdRadioGroup)
     statusRadioBlock: MdRadioGroup;
