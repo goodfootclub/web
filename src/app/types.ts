@@ -86,7 +86,7 @@ export enum TeamType {
  */
 export class GameEvent {
     id: number;
-    datetime: string|string[];
+    datetime: string | string[];
     // datetime: Date;
     duration?: number; // Minutes
     description?: string;
