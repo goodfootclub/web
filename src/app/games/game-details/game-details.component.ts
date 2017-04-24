@@ -89,4 +89,11 @@ export class GameDetailsComponent implements OnInit {
             });
         });
     }
+
+    isAddPlayersVisible(): boolean {
+        if (this.game != null && this.game.organizer != null) {
+            return this.auth.profile.currentUser.id === this.game.organizer.id;
+        }
+        return false;
+    }
 }

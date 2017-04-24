@@ -18,10 +18,7 @@
 
 <md-card
     *ngFor="let player of players"
-    [routerLink]="
-        targetTeam?
-        ['/players', player.id, {targetTeam: targetTeam}] :
-        ['/players', player.id]">
+    (click)="openDetails(player)">
     <img [src]="player.img" alt="" class="player-pic">
     <div class="player-info">
         <h1> {{ player.firstName }} {{ player.lastName }} </h1>

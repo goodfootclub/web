@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
@@ -25,11 +25,13 @@ export class PlayersComponent implements OnInit {
 
     players: User[];
     targetTeam: number;
+    targetGame: number;
 
     constructor(
         public _players: PlayersService,
         public formBuilder: FormBuilder,
         public route: ActivatedRoute,
+        public router: Router,
         public title: TitleService,
     ) {
         title.setTitle('Players');
@@ -48,6 +50,7 @@ export class PlayersComponent implements OnInit {
 
         this.route.params.forEach((params: Params) => {
             this.targetTeam = +params['targetTeam'];
+            this.targetGame = +params['targetGame'];
         });
 
         this.loadData().subscribe(players => {
@@ -66,5 +69,15 @@ export class PlayersComponent implements OnInit {
 
     loadData(search?: string, offset?: number): Observable<User[]> {
         return this._players.all(search ? search : '', this.limit, offset);
+    }
+
+    openDetails(player: User) {
+        const link: any = ['/players', player.id];
+        if (this.targetTeam) {
+            link.push({ targetTeam: this.targetTeam });
+        } else if(this.targetGame) {
+            link.push({ targetGame: this.targetGame });
+        }
+        this.router.navigate(link);
     }
 }

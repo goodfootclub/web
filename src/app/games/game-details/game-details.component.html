@@ -47,6 +47,12 @@
     <div class="header-content">
         <div class="header-text">
             <p>Players</p>
+            <button
+                *ngIf="isAddPlayersVisible()"
+                md-mini-fab
+                [routerLink]="['/players', {targetGame: game?.id}]">
+                <md-icon>add</md-icon>
+            </button>
         </div>
     </div>
     <hr/>

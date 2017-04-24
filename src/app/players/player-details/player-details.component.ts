@@ -14,6 +14,7 @@ export class PlayerDetailsComponent implements OnInit {
 
     player: User;
     targetTeam: number;
+    targetGame: number;
 
     constructor(
         public players: PlayersService,
@@ -28,17 +29,26 @@ export class PlayerDetailsComponent implements OnInit {
         this.route.params.forEach((params: Params) => {
             let id = +params['id'];
             this.targetTeam = +params['targetTeam'];
+            this.targetGame = +params['targetGame'];
             this.players.get(id).subscribe(player => {
                 this.player = player;
             });
         });
     }
 
+    isInviteVisible(): boolean {
+        return !!(this.targetGame || this.targetTeam);
+    }
+
     invite() {
-        this.players.inviteToTeam(this.targetTeam, this.player.id).subscribe(
-            response => {
-                this.router.navigate(['/teams', this.targetTeam]);
-            },
-        );
+        if (this.targetTeam) {
+            this.players.inviteToTeam(this.targetTeam, this.player.id)
+                .subscribe(
+                    () => this.router.navigate(['/teams', this.targetTeam]));
+        } else if (this.targetGame) {
+            this.players.inviteToGame(this.targetGame, this.player.id)
+                .subscribe(
+                    () => this.router.navigate(['/games', this.targetGame]));
+        }
     }
 }
