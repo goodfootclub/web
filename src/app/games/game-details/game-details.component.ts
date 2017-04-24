@@ -96,4 +96,12 @@ export class GameDetailsComponent implements OnInit {
         }
         return false;
     }
+
+    addPlayer() {
+        const params: any = { targetGame: this.game.id };
+        if (this.game.teams && this.game.teams.length > 0) {
+            params.targetTeam = this.game.teams[0].id;
+        }
+        this.router.navigate(['/players', params]);
+    }
 }

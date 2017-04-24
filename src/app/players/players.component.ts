@@ -72,12 +72,10 @@ export class PlayersComponent implements OnInit {
     }
 
     openDetails(player: User) {
-        const link: any = ['/players', player.id];
-        if (this.targetTeam) {
-            link.push({ targetTeam: this.targetTeam });
-        } else if(this.targetGame) {
-            link.push({ targetGame: this.targetGame });
-        }
+        const params: any = {};
+        const link: any = ['/players', player.id, params];
+        if (this.targetTeam) { params.targetTeam = this.targetTeam; }
+        if (this.targetGame) { params.targetGame = this.targetGame; }
         this.router.navigate(link);
     }
 }

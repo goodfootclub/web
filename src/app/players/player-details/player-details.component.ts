@@ -41,14 +41,16 @@ export class PlayerDetailsComponent implements OnInit {
     }
 
     invite() {
-        if (this.targetTeam) {
+        if (this.targetGame) {
+            const teamMember = this.targetTeam ? 0 : 2;
+            this.players.inviteToGame(this.targetGame,
+                this.player.id,
+                teamMember).subscribe(
+                    () => this.router.navigate(['/games', this.targetGame]));
+        } else if (this.targetTeam) {
             this.players.inviteToTeam(this.targetTeam, this.player.id)
                 .subscribe(
                     () => this.router.navigate(['/teams', this.targetTeam]));
-        } else if (this.targetGame) {
-            this.players.inviteToGame(this.targetGame, this.player.id)
-                .subscribe(
-                    () => this.router.navigate(['/games', this.targetGame]));
         }
     }
 }
