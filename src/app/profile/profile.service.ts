@@ -1,8 +1,7 @@
-import { Injectable, Inject, forwardRef } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
     Http,
     Request,
-    CookieXSRFStrategy,
     RequestMethod,
     URLSearchParams,
 } from '@angular/http';
@@ -79,15 +78,11 @@ export class ProfileService {
         delete data['firstName'];
         data['last_name'] = data.lastName;
         delete data['lastName'];
-
-        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
         let request = new Request({
             method: RequestMethod.Put,
             url: `/api/users/me/`,
             body: data,
         });
-        csrf.configureRequest(request);
-
         return this.http.request(request).map(response => {
             this.currentUser = new User(response.json());
             return this.currentUser;

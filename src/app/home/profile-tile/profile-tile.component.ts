@@ -1,4 +1,10 @@
-import { Component, Input, OnChanges, SimpleChanges, HostListener } from '@angular/core';
+import {
+    Component,
+    Input,
+    OnChanges,
+    SimpleChanges,
+    HostListener,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { ProfileService } from '../../profile/profile.service';
 import { User } from '../../types';
@@ -8,7 +14,7 @@ import { User } from '../../types';
   templateUrl: './profile-tile.component.html',
   styleUrls: [
       './profile-tile.component.styl',
-  ]
+  ],
 })
 export class ProfileTileComponent implements OnChanges {
 

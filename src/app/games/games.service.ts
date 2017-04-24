@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {
     Http,
     Request,
-    CookieXSRFStrategy,
     RequestMethod,
     URLSearchParams,
 } from '@angular/http';
@@ -41,14 +40,11 @@ export class GamesService {
     }
 
     create(data): Observable<GameEvent> {
-        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
         let request = new Request({
             method: RequestMethod.Post,
             url: `/api/games/`,
             body: data,
         });
-        csrf.configureRequest(request);
-
         return this.http.request(request).map(res => {
             return new GameEvent(res.json());
         }).catch((err, caught) => {
@@ -61,8 +57,6 @@ export class GamesService {
         player: Player,
         status: RsvpStatus,
     ): Observable<any> {
-        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
-
         let request = new Request({
             method: RequestMethod.Put,
             url: `/api/games/${game.id}/players/${player.rsvpId}/`,
@@ -72,15 +66,10 @@ export class GamesService {
                 'team': player.team,
             },
         });
-
-        csrf.configureRequest(request);
-
         return this.http.request(request);
     };
 
     addPlayer(game: GameEvent, user: User): Observable<any> {
-        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
-
         let request = new Request({
             method: RequestMethod.Post,
             url: `/api/games/${game.id}/players/`,
@@ -89,22 +78,14 @@ export class GamesService {
                 'rsvp': RsvpStatus.Going,
             },
         });
-
-        csrf.configureRequest(request);
-
         return this.http.request(request);
     };
 
     removePlayer(game: GameEvent, player: Player): Observable<any> {
-        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
-
         let request = new Request({
             method: RequestMethod.Delete,
             url: `/api/games/${game.id}/players/${player.rsvpId}/`,
         });
-
-        csrf.configureRequest(request);
-
         return this.http.request(request);
     };
 

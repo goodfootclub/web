@@ -1,11 +1,18 @@
-import { Component, Input, OnInit, HostListener } from '@angular/core';
+import {
+    Component,
+    Input,
+    OnInit,
+    HostListener,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../types';
 
 @Component({
   selector: 'app-players-tile',
   templateUrl: './players-tile.component.html',
-  styleUrls: ['./players-tile.component.styl']
+  styleUrls: [
+      './players-tile.component.styl',
+  ],
 })
 export class PlayersTileComponent implements OnInit {
 

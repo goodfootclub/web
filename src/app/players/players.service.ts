@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {
     Http,
     Request,
-    CookieXSRFStrategy,
     RequestMethod,
     URLSearchParams,
 } from '@angular/http';
@@ -40,14 +39,11 @@ export class PlayersService {
     }
 
     inviteToTeam(teamId: number, playerId: number): Observable<any> {
-        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
         let request = new Request({
             method: RequestMethod.Post,
             url: `/api/teams/${teamId}/players/`,
             body: { id: playerId, role: PlayerRole.Invited },
         });
-        csrf.configureRequest(request);
-
         return this.http.request(request).catch((err, caught) => {
             throw err;
         });

@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './teams-tile.component.html',
   styleUrls: [
       './teams-tile.component.styl',
-  ]
+  ],
 })
 export class TeamsTileComponent implements OnInit {
 
