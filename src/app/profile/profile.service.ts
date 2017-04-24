@@ -8,6 +8,7 @@ import {
 
 import { Observable } from 'rxjs/Observable';
 import { User, GameEvent, Team } from '../types';
+import { AppToastyService } from '../common/services/toasty.service';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
@@ -22,7 +23,8 @@ export class ProfileService {
     currentUser: User;
 
     constructor(
-        public http: Http,
+        private http: Http,
+        private toastyService: AppToastyService,
     ) {}
 
     /**
@@ -84,6 +86,7 @@ export class ProfileService {
             body: data,
         });
         return this.http.request(request).map(response => {
+            this.toastyService.info('User info updated!');
             this.currentUser = new User(response.json());
             return this.currentUser;
         }).catch((err, caught) => {

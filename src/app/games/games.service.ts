@@ -9,6 +9,7 @@ import {
 import { Observable } from 'rxjs/Observable';
 
 import { GameEvent, RsvpStatus, Player, User } from 'app/types';
+import { AppToastyService } from '../common/services/toasty.service';
 
 
 @Injectable()
@@ -16,6 +17,7 @@ export class GamesService {
 
     constructor(
         private http: Http,
+        private toastyService: AppToastyService,
     ) { }
 
     all(search?: string, limit?: number, offset?: number):
@@ -46,6 +48,7 @@ export class GamesService {
             body: data,
         });
         return this.http.request(request).map(res => {
+            this.toastyService.info('New game created!');
             return new GameEvent(res.json());
         }).catch((err, caught) => {
             throw err;
@@ -66,7 +69,9 @@ export class GamesService {
                 'team': player.team,
             },
         });
-        return this.http.request(request);
+        return this.http.request(request).do(() => {
+            this.toastyService.info('Status changed!');
+        });
     };
 
     addPlayer(game: GameEvent, user: User): Observable<any> {
@@ -78,7 +83,9 @@ export class GamesService {
                 'rsvp': RsvpStatus.Going,
             },
         });
-        return this.http.request(request);
+        return this.http.request(request).do(() => {
+            this.toastyService.info('Player added!');
+        });
     };
 
     removePlayer(game: GameEvent, player: Player): Observable<any> {
@@ -86,7 +93,9 @@ export class GamesService {
             method: RequestMethod.Delete,
             url: `/api/games/${game.id}/players/${player.rsvpId}/`,
         });
-        return this.http.request(request);
+        return this.http.request(request).do(() => {
+            this.toastyService.info('Player removed!');
+        });
     };
 
 }

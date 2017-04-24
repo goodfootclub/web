@@ -9,6 +9,7 @@ import {
 import { Observable } from 'rxjs/Observable';
 
 import { Team, PlayerRole, Player, GameEvent } from 'app/types';
+import { AppToastyService } from '../common/services/toasty.service';
 
 
 @Injectable()
@@ -16,6 +17,7 @@ export class TeamsService {
 
     constructor(
         private http: Http,
+        private toastyService: AppToastyService,
     ) { }
 
 
@@ -63,11 +65,15 @@ export class TeamsService {
     }
 
     create(data): Observable<Team> {
-        return this.createOrUpdate(data, RequestMethod.Post);
+        return this.createOrUpdate(data, RequestMethod.Post).do(() => {
+            this.toastyService.info('Team created!');
+        });
     }
 
     update(data): Observable<Team> {
-        return this.createOrUpdate(data, RequestMethod.Put);
+        return this.createOrUpdate(data, RequestMethod.Put).do(() => {
+            this.toastyService.info('Team updated!');
+        });
     }
 
     updateTeamPlayer(teamId: number,
@@ -77,7 +83,9 @@ export class TeamsService {
             url: `/api/teams/${teamId}/players/${playerId}`,
             body: data,
         });
-        return this.http.request(request).map(res => new Player(res.json()));
+        return this.http.request(request).do(() => {
+            this.toastyService.info('Player updated!');
+        }).map(res => new Player(res.json()));
     }
 
     excludeTeamPlayer(teamId: number, playerId: number): Observable<any> {
@@ -85,7 +93,9 @@ export class TeamsService {
             method: RequestMethod.Delete,
             url: `/api/teams/${teamId}/players/${playerId}`,
         });
-        return this.http.request(request);
+        return this.http.request(request).do(() => {
+            this.toastyService.info('Player excluded!');
+        });
     }
 
     askToJoin(teamId: number, playerId: number): Observable<any> {
@@ -95,7 +105,9 @@ export class TeamsService {
             url: `/api/teams/${teamId}/players/`,
             body: { id: playerId, role: PlayerRole.RequestedToJoin },
         });
-        return this.http.request(request).catch((err, caught) => {
+        return this.http.request(request).do(() => {
+            this.toastyService.info('Join request sent!');
+        }).catch((err, caught) => {
             throw err;
         });
     }

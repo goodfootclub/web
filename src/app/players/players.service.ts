@@ -9,6 +9,7 @@ import {
 import { Observable } from 'rxjs/Observable';
 
 import { User, PlayerRole } from 'app/types';
+import { AppToastyService } from '../common/services/toasty.service';
 
 
 @Injectable()
@@ -16,6 +17,7 @@ export class PlayersService {
 
     constructor(
         private http: Http,
+        private toastyService: AppToastyService,
     ) { }
 
     all(search?: string, limit?: number, offset?: number): Observable<User[]> {
@@ -44,7 +46,9 @@ export class PlayersService {
             url: `/api/teams/${teamId}/players/`,
             body: { id: playerId, role: PlayerRole.Invited },
         });
-        return this.http.request(request).catch((err, caught) => {
+        return this.http.request(request).do(() => {
+            this.toastyService.info('Player invited!');
+        }).catch((err, caught) => {
             throw err;
         });
     }

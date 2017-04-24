@@ -1,7 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { ToastyService, ToastyConfig, ToastOptions } from 'ng2-toasty';
 
-
 @Injectable()
 export class AppToastyService implements OnInit {
 
