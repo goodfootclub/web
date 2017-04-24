@@ -15,6 +15,7 @@ import { ProfileService } from './profile';
 import { SidenavComponent } from './sidenav';
 import { TitleService } from './title.service';
 import { ErrorHandlingModule, FourxxErrorComponent } from './error-handling';
+import { WindowRefService } from './common/services/window.service';
 
 
 export const ROUTES: Routes = [{
@@ -74,6 +75,7 @@ export const ROUTES: Routes = [{
         ProfileService,
         SidenavComponent,
         TitleService,
+        WindowRefService,
     ],
     bootstrap: [AppComponent],
 })

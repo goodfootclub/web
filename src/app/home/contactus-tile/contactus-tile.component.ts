@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { Router } from '@angular/router';
+import { WindowRefService } from '../../common/services/window.service';
 
 
 @Component({
@@ -12,9 +12,15 @@ import { Router } from '@angular/router';
 export class ContactusTileComponent implements OnInit {
 
     constructor(
-        private router: Router,
+        private windowRef: WindowRefService,
     ) { }
 
     ngOnInit() {
+    }
+
+    @HostListener('click')
+    onClick() {
+        this.windowRef.window.location.href =
+            'https://facebook.com/goodfootclub';
     }
 }
