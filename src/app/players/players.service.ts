@@ -53,18 +53,15 @@ export class PlayersService {
         });
     }
 
-    inviteToGame(gameId: number,
-                 playerId: number,
-                 teamId?: number): Observable<any> {
-        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
-        let request = new Request({
-            method: RequestMethod.Post,
-            url: `/api/games/${gameId}/players/`,
-            body: { id: playerId, rsvp: PlayerRole.Invited, team: teamId },
-        });
-        csrf.configureRequest(request);
-
-        return this.http.request(request).catch((err, caught) => {
+    inviteToGame(
+        gameId: number,
+        playerId: number,
+        teamId?: number,
+    ): Observable<any> {
+        return this.http.post(
+            `/api/games/${gameId}/players/`,
+            { id: playerId, rsvp: PlayerRole.Invited, team: teamId },
+        ).catch((err, caught) => {
             throw err;
         });
     }
