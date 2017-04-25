@@ -86,7 +86,7 @@ export class ProfileService {
             body: data,
         });
         return this.http.request(request).map(response => {
-            this.toastyService.info('User info updated!');
+            this.toastyService.success('User info updated!');
             this.currentUser = new User(response.json());
             return this.currentUser;
         }).catch((err, caught) => {

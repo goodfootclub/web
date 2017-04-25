@@ -66,13 +66,13 @@ export class TeamsService {
 
     create(data): Observable<Team> {
         return this.createOrUpdate(data, RequestMethod.Post).do(() => {
-            this.toastyService.info('Team created!');
+            this.toastyService.success('Team created!');
         });
     }
 
     update(data): Observable<Team> {
         return this.createOrUpdate(data, RequestMethod.Put).do(() => {
-            this.toastyService.info('Team updated!');
+            this.toastyService.success('Team updated!');
         });
     }
 
@@ -84,7 +84,7 @@ export class TeamsService {
             body: data,
         });
         return this.http.request(request).do(() => {
-            this.toastyService.info('Player updated!');
+            this.toastyService.success('Player updated!');
         }).map(res => new Player(res.json()));
     }
 
@@ -94,7 +94,7 @@ export class TeamsService {
             url: `/api/teams/${teamId}/players/${playerId}`,
         });
         return this.http.request(request).do(() => {
-            this.toastyService.info('Player excluded!');
+            this.toastyService.success('Player excluded!');
         });
     }
 
@@ -106,7 +106,7 @@ export class TeamsService {
             body: { id: playerId, role: PlayerRole.RequestedToJoin },
         });
         return this.http.request(request).do(() => {
-            this.toastyService.info('Join request sent!');
+            this.toastyService.success('Join request sent!');
         }).catch((err, caught) => {
             throw err;
         });

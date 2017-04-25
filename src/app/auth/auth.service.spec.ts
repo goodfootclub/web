@@ -12,6 +12,7 @@ import {
 } from '@angular/router';
 import { AuthService } from './auth.service';
 import { ProfileService } from '../profile';
+import { AppToastyService } from '../common/services/toasty.service';
 
 
 class HttpStub {
@@ -39,6 +40,10 @@ class RouterStub {
     }
 }
 
+class AppToastyServiceStub {
+    success(message: string, title?: string): void {}
+}
+
 describe('Service: Auth', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -48,6 +53,7 @@ describe('Service: Auth', () => {
                 ProfileService,
                 { provide: Http, useClass: HttpStub },
                 { provide: Router, useClass: RouterStub },
+                { provide: AppToastyService, useClass: AppToastyServiceStub },
             ],
         });
     });

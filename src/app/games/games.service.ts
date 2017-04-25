@@ -48,7 +48,7 @@ export class GamesService {
             body: data,
         });
         return this.http.request(request).map(res => {
-            this.toastyService.info('New game created!');
+            this.toastyService.success('New game created!');
             return new GameEvent(res.json());
         }).catch((err, caught) => {
             throw err;
@@ -70,7 +70,7 @@ export class GamesService {
             },
         });
         return this.http.request(request).do(() => {
-            this.toastyService.info('Status changed!');
+            this.toastyService.success('Status changed!');
         });
     };
 
@@ -84,7 +84,7 @@ export class GamesService {
             },
         });
         return this.http.request(request).do(() => {
-            this.toastyService.info('Player added!');
+            this.toastyService.success('Player added!');
         });
     };
 
@@ -94,7 +94,7 @@ export class GamesService {
             url: `/api/games/${game.id}/players/${player.rsvpId}/`,
         });
         return this.http.request(request).do(() => {
-            this.toastyService.info('Player removed!');
+            this.toastyService.success('Player removed!');
         });
     };
 

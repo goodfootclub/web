@@ -47,7 +47,7 @@ export class PlayersService {
             body: { id: playerId, role: PlayerRole.Invited },
         });
         return this.http.request(request).do(() => {
-            this.toastyService.info('Player invited!');
+            this.toastyService.success('Player invited!');
         }).catch((err, caught) => {
             throw err;
         });
