@@ -38,7 +38,7 @@ export class ProfileService {
             this.currentUser = new User(response.json());
             return this.currentUser;
         }).catch((err, caught) => {
-            if (err.status === 403) {
+            if (err.status === 401 || err.status === 403) {
                 this.currentUser = null;
                 return Observable.of(null);
             };
