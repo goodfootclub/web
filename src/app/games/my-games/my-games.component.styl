@@ -1,13 +1,20 @@
 @import "../../common/styles/variables.styl"
 
-.game-header
-    width 100%
-    display inline-block
+.game-group
+    margin-top 10px
 
-    & > h1
-        float left
+    .game-group-title
+        text-align center
+        text-transform uppercase
 
-    & > span.rsvp-status
-        float right
-        line-height 1
-        color $main-theme-color
+    .game-header
+        width 100%
+        display inline-block
+
+        & > h1
+            float left
+
+        & > span.rsvp-status
+            float right
+            line-height 1
+            color $main-theme-color
