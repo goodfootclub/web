@@ -5,7 +5,7 @@ import { User } from '../../types';
 @Component({
   selector: 'app-players-tile',
   templateUrl: './players-tile.component.html',
-  styleUrls: ['./players-tile.component.styl']
+  styleUrls: ['./players-tile.component.styl'],
 })
 export class PlayersTileComponent implements OnInit {
 

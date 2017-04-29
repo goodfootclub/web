@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
     FormGroup,
     FormArray,
@@ -116,10 +116,11 @@ export class GameAddComponent implements OnInit {
                 _locationSubject.next(value);
             }
         });
-        _locationSubject.debounceTime(this.searchDebounceTime).subscribe(value => {
-            this._locations.all(value).subscribe(locations => {
-                this.locations = locations;
-            });
+        _locationSubject.debounceTime(this.searchDebounceTime)
+            .subscribe(value => {
+                this._locations.all(value).subscribe(locations => {
+                    this.locations = locations;
+                });
         });
     }
 

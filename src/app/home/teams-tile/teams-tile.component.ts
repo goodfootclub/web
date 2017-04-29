@@ -4,9 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-teams-tile',
   templateUrl: './teams-tile.component.html',
-  styleUrls: [
-      './teams-tile.component.styl',
-  ]
+  styleUrls: ['./teams-tile.component.styl'],
 })
 export class TeamsTileComponent implements OnInit {
 
