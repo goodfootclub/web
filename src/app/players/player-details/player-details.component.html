@@ -1,7 +1,7 @@
 <md-toolbar>
     <app-back-button></app-back-button>
     <app-title></app-title>
-    <button md-button color="primary" (click)="invite()">
+    <button md-button color="primary" (click)="invite()" *ngIf="isInviteVisible()">
         invite
     </button>
 </md-toolbar>

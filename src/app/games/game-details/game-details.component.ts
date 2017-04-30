@@ -89,4 +89,19 @@ export class GameDetailsComponent implements OnInit {
             });
         });
     }
+
+    isAddPlayersVisible(): boolean {
+        if (this.game != null && this.game.organizer != null) {
+            return this.auth.profile.currentUser.id === this.game.organizer.id;
+        }
+        return false;
+    }
+
+    addPlayer() {
+        const params: any = { targetGame: this.game.id };
+        if (this.game.teams && this.game.teams.length > 0) {
+            params.targetTeam = this.game.teams[0].id;
+        }
+        this.router.navigate(['/players', params]);
+    }
 }

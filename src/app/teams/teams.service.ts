@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {
     Http,
     Request,
-    CookieXSRFStrategy,
     RequestMethod,
     URLSearchParams,
 } from '@angular/http';
@@ -10,6 +9,7 @@ import {
 import { Observable } from 'rxjs/Observable';
 
 import { Team, PlayerRole, Player, GameEvent } from 'app/types';
+import { AppToastyService } from '../common/services/toasty.service';
 
 
 @Injectable()
@@ -17,6 +17,7 @@ export class TeamsService {
 
     constructor(
         private http: Http,
+        private toastyService: AppToastyService,
     ) { }
 
 
@@ -49,7 +50,6 @@ export class TeamsService {
     }
 
     createOrUpdate(data, method: RequestMethod): Observable<Team> {
-        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
         const url = method === RequestMethod.Put ?
             `/api/teams/${data.id}` : `/api/teams/`;
         let request = new Request({
@@ -57,8 +57,6 @@ export class TeamsService {
             url: url,
             body: data,
         });
-        csrf.configureRequest(request);
-
         return this.http.request(request).map(res => {
             return new Team(res.json());
         }).catch((err, caught) => {
@@ -67,46 +65,49 @@ export class TeamsService {
     }
 
     create(data): Observable<Team> {
-        return this.createOrUpdate(data, RequestMethod.Post);
+        return this.createOrUpdate(data, RequestMethod.Post).do(() => {
+            this.toastyService.success('Team created!');
+        });
     }
 
     update(data): Observable<Team> {
-        return this.createOrUpdate(data, RequestMethod.Put);
+        return this.createOrUpdate(data, RequestMethod.Put).do(() => {
+            this.toastyService.success('Team updated!');
+        });
     }
 
     updateTeamPlayer(teamId: number,
                      playerId: number, data): Observable<Player> {
-        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
         let request = new Request({
             method: RequestMethod.Put,
             url: `/api/teams/${teamId}/players/${playerId}`,
             body: data,
         });
-        csrf.configureRequest(request);
-        return this.http.request(request).map(res => new Player(res.json()));
+        return this.http.request(request).do(() => {
+            this.toastyService.success('Player updated!');
+        }).map(res => new Player(res.json()));
     }
 
     excludeTeamPlayer(teamId: number, playerId: number): Observable<any> {
-        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
         let request = new Request({
             method: RequestMethod.Delete,
             url: `/api/teams/${teamId}/players/${playerId}`,
         });
-        csrf.configureRequest(request);
-        return this.http.request(request);
+        return this.http.request(request).do(() => {
+            this.toastyService.success('Player excluded!');
+        });
     }
 
     askToJoin(teamId: number, playerId: number): Observable<any> {
         // FIXME: dirty example needs more work @bsko
-        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
         let request = new Request({
             method: RequestMethod.Post,
             url: `/api/teams/${teamId}/players/`,
             body: { id: playerId, role: PlayerRole.RequestedToJoin },
         });
-        csrf.configureRequest(request);
-
-        return this.http.request(request).catch((err, caught) => {
+        return this.http.request(request).do(() => {
+            this.toastyService.success('Join request sent!');
+        }).catch((err, caught) => {
             throw err;
         });
     }

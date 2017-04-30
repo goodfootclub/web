@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {
     Http,
     Request,
-    CookieXSRFStrategy,
     RequestMethod,
     URLSearchParams,
 } from '@angular/http';
@@ -10,6 +9,7 @@ import {
 import { Observable } from 'rxjs/Observable';
 
 import { User, PlayerRole } from 'app/types';
+import { AppToastyService } from '../common/services/toasty.service';
 
 
 @Injectable()
@@ -17,6 +17,7 @@ export class PlayersService {
 
     constructor(
         private http: Http,
+        private toastyService: AppToastyService,
     ) { }
 
     all(search?: string, limit?: number, offset?: number): Observable<User[]> {
@@ -40,15 +41,27 @@ export class PlayersService {
     }
 
     inviteToTeam(teamId: number, playerId: number): Observable<any> {
-        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
         let request = new Request({
             method: RequestMethod.Post,
             url: `/api/teams/${teamId}/players/`,
             body: { id: playerId, role: PlayerRole.Invited },
         });
-        csrf.configureRequest(request);
+        return this.http.request(request).do(() => {
+            this.toastyService.success('Player invited!');
+        }).catch((err, caught) => {
+            throw err;
+        });
+    }
 
-        return this.http.request(request).catch((err, caught) => {
+    inviteToGame(
+        gameId: number,
+        playerId: number,
+        teamId?: number,
+    ): Observable<any> {
+        return this.http.post(
+            `/api/games/${gameId}/players/`,
+            { id: playerId, rsvp: PlayerRole.Invited, team: teamId },
+        ).catch((err, caught) => {
             throw err;
         });
     }

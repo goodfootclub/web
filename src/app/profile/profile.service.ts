@@ -1,14 +1,14 @@
-import { Injectable, Inject, forwardRef } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
     Http,
     Request,
-    CookieXSRFStrategy,
     RequestMethod,
     URLSearchParams,
 } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import { User, GameEvent, Team } from '../types';
+import { AppToastyService } from '../common/services/toasty.service';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
@@ -23,7 +23,8 @@ export class ProfileService {
     currentUser: User;
 
     constructor(
-        public http: Http,
+        private http: Http,
+        private toastyService: AppToastyService,
     ) {}
 
     /**
@@ -37,7 +38,7 @@ export class ProfileService {
             this.currentUser = new User(response.json());
             return this.currentUser;
         }).catch((err, caught) => {
-            if (err.status === 403) {
+            if (err.status === 401 || err.status === 403) {
                 this.currentUser = null;
                 return Observable.of(null);
             };
@@ -79,16 +80,13 @@ export class ProfileService {
         delete data['firstName'];
         data['last_name'] = data.lastName;
         delete data['lastName'];
-
-        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
         let request = new Request({
             method: RequestMethod.Put,
             url: `/api/users/me/`,
             body: data,
         });
-        csrf.configureRequest(request);
-
         return this.http.request(request).map(response => {
+            this.toastyService.success('User info updated!');
             this.currentUser = new User(response.json());
             return this.currentUser;
         }).catch((err, caught) => {

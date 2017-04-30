@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {
     Http,
     Request,
-    CookieXSRFStrategy,
     RequestMethod,
 } from '@angular/http';
 
@@ -53,8 +52,6 @@ export class EventsService {
     }
 
     setStatus(game, user, status): Observable<any> {
-        let csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
-
         let request = new Request({
             method: RequestMethod.Put,
             url: `/api/games/${game.id}/players/${user.id}/`,
@@ -64,9 +61,6 @@ export class EventsService {
                 'team': user.team,
             },
         });
-
-        csrf.configureRequest(request);
-
         return this.http.request(request);
     };
 }

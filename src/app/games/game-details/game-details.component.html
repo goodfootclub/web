@@ -47,6 +47,12 @@
     <div class="header-content">
         <div class="header-text">
             <p>Players</p>
+            <button
+                md-mini-fab
+                *ngIf="isAddPlayersVisible()"
+                (click)="addPlayer()">
+                <md-icon>add</md-icon>
+            </button>
         </div>
     </div>
     <hr/>
