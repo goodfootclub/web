@@ -12,9 +12,7 @@ import { User } from '../../types';
 @Component({
   selector: 'app-profile-tile',
   templateUrl: './profile-tile.component.html',
-  styleUrls: [
-      './profile-tile.component.styl',
-  ],
+  styleUrls: ['./profile-tile.component.styl'],
 })
 export class ProfileTileComponent implements OnChanges {
 
