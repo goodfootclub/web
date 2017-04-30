@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { GameEvent } from '../../../types';
+import { GameEvent, RsvpStatuses } from '../../../types';
 
 const DATE_GROUPS = {
     '0': 'today',
@@ -17,6 +17,8 @@ const DATE_GROUPS = {
 export class GameListComponent implements OnInit {
 
     gamesDictionary: { [id: string]: GameEvent[] };
+
+    rsvpMessages = RsvpStatuses.RSVP_MESSAGES;
 
     @Input('games')
     set games(games: GameEvent[]) {
@@ -36,6 +38,12 @@ export class GameListComponent implements OnInit {
             return Object.keys(this.gamesDictionary);
         }
         return [];
+    }
+
+    getRsvpStatus(game: GameEvent) {
+        if (game.rsvp != null) {
+            return this.rsvpMessages[game.rsvp];
+        }
     }
 
     groupGames(games: GameEvent[]): { [id: string]: GameEvent[] } {

@@ -14,7 +14,7 @@ import 'rxjs/add/operator/debounceTime';
 })
 export class GamesComponent implements OnInit {
 
-    get limit(): number { return 10; };
+    get limit(): number { return 50; };
     get searchDebounceTime(): number { return 750; };
     canLoadMore = true;
 
