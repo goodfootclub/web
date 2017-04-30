@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import {
     Http,
     Request,
@@ -15,13 +14,9 @@ import { GameEvent, RsvpStatus, Player, User } from 'app/types';
 @Injectable()
 export class GamesService {
 
-    datePipe: DatePipe;
-
     constructor(
         private http: Http,
-    ) {
-        this.datePipe = new DatePipe('en-US');
-    }
+    ) {}
 
     all(search?: string, limit?: number, offset?: number):
     Observable<GameEvent[]> {
