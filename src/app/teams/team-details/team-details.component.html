@@ -71,24 +71,7 @@
             <button md-mini-fab *ngIf="isManager" [routerLink]="['/games/add', {targetTeam: team.id}]"><md-icon>add</md-icon></button>
         </div>
         <hr/>
-        <md-card
-            *ngFor="let game of scheduledGames"
-            [routerLink]="['/games', game.id]">
-            <h1>{{ game.name }}</h1>
-            <hr>
-            <div>
-                <h1>{{ game.datetime | date:'EEEE, h:mm a' }}</h1>
-                <span class="info">
-                    {{ game.datetime | date:'MMMM d, y' }}
-                </span>
-            </div>
-            <div>
-                <h1>{{ game.location.name }}</h1>
-                <span class="info">
-                    {{ game.location.address }}
-                </span>
-            </div>
-        </md-card>
+        <app-games-list [games]="scheduledGames"></app-games-list>
     </md-tab>
 
     <md-tab label="Chat">
