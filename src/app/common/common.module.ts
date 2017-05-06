@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { MaterialModule } from '@angular/material';
 import { CommonModule as NgCommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import {
     BackButtonComponent,
     LoadMoreComponent,
     MenuButtonComponent,
+    HomeButtonComponent,
     PlayerViewComponent,
     TitleComponent,
 } from './ui';
@@ -21,11 +23,13 @@ import { AppToastyService } from './services/toasty.service';
     imports: [
         MaterialModule,
         NgCommonModule,
+        RouterModule,
     ],
     declarations: [
         BackButtonComponent,
         LoadMoreComponent,
         MenuButtonComponent,
+        HomeButtonComponent,
         PlayerViewComponent,
         TextSearchPipe,
         TitleComponent,
@@ -39,6 +43,7 @@ import { AppToastyService } from './services/toasty.service';
         LoadMoreComponent,
         MaterialModule,
         MenuButtonComponent,
+        HomeButtonComponent,
         NgCommonModule,
         PlayerViewComponent,
         TextSearchPipe,
