@@ -1,9 +1,8 @@
 import { Component, Input, Inject, forwardRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-
 import { AuthService } from 'app/auth';
-
+import { HistoryService } from '../services/history.service';
 
 @Component({
     selector: 'app-back-button',
@@ -30,15 +29,18 @@ export class BackButtonComponent {
         @Inject(forwardRef(() => AuthService)) public auth: AuthService,
         public location: Location,
         public router: Router,
+        private historyService: HistoryService,
     ) {}
 
     back() {
-        // Check if user got there by nvigating through the app or
+        // Check if user got there by navigating through the app or
         // by opening a link
-        if (this.auth.activationsChecks > this.depth) {
+        this.historyService.back();
+
+        /* if (this.auth.activationsChecks > this.depth) {
             this.location.back();
         } else {
             this.router.navigate(['/']);
-        }
+        } */
     }
 }
