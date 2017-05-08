@@ -40,6 +40,12 @@ export class GameListComponent implements OnInit {
         return [];
     }
 
+    // we shouldn't show group header if there is only one group 'later'
+    showGroupTitle(): boolean {
+        const keys = this.keys();
+        return !(keys.length === 1 && keys[0] === 'later');
+    }
+
     getRsvpStatus(game: GameEvent) {
         if (game.rsvp != null) {
             return this.rsvpMessages[game.rsvp];

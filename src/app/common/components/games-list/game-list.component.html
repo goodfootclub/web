@@ -1,5 +1,5 @@
 <div *ngFor="let key of keys()" class="game-group">
-    <span class="game-group-title"><h4>{{key}}</h4></span>
+    <span class="game-group-title" *ngIf="showGroupTitle()"><h5>{{key}}</h5></span>
     <md-card
         *ngFor="let game of gamesDictionary[key]"
         [routerLink]="['/games', game.id]"
