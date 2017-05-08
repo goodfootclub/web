@@ -1,4 +1,13 @@
-# Gfc
+# Good Foot Club Angular App
+
+Front end for the goodfoot.club project
+
+**Master:**
+[![Build Status](https://travis-ci.org/goodfootclub/api.svg?branch=master)](https://travis-ci.org/goodfootclub/api)
+[![codecov](https://codecov.io/gh/goodfootclub/api/branch/master/graph/badge.svg)](https://codecov.io/gh/goodfootclub/api)
+**Develop:**
+[![Build Status](https://travis-ci.org/goodfootclub/api.svg?branch=develop)](https://travis-ci.org/goodfootclub/api)
+[![codecov](https://codecov.io/gh/goodfootclub/api/branch/develop/graph/badge.svg)](https://codecov.io/gh/goodfootclub/api)
 
 This project uses [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-beta.31.
 
