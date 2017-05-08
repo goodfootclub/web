@@ -3,11 +3,11 @@
 Front end for the goodfoot.club project
 
 **Master:**
-[![Build Status](https://travis-ci.org/goodfootclub/api.svg?branch=master)](https://travis-ci.org/goodfootclub/api)
-[![codecov](https://codecov.io/gh/goodfootclub/api/branch/master/graph/badge.svg)](https://codecov.io/gh/goodfootclub/api)
+[![Build Status](https://travis-ci.org/goodfootclub/web.svg?branch=master)](https://travis-ci.org/goodfootclub/web)
+[![codecov](https://codecov.io/gh/goodfootclub/web/branch/master/graph/badge.svg)](https://codecov.io/gh/goodfootclub/web)
 **Develop:**
-[![Build Status](https://travis-ci.org/goodfootclub/api.svg?branch=develop)](https://travis-ci.org/goodfootclub/api)
-[![codecov](https://codecov.io/gh/goodfootclub/api/branch/develop/graph/badge.svg)](https://codecov.io/gh/goodfootclub/api)
+[![Build Status](https://travis-ci.org/goodfootclub/web.svg?branch=develop)](https://travis-ci.org/goodfootclub/web)
+[![codecov](https://codecov.io/gh/goodfootclub/web/branch/develop/graph/badge.svg)](https://codecov.io/gh/goodfootclub/web)
 
 This project uses [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-beta.31.
 
