@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { GameEvent, RsvpStatus, RsvpStatuses } from '../../types';
-import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-my-next-game-tile',
@@ -16,7 +15,6 @@ export class MyNextGameTileComponent implements OnInit {
     rsvpMessages = RsvpStatuses.RSVP_MESSAGES;
 
     constructor(
-        private authService: AuthService,
         private router: Router,
     ) { }
 

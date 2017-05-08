@@ -97,5 +97,4 @@ export class GamesService {
             this.toastyService.success('Player removed!');
         });
     };
-
 }

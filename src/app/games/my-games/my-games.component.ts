@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TitleService } from '../../title.service';
 import { ProfileService } from '../../profile/profile.service';
-import { GameEvent, RsvpStatuses } from '../../types';
+import { GameEvent } from '../../types';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -14,11 +14,10 @@ import { Observable } from 'rxjs/Observable';
 export class MyGamesComponent implements OnInit {
 
     get limit(): number { return 50; };
+
     games: GameEvent[];
 
     canLoadMore = true;
-
-    rsvpMessages = RsvpStatuses.RSVP_MESSAGES;
 
     constructor(
         private profileService: ProfileService,
@@ -33,7 +32,6 @@ export class MyGamesComponent implements OnInit {
             this.canLoadMore = games.length === this.limit;
         });
     }
-
     loadMore() {
         this.loadData(this.games.length)
             .subscribe(games => {
@@ -41,15 +39,8 @@ export class MyGamesComponent implements OnInit {
                 this.canLoadMore = games.length === this.limit;
             });
     }
-
     loadData(offset?: number): Observable<GameEvent[]> {
         return this.profileService.getCurrentUserGames(this.limit, offset)
             .map(res => res.results);
-    }
-
-    getRsvpStatus(game: GameEvent) {
-        if (game.rsvp != null) {
-            return this.rsvpMessages[game.rsvp];
-        }
     }
 }
