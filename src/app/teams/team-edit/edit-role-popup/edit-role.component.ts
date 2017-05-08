@@ -41,17 +41,17 @@ export class EditRoleComponent implements OnInit {
             if (roleId > -3) {
                 this.player.role = roleId;
                 this.teamsService
-                    .updateTeamPlayer(this.team.id, this.player.id, this.player)
-                    .subscribe((result) => {
-                        Object.assign(this.player, result);
-                    }, this.handleException(oldRoleId));
+                .updateTeamPlayer(this.team.id, this.player.roleId, this.player)
+                .subscribe((result) => {
+                    Object.assign(this.player, result);
+                }, this.handleException(oldRoleId));
             } else {
                 const index = this.team.players.indexOf(this.player);
                 this.teamsService
-                    .excludeTeamPlayer(this.team.id, this.player.id)
-                    .subscribe(() => {
-                        this.team.players.splice(index, 1);
-                    });
+                .excludeTeamPlayer(this.team.id, this.player.roleId)
+                .subscribe(() => {
+                    this.team.players.splice(index, 1);
+                });
             }
         }
         this.dialogRef.close();
