@@ -1,0 +1,9 @@
+<div *ngIf="player" class="player-container" (click)="redirectToPlayerInfo()">
+    <img [src]="player.img" alt="" class="player-pic">
+    <div class="player-info">
+        <h3> {{ player.firstName }} {{ player.lastName }} </h3>
+    </div>
+</div>
+<md-radio-group (change)="updatePlayerRole($event)">
+    <md-radio-button *ngFor="let role of playerRolesList" [value]="role.id" [checked]="isRoleChecked(role)">{{role.name}}</md-radio-button>
+</md-radio-group>

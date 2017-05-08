@@ -15,7 +15,7 @@
     <md-tab label="Info">
         <div class="header-content">
             <div class="header-text"><p>{{ team?.name }}</p><p class="team-info">[{{ ['coed', 'female', 'male'][team?.type] }}] {{ team?.info }}</p></div>
-            <button *ngIf="isManager" md-mini-fab [routerLink]="['edit']"><md-icon>edit</md-icon></button>
+            <button *ngIf="!isManager" md-mini-fab [routerLink]="['edit']"><md-icon>edit</md-icon></button>
         </div>
         <hr/>
         <md-card>

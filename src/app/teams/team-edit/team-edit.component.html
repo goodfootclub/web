@@ -69,7 +69,7 @@
         <md-list formArrayName="players">
             <a md-list-item class="player"
                 *ngFor="let player of team?.players; let i=index" [formGroupName]="i">
-                <div class="clickable-player" [routerLink]="['/players', player.id]">
+                <div class="clickable-player" (click)="openDialog(player)"><!--[routerLink]="['/players', player.id]"-->
                     <img [src]="player.img" alt="" class="player-pic">
                     <div class="player-info">
                         <h1> {{ player.firstName }} {{ player.lastName }} </h1>
@@ -78,32 +78,6 @@
                         </div>
                     </div>
                 </div>
-                <md-select *ngIf="player.role > 0" formControlName="role"
-                           placeholder="Select role" class="flex-right"
-                           (change)="updatePlayerRole(player, $event)">
-                    <md-option
-                        *ngFor="let role of roasterRoles"
-                        value="{{+role}}">{{ROLES[role]}}</md-option>
-                </md-select>
-                <button md-button
-                        (click)="exclude(player)"
-                        *ngIf="player.role == 0"
-                        class="flex-right">
-                    Exclude
-                </button>
-                <button class="flex-right"
-                        md-button
-                        (click)="updatePlayerRole(player, 1)"
-                        *ngIf="player.role == -2">
-                    Accept
-                </button>
-                <button md-button (click)="exclude(player)" *ngIf="player.role == -2">
-                    Decline
-                </button>
-                <button class="flex-right"
-                        md-button (click)="exclude(player)" *ngIf="player.role == -1">
-                    Cancel
-                </button>
             </a>
         </md-list>
     </md-card>
