@@ -46,6 +46,16 @@ export class ProfileService {
         });
     }
 
+    getCurrentUserInvites(): Observable<{count?: number, results: any[]}> {
+        return this.http.get('/api/users/me/invites/')
+            .map(res => {
+                let data = res.json();
+                // TODO map it correctly
+                data.results = data.results.map(item => new Team(item));
+                return data;
+            });
+    }
+
     // FIXME: I think this belongs in GameService
     // Also define type for search result... or move count somewhere...
     getCurrentUserGames(limit?: number, offset?: number):

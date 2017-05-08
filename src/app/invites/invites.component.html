@@ -1,0 +1,21 @@
+<md-toolbar>
+    <app-menu-button></app-menu-button>
+    <app-title></app-title>
+</md-toolbar>
+
+    <md-card
+    *ngFor="let team of teams"
+    [routerLink]="['/teams', team.id]"
+>
+    <div class="team-data">
+        <div class="team-info">
+            <h1> {{ team.name }} </h1>
+            <div class="info">
+                [{{ ['coed', 'female', 'male'][team.type] }}]
+                {{ team.info }}
+            </div>
+        </div>
+    </div>
+</md-card>
+
+<app-games-list [games]="games" rsvpStatuses="true" (rsvpStatusChanged)="rsvpStatusChanged($event)"></app-games-list>

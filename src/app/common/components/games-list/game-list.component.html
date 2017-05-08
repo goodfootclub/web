@@ -13,13 +13,18 @@
             <h1>{{ game.datetime | date:'EEEE, h:mm a' }}</h1>
             <span class="info">
             {{ game.datetime | date:'MMMM d, y' }}
-        </span>
+            </span>
         </div>
         <div>
             <h1>{{ game.location.name }}</h1>
             <span class="info">
             {{ game.location.address }}
-        </span>
+            </span>
+        </div>
+        <div class="footer rsvp-statuses" *ngIf="rsvpStatuses" (click)="handleFooterClick($event)">
+            <button md-button color="primary" *ngFor="let rsvp of rsvpStatusesList" (click)="changeRsvpStatus(game.id, rsvp.id)">
+                {{rsvp.name}}
+            </button>
         </div>
     </md-card>
 </div>

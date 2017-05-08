@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { GameEvent, RsvpStatuses } from '../../../types';
 
 const DATE_GROUPS = {
@@ -8,6 +8,11 @@ const DATE_GROUPS = {
     '3': 'in a month',
     '4': 'later',
 };
+
+class RsvpStatus {
+    id: number;
+    name: string;
+}
 
 @Component({
     selector: 'app-games-list',
@@ -19,6 +24,13 @@ export class GameListComponent implements OnInit {
     gamesDictionary: { [id: string]: GameEvent[] };
 
     rsvpMessages = RsvpStatuses.RSVP_MESSAGES;
+
+    rsvpStatusesList = this.getRsvpStatusesList();
+
+    @Output() rsvpStatusChanged: EventEmitter<any> = new EventEmitter();
+
+    @Input('rsvpStatuses')
+    rsvpStatuses = false;
 
     @Input('games')
     set games(games: GameEvent[]) {
@@ -68,6 +80,18 @@ export class GameListComponent implements OnInit {
         return groupedGames;
     }
 
+    changeRsvpStatus(gameId: number, rsvpId: number) {
+        this.rsvpStatusChanged.next({ gameId: gameId, rsvpId: rsvpId });
+    }
+
+    deleteRsvpStatus(gameId: number) {
+        this.rsvpStatusChanged.next({ gameId: gameId, isDelete: true });
+    }
+
+    handleFooterClick(event: Event) {
+        event.stopPropagation();
+    }
+
     private findGroupForGame(now: Date, date: Date): string {
         date.setHours(0, 0, 0, 0);
         now.setHours(0, 0, 0, 0);
@@ -85,5 +109,12 @@ export class GameListComponent implements OnInit {
             return DATE_GROUPS['3'];
         }
         return DATE_GROUPS['4'];
+    }
+
+    private getRsvpStatusesList(): RsvpStatus[] {
+        return Object.keys(RsvpStatuses.RSVP_MESSAGES).map(key =>
+            ({ id: +key, name: RsvpStatuses.RSVP_MESSAGES[key] } as RsvpStatus),
+        ).filter(a => a.id >= 0)
+            .sort((a, b) => b.id - a.id);
     }
 }
