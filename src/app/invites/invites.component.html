@@ -3,27 +3,6 @@
     <app-title></app-title>
 </md-toolbar>
 
-    <md-card
-    *ngFor="let team of teams"
-    [routerLink]="['/teams', team.id]"
->
-    <div class="team-data">
-        <div class="team-info">
-            <h1> {{ team.name }} </h1>
-            <div class="info">
-                [{{ ['coed', 'female', 'male'][team.type] }}]
-                {{ team.info }}
-            </div>
-        </div>
-    </div>
-    <div class="close-button" (click)="declineTeamInv(team, $event)">
-        <md-icon>close</md-icon>
-    </div>
-    <div class="team-footer" (click)="handleFooterClick($event)">
-        <button md-button color="primary" (click)="acceptTeamInv(team)">
-            Accept
-        </button>
-    </div>
-</md-card>
+<app-team-invites [teams]="teams" (inviteStatusChanged)="teamInviteStatusChanged($event)"></app-team-invites>
 
 <app-games-list [games]="games" rsvpStatuses="true" (rsvpStatusChanged)="rsvpStatusChanged($event)"></app-games-list>

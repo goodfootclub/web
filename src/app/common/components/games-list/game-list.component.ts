@@ -59,7 +59,7 @@ export class GameListComponent implements OnInit {
     }
 
     getRsvpStatus(game: GameEvent) {
-        if (game.rsvp != null) {
+        if (!this.rsvpStatuses && game.rsvp != null) {
             return this.rsvpMessages[game.rsvp];
         }
     }
@@ -80,12 +80,13 @@ export class GameListComponent implements OnInit {
         return groupedGames;
     }
 
-    changeRsvpStatus(gameId: number, rsvpId: number) {
-        this.rsvpStatusChanged.next({ gameId: gameId, rsvpId: rsvpId });
+    changeRsvpStatus(game: GameEvent, rsvpId: number) {
+        this.rsvpStatusChanged.next({ game: game, rsvpId: rsvpId });
     }
 
-    deleteRsvpStatus(gameId: number) {
-        this.rsvpStatusChanged.next({ gameId: gameId, isDelete: true });
+    deleteRsvpStatus(game: GameEvent, event: Event) {
+        event.stopPropagation();
+        this.rsvpStatusChanged.next({ game: game, isDelete: true });
     }
 
     handleFooterClick(event: Event) {

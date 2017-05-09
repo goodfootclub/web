@@ -7,6 +7,11 @@
         <div class="game-header">
             <h1>{{ game.name }}</h1>
             <span class="rsvp-status">{{getRsvpStatus(game)}}</span>
+            <div class="close-button" (click)="deleteRsvpStatus(game, $event)" *ngIf="rsvpStatuses">
+                <button md-icon-button>
+                    <md-icon>close</md-icon>
+                </button>
+            </div>
         </div>
         <hr>
         <div>
@@ -22,7 +27,7 @@
             </span>
         </div>
         <div class="footer rsvp-statuses" *ngIf="rsvpStatuses" (click)="handleFooterClick($event)">
-            <button md-button color="primary" *ngFor="let rsvp of rsvpStatusesList" (click)="changeRsvpStatus(game.id, rsvp.id)">
+            <button md-button color="primary" *ngFor="let rsvp of rsvpStatusesList" (click)="changeRsvpStatus(game, rsvp.id)">
                 {{rsvp.name}}
             </button>
         </div>

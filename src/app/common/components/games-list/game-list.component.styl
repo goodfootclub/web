@@ -9,14 +9,21 @@
             color $sub-color
             font-size $extra-small-font
 
-.game-header
-    width 100%
-    display inline-block
+    .game-header
+        width 100%
+        display inline-block
 
-    & > h1
-        float left
+        & > h1
+            float left
 
-    & > span.rsvp-status
-        float right
-        line-height 1
-        color $main-theme-color
+        & > span.rsvp-status
+            float right
+            line-height 1
+            color $main-theme-color
+
+        & > .close-button
+            float right
+            padding-right 10px
+
+    .footer
+        margin-top 10px

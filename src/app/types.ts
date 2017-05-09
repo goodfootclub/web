@@ -260,6 +260,7 @@ export class Team {
     name: string;
     players?: Player[];
     playersInGame?: Player[];  // When team in a game
+    playersById?: { [id: number]: Player };
     role?: PlayerRole;
     slotsFemale?: string;
     slotsMale?: string;
@@ -280,8 +281,13 @@ export class Team {
         }
 
         this.players = [];
+        this.playersById = {};
         if (data['players'] != null) {
-            this.players = data['players'].map(item => new Player(item));
+            this.players = data['players'].map(item => {
+                const player = new Player(item);
+                this.playersById[player.id] = player;
+                return player;
+            });
         }
 
         this.id = data['id'];
