@@ -22,9 +22,26 @@ export class InvitesComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.teams = this.teams.concat([{ 'id': 135, 'name': 'My Fa', 'info': '', 'type': 2 } as Team]);
-        this.games = this.games.concat([{ 'id': 346, 'teams': [], 'datetime': '2017-05-09T03:15:00Z', 'location': { 'id': 8, 'address': 'Test place v002, Granite bay park-6010 Douglas Blvd., Granite Bay, CA 95746', 'gis': null, 'name': 'Granite Bay Park' } } as GameEvent]);
-        // this.profileService.getCurrentUserInvites(); TODO
+        this.profileService.getCurrentUserGameInvites().subscribe((data) => {
+            this.games = data.results;
+        });
+        this.profileService.getCurrentUserTeamInvites().subscribe((data) => {
+            this.teams = data.results;
+        });
+    }
+
+    acceptTeamInv(team: Team) {
+        // TODO
+        // this.profileService
+    }
+
+    declineTeamInv(team: Team, event: Event) {
+        // TODO remove invitation
+        event.stopPropagation();
+    }
+
+    handleFooterClick(event: Event) {
+        event.stopPropagation();
     }
 
     rsvpStatusChanged(data:

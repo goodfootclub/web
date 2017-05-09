@@ -46,16 +46,6 @@ export class ProfileService {
         });
     }
 
-    getCurrentUserInvites(): Observable<{count?: number, results: any[]}> {
-        return this.http.get('/api/users/me/invites/')
-            .map(res => {
-                let data = res.json();
-                // TODO map it correctly
-                data.results = data.results.map(item => new Team(item));
-                return data;
-            });
-    }
-
     // FIXME: I think this belongs in GameService
     // Also define type for search result... or move count somewhere...
     getCurrentUserGames(limit?: number, offset?: number):
@@ -71,6 +61,17 @@ export class ProfileService {
             });
     }
 
+    getCurrentUserGameInvites():
+    Observable<{count?: number, results: GameEvent[]}> {
+        return this.http.get('/api/games/invites/')
+            .map(res => {
+                let data = res.json();
+                data.results = data.results.map(item => new GameEvent(item));
+                return data;
+            });
+    }
+
+
     // FIXME: same as "my games" above
     getCurrentUserTeams(limit?: number, offset?: number):
     Observable<{count?: number, results: Team[]}> {
@@ -78,6 +79,16 @@ export class ProfileService {
         if (limit) { params.set('limit', limit.toString()); }
         if (offset) { params.set('offset', offset.toString()); }
         return this.http.get('/api/teams/my/', { search: params })
+            .map(res => {
+                let data = res.json();
+                data.results = data.results.map(item => new Team(item));
+                return data;
+            });
+    }
+
+    getCurrentUserTeamInvites():
+    Observable<{count?: number, results: GameEvent[]}> {
+        return this.http.get('/api/teams/invites/')
             .map(res => {
                 let data = res.json();
                 data.results = data.results.map(item => new Team(item));
