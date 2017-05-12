@@ -70,9 +70,7 @@ export class InvitesComponent implements OnInit {
 
     private loadGameInvites() {
         this.profileService.getCurrentUserGameInvites().subscribe((data) => {
-            // this.games = data.results;
-            this.games = [ new GameEvent({ 'id': 390, 'teams': [], 'datetime': '2017-05-13T17:00:00Z', 'location': { 'id': 8, 'address': 'Test place v002, Granite bay park-6010 Douglas Blvd., Granite Bay, CA 95746', 'gis': null, 'name': 'Granite Bay Park' } })]
+            this.games = data.results;
         });
     }
-
 }

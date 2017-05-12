@@ -157,6 +157,11 @@ export class GameEvent {
     }
 };
 
+export class InvitesCountData {
+    games: number;
+    teams: number;
+    total: number;
+}
 
 export class League {
     age: number | [number, number];
@@ -311,6 +316,7 @@ export class User {
     id?: number;
     img?: string;
     lastName: string;
+    invites: InvitesCountData;
     managedTeams: Team[];
     games?: GameEvent[];
     phone?: string;
@@ -350,6 +356,7 @@ export class User {
                 Gender.Male :
                 Gender.Female;
         }
+        this.invites = data['invites'] as InvitesCountData;
 
         let hash = data['id'] % 50;
         this.cover = data['cover'] == null ?

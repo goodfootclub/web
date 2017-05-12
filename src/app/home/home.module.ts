@@ -24,6 +24,7 @@ import {
 import {
     PickupGamesTileComponent,
 } from './pickup-games-tile/pickup-games-tile.component';
+import { InvitesTileComponent } from './invites-tile/invites-tile.component';
 
 
 const ROUTES: Routes = [{
@@ -46,6 +47,7 @@ const ROUTES: Routes = [{
         MyGamesTileComponent,
         MyTeamsTileComponent,
         PickupGamesTileComponent,
+        InvitesTileComponent,
     ],
     providers: [
         PlayersService,

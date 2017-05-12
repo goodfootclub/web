@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { GameEvent, RsvpStatuses } from '../../../types';
 
 const DATE_GROUPS = {
+    '-1': 'have already past',
     '0': 'today',
     '1': 'tomorrow',
     '2': 'in a week',
@@ -96,7 +97,9 @@ export class GameListComponent implements OnInit {
     private findGroupForGame(now: Date, date: Date): string {
         date.setHours(0, 0, 0, 0);
         now.setHours(0, 0, 0, 0);
-        if (now.getTime() === date.getTime()) {
+        if (now.getTime() > date.getTime()) {
+            return DATE_GROUPS['-1'];
+        } else if (now.getTime() === date.getTime()) {
             return DATE_GROUPS['0'];
         }
         const oneDay = 24 * 60 * 60 * 1000;
