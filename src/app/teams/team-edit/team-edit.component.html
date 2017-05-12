@@ -69,7 +69,7 @@
         <md-list formArrayName="players">
             <a md-list-item class="player"
                 *ngFor="let player of team?.players; let i=index" [formGroupName]="i">
-                <div class="clickable-player" (click)="openDialog(player)"><!--[routerLink]="['/players', player.id]"-->
+                <div class="clickable-player" (click)="openDialog(player)">
                     <img [src]="player.img" alt="" class="player-pic">
                     <div class="player-info">
                         <h1> {{ player.firstName }} {{ player.lastName }} </h1>
