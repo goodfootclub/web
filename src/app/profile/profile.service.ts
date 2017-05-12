@@ -28,12 +28,19 @@ export class ProfileService {
     ) {}
 
     /**
-     * Get current user data (from the server if needed)
+     * Get current user data and update it from server if needed
      */
     getCurrentUser(): Observable<User> {
         if (this.currentUser !== undefined) {
             return Observable.of(this.currentUser);
         }
+        return this.updateCurrentUser();
+    }
+
+    /**
+     * Get current user data from the server
+     */
+    updateCurrentUser(): Observable<User> {
         return this.http.get('/api/users/me/').map(response => {
             this.currentUser = new User(response.json());
             return this.currentUser;
@@ -87,7 +94,7 @@ export class ProfileService {
     }
 
     getCurrentUserTeamInvites():
-    Observable<{count?: number, results: GameEvent[]}> {
+    Observable<{count?: number, results: Team[]}> {
         return this.http.get('/api/teams/invites/')
             .map(res => {
                 let data = res.json();

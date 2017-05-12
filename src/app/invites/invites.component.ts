@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ProfileService } from '../profile/profile.service';
-import { GameEvent, Player, Team, PlayerRole } from '../types';
+import { GameEvent, Player, Team, PlayerRole, User } from '../types';
 import { TitleService } from '../title.service';
 import { GamesService } from '../games/games.service';
 import { TeamsService } from '../teams/teams.service';
-import { AuthService } from '../auth/auth.service';
 
 @Component({
     selector: 'app-invites',
@@ -14,6 +13,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class InvitesComponent implements OnInit {
 
+    user: User;
     teams: Team[] = [];
     games: GameEvent[] = [];
 
@@ -21,43 +21,43 @@ export class InvitesComponent implements OnInit {
         private profileService: ProfileService,
         private gamesService: GamesService,
         private teamsService: TeamsService,
-        private authService: AuthService,
         private title: TitleService,
     ) {
         title.setTitle('Your invites');
     }
 
     ngOnInit() {
+        this.profileService.getCurrentUser().subscribe((user) => {
+            this.user = user;
+        });
         this.loadTeamInvites();
         this.loadGameInvites();
     }
 
     teamInviteStatusChanged(data:
         { team: Team, accepted?: boolean, declined?: boolean }) {
-        const player: Player = data.team.playersById[
-            this.authService.profile.currentUser.id
-        ];
-        player.role = PlayerRole.Field;
         if (data.accepted) {
+            const player: Player =
+                new Player(Object.assign(
+                    { role_id: data.team.roleId }, this.user));
+            player.role = PlayerRole.Field;
             this.teamsService
                 .updateTeamPlayer(data.team.id, player.roleId, player)
                 .subscribe(this.loadTeamInvites.bind(this));
         } else if (data.declined) {
-            this.teamsService.excludeTeamPlayer(data.team.id, player.roleId)
+            this.teamsService.excludeTeamPlayer(data.team.id, data.team.roleId)
                 .subscribe(this.loadTeamInvites.bind(this));
         }
     }
 
     rsvpStatusChanged(data:
         { game: GameEvent, rsvpId?: number, isDelete?: boolean }) {
-        const player: Player = data.game.playersById[
-            this.authService.profile.currentUser.id
-        ];
+        const player = new Player(data.game);
         if (data.isDelete) {
-            this.gamesService.removePlayer(data.game, player)
+            this.gamesService.removePlayer(data.game.id, player)
                 .subscribe(this.loadGameInvites.bind(this));
         } else {
-            this.gamesService.setStatus(data.game, player, data.rsvpId)
+            this.gamesService.setStatus(data.game.id, player, data.rsvpId)
                 .subscribe(this.loadGameInvites.bind(this));
         }
     }

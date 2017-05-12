@@ -49,7 +49,7 @@ export class GameDetailsComponent implements OnInit {
     }
 
     setStatus(status: RsvpStatus) {
-        this.games.setStatus(this.game, this.user, status).subscribe(() => {
+        this.games.setStatus(this.game.id, this.user, status).subscribe(() => {
             this.games.get(this.game.id).subscribe(game => {
                 this.user = game.playersById[
                     this.auth.profile.currentUser.id
@@ -61,7 +61,7 @@ export class GameDetailsComponent implements OnInit {
 
     join() {
         this.games.addPlayer(
-            this.game,
+            this.game.id,
             this.auth.profile.currentUser,
         ).subscribe(() => {
             this.games.get(this.game.id).subscribe(game => {
@@ -78,7 +78,7 @@ export class GameDetailsComponent implements OnInit {
 
     leave() {
         this.games.removePlayer(
-            this.game,
+            this.game.id,
             this.user,
         ).subscribe(() => {
             this.games.get(this.game.id).subscribe(game => {

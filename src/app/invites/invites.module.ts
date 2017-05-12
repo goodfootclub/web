@@ -20,6 +20,6 @@ const ROUTER_CONFIG = [
     providers: [
         GamesService,
         TeamsService,
-    ]
+    ],
 })
 export class InvitesModule {}

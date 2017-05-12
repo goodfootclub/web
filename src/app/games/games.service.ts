@@ -56,13 +56,13 @@ export class GamesService {
     }
 
     setStatus(
-        game: GameEvent,
+        gameId: number,
         player: Player,
         status: RsvpStatus,
     ): Observable<any> {
         let request = new Request({
             method: RequestMethod.Put,
-            url: `/api/games/${game.id}/players/${player.rsvpId}/`,
+            url: `/api/games/${gameId}/players/${player.rsvpId}/`,
             body: {
                 'id': player.id,
                 'rsvp': status,
@@ -74,10 +74,10 @@ export class GamesService {
         });
     };
 
-    addPlayer(game: GameEvent, user: User): Observable<any> {
+    addPlayer(gameId: number, user: User): Observable<any> {
         let request = new Request({
             method: RequestMethod.Post,
-            url: `/api/games/${game.id}/players/`,
+            url: `/api/games/${gameId}/players/`,
             body: {
                 'id': user.id,
                 'rsvp': RsvpStatus.Going,
@@ -88,10 +88,10 @@ export class GamesService {
         });
     };
 
-    removePlayer(game: GameEvent, player: Player): Observable<any> {
+    removePlayer(gameId: number, player: Player): Observable<any> {
         let request = new Request({
             method: RequestMethod.Delete,
-            url: `/api/games/${game.id}/players/${player.rsvpId}/`,
+            url: `/api/games/${gameId}/players/${player.rsvpId}/`,
         });
         return this.http.request(request).do(() => {
             this.toastyService.success('Player removed!');

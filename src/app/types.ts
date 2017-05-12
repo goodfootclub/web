@@ -96,6 +96,7 @@ export class GameEvent {
     players?: Player[];
     playersById?: { [id: number]: Player };
     rsvp?: RsvpStatus;
+    rsvpId: number;
     // playersCount?: PlayersCount;
     // playersNeeded?: PlayersCount;
     teams?: Team[];
@@ -136,6 +137,7 @@ export class GameEvent {
         this.datetime = [data['datetime']];
         this.location = new Location(data['location']);
         this.rsvp = data['rsvp'];
+        this.rsvpId = data['rsvp_id'] || data['rsvpId'];
 
         this.playersById = {};
 
@@ -215,14 +217,14 @@ export class Player {
      */
     constructor(data: any) {
         this.age = data['age'];
-        this.firstName = data['first_name'];
+        this.firstName = data['first_name'] || data['firstName'];
         this.id = data['id'];
         this.img = data['img'];
-        this.lastName = data['last_name'];
+        this.lastName = data['last_name']  || data['lastName'];
         this.role = data['role'];
-        this.roleId = data['role_id'];
+        this.roleId = data['role_id'] || data['roleId'];
         this.rsvp = data['rsvp'];
-        this.rsvpId = data['rsvp_id'];
+        this.rsvpId = data['rsvp_id'] || data['rsvpId'];
         this.team = data['team'];
     }
 };
@@ -267,6 +269,7 @@ export class Team {
     playersInGame?: Player[];  // When team in a game
     playersById?: { [id: number]: Player };
     role?: PlayerRole;
+    roleId: number;
     slotsFemale?: string;
     slotsMale?: string;
     type?: TeamType;
@@ -299,6 +302,7 @@ export class Team {
         this.info = data['info'];
         this.name = data['name'];
         this.role = data['role'];
+        this.roleId = data['role_id'] || data['roleId'];
         this.slotsFemale = data['slots_female'];
         this.slotsMale = data['slots_male'];
         this.type = data['type'];

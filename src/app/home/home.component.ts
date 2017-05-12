@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.profile.getCurrentUser().subscribe(user => {
+        this.profile.updateCurrentUser().subscribe(user => {
             this.user = user;
         });
         this.profile.getCurrentUserGames(1)
