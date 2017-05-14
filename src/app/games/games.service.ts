@@ -85,6 +85,11 @@ export class GamesService {
         });
         return this.http.request(request).do(() => {
             this.toastyService.success('Player added!');
+        }).catch(err => {
+            if (err.status === 409) {
+                this.toastyService.warning('Player is already in game');
+            }
+            throw err;
         });
     };
 
