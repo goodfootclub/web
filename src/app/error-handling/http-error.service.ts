@@ -40,6 +40,14 @@ export class HttpErrorHandler {
         throw error;
     }
 
+    /**
+     * This method specifies if error response should be handled
+     *  by common error handling functionality
+     * @see Exclusions
+     * @param error http response object
+     * @returns {boolean} true if this error response
+     *  should be excluded from common error handling
+     */
     private isExcluded(error: Response) {
         const index = error.url.indexOf('/api');
         if (index === -1) { return false; }

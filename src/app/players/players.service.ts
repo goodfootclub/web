@@ -50,7 +50,8 @@ export class PlayersService {
             this.toastyService.success('Player invited!');
         }).catch((err) => {
             if (err.status === 409) {
-                this.toastyService.warning('Player is already in team');
+                this.toastyService.warning(
+                'Why u trying to add a player twice?');
             }
             throw err;
         });
@@ -66,7 +67,8 @@ export class PlayersService {
             { id: playerId, rsvp: PlayerRole.Invited, team: teamId },
         ).catch((err) => {
             if (err.status === 409) {
-                this.toastyService.warning('Player is already in game');
+                this.toastyService.warning(
+                'Hold on Mr. Thorough Pants, they already got a game invite.');
             }
             throw err;
         });

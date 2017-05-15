@@ -87,7 +87,8 @@ export class GamesService {
             this.toastyService.success('Player added!');
         }).catch(err => {
             if (err.status === 409) {
-                this.toastyService.warning('Player is already in game');
+                this.toastyService.warning(
+                'Hold on Mr. Thorough Pants, they already got a game invite.');
             }
             throw err;
         });
