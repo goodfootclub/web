@@ -109,7 +109,8 @@ export class TeamsService {
             this.toastyService.success('Join request sent!');
         }).catch((err) => {
             if (err.status === 409) {
-                this.toastyService.warning('You are already in the team');
+                this.toastyService.warning(
+            'Do you like this team so much that you want to join it twice?');
             }
             throw err;
         });
