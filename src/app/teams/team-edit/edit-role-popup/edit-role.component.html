@@ -4,6 +4,11 @@
         <h3> {{ player.firstName }} {{ player.lastName }} </h3>
     </div>
 </div>
-<md-radio-group (change)="updatePlayerRole($event)">
+<md-radio-group (change)="updatePlayerRole($event)" *ngIf="player && player.role !== -1">
     <md-radio-button *ngFor="let role of playerRolesList" [value]="role.id" [checked]="isRoleChecked(role)">{{role.name}}</md-radio-button>
 </md-radio-group>
+
+<div *ngIf="player && player.role === -1" class="player-warning">
+    <p>Player is invited.</p>
+    <p>Waiting for approval.</p>
+</div>
