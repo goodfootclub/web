@@ -51,8 +51,7 @@ export class PlayersService {
         }).catch((err) => {
             if (err.status === 409) {
                 this.toastyService.warning(
-                    'Why u trying to add a player twice?'
-                );
+                    'Why u trying to add a player twice?');
             }
             throw err;
         });
@@ -69,8 +68,7 @@ export class PlayersService {
         ).catch((err) => {
             if (err.status === 409) {
                 this.toastyService.warning(
-                    'Hold on Mr. Thorough Pants, they already got a game invite.'
-                );
+            'Hold on Mr. Thorough Pants, they already got a game invite.');
             }
             throw err;
         });

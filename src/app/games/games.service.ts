@@ -88,8 +88,7 @@ export class GamesService {
         }).catch(err => {
             if (err.status === 409) {
                 this.toastyService.warning(
-                    'Hold on Mr. Thorough Pants, they already got a game invite.'
-                );
+        'Hold on Mr. Thorough Pants, they already got a game invite.');
             }
             throw err;
         });

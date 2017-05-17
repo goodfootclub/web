@@ -110,8 +110,7 @@ export class TeamsService {
         }).catch((err) => {
             if (err.status === 409) {
                 this.toastyService.warning(
-                    'Do you like this team so much that you want to join it twice?'
-                );
+            'Do you like this team so much that you want to join it twice?');
             }
             throw err;
         });
