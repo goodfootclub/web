@@ -1,0 +1,15 @@
+<md-card
+    *ngFor="let team of teams"
+    [routerLink]="['/teams', team.id]"
+>
+    <div class="team-data">
+        <div class="team-info">
+            <h1> {{ team.name }} </h1>
+            <div class="info">
+                [{{ ['coed', 'female', 'male'][team.type] }}]
+                {{ team.info }}
+            </div>
+        </div>
+        <span class="role-title" *ngIf="team.role">{{ roleNames[team.role] }}</span>
+    </div>
+</md-card>

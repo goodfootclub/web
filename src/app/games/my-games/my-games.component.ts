@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TitleService } from '../../title.service';
-import { ProfileService } from '../../profile/profile.service';
+import { GamesService } from '../games.service';
 import { GameEvent } from '../../types';
 import { Observable } from 'rxjs/Observable';
 
@@ -20,7 +20,7 @@ export class MyGamesComponent implements OnInit {
     canLoadMore = true;
 
     constructor(
-        private profileService: ProfileService,
+        private gamesService: GamesService,
         private title: TitleService,
     ) {
         this.title.setTitle('My games');
@@ -40,7 +40,7 @@ export class MyGamesComponent implements OnInit {
             });
     }
     loadData(offset?: number): Observable<GameEvent[]> {
-        return this.profileService.getCurrentUserGames(this.limit, offset)
+        return this.gamesService.getCurrentUserGames(this.limit, offset)
             .map(res => res.results);
     }
 }

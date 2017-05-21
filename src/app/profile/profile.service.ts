@@ -3,11 +3,10 @@ import {
     Http,
     Request,
     RequestMethod,
-    URLSearchParams,
 } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
-import { User, GameEvent, Team } from '../types';
+import { User } from '../types';
 import { AppToastyService } from '../common/services/toasty.service';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
@@ -51,56 +50,6 @@ export class ProfileService {
             };
             throw err;
         });
-    }
-
-    // FIXME: I think this belongs in GameService
-    // Also define type for search result... or move count somewhere...
-    getCurrentUserGames(limit?: number, offset?: number):
-    Observable<{count?: number, results: GameEvent[]}> {
-        const params: URLSearchParams = new URLSearchParams();
-        if (limit) { params.set('limit', limit.toString()); }
-        if (offset) { params.set('offset', offset.toString()); }
-        return this.http.get('/api/games/my/', { search: params })
-            .map(res => {
-                let data = res.json();
-                data.results = data.results.map(item => new GameEvent(item));
-                return data;
-            });
-    }
-
-    getCurrentUserGameInvites():
-    Observable<{count?: number, results: GameEvent[]}> {
-        return this.http.get('/api/games/invites/')
-            .map(res => {
-                let data = res.json();
-                data.results = data.results.map(item => new GameEvent(item));
-                return data;
-            });
-    }
-
-
-    // FIXME: same as "my games" above
-    getCurrentUserTeams(limit?: number, offset?: number):
-    Observable<{count?: number, results: Team[]}> {
-        const params: URLSearchParams = new URLSearchParams();
-        if (limit) { params.set('limit', limit.toString()); }
-        if (offset) { params.set('offset', offset.toString()); }
-        return this.http.get('/api/teams/my/', { search: params })
-            .map(res => {
-                let data = res.json();
-                data.results = data.results.map(item => new Team(item));
-                return data;
-            });
-    }
-
-    getCurrentUserTeamInvites():
-    Observable<{count?: number, results: Team[]}> {
-        return this.http.get('/api/teams/invites/')
-            .map(res => {
-                let data = res.json();
-                data.results = data.results.map(item => new Team(item));
-                return data;
-            });
     }
 
     update(data): Observable<User> {

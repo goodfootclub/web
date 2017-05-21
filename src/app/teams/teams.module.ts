@@ -11,6 +11,7 @@ import { TeamEditComponent, EditRoleComponent } from './team-edit';
 import { TeamDetailsComponent } from './team-details';
 import { TeamsService } from './teams.service';
 import { GamesService } from '../games/games.service';
+import { TeamsListComponent } from './teams-list/teams-list.component';
 
 
 const ROUTES: Routes = [{
@@ -44,6 +45,7 @@ const ROUTES: Routes = [{
         TeamDetailsComponent,
         TeamsComponent,
         EditRoleComponent,
+        TeamsListComponent,
     ],
     entryComponents: [
         EditRoleComponent,

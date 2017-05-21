@@ -6,23 +6,13 @@
     </button>
 </md-toolbar>
 
-<md-card
-    *ngFor="let team of teams"
-    [routerLink]="['/teams', team.id]"
->
-    <div class="team-data">
-        <div class="team-info">
-            <h1> {{ team.name }} </h1>
-            <div class="info">
-                [{{ ['coed', 'female', 'male'][team.type] }}]
-                {{ team.info }}
-            </div>
-        </div>
-        <span class="role-title">{{ roleNames[team.role] }}</span>
-    </div>
-</md-card>
-
-<app-load-more-block
-    [canLoadMore]="canLoadMore"
-    (loadMoreCallback)="loadMore()"
-></app-load-more-block>
+ <md-tab-group #tabGroup>
+     <md-tab label="As a manager">
+        <app-teams-list *ngIf="managedTeams?.length > 0" [teams]="managedTeams"></app-teams-list>
+         <div class="no-teams-message" *ngIf="managedTeams?.length === 0">You are not managing any teams</div>
+     </md-tab>
+     <md-tab label="As a player">
+         <app-teams-list *ngIf="teams?.length > 0" [teams]="teams"></app-teams-list>
+         <div class="no-teams-message" *ngIf="teams?.length === 0">You are not playing in any teams</div>
+     </md-tab>
+ </md-tab-group>

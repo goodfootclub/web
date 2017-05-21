@@ -5,6 +5,7 @@ import { GameEvent, Player, Team, PlayerRole, User } from '../types';
 import { TitleService } from '../title.service';
 import { GamesService } from '../games/games.service';
 import { TeamsService } from '../teams/teams.service';
+import { InvitesService } from './invites.service';
 
 @Component({
     selector: 'app-invites',
@@ -19,6 +20,7 @@ export class InvitesComponent implements OnInit {
 
     constructor(
         private profileService: ProfileService,
+        private invitesService: InvitesService,
         private gamesService: GamesService,
         private teamsService: TeamsService,
         private title: TitleService,
@@ -63,13 +65,13 @@ export class InvitesComponent implements OnInit {
     }
 
     private loadTeamInvites() {
-        this.profileService.getCurrentUserTeamInvites().subscribe((data) => {
+        this.invitesService.getCurrentUserTeamInvites().subscribe((data) => {
             this.teams = data.results;
         });
     }
 
     private loadGameInvites() {
-        this.profileService.getCurrentUserGameInvites().subscribe((data) => {
+        this.invitesService.getCurrentUserGameInvites().subscribe((data) => {
             this.games = data.results;
         });
     }

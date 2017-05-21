@@ -6,6 +6,7 @@ import { InvitesComponent } from './invites.component';
 import { TeamInvitesComponent } from './team-invites/team-invites.component';
 import { GamesService } from '../games/games.service';
 import { TeamsService } from '../teams/teams.service';
+import { InvitesService } from './invites.service';
 
 const ROUTER_CONFIG = [
     { path: '', component: InvitesComponent },
@@ -18,6 +19,7 @@ const ROUTER_CONFIG = [
     ],
     declarations: [InvitesComponent, TeamInvitesComponent],
     providers: [
+        InvitesService,
         GamesService,
         TeamsService,
     ],

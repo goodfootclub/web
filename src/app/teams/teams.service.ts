@@ -115,6 +115,28 @@ export class TeamsService {
             throw err;
         });
     }
+
+    getCurrentUserTeams(limit?: number, offset?: number):
+    Observable<{count?: number, results: Team[]}> {
+        const params: URLSearchParams = new URLSearchParams();
+        if (limit) { params.set('limit', limit.toString()); }
+        if (offset) { params.set('offset', offset.toString()); }
+        return this.http.get('/api/teams/my/', { search: params })
+            .map(res => {
+                let data = res.json();
+                data.results = data.results.map(item => new Team(item));
+                return data;
+            });
+    }
+
+    getUserManagedTeams(): Observable<{count?: number, results: Team[]}> {
+        return this.http.get('/api/teams/managed/')
+            .map(res => {
+                let data = res.json();
+                data.results = data.results.map(item => new Team(item));
+                return data;
+            });
+    }
 }
 
 export const playerRoles = {

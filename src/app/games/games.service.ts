@@ -103,4 +103,17 @@ export class GamesService {
             this.toastyService.success('Player removed!');
         });
     };
+
+    getCurrentUserGames(limit?: number, offset?: number):
+    Observable<{count?: number, results: GameEvent[]}> {
+        const params: URLSearchParams = new URLSearchParams();
+        if (limit) { params.set('limit', limit.toString()); }
+        if (offset) { params.set('offset', offset.toString()); }
+        return this.http.get('/api/games/my/', { search: params })
+            .map(res => {
+                let data = res.json();
+                data.results = data.results.map(item => new GameEvent(item));
+                return data;
+            });
+    }
 }

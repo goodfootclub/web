@@ -10,6 +10,7 @@ import {
     GameListComponent,
 } from '../common/components/games-list/game-list.component';
 import { ProfileService } from '../profile/profile.service';
+import { InvitesService } from './invites.service';
 import { GamesService } from '../games/games.service';
 import { TeamsService } from '../teams/teams.service';
 import { TitleService } from '../title.service';
@@ -32,6 +33,7 @@ describe('InvitesComponent', () => {
             ],
             providers: [
                 { provide: ProfileService, useClass: ProfileServiceStub },
+                { provide: InvitesService, useClass: InvitesServiceStub },
                 { provide: GamesService, useClass: GamesServiceStub },
                 { provide: TeamsService, useClass: TeamsServiceStub },
                 { provide: TitleService, useClass: TitleServiceStub },
@@ -60,6 +62,9 @@ class ProfileServiceStub {
     getCurrentUser() {
         return Observable.of(new User({}));
     }
+}
+
+class InvitesServiceStub {
     getCurrentUserTeamInvites() {
         return Observable.of({});
     }
