@@ -16,6 +16,7 @@ import { TitleService } from '../../title.service';
 export class GameDetailsComponent implements OnInit {
 
     game: GameEvent;
+    gameDate: Date;
     user: Player;
     rsvpMessages = RsvpStatuses.RSVP_MESSAGES;
 
@@ -39,6 +40,7 @@ export class GameDetailsComponent implements OnInit {
                     this.auth.profile.currentUser.id
                 ];
                 this.game = game;
+                this.gameDate = this.getGameDate(this.game.datetime);
                 this.statusRadioBlock.registerOnChange(
                     this.setStatus.bind(this));
                 if (this.user) {
@@ -46,6 +48,11 @@ export class GameDetailsComponent implements OnInit {
                 }
             });
         });
+    }
+
+    private getGameDate(sdate: string | string[]): Date {
+        let s = sdate instanceof Array ? sdate[0] : sdate;
+        return new Date(s);
     }
 
     setStatus(status: RsvpStatus) {
