@@ -132,7 +132,14 @@ export class GameAddComponent implements OnInit {
         return this.formBuilder.group({
             date: [dateStr, Validators.required],
             time: [timeStr, Validators.required],
-        });
+        }, { validator: this.validateDateTime.bind(this) });
+    }
+
+    validateDateTime(group: FormGroup) {
+        const value = group.value;
+        const selectedDate = new Date(`${value.date}T${value.time}`);
+        const now = new Date();
+        return selectedDate > now ? null : { invalidDate: true };
     }
 
     displayTeam(team: Team) {
