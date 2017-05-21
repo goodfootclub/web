@@ -26,7 +26,7 @@
             {{ game.location.address }}
             </span>
         </div>
-        <div class="footer rsvp-statuses" *ngIf="rsvpStatuses" (click)="handleFooterClick($event)">
+        <div class="footer rsvp-statuses" *ngIf="showRsvpStatuses(game)" (click)="handleFooterClick($event)">
             <button md-button color="primary" *ngFor="let rsvp of rsvpStatusesList" (click)="changeRsvpStatus(game, rsvp.id)">
                 {{rsvp.name}}
             </button>

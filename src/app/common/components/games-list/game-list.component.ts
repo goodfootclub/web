@@ -94,6 +94,13 @@ export class GameListComponent implements OnInit {
         event.stopPropagation();
     }
 
+    showRsvpStatuses(game: GameEvent) {
+        if (!this.rsvpStatuses) { return false; }
+        const gameDate = game.datetime instanceof Array ?
+            new Date(game.datetime[0]) : new Date(game.datetime);
+        return gameDate > new Date();
+    }
+
     private findGroupForGame(now: Date, date: Date): string {
         date.setHours(0, 0, 0, 0);
         now.setHours(0, 0, 0, 0);
