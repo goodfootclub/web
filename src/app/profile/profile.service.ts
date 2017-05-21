@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
     Http,
     Request,
+    Response,
     RequestMethod,
 } from '@angular/http';
 
@@ -69,5 +70,9 @@ export class ProfileService {
         }).catch((err, caught) => {
             throw err;
         });
+    }
+
+    logout(): Observable<Response> {
+        return this.http.get('/api/auth/logout');
     }
 }
