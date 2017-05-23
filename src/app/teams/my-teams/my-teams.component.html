@@ -7,12 +7,12 @@
 </md-toolbar>
 
  <md-tab-group #tabGroup>
-     <md-tab label="As a manager">
-        <app-teams-list *ngIf="managedTeams?.length > 0" [teams]="managedTeams"></app-teams-list>
-         <div class="no-teams-message" *ngIf="managedTeams?.length === 0">You are not managing any teams</div>
-     </md-tab>
      <md-tab label="As a player">
          <app-teams-list *ngIf="teams?.length > 0" [teams]="teams"></app-teams-list>
          <div class="no-teams-message" *ngIf="teams?.length === 0">You are not playing in any teams</div>
+     </md-tab>
+     <md-tab label="As a manager">
+         <app-teams-list *ngIf="managedTeams?.length > 0" [teams]="managedTeams"></app-teams-list>
+         <div class="no-teams-message" *ngIf="managedTeams?.length === 0">You are not managing any teams</div>
      </md-tab>
  </md-tab-group>
