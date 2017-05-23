@@ -7,10 +7,10 @@ import {
     BackButtonComponent,
     LoadMoreComponent,
     MenuButtonComponent,
-    HomeButtonComponent,
     PlayerViewComponent,
     TitleComponent,
 } from './ui';
+import { GameListComponent } from './components';
 import { TextSearchPipe } from './pipes';
 import { HttpProvider } from './services/app.http';
 import { AppToastyService } from './services/toasty.service';
@@ -29,10 +29,10 @@ import { AppToastyService } from './services/toasty.service';
         BackButtonComponent,
         LoadMoreComponent,
         MenuButtonComponent,
-        HomeButtonComponent,
         PlayerViewComponent,
         TextSearchPipe,
         TitleComponent,
+        GameListComponent,
     ],
     providers: [
         HttpProvider,
@@ -43,11 +43,11 @@ import { AppToastyService } from './services/toasty.service';
         LoadMoreComponent,
         MaterialModule,
         MenuButtonComponent,
-        HomeButtonComponent,
         NgCommonModule,
         PlayerViewComponent,
         TextSearchPipe,
         TitleComponent,
+        GameListComponent,
     ],
 })
 export class CommonModule { }

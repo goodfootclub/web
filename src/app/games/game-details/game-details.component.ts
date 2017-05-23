@@ -16,6 +16,7 @@ import { TitleService } from '../../title.service';
 export class GameDetailsComponent implements OnInit {
 
     game: GameEvent;
+    gameDate: Date;
     user: Player;
     rsvpMessages = RsvpStatuses.RSVP_MESSAGES;
 
@@ -39,6 +40,7 @@ export class GameDetailsComponent implements OnInit {
                     this.auth.profile.currentUser.id
                 ];
                 this.game = game;
+                this.gameDate = this.getGameDate(this.game.datetime);
                 this.statusRadioBlock.registerOnChange(
                     this.setStatus.bind(this));
                 if (this.user) {
@@ -48,8 +50,13 @@ export class GameDetailsComponent implements OnInit {
         });
     }
 
+    private getGameDate(sdate: string | string[]): Date {
+        let s = sdate instanceof Array ? sdate[0] : sdate;
+        return new Date(s);
+    }
+
     setStatus(status: RsvpStatus) {
-        this.games.setStatus(this.game, this.user, status).subscribe(() => {
+        this.games.setStatus(this.game.id, this.user, status).subscribe(() => {
             this.games.get(this.game.id).subscribe(game => {
                 this.user = game.playersById[
                     this.auth.profile.currentUser.id
@@ -61,7 +68,7 @@ export class GameDetailsComponent implements OnInit {
 
     join() {
         this.games.addPlayer(
-            this.game,
+            this.game.id,
             this.auth.profile.currentUser,
         ).subscribe(() => {
             this.games.get(this.game.id).subscribe(game => {
@@ -78,7 +85,7 @@ export class GameDetailsComponent implements OnInit {
 
     leave() {
         this.games.removePlayer(
-            this.game,
+            this.game.id,
             this.user,
         ).subscribe(() => {
             this.games.get(this.game.id).subscribe(game => {

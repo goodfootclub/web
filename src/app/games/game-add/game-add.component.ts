@@ -132,7 +132,14 @@ export class GameAddComponent implements OnInit {
         return this.formBuilder.group({
             date: [dateStr, Validators.required],
             time: [timeStr, Validators.required],
-        });
+        }, { validator: this.validateDateTime.bind(this) });
+    }
+
+    validateDateTime(group: FormGroup) {
+        const value = group.value;
+        const selectedDate = new Date(`${value.date}T${value.time}`);
+        const now = new Date();
+        return selectedDate > now ? null : { invalidDate: true };
     }
 
     displayTeam(team: Team) {
@@ -151,7 +158,7 @@ export class GameAddComponent implements OnInit {
 
     onSubmit() {
         const dates: string[] = this.form.value['dates']
-            .map(this.dateFromInputValue);
+            .map(({ date, time }) => new Date(`${date}T${time}`));
         const selectedTeam = this.form.value['teams']['teamName'] as Team;
         const teamsArray = selectedTeam.id == null ? [] : [selectedTeam.id];
         const selectedLocation: Location =

@@ -1,0 +1,8 @@
+<md-toolbar>
+    <app-menu-button></app-menu-button>
+    <app-title></app-title>
+</md-toolbar>
+
+<app-team-invites [teams]="teams" (inviteStatusChanged)="teamInviteStatusChanged($event)"></app-team-invites>
+
+<app-games-list [games]="games" rsvpStatuses="true" (rsvpStatusChanged)="rsvpStatusChanged($event)"></app-games-list>

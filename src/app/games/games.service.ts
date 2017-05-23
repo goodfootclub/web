@@ -56,13 +56,13 @@ export class GamesService {
     }
 
     setStatus(
-        game: GameEvent,
+        gameId: number,
         player: Player,
         status: RsvpStatus,
     ): Observable<any> {
         let request = new Request({
             method: RequestMethod.Put,
-            url: `/api/games/${game.id}/players/${player.rsvpId}/`,
+            url: `/api/games/${gameId}/players/${player.rsvpId}/`,
             body: {
                 'id': player.id,
                 'rsvp': status,
@@ -74,10 +74,10 @@ export class GamesService {
         });
     };
 
-    addPlayer(game: GameEvent, user: User): Observable<any> {
+    addPlayer(gameId: number, user: User): Observable<any> {
         let request = new Request({
             method: RequestMethod.Post,
-            url: `/api/games/${game.id}/players/`,
+            url: `/api/games/${gameId}/players/`,
             body: {
                 'id': user.id,
                 'rsvp': RsvpStatus.Going,
@@ -85,17 +85,35 @@ export class GamesService {
         });
         return this.http.request(request).do(() => {
             this.toastyService.success('Player added!');
+        }).catch(err => {
+            if (err.status === 409) {
+                this.toastyService.warning(
+        'Hold on Mr. Thorough Pants, they already got a game invite.');
+            }
+            throw err;
         });
     };
 
-    removePlayer(game: GameEvent, player: Player): Observable<any> {
+    removePlayer(gameId: number, player: Player): Observable<any> {
         let request = new Request({
             method: RequestMethod.Delete,
-            url: `/api/games/${game.id}/players/${player.rsvpId}/`,
+            url: `/api/games/${gameId}/players/${player.rsvpId}/`,
         });
         return this.http.request(request).do(() => {
             this.toastyService.success('Player removed!');
         });
     };
 
+    getCurrentUserGames(limit?: number, offset?: number):
+    Observable<{count?: number, results: GameEvent[]}> {
+        const params: URLSearchParams = new URLSearchParams();
+        if (limit) { params.set('limit', limit.toString()); }
+        if (offset) { params.set('offset', offset.toString()); }
+        return this.http.get('/api/games/my/', { search: params })
+            .map(res => {
+                let data = res.json();
+                data.results = data.results.map(item => new GameEvent(item));
+                return data;
+            });
+    }
 }

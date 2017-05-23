@@ -107,9 +107,35 @@ export class TeamsService {
         });
         return this.http.request(request).do(() => {
             this.toastyService.success('Join request sent!');
-        }).catch((err, caught) => {
+        }).catch((err) => {
+            if (err.status === 409) {
+                this.toastyService.warning(
+            'Do you like this team so much that you want to join it twice?');
+            }
             throw err;
         });
+    }
+
+    getCurrentUserTeams(limit?: number, offset?: number):
+    Observable<{count?: number, results: Team[]}> {
+        const params: URLSearchParams = new URLSearchParams();
+        if (limit) { params.set('limit', limit.toString()); }
+        if (offset) { params.set('offset', offset.toString()); }
+        return this.http.get('/api/teams/my/', { search: params })
+            .map(res => {
+                let data = res.json();
+                data.results = data.results.map(item => new Team(item));
+                return data;
+            });
+    }
+
+    getUserManagedTeams(): Observable<{count?: number, results: Team[]}> {
+        return this.http.get('/api/teams/managed/')
+            .map(res => {
+                let data = res.json();
+                data.results = data.results.map(item => new Team(item));
+                return data;
+            });
     }
 }
 

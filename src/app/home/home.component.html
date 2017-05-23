@@ -9,6 +9,9 @@
             <app-profile-tile class="grid-tile" [user]="user">
             </app-profile-tile>
         </md-grid-tile>
+        <md-grid-tile colspan="2" *ngIf="user?.invites?.total" class="grid-tile">
+            <app-invites-tile [invites]="user.invites"></app-invites-tile>
+        </md-grid-tile>
         <md-grid-tile>
             <app-my-games-tile class="grid-tile right-border">
             </app-my-games-tile>

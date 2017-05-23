@@ -96,6 +96,7 @@ export class GameEvent {
     players?: Player[];
     playersById?: { [id: number]: Player };
     rsvp?: RsvpStatus;
+    rsvpId: number;
     // playersCount?: PlayersCount;
     // playersNeeded?: PlayersCount;
     teams?: Team[];
@@ -136,6 +137,7 @@ export class GameEvent {
         this.datetime = [data['datetime']];
         this.location = new Location(data['location']);
         this.rsvp = data['rsvp'];
+        this.rsvpId = data['rsvp_id'] || data['rsvpId'];
 
         this.playersById = {};
 
@@ -157,6 +159,11 @@ export class GameEvent {
     }
 };
 
+export class InvitesCountData {
+    games: number;
+    teams: number;
+    total: number;
+}
 
 export class League {
     age: number | [number, number];
@@ -210,14 +217,14 @@ export class Player {
      */
     constructor(data: any) {
         this.age = data['age'];
-        this.firstName = data['first_name'];
+        this.firstName = data['first_name'] || data['firstName'];
         this.id = data['id'];
         this.img = data['img'];
-        this.lastName = data['last_name'];
+        this.lastName = data['last_name']  || data['lastName'];
         this.role = data['role'];
-        this.roleId = data['role_id'];
+        this.roleId = data['role_id'] || data['roleId'];
         this.rsvp = data['rsvp'];
-        this.rsvpId = data['rsvp_id'];
+        this.rsvpId = data['rsvp_id'] || data['rsvpId'];
         this.team = data['team'];
     }
 };
@@ -260,7 +267,9 @@ export class Team {
     name: string;
     players?: Player[];
     playersInGame?: Player[];  // When team in a game
+    playersById?: { [id: number]: Player };
     role?: PlayerRole;
+    roleId: number;
     slotsFemale?: string;
     slotsMale?: string;
     type?: TeamType;
@@ -280,14 +289,20 @@ export class Team {
         }
 
         this.players = [];
+        this.playersById = {};
         if (data['players'] != null) {
-            this.players = data['players'].map(item => new Player(item));
+            this.players = data['players'].map(item => {
+                const player = new Player(item);
+                this.playersById[player.id] = player;
+                return player;
+            });
         }
 
         this.id = data['id'];
         this.info = data['info'];
         this.name = data['name'];
         this.role = data['role'];
+        this.roleId = data['role_id'] || data['roleId'];
         this.slotsFemale = data['slots_female'];
         this.slotsMale = data['slots_male'];
         this.type = data['type'];
@@ -305,6 +320,7 @@ export class User {
     id?: number;
     img?: string;
     lastName: string;
+    invites: InvitesCountData;
     managedTeams: Team[];
     games?: GameEvent[];
     phone?: string;
@@ -344,6 +360,7 @@ export class User {
                 Gender.Male :
                 Gender.Female;
         }
+        this.invites = data['invites'] as InvitesCountData;
 
         let hash = data['id'] % 50;
         this.cover = data['cover'] == null ?

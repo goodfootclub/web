@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { MdDialog, MdDialogRef } from '@angular/material';
 
 import { TitleService } from 'app/title.service';
 import { TeamsService, playerRoles } from '../teams.service';
 import { Team, Player, PlayerRole } from '../../types';
 import { ProfileService } from '../../profile/profile.service';
+import { EditRoleComponent } from './edit-role-popup/edit-role.component';
 
 
 @Component({
@@ -36,6 +38,7 @@ export class TeamEditComponent implements OnInit {
         public route: ActivatedRoute,
         public title: TitleService,
         public profile: ProfileService,
+        private dialogService: MdDialog,
     ) {
         title.setTitle('Edit a team');
         this.roasterRoles = Object.keys(this.ROLES).filter((key) => +key >= 0);
@@ -81,23 +84,14 @@ export class TeamEditComponent implements OnInit {
             (manager) => manager.id === this.profile.currentUser.id);
     }
 
-    updatePlayerRole(player: Player, event: any) {
-        const role = +event.value;
-        if (player.role !== role) {
-            player.role = role;
-            this.teams.updateTeamPlayer(this.team.id, player.roleId, player)
-                .subscribe((result) => {
-                    Object.assign(player, result);
-                });
-        }
-    }
-
-    exclude(player: Player): void {
-        const index = this.team.players.indexOf(player);
-        this.teams.excludeTeamPlayer(this.team.id, player.roleId)
-            .subscribe((result) => {
-                this.team.players.splice(index, 1);
+    openDialog(player: Player) {
+        const dialog: MdDialogRef<EditRoleComponent> =
+            this.dialogService.open(EditRoleComponent, {
+                height: '300px',
+                width: '250px',
             });
+        dialog.componentInstance.setPlayer(player);
+        dialog.componentInstance.setTeam(this.team);
     }
 
     save(): void {

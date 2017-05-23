@@ -2,6 +2,7 @@
     <app-home-button></app-home-button>
     <app-title></app-title>
     <button md-mini-fab [routerLink]="['edit']"><md-icon>edit</md-icon></button>
+    <a class="logout-link" (click)="logout()">Logout</a>
 </md-toolbar>
 
 <app-player [player]="user"></app-player>

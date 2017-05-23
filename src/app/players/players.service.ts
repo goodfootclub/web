@@ -48,7 +48,11 @@ export class PlayersService {
         });
         return this.http.request(request).do(() => {
             this.toastyService.success('Player invited!');
-        }).catch((err, caught) => {
+        }).catch((err) => {
+            if (err.status === 409) {
+                this.toastyService.warning(
+                    'Why u trying to add a player twice?');
+            }
             throw err;
         });
     }
@@ -61,7 +65,11 @@ export class PlayersService {
         return this.http.post(
             `/api/games/${gameId}/players/`,
             { id: playerId, rsvp: PlayerRole.Invited, team: teamId },
-        ).catch((err, caught) => {
+        ).catch((err) => {
+            if (err.status === 409) {
+                this.toastyService.warning(
+            'Hold on Mr. Thorough Pants, they already got a game invite.');
+            }
             throw err;
         });
     }

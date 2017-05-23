@@ -32,6 +32,10 @@ export const ROUTES: Routes = [{
     loadChildren: 'app/profile/profile.module#ProfileModule',
     canActivateChild: [AuthService],
 }, {
+    path: 'invites',
+    loadChildren: 'app/invites/invites.module#InvitesModule',
+    canActivateChild: [AuthService],
+}, {
     path: 'players',
     loadChildren: 'app/players/players.module#PlayersModule',
     canActivateChild: [AuthService],

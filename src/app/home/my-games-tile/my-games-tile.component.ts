@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProfileService } from 'app/profile';
+import { GamesService } from '../../games/games.service';
 
 
 @Component({
@@ -16,12 +16,12 @@ export class MyGamesTileComponent implements OnInit {
     count = 0;
 
     constructor(
-        private profile: ProfileService,
+        private gamesService: GamesService,
         private router: Router,
     ) { }
 
     ngOnInit() {
-        this.profile.getCurrentUserGames(1).subscribe(res => {
+        this.gamesService.getCurrentUserGames(1).subscribe(res => {
             this.loading = false;
             if (res != null) {
                 this.count = res.count;

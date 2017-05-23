@@ -18,15 +18,6 @@
     </md-toolbar-row>
 </md-toolbar>
 
-<md-card
-    *ngFor="let team of teams"
-    [routerLink]="['/teams', team.id]"
->
-    <h1> {{ team.name }} </h1>
-    <div class="info">
-        [{{ ['coed', 'female', 'male'][team.type] }}]
-        {{ team.info }}
-    </div>
-</md-card>
+<app-teams-list [teams]="teams"></app-teams-list>
 
 <app-load-more-block [canLoadMore]="canLoadMore" (loadMoreCallback)="loadMore()"></app-load-more-block>

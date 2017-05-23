@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {ActivatedRoute, Router, RoutesRecognized} from '@angular/router';
+import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
 
 /**
  * Service to keep history of user's routing
@@ -41,7 +41,8 @@ export class HistoryService {
                 found = (url.indexOf(';') === -1
                     && url.indexOf('/edit') === -1);
             }
-            console.log(`next url is ${url} from ${this.routes.map((i) => i.url)}`);
+            console.log(`next url is ${url} 
+                from ${this.routes.map((i) => i.url)}`);
             if (found) {
                 this.router.navigate([url]);
             } else {

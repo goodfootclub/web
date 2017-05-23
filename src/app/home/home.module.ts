@@ -9,21 +9,23 @@ import { TeamsTileComponent } from './teams-tile/teams-tile.component';
 import { PlayersTileComponent } from './players-tile/players-tile.component';
 import { PlayersService } from '../players/players.service';
 import { GamesService } from 'app/games/games.service';
+import { TeamsService } from '../teams/teams.service';
 import {
-    ContactusTileComponent,
+ContactusTileComponent,
 } from './contactus-tile/contactus-tile.component';
 import {
-    MyNextGameTileComponent,
+MyNextGameTileComponent,
 } from './my-next-game-tile/my-next-game-tile.component';
 import {
-    MyGamesTileComponent,
+MyGamesTileComponent,
 } from './my-games-tile/my-games-tile.component';
 import {
-    MyTeamsTileComponent,
+MyTeamsTileComponent,
 } from './my-teams-tile/my-teams-tile.component';
 import {
-    PickupGamesTileComponent,
+PickupGamesTileComponent,
 } from './pickup-games-tile/pickup-games-tile.component';
+import { InvitesTileComponent } from './invites-tile/invites-tile.component';
 
 
 const ROUTES: Routes = [{
@@ -46,10 +48,12 @@ const ROUTES: Routes = [{
         MyGamesTileComponent,
         MyTeamsTileComponent,
         PickupGamesTileComponent,
+        InvitesTileComponent,
     ],
     providers: [
         PlayersService,
         GamesService,
+        TeamsService,
     ],
 })
 export class HomeModule { }

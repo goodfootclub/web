@@ -24,10 +24,10 @@ export class HomeComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.profile.getCurrentUser().subscribe(user => {
+        this.profile.updateCurrentUser().subscribe(user => {
             this.user = user;
         });
-        this.profile.getCurrentUserGames(1)
+        this.gamesService.getCurrentUserGames(1)
             .map(res => res.results)
             .subscribe(games => {
                 if (games && games instanceof Array && games.length > 0) {

@@ -1,0 +1,35 @@
+<div *ngFor="let key of keys()" class="game-group">
+    <span class="game-group-title" *ngIf="showGroupTitle()"><h5>{{key}}</h5></span>
+    <md-card
+        *ngFor="let game of gamesDictionary[key]"
+        [routerLink]="['/games', game.id]"
+    >
+        <div class="game-header">
+            <h1>{{ game.name }}</h1>
+            <span class="rsvp-status">{{getRsvpStatus(game)}}</span>
+            <div class="close-button" (click)="deleteRsvpStatus(game, $event)" *ngIf="rsvpStatuses">
+                <button md-icon-button>
+                    <md-icon>close</md-icon>
+                </button>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <h1>{{ game.datetime | date:'EEEE, h:mm a' }}</h1>
+            <span class="info">
+            {{ game.datetime | date:'MMMM d, y' }}
+            </span>
+        </div>
+        <div>
+            <h1>{{ game.location.name }}</h1>
+            <span class="info">
+            {{ game.location.address }}
+            </span>
+        </div>
+        <div class="footer rsvp-statuses" *ngIf="showRsvpStatuses(game)" (click)="handleFooterClick($event)">
+            <button md-button color="primary" *ngFor="let rsvp of rsvpStatusesList" (click)="changeRsvpStatus(game, rsvp.id)">
+                {{rsvp.name}}
+            </button>
+        </div>
+    </md-card>
+</div>

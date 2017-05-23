@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProfileService } from 'app/profile';
+import { TeamsService } from '../../teams/teams.service';
 
 
 @Component({
@@ -16,12 +16,12 @@ export class MyTeamsTileComponent implements OnInit {
     loading = true;
 
     constructor(
-        private profile: ProfileService,
+        private teamsService: TeamsService,
         private router: Router,
     ) { }
 
     ngOnInit() {
-        this.profile.getCurrentUserTeams(1).subscribe(res => {
+        this.teamsService.getCurrentUserTeams(1).subscribe(res => {
             this.loading = false;
             if (res != null) {
                 this.count = res.count;

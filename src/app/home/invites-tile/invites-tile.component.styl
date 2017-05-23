@@ -1,0 +1,17 @@
+@import "../../common/styles/variables.styl"
+
+p
+    font-size $header-font-size
+    text-transform uppercase
+    margin-top 0px
+    margin-bottom 0px
+    line-height $sub-huge-font-size
+
+    span.number
+        margin-right 5px
+        margin-left 5px
+        color $main-theme-color
+        font-size $sub-huge-font-size
+
+    @media only screen and (max-width: $iphone-5), only screen and (max-device-width: $iphone-5)
+        font-size $subheader-font-size
