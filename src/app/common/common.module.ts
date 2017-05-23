@@ -9,6 +9,7 @@ import {
     MenuButtonComponent,
     PlayerViewComponent,
     TitleComponent,
+    HomeButtonComponent,
 } from './ui';
 import { GameListComponent } from './components';
 import { TextSearchPipe } from './pipes';
@@ -33,6 +34,7 @@ import { AppToastyService } from './services/toasty.service';
         TextSearchPipe,
         TitleComponent,
         GameListComponent,
+        HomeButtonComponent,
     ],
     providers: [
         HttpProvider,
@@ -48,6 +50,7 @@ import { AppToastyService } from './services/toasty.service';
         TextSearchPipe,
         TitleComponent,
         GameListComponent,
+        HomeButtonComponent,
     ],
 })
 export class CommonModule { }

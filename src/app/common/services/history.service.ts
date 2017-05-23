@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
+import { Router, RoutesRecognized } from '@angular/router';
 
 /**
  * Service to keep history of user's routing
@@ -9,21 +9,27 @@ export class HistoryService {
 
     private readonly maxSize = 5;
     private routes: RoutesRecognized[] = [];
+    private currentRoute: RoutesRecognized;
+    private excludeNext = false;
 
     constructor(
         private router: Router,
-        private activeRoute: ActivatedRoute,
     ) {
         this.router.events
             .filter(e => e instanceof RoutesRecognized)
             .subscribe((e: RoutesRecognized) => {
-                this.add(e);
+                if (this.excludeNext) {
+                    this.excludeNext = false;
+                    return; // do nothing. should be back button click
+                } else if (this.currentRoute) {
+                    this.add(this.currentRoute);
+                }
+                this.currentRoute = e;
             });
     }
 
     add(route: RoutesRecognized) {
         this.routes.push(route);
-        console.log(this.activeRoute);
         if (this.routes.length > this.maxSize) {
             this.routes.shift();
         }
@@ -41,8 +47,7 @@ export class HistoryService {
                 found = (url.indexOf(';') === -1
                     && url.indexOf('/edit') === -1);
             }
-            console.log(`next url is ${url} 
-                from ${this.routes.map((i) => i.url)}`);
+            this.excludeNext = true;
             if (found) {
                 this.router.navigate([url]);
             } else {
