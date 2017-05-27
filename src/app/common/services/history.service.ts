@@ -7,7 +7,7 @@ import { Router, RoutesRecognized } from '@angular/router';
 @Injectable()
 export class HistoryService {
 
-    private readonly maxSize = 5;
+    private readonly maxSize = 10;
     private routes: RoutesRecognized[] = [];
     private currentRoute: RoutesRecognized;
     private excludeNext = false;
@@ -54,5 +54,11 @@ export class HistoryService {
                 this.router.navigate(['/']);
             }
         }
+    }
+
+    getHomePageIndex(): number {
+        const index =  this.routes.map(i => i.url).lastIndexOf('/');
+        if (index === -1) { return -1; }
+        return this.routes.length - index - 1;
     }
 }

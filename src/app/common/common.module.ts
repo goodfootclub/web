@@ -15,6 +15,7 @@ import { GameListComponent } from './components';
 import { TextSearchPipe } from './pipes';
 import { HttpProvider } from './services/app.http';
 import { AppToastyService } from './services/toasty.service';
+import { NavigationButtonsComponent } from './ui/navigation-buttons.component';
 
 
 /**
@@ -35,13 +36,13 @@ import { AppToastyService } from './services/toasty.service';
         TitleComponent,
         GameListComponent,
         HomeButtonComponent,
+        NavigationButtonsComponent,
     ],
     providers: [
         HttpProvider,
         AppToastyService,
     ],
     exports: [
-        BackButtonComponent,
         LoadMoreComponent,
         MaterialModule,
         MenuButtonComponent,
@@ -50,7 +51,7 @@ import { AppToastyService } from './services/toasty.service';
         TextSearchPipe,
         TitleComponent,
         GameListComponent,
-        HomeButtonComponent,
+        NavigationButtonsComponent,
     ],
 })
 export class CommonModule { }
