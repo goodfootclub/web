@@ -64,7 +64,6 @@ export class GamesService {
             method: RequestMethod.Put,
             url: `/api/games/${gameId}/players/${player.rsvpId}/`,
             body: {
-                'id': player.id,
                 'rsvp': status,
                 'team': player.team,
             },
