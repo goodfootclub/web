@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "angular-cli": {},
   "scripts": {
+    "build": "ng build -prod",
     "e2e": "ng e2e",
     "lint": "ng lint",
     "ng": "ng",
