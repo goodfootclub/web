@@ -126,6 +126,8 @@ export class GameAddComponent implements OnInit {
 
     initMatchDate(date?: string, time?: string): FormGroup {
         const now = new Date();
+        now.setMinutes(0);
+        now.setHours(now.getHours() + 1);
         const timeStr = time ? time : this.datePipe.transform(now, 'HH:mm');
         const dateStr = date ? date :
             this.datePipe.transform(now, 'yyyy-MM-dd');
