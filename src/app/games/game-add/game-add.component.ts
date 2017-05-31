@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
 import { Location, Team } from 'app/types';
 import { GamesService } from '../games.service';
 import { LocationsService } from '../locations.service';
+import { HistoryService } from '../../common/services/history.service';
 
 import 'rxjs/add/operator/debounceTime';
 import { ProfileService } from '../../profile/profile.service';
@@ -65,8 +66,9 @@ export class GameAddComponent implements OnInit {
         public _profile: ProfileService,
         public formBuilder: FormBuilder,
         public games: GamesService,
-        public router: Router,
-        public route: ActivatedRoute,
+        private historyService: HistoryService,
+        private router: Router,
+        private route: ActivatedRoute,
     ) {}
 
     ngOnInit(): void {
@@ -156,6 +158,10 @@ export class GameAddComponent implements OnInit {
         let dt = new Date(`${val['date']}T${val['time']}`);
         dt.setHours(dt.getHours() + dt.getTimezoneOffset() / 60);
         return dt;
+    }
+
+    onCancel() {
+        this.historyService.back();
     }
 
     onSubmit() {

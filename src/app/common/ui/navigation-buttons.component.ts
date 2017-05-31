@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Location } from '@angular/common';
 import { HistoryService } from '../services/history.service';
 
 
@@ -12,13 +11,10 @@ import { HistoryService } from '../services/history.service';
 })
 export class NavigationButtonsComponent {
     constructor(
-        private location: Location,
         private historyService: HistoryService,
     ) {}
 
     isHomeButtonShown(): boolean {
-        // return this.historyService.getHomePageIndex() !== 0
-        //     && '/' !== this.location.path();
         return true;
     }
 
