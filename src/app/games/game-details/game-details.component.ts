@@ -2,10 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { GamesService } from '../games.service';
-import { AuthService } from '../../auth/auth.service';
 import { GameEvent, RsvpStatus, Player, RsvpStatuses } from '../../types';
 import { MdRadioGroup } from '@angular/material';
 import { TitleService } from '../../title.service';
+import { ProfileService } from '../../profile/profile.service';
 
 
 @Component({
@@ -28,7 +28,7 @@ export class GameDetailsComponent implements OnInit {
         private titleService: TitleService,
         private route: ActivatedRoute,
         private router: Router,
-        private auth: AuthService,
+        private profileService: ProfileService,
     ) { }
 
     ngOnInit() {
@@ -37,7 +37,7 @@ export class GameDetailsComponent implements OnInit {
             this.games.get(id).subscribe(game => {
                 this.titleService.setTitle(game.name);
                 this.user = game.playersById[
-                    this.auth.profile.currentUser.id
+                    this.profileService.currentUser.id
                 ];
                 this.game = game;
                 this.gameDate = this.getGameDate(this.game.datetime);
@@ -59,7 +59,7 @@ export class GameDetailsComponent implements OnInit {
         this.games.setStatus(this.game.id, this.user, status).subscribe(() => {
             this.games.get(this.game.id).subscribe(game => {
                 this.user = game.playersById[
-                    this.auth.profile.currentUser.id
+                    this.profileService.currentUser.id
                 ];
                 this.game = game;
             });
@@ -69,11 +69,11 @@ export class GameDetailsComponent implements OnInit {
     join() {
         this.games.addPlayer(
             this.game.id,
-            this.auth.profile.currentUser,
+            this.profileService.currentUser,
         ).subscribe(() => {
             this.games.get(this.game.id).subscribe(game => {
                 this.user = game.playersById[
-                    this.auth.profile.currentUser.id
+                    this.profileService.currentUser.id
                 ];
                 this.game = game;
                 if (this.user) {
@@ -90,7 +90,7 @@ export class GameDetailsComponent implements OnInit {
         ).subscribe(() => {
             this.games.get(this.game.id).subscribe(game => {
                 this.user = game.playersById[
-                    this.auth.profile.currentUser.id
+                    this.profileService.currentUser.id
                 ];
                 this.game = game;
             });
@@ -99,7 +99,8 @@ export class GameDetailsComponent implements OnInit {
 
     isAddPlayersVisible(): boolean {
         if (this.game != null && this.game.organizer != null) {
-            return this.auth.profile.currentUser.id === this.game.organizer.id;
+            return this.profileService.currentUser.id
+                === this.game.organizer.id;
         }
         return false;
     }
