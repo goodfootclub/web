@@ -11,7 +11,6 @@ import {
     Router,
 } from '@angular/router';
 import { AuthService } from './auth.service';
-import { ProfileService } from '../profile';
 import { AppToastyService } from '../common/services/toasty.service';
 
 
@@ -50,7 +49,6 @@ describe('Service: Auth', () => {
             providers: [
                 // { provide: APP_BASE_HREF, useValue: '/' }
                 AuthService,
-                ProfileService,
                 { provide: Http, useClass: HttpStub },
                 { provide: Router, useClass: RouterStub },
                 { provide: AppToastyService, useClass: AppToastyServiceStub },
@@ -66,7 +64,6 @@ describe('Service: Auth', () => {
         inject(
             [AuthService, Router],
             (service: AuthService, router: RouterStub) => {
-                service.profile.currentUser = null;
                 const result = service.canActivate(
                     <ActivatedRouteSnapshot>{},
                     <RouterStateSnapshot>{ url: '' },

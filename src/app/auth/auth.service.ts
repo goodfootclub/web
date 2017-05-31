@@ -6,7 +6,6 @@ import {
     Router,
     RouterStateSnapshot,
 } from '@angular/router';
-import { ProfileService } from '../profile';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 import { Observable } from 'rxjs/Observable';
@@ -27,7 +26,6 @@ export class AuthService implements CanActivate, CanActivateChild {
 
     constructor(
         private router: Router,
-        public profile: ProfileService,
     ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
