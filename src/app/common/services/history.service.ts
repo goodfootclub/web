@@ -7,9 +7,7 @@ import { Router, RoutesRecognized } from '@angular/router';
 @Injectable()
 export class HistoryService {
 
-    private readonly maxSize = 10;
-    private routes: RoutesRecognized[] = [];
-    private currentRoute: RoutesRecognized;
+    private routes: ParsedRoute[] = [];
     private excludeNext = false;
 
     constructor(
@@ -20,18 +18,25 @@ export class HistoryService {
             .subscribe((e: RoutesRecognized) => {
                 if (this.excludeNext) {
                     this.excludeNext = false;
-                    return; // do nothing. should be back button click
-                } else if (this.currentRoute) {
-                    this.add(this.currentRoute);
+                    return;
                 }
-                this.currentRoute = e;
+                this.register(e);
             });
     }
 
-    add(route: RoutesRecognized) {
-        this.routes.push(route);
-        if (this.routes.length > this.maxSize) {
-            this.routes.shift();
+    register(route: RoutesRecognized) {
+        if ('/' === route.url) {
+            this.routes = [];
+            return;
+        }
+        const parsedRoute = this.parseUrl(route);
+        const existingRoute = this.routes
+            .find(r => r.parametrizedUrl === parsedRoute.parametrizedUrl);
+        if (existingRoute) {
+            const index = this.routes.indexOf(existingRoute);
+            this.routes.splice(index, 100);
+        } else {
+            this.routes.push(parsedRoute);
         }
     }
 
@@ -39,26 +44,66 @@ export class HistoryService {
         if (this.routes.length === 0) {
             this.router.navigate(['/']);
         } else {
-            let found = false;
-            let url = '';
-            while (!found) {
-                const rr = this.routes.pop();
-                url = rr.url;
-                found = (url.indexOf(';') === -1
-                    && url.indexOf('/edit') === -1);
-            }
             this.excludeNext = true;
-            if (found) {
-                this.router.navigate([url]);
-            } else {
+            this.routes.pop();
+            if (this.routes.length === 0) {
                 this.router.navigate(['/']);
+            } else {
+                const url = this.routes[this.routes.length - 1];
+                if (url.parameters) {
+                    this.router.navigate([url.initialUrl, url.parameters]);
+                } else {
+                    this.router.navigate([url.initialUrl]);
+                }
             }
         }
     }
 
     getHomePageIndex(): number {
-        const index =  this.routes.map(i => i.url).lastIndexOf('/');
-        if (index === -1) { return -1; }
-        return this.routes.length - index - 1;
+        return this.routes.length - 1;
     }
+
+    private parseUrl(route: RoutesRecognized): ParsedRoute {
+        const parsed = new ParsedRoute();
+        parsed.urlParameters = {};
+        parsed.parameters = {};
+        parsed.initialParts = route.url.split('/')
+            .map(i => i.trim())
+            .filter(i => i);
+        const lastIndex = parsed.initialParts.length - 1;
+        const lastParam = parsed.initialParts[lastIndex];
+        const parametersList = lastParam.split(';');
+        if (parametersList.length > 1) {
+            parsed.initialParts[lastIndex] = parametersList.shift();
+            parametersList.forEach(str => {
+                const param = str.split('=');
+                parsed.parameters[param[0]] = param[1];
+            });
+        }
+        parsed.initialUrl = route.url.split(';')[0];
+        let iter = 0;
+        parsed.parametrizedParts = parsed.initialParts.map(i => {
+            if (this.isNumber(i)) {
+                const paramName = `attr${++iter}`;
+                parsed.urlParameters[paramName] = i;
+                return paramName;
+            }
+            return i;
+        });
+        parsed.parametrizedUrl = parsed.parametrizedParts.join('/');
+        return parsed;
+    }
+
+    private isNumber(value: string) {
+        return /^\d+$/.test(value);
+    }
+}
+
+class ParsedRoute {
+    initialUrl: string;
+    initialParts: string[];
+    parametrizedUrl: string;
+    parametrizedParts: string[];
+    urlParameters: any;
+    parameters: any;
 }

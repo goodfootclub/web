@@ -23,7 +23,6 @@ export class NavigationButtonsComponent {
     }
 
     isBackButtonShown(): boolean {
-        console.log(this.historyService.getHomePageIndex());
         return this.historyService.getHomePageIndex() > 0;
     }
 }
