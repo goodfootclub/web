@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 import { EventsService } from '../events.service';
-import { AuthService } from '../../auth/auth.service';
 import { GameEvent, RsvpStatuses } from '../../types';
+import { ProfileService } from '../../profile/profile.service';
 
 
 @Component({
@@ -21,8 +21,7 @@ export class EventDetailsComponent implements OnInit {
     constructor(
         private events: EventsService,
         private route: ActivatedRoute,
-        private router: Router,
-        private auth: AuthService,
+        private profileService: ProfileService,
     ) { }
 
     ngOnInit() {
@@ -30,7 +29,7 @@ export class EventDetailsComponent implements OnInit {
             let id = +params['id'];
             this.events.get(id).subscribe(event => {
                 this.user = event.playersById[
-                    this.auth.profile.currentUser.id
+                    this.profileService.currentUser.id
                 ];
                 this.event = event;
             });
@@ -41,7 +40,7 @@ export class EventDetailsComponent implements OnInit {
         this.events.setStatus(this.event, this.user, status).subscribe(() => {
             this.events.get(this.event.id).subscribe(event => {
                 this.user = event.playersById[
-                    this.auth.profile.currentUser.id
+                    this.profileService.currentUser.id
                 ];
                 this.event = event;
             });

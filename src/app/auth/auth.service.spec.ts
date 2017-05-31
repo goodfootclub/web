@@ -11,7 +11,6 @@ import {
     Router,
 } from '@angular/router';
 import { AuthService } from './auth.service';
-import { ProfileService } from '../profile';
 import { AppToastyService } from '../common/services/toasty.service';
 
 
@@ -50,7 +49,6 @@ describe('Service: Auth', () => {
             providers: [
                 // { provide: APP_BASE_HREF, useValue: '/' }
                 AuthService,
-                ProfileService,
                 { provide: Http, useClass: HttpStub },
                 { provide: Router, useClass: RouterStub },
                 { provide: AppToastyService, useClass: AppToastyServiceStub },
@@ -62,22 +60,10 @@ describe('Service: Auth', () => {
         expect(service).toBeTruthy();
     }));
 
-    it('should send an http request to see if a user is logged in', async(
-        inject([AuthService, Http], (service: AuthService, http: HttpStub) => {
-            service.canActivate(
-                <ActivatedRouteSnapshot>{},
-                <RouterStateSnapshot>{ url: '' },
-            );
-            expect(http.requestDidHappen).toBeTruthy();
-            expect(http.url).toEqual('/api/users/me/');
-        }),
-    ));
-
     it('should navigate to login page if user is not logged in', async(
         inject(
             [AuthService, Router],
             (service: AuthService, router: RouterStub) => {
-                service.profile.currentUser = null;
                 const result = service.canActivate(
                     <ActivatedRouteSnapshot>{},
                     <RouterStateSnapshot>{ url: '' },
