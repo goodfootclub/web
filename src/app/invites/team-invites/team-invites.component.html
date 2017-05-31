@@ -11,14 +11,12 @@
             </div>
         </div>
     </div>
-    <div class="close-button" (click)="declineTeamInv(team, $event)">
-        <button md-icon-button>
-            <md-icon>close</md-icon>
-        </button>
-    </div>
     <div class="team-footer" (click)="handleFooterClick($event)">
         <button md-button color="primary" (click)="acceptTeamInv(team)">
             Accept
+        </button>
+        <button md-icon-button class="close-button" (click)="declineTeamInv(team, $event)">
+            <md-icon>close</md-icon>
         </button>
     </div>
 </md-card>
