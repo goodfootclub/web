@@ -11,6 +11,7 @@ import { AuthComponent, AuthService } from './auth';
 import { MenuService } from './common';
 import { HttpProvider } from './common';
 import { StatusService } from './common';
+import { AnalyticsService } from './common';
 import { ProfileService } from './profile';
 import { SidenavComponent } from './sidenav';
 import { TitleService } from './title.service';
@@ -78,6 +79,7 @@ export const ROUTES: Routes = [{
         AuthService,
         MenuService,
         ProfileService,
+        AnalyticsService,
         SidenavComponent,
         TitleService,
         WindowRefService,
