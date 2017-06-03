@@ -24,18 +24,12 @@ export class HttpErrorHandler {
 
     handleError(error: Response): Observable<Response> {
         if (!this.isExcluded(error)) {
-            let message = 'Server Error!';
-            let toast = this.toastyService.error;
-            if (error) {
-                const err = error.json();
-                const keys = Object.keys(err);
-                const lines = keys.map((key) => `${key}: ${err[key]}`);
-                message = lines.join('\n');
-                if (error.status < 500) {
-                    toast = this.toastyService.warning;
-                }
+            const status = error.status;
+            if (status === 401) {
+                this.handleUnauthorizedError(error);
+            } else {
+                this.handleDefaultError(error);
             }
-            toast(message);
         }
         throw error;
     }
@@ -59,5 +53,34 @@ export class HttpErrorHandler {
         return Exclusions.LIST.some((ex: Exclusion) => {
             return ex.status === status && ex.matcher(tree);
         });
+    }
+
+    /**
+     * If an 'Unauthorized' error occurs while getting data from server
+     * it will be handled here
+     * @param error http response object
+     */
+    private handleUnauthorizedError(error: Response) {
+        this.router.navigate(['/signup']);
+        this.handleDefaultError(error);
+    }
+
+    /**
+     * Common errors handler function
+     * @param error http response object
+     */
+    private handleDefaultError(error: Response) {
+        let message = 'Server Error!';
+        let toast = this.toastyService.error;
+        if (error) {
+            const err = error.json();
+            const keys = Object.keys(err);
+            const lines = keys.map((key) => `${key}: ${err[key]}`);
+            message = lines.join('\n');
+            if (error.status < 500) {
+                toast = this.toastyService.warning;
+            }
+        }
+        toast(message);
     }
 }
