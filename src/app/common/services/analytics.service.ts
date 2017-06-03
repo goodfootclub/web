@@ -5,7 +5,7 @@ import { WindowRefService } from './window.service';
 declare var ga: Function;
 
 const dimensions = {
-    WINDOW_ID: 'dimension3',
+    WINDOW_ID: 'dimension1',
 };
 
 /**
