@@ -1,18 +1,21 @@
 import { NgModule } from '@angular/core';
 import { MaterialModule } from '@angular/material';
 import { CommonModule as NgCommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
 import {
     BackButtonComponent,
     LoadMoreComponent,
     MenuButtonComponent,
     PlayerViewComponent,
     TitleComponent,
+    HomeButtonComponent,
 } from './ui';
 import { GameListComponent } from './components';
 import { TextSearchPipe } from './pipes';
 import { HttpProvider } from './services/app.http';
 import { AppToastyService } from './services/toasty.service';
-import { RouterModule } from '@angular/router';
+import { NavigationButtonsComponent } from './ui/navigation-buttons.component';
 
 
 /**
@@ -32,13 +35,14 @@ import { RouterModule } from '@angular/router';
         TextSearchPipe,
         TitleComponent,
         GameListComponent,
+        HomeButtonComponent,
+        NavigationButtonsComponent,
     ],
     providers: [
         HttpProvider,
         AppToastyService,
     ],
     exports: [
-        BackButtonComponent,
         LoadMoreComponent,
         MaterialModule,
         MenuButtonComponent,
@@ -47,6 +51,7 @@ import { RouterModule } from '@angular/router';
         TextSearchPipe,
         TitleComponent,
         GameListComponent,
+        NavigationButtonsComponent,
     ],
 })
 export class CommonModule { }

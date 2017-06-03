@@ -8,9 +8,11 @@ import { ToastyModule } from 'ng2-toasty';
 
 import { AppComponent } from './app.component';
 import { AuthComponent, AuthService } from './auth';
-import { MenuService } from './common';
-import { HttpProvider } from './common';
-import { StatusService } from './common';
+import { MenuService,
+    HttpProvider,
+    StatusService,
+    HistoryService,
+} from './common';
 import { ProfileService } from './profile';
 import { SidenavComponent } from './sidenav';
 import { TitleService } from './title.service';
@@ -77,6 +79,7 @@ export const ROUTES: Routes = [{
         StatusService,
         AuthService,
         MenuService,
+        HistoryService,
         ProfileService,
         SidenavComponent,
         TitleService,

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { HistoryService } from '../../common/services/history.service';
 import { TitleService } from 'app/title.service';
 import { TeamsService } from '../teams.service';
 
@@ -18,7 +19,8 @@ export class TeamAddComponent {
     constructor(
         public teams: TeamsService,
         public formBuilder: FormBuilder,
-        public router: Router,
+        private router: Router,
+        private historyService: HistoryService,
         title: TitleService,
     ) {
         title.setTitle('Create a team');
@@ -30,6 +32,10 @@ export class TeamAddComponent {
             info: ['', Validators.maxLength(1000)],
             type: ['2', Validators.required],
         });
+    }
+
+    onCancel() {
+        this.historyService.back();
     }
 
     onSubmit() {
