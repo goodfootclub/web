@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { HistoryService } from '../../common/services/history.service';
 import { ProfileService } from '../profile.service';
 import { User } from 'app/types';
 
@@ -19,7 +20,8 @@ export class ProfileEditComponent implements OnInit {
     constructor(
         public formBuilder: FormBuilder,
         public profile: ProfileService,
-        public router: Router,
+        private historyService: HistoryService,
+        private router: Router,
     ) {
         profile.getCurrentUser().subscribe(user => {
             this.user = user;
@@ -27,6 +29,10 @@ export class ProfileEditComponent implements OnInit {
                 this.form.patchValue(user);
             }
         });
+    }
+
+    onCancel() {
+        this.historyService.back();
     }
 
     onSubmit() {

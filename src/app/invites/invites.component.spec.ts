@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MaterialModule } from '@angular/material';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 
 import { InvitesComponent } from './invites.component';
 import { MenuButtonComponent } from '../common/ui/menu-button.component';
@@ -9,12 +9,18 @@ import { TeamInvitesComponent } from './team-invites/team-invites.component';
 import {
     GameListComponent,
 } from '../common/components/games-list/game-list.component';
+import {
+    NavigationButtonsComponent,
+} from '../common/ui/navigation-buttons.component';
+import { HomeButtonComponent } from '../common/ui/home-button.component';
+import { BackButtonComponent } from '../common/ui/back-button.component';
 import { ProfileService } from '../profile/profile.service';
 import { InvitesService } from './invites.service';
 import { GamesService } from '../games/games.service';
 import { TeamsService } from '../teams/teams.service';
 import { TitleService } from '../title.service';
 import { MenuService } from '../common/services/menu.service';
+import { HistoryService } from '../common/services/history.service';
 import { User } from '../types';
 import { Observable } from 'rxjs/Observable';
 
@@ -30,6 +36,9 @@ describe('InvitesComponent', () => {
                 TitleComponent,
                 TeamInvitesComponent,
                 GameListComponent,
+                NavigationButtonsComponent,
+                HomeButtonComponent,
+                BackButtonComponent,
             ],
             providers: [
                 { provide: ProfileService, useClass: ProfileServiceStub },
@@ -38,6 +47,9 @@ describe('InvitesComponent', () => {
                 { provide: TeamsService, useClass: TeamsServiceStub },
                 { provide: TitleService, useClass: TitleServiceStub },
                 { provide: MenuService, useClass: MenuServiceStub },
+                { provide: HistoryService, useClass: HistoryServiceStub },
+                { provide: Router, useClass: RouterStub },
+                { provide: ActivatedRoute, useClass: ActivatedRouteStub },
             ],
             imports: [
                 MaterialModule,
@@ -84,4 +96,14 @@ class TitleServiceStub {
 }
 
 class MenuServiceStub {
+}
+
+class HistoryServiceStub {
+    getHomePageIndex() { return 1; }
+}
+
+class RouterStub {
+}
+
+class ActivatedRouteStub {
 }
