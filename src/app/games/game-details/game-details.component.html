@@ -2,10 +2,10 @@
     <app-navigation></app-navigation>
     <app-title></app-title>
 
-    <button *ngIf="!user" md-button color="primary" (click)="join()">
+    <button *ngIf="!userPlayer" md-button color="primary" (click)="join()">
         Join
     </button>
-    <button *ngIf="user" md-button color="primary" (click)="leave()">
+    <button *ngIf="userPlayer" md-button color="primary" (click)="leave()">
         Leave
     </button>
 </md-toolbar>
@@ -16,10 +16,10 @@
         <div>
             <strong>I'm</strong>
         </div>
-        <div *ngIf="!user">
+        <div *ngIf="!userPlayer">
             <a href="javascript:void(0)" (click)="join()">Able to join!</a>
         </div>
-        <div [hidden]="!user">
+        <div [hidden]="!userPlayer">
             <md-radio-group>
                 <md-radio-button *ngFor="let status of [2, 0, 1];" [value]="status">{{rsvpMessages[status]}}  </md-radio-button>
             </md-radio-group>

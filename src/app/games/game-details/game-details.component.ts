@@ -2,11 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { GamesService } from '../games.service';
-import { GameEvent, RsvpStatus, Player, RsvpStatuses } from '../../types';
+import { GameEvent, RsvpStatus, Player, RsvpStatuses, User } from '../../types';
 import { MdRadioGroup } from '@angular/material';
 import { TitleService } from '../../title.service';
 import { ProfileService } from '../../profile/profile.service';
+import { Observable } from 'rxjs/Observable';
 
+import 'rxjs/add/observable/forkJoin';
 
 @Component({
     selector: 'app-game-details',
@@ -17,7 +19,8 @@ export class GameDetailsComponent implements OnInit {
 
     game: GameEvent;
     gameDate: Date;
-    user: Player;
+    user: User;
+    userPlayer: Player;
     rsvpMessages = RsvpStatuses.RSVP_MESSAGES;
 
     @ViewChild(MdRadioGroup)
@@ -34,17 +37,22 @@ export class GameDetailsComponent implements OnInit {
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
             let id = +params['id'];
-            this.games.get(id).subscribe(game => {
+            Observable.forkJoin(
+                this.profileService.getCurrentUser(),
+                this.games.get(id),
+            ).subscribe(arr => {
+                this.user = arr[0];
+                const game = arr[1] as GameEvent;
                 this.titleService.setTitle(game.name);
-                this.user = game.playersById[
-                    this.profileService.currentUser.id
+                this.userPlayer = game.playersById[
+                    this.user.id
                 ];
                 this.game = game;
                 this.gameDate = this.getGameDate(this.game.datetime);
                 this.statusRadioBlock.registerOnChange(
                     this.setStatus.bind(this));
-                if (this.user) {
-                    this.statusRadioBlock.value = '' + this.user.rsvp;
+                if (this.userPlayer) {
+                    this.statusRadioBlock.value = '' + this.userPlayer.rsvp;
                 }
             });
         });
@@ -56,10 +64,11 @@ export class GameDetailsComponent implements OnInit {
     }
 
     setStatus(status: RsvpStatus) {
-        this.games.setStatus(this.game.id, this.user, status).subscribe(() => {
+        this.games.setStatus(this.game.id, this.userPlayer, status)
+            .subscribe(() => {
             this.games.get(this.game.id).subscribe(game => {
-                this.user = game.playersById[
-                    this.profileService.currentUser.id
+                this.userPlayer = game.playersById[
+                    this.user.id
                 ];
                 this.game = game;
             });
@@ -69,15 +78,15 @@ export class GameDetailsComponent implements OnInit {
     join() {
         this.games.addPlayer(
             this.game.id,
-            this.profileService.currentUser,
+            this.user,
         ).subscribe(() => {
             this.games.get(this.game.id).subscribe(game => {
-                this.user = game.playersById[
-                    this.profileService.currentUser.id
+                this.userPlayer = game.playersById[
+                    this.user.id
                 ];
                 this.game = game;
-                if (this.user) {
-                    this.statusRadioBlock.value = '' + this.user.rsvp;
+                if (this.userPlayer) {
+                    this.statusRadioBlock.value = '' + this.userPlayer.rsvp;
                 }
             });
         });
@@ -86,11 +95,11 @@ export class GameDetailsComponent implements OnInit {
     leave() {
         this.games.removePlayer(
             this.game.id,
-            this.user,
+            this.userPlayer,
         ).subscribe(() => {
             this.games.get(this.game.id).subscribe(game => {
-                this.user = game.playersById[
-                    this.profileService.currentUser.id
+                this.userPlayer = game.playersById[
+                    this.user.id
                 ];
                 this.game = game;
             });
@@ -99,7 +108,7 @@ export class GameDetailsComponent implements OnInit {
 
     isAddPlayersVisible(): boolean {
         if (this.game != null && this.game.organizer != null) {
-            return this.profileService.currentUser.id
+            return this.user.id
                 === this.game.organizer.id;
         }
         return false;

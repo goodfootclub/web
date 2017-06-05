@@ -10,15 +10,14 @@ import {
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
-import { Location, Team } from 'app/types';
+import { Location, Team, User } from 'app/types';
 import { GamesService } from '../games.service';
 import { LocationsService } from '../locations.service';
 import { HistoryService } from '../../common/services/history.service';
-
-import 'rxjs/add/operator/debounceTime';
 import { ProfileService } from '../../profile/profile.service';
 import { Subject } from 'rxjs/Subject';
 
+import 'rxjs/add/operator/debounceTime';
 
 declare class GameAddFormControls {
     dates?: FormArray;
@@ -63,7 +62,7 @@ export class GameAddComponent implements OnInit {
 
     constructor(
         public _locations: LocationsService,
-        public _profile: ProfileService,
+        public profileService: ProfileService,
         public formBuilder: FormBuilder,
         public games: GamesService,
         private historyService: HistoryService,
@@ -78,8 +77,11 @@ export class GameAddComponent implements OnInit {
         this.route.params.forEach((params: Params) => {
             this.targetTeam = +params['targetTeam'];
         });
-        this.managedTeams =
-            this.managedTeams.concat(this._profile.currentUser.managedTeams);
+        this.profileService.getCurrentUser()
+            .subscribe(user => {
+                this.managedTeams =
+                    this.managedTeams.concat(user.managedTeams);
+            });
         this.form = this.formBuilder.group({
             location: this.formBuilder.group({
                 id: null,

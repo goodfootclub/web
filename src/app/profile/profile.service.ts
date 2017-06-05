@@ -20,7 +20,7 @@ import 'rxjs/add/operator/do';
 @Injectable()
 export class ProfileService {
 
-    currentUser: User;
+    private currentUser: User;
 
     constructor(
         private http: Http,

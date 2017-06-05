@@ -5,9 +5,12 @@ import { MdDialog, MdDialogRef } from '@angular/material';
 
 import { TitleService } from 'app/title.service';
 import { TeamsService, playerRoles } from '../teams.service';
-import { Team, Player, PlayerRole } from '../../types';
+import { Team, Player, PlayerRole, User } from '../../types';
 import { ProfileService } from '../../profile/profile.service';
 import { EditRoleComponent } from './edit-role-popup/edit-role.component';
+import { Observable } from 'rxjs/Observable';
+
+import 'rxjs/add/observable/forkJoin';
 
 
 @Component({
@@ -22,6 +25,7 @@ export class TeamEditComponent implements OnInit {
     form: FormGroup;
     roaster: FormGroup;
     team: Team;
+    user: User;
 
     isPlayer = false;
     isManager = false;
@@ -37,7 +41,7 @@ export class TeamEditComponent implements OnInit {
         public router: Router,
         public route: ActivatedRoute,
         public title: TitleService,
-        public profile: ProfileService,
+        public profileService: ProfileService,
         private dialogService: MdDialog,
     ) {
         title.setTitle('Edit a team');
@@ -47,9 +51,18 @@ export class TeamEditComponent implements OnInit {
     ngOnInit(): void {
         this.form = this.createForm();
         this.roaster = this.createRoasterForm();
+        let profileObservable = this.profileService.getCurrentUser();
+        let teamObservable = null;
         this.route.params.forEach((params: Params) => {
             let id = +params['id'];
-            this.teams.get(id).subscribe(team => this.initTeam(team));
+            teamObservable = this.teams.get(id);
+        });
+        Observable.forkJoin(
+            teamObservable,
+            profileObservable,
+        ).subscribe(arr => {
+            this.user = arr[1];
+            this.initTeam(arr[0] as Team);
         });
     }
 
@@ -78,10 +91,10 @@ export class TeamEditComponent implements OnInit {
         });
         // players list:
         this.isPlayer = !!team.players.find(
-            (player) => player.id === this.profile.currentUser.id
+            (player) => player.id === this.user.id
             && player.role >= PlayerRole.Substitute);
         this.isManager = !!team.managers.find(
-            (manager) => manager.id === this.profile.currentUser.id);
+            (manager) => manager.id === this.user.id);
     }
 
     openDialog(player: Player) {

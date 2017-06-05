@@ -4,7 +4,9 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { EventsService } from '../events.service';
 import { GameEvent, RsvpStatuses } from '../../types';
 import { ProfileService } from '../../profile/profile.service';
+import { Observable } from 'rxjs/Observable';
 
+import 'rxjs/add/observable/forkJoin';
 
 @Component({
     selector: 'app-event-details',
@@ -27,11 +29,15 @@ export class EventDetailsComponent implements OnInit {
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
             let id = +params['id'];
-            this.events.get(id).subscribe(event => {
-                this.user = event.playersById[
-                    this.profileService.currentUser.id
+            Observable.forkJoin(
+                this.profileService.getCurrentUser(),
+                this.events.get(id),
+            ).subscribe(arr => {
+                this.user = arr[0];
+                this.event = arr[1];
+                this.user = this.event.playersById[
+                    this.user.id
                 ];
-                this.event = event;
             });
         });
     }
@@ -40,7 +46,7 @@ export class EventDetailsComponent implements OnInit {
         this.events.setStatus(this.event, this.user, status).subscribe(() => {
             this.events.get(this.event.id).subscribe(event => {
                 this.user = event.playersById[
-                    this.profileService.currentUser.id
+                    this.user.id
                 ];
                 this.event = event;
             });

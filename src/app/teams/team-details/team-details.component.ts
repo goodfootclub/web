@@ -3,8 +3,11 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import { TitleService } from 'app/title.service';
 import { ProfileService } from 'app/profile';
-import { Team, PlayerRole, GameEvent } from 'app/types';
+import { Team, PlayerRole, GameEvent, User } from 'app/types';
 import { TeamsService, playerRoles } from '../teams.service';
+import { Observable } from 'rxjs/Observable';
+
+import 'rxjs/add/observable/forkJoin';
 
 @Component({
     selector: 'app-team-details',
@@ -22,6 +25,7 @@ export class TeamDetailsComponent implements OnInit {
     ROLES = playerRoles;
     teamId: number;
     team: Team;
+    user: User;
     scheduledGames: GameEvent[];
     isManager = false;
     isPlayer = false;
@@ -33,7 +37,7 @@ export class TeamDetailsComponent implements OnInit {
         public route: ActivatedRoute,
         public teams: TeamsService,
         public title: TitleService,
-        public profile: ProfileService,
+        public profileService: ProfileService,
     ) {
         title.setTitle('Team');
     }
@@ -41,18 +45,22 @@ export class TeamDetailsComponent implements OnInit {
     ngOnInit() {
         this.route.params.forEach((params: Params) => {
             this.teamId = +params['id'];
-            this.teams.get(this.teamId).subscribe(team => {
-                this.team = team;
-                this.title.setTitle(team.name);
-                for (let player of team.players) {
-                    if (player.id === this.profile.currentUser.id) {
+            Observable.forkJoin(
+                this.profileService.getCurrentUser(),
+                this.teams.get(this.teamId),
+            ).subscribe(arr => {
+                this.user = arr[0];
+                this.team = arr[1];
+                this.title.setTitle(this.team.name);
+                for (let player of this.team.players) {
+                    if (player.id === this.user.id) {
                         this.canAskToJoin = false;
                         this.isPlayer = player.role >= PlayerRole.Substitute;
                         break;
                     }
                 }
-                for (let manager of team.managers) {
-                    if (manager.id === this.profile.currentUser.id) {
+                for (let manager of this.team.managers) {
+                    if (manager.id === this.user.id) {
                         this.isManager = true;
                         break;
                     }
@@ -63,7 +71,7 @@ export class TeamDetailsComponent implements OnInit {
 
     askToJoin() {
         this.teams.askToJoin(
-            this.team.id, this.profile.currentUser.id)
+            this.team.id, this.user.id)
             .subscribe(console.log);
     }
 
