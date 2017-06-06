@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
-import { ProfileService } from 'app/profile';
-import { User, GameEvent } from 'app/types';
-import { GamesService } from '../games/games.service';
-import { PlayersService } from '../players/players.service';
+import { AuthService } from '../auth/auth.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'app-home',
@@ -12,33 +9,31 @@ import { PlayersService } from '../players/players.service';
 })
 export class HomeComponent implements OnInit {
 
-    user: User;
-    userNextGame: GameEvent;
-    nextGames: GameEvent[];
-    players: User[];
+    private initialized = false;
+    private isAuthenticated = false;
 
     constructor(
-        private profile: ProfileService,
-        private gamesService: GamesService,
-        private playersService: PlayersService,
+        private authService: AuthService,
     ) {}
 
     ngOnInit(): void {
-        this.profile.updateCurrentUser().subscribe(user => {
-            this.user = user;
-        });
-        this.gamesService.getCurrentUserGames(1)
-            .map(res => res.results)
-            .subscribe(games => {
-                if (games && games instanceof Array && games.length > 0) {
-                    this.userNextGame = games[0];
-                }
+        const authenticated = this.authService.isAuthenticated();
+        if (authenticated instanceof Observable) {
+            (authenticated as Observable<boolean>).subscribe(result => {
+                this.isAuthenticated = result;
+                this.initialized = true;
             });
-        this.gamesService.all('', 2).subscribe(games => {
-            this.nextGames = games;
-        });
-        this.playersService.all().subscribe(players => {
-            this.players = players;
-        });
+        } else {
+            this.isAuthenticated = authenticated as boolean;
+            this.initialized = true;
+        }
+    }
+
+    showHomePage() {
+        return this.initialized && this.isAuthenticated;
+    }
+
+    showLandingPage() {
+        return this.initialized && !this.isAuthenticated;
     }
 }

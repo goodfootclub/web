@@ -9,6 +9,9 @@ import {
 import { Observable } from 'rxjs/Observable';
 import { User } from '../types';
 import { AppToastyService } from '../common/services/toasty.service';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
+import { Cookies } from '../auth/auth.service';
+
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
@@ -73,6 +76,8 @@ export class ProfileService {
     }
 
     logout(): Observable<Response> {
-        return this.http.get('/api/auth/logout');
+        return this.http.get('/api/auth/logout').do(() => {
+            Cookie.delete(Cookies.CSRFTOKEN);
+        });
     }
 }

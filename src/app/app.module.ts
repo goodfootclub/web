@@ -26,8 +26,6 @@ export const ROUTES: Routes = [{
 }, {
     path: '',
     loadChildren: 'app/home/home.module#HomeModule',
-    canActivateChild: [AuthService],
-    canActivate: [AuthService],
 }, {
     path: 'profile',
     loadChildren: 'app/profile/profile.module#ProfileModule',

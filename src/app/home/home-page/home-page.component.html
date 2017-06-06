@@ -1,0 +1,40 @@
+<md-toolbar>
+    <app-title value="Home"></app-title>
+    <md-icon></md-icon>
+</md-toolbar>
+
+<md-card>
+    <md-grid-list cols="2" rowHeight="200px">
+        <md-grid-tile colspan="2">
+            <app-profile-tile class="grid-tile" [user]="user">
+            </app-profile-tile>
+        </md-grid-tile>
+        <md-grid-tile colspan="2" *ngIf="user?.invites?.total" class="grid-tile">
+            <app-invites-tile [invites]="user.invites"></app-invites-tile>
+        </md-grid-tile>
+        <md-grid-tile>
+            <app-my-games-tile class="grid-tile right-border">
+            </app-my-games-tile>
+        </md-grid-tile>
+        <md-grid-tile>
+            <app-my-teams-tile class="grid-tile">
+            </app-my-teams-tile>
+        </md-grid-tile>
+        <md-grid-tile colspan="2" *ngIf="userNextGame">
+            <app-my-next-game-tile class="grid-tile" [game]="userNextGame">
+            </app-my-next-game-tile>
+        </md-grid-tile>
+        <md-grid-tile colspan="2">
+            <app-pickup-games-tile class="grid-tile" [nextGames]="nextGames">
+            </app-pickup-games-tile>
+        </md-grid-tile>
+        <md-grid-tile>
+            <app-players-tile class="grid-tile right-border" [players]="players">
+            </app-players-tile>
+        </md-grid-tile>
+        <md-grid-tile>
+            <app-teams-tile class="grid-tile"></app-teams-tile>
+        </md-grid-tile>
+    </md-grid-list>
+    <app-contactus-tile></app-contactus-tile>
+</md-card>

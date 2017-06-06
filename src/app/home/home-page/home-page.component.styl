@@ -1,0 +1,23 @@
+@import "../../common/styles/variables.styl"
+
+md-card
+    padding 0
+
+    @media only screen and (max-width: $media-phone), only screen and (max-device-width: $media-phone)
+        margin 0 auto
+
+    &:hover
+        background-color white
+
+.grid-tile
+    width 100%
+    height 100%
+    border-bottom 1px solid rgba(0,0,0,0.1)
+    cursor pointer
+    &.right-border
+        border-right 1px solid rgba(0,0,0,0.1)
+    &:hover
+        background-color $hover-color
+
+app-contactus-tile
+    cursor pointer

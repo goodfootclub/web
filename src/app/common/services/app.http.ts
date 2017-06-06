@@ -12,6 +12,7 @@ import {
 import { StatusService } from './status.service';
 import { HttpErrorHandler } from 'app/error-handling/http-error.service';
 import { Observable } from 'rxjs/Observable';
+import { Cookies } from '../../auth/auth.service';
 
 
 const UNSAFE_METHODS = [
@@ -37,7 +38,8 @@ export class AppHttp extends Http {
     request(request: Request,
             options?: RequestOptionsArgs): Observable<Response> {
         if (request && UNSAFE_METHODS.indexOf(request.method) > -1) {
-            const csrf = new CookieXSRFStrategy('csrftoken', 'X-CSRFToken');
+            const csrf =
+                new CookieXSRFStrategy(Cookies.CSRFTOKEN, 'X-CSRFToken');
             csrf.configureRequest(request);
         }
         this.statusService.startRequesting();
