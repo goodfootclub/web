@@ -1,3 +1,16 @@
-<p>
-  landing-page works!
-</p>
+<div class="root"
+    [style.background-image]="bgImg"
+>
+    <div class="center-block">
+        <div class="title">
+            <h1>GOOD FOOT CLUB</h1>
+        </div>
+        <div class="description">
+            <p>A new and awesome way to find people to play football with is coming SOON™</p>
+            <p>Sign up today to be the first to test it when the service goes live!</p>
+        </div>
+        <div class="button-container">
+            <button class="btn-dark" [routerLink]="['/signup']">Sign Up</button>
+        </div>
+    </div>
+</div>

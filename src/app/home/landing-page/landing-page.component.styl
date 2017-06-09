@@ -1,0 +1,48 @@
+@import "../../common/styles/variables.styl"
+
+.root
+    height 1062px
+    background-repeat no-repeat
+    background-position center center
+
+    display flex
+    justify-content center
+    align-items center
+
+    .title h1
+        color $general-background-color
+        font-size 3.5em
+        font-weight 700
+        line-height 1.1
+        text-align center
+
+    .description
+        color $sub-color
+        margin-top 20px
+        margin-bottom 10px
+        font-weight 500
+        line-height 1.1
+        font-size $header-font-size
+        text-align center
+
+    .button-container
+        text-align center
+
+        button
+            padding 10px 16px
+            font-size 18px
+            line-height 1.3333333
+            border-radius 0
+
+.btn-dark
+    cursor pointer
+    border none
+    border-radius 0
+    color #fff
+    background-color rgba(0,0,0,0.4)
+
+.btn-dark:hover,
+.btn-dark:focus,
+.btn-dark:active
+    color #fff
+    background-color rgba(0,0,0,0.7)
