@@ -1,26 +1,27 @@
-fb-color = #3B5998
+@import "../common/styles/variables.styl"
+@import "../common/styles/custom-buttons.styl"
 
-h1
-    text-align: center
-    padding-bottom: 30px
+.root
+    text-align center
+    display flex
+    flex-flow column
+    align-items center
+    justify-content center
+    height 600px
 
-.container
-    max-width: 420px
-    margin: 0 auto
-    padding-top: 50px
+    .button-container
+        padding-top 50px
 
-.facebook-icon
-    float: left
-    width: 26px
-    height: 26px
-    fill: fb-color
+        button
+            display flex
+            justify-content center
+            align-items center
 
-.work-in-progress
-    opacity: .8
-    cursor: not-allowed
+            .icon-wrapper
+                padding-right 10px
 
-.form-signin
-    padding-top: 50px
-
-    .caption
-        text-align: center
+            .facebook-icon
+                float: left
+                width: 26px
+                height: 26px
+                fill: $hover-color

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { WindowRefService } from '../common/services/window.service';
 
 @Component({
     selector: 'app-auth',
@@ -7,6 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AuthComponent {
 
-    constructor() { }
+    constructor(private windowRef: WindowRefService) { }
 
+    useFacebook() {
+        this.windowRef.window.location.href =
+            '/auth/login/facebook';
+    }
 }
