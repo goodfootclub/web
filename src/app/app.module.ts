@@ -7,7 +7,7 @@ import { MaterialModule } from '@angular/material';
 import { ToastyModule } from 'ng2-toasty';
 
 import { AppComponent } from './app.component';
-import { AuthComponent, AuthService } from './auth';
+import { AuthService } from './auth';
 import { MenuService,
     HttpProvider,
     StatusService,
@@ -21,9 +21,6 @@ import { WindowRefService } from './common/services/window.service';
 
 
 export const ROUTES: Routes = [{
-    path: 'signup',
-    component: AuthComponent,
-}, {
     path: '',
     loadChildren: 'app/home/home.module#HomeModule',
 }, {
@@ -60,7 +57,6 @@ export const ROUTES: Routes = [{
 @NgModule({
     declarations: [
         AppComponent,
-        AuthComponent,
         SidenavComponent,
     ],
     imports: [

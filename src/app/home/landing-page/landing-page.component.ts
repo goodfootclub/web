@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { WindowRefService } from '../../common/services/window.service';
 
 const landingBg = require('./img/bg.jpg');
 
@@ -9,4 +10,18 @@ const landingBg = require('./img/bg.jpg');
 })
 export class LandingPageComponent {
     bgImg = `url('${ landingBg }')`;
+    signinForm = false;
+
+    constructor(
+        private windowRef: WindowRefService,
+    ) {}
+
+    signin() {
+        this.signinForm = true;
+    }
+
+    useFacebook() {
+        this.windowRef.window.location.href =
+            '/auth/login/facebook';
+    }
 }

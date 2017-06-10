@@ -28,7 +28,7 @@ export class AuthService implements CanActivate, CanActivateChild {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         this.activationsChecks += 1;
         this.nextUrl = state.url;
-        return this.isAuthenticated('signup');
+        return this.isAuthenticated('/');
     }
 
     /**
@@ -40,12 +40,10 @@ export class AuthService implements CanActivate, CanActivateChild {
      */
     isAuthenticated(redirectPath?: string): boolean | Observable<boolean> {
         const csrf = Cookie.get(Cookies.CSRFTOKEN);
-        console.log(csrf);
         const isAuthenticated = !!csrf;
         if (!isAuthenticated && redirectPath) {
             this.router.navigate([redirectPath]);
         }
-        console.log(isAuthenticated);
         return isAuthenticated;
     }
 }
