@@ -37,6 +37,7 @@
     "@angular/cli": "^1.0.0",
     "@angular/compiler-cli": "^2.4.7",
     "@angularclass/hmr": "^1.2.2",
+    "@types/google.analytics": "^0.0.33",
     "@types/jasmine": "2.5.38",
     "@types/node": "^6.0.42",
     "codelyzer": "~2.0.0-beta.1",

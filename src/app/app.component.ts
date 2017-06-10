@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TitleService } from './title.service';
+import { AnalyticsService } from './common';
 import { StatusService } from './common/services/status.service';
 import { HistoryService } from './common/services/history.service';
 
@@ -15,6 +16,7 @@ export class AppComponent {
     constructor(
         public title: TitleService,
         public status: StatusService,
+        private analytics: AnalyticsService,
         private historyService: HistoryService,
     ) {
         title.setTitle('Your Games');
