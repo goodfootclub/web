@@ -6,6 +6,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PlayersComponent } from './players.component';
 import { PlayerDetailsComponent } from './player-details';
 import { PlayersService } from './players.service';
+import { GamesService } from '../games/games.service';
+import { TeamsService } from '../teams/teams.service';
 
 
 const ROUTER_CONFIG = [
@@ -24,6 +26,10 @@ const ROUTER_CONFIG = [
         PlayersComponent,
         PlayerDetailsComponent,
     ],
-    providers: [PlayersService],
+    providers: [
+        PlayersService,
+        GamesService,
+        TeamsService,
+    ],
 })
 export class PlayersModule { }
