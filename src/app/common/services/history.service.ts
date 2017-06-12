@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router, RoutesRecognized } from '@angular/router';
 
+const EXCLUDED_ROUTES = [
+    '/games/add',
+];
+
 /**
  * Service to keep history of user's routing
  */
@@ -45,15 +49,16 @@ export class HistoryService {
             this.router.navigate(['/']);
         } else {
             this.excludeNext = true;
-            this.routes.pop();
-            if (this.routes.length === 0) {
+            const nextOne = this.findNextOne();
+            if (!nextOne) {
                 this.router.navigate(['/']);
             } else {
-                const url = this.routes[this.routes.length - 1];
-                if (url.parameters) {
-                    this.router.navigate([url.initialUrl, url.parameters]);
+                if (nextOne.parameters) {
+                    this.router.navigate([
+                        nextOne.initialUrl,
+                        nextOne.parameters]);
                 } else {
-                    this.router.navigate([url.initialUrl]);
+                    this.router.navigate([nextOne.initialUrl]);
                 }
             }
         }
@@ -61,6 +66,19 @@ export class HistoryService {
 
     getHomePageIndex(): number {
         return this.routes.length - 1;
+    }
+
+    private findNextOne(): ParsedRoute {
+        let searching = true;
+        while (searching) {
+            this.routes.pop();
+            if (this.routes.length === 0) { return null; }
+            const nextOne = this.routes[this.routes.length - 1];
+            if (EXCLUDED_ROUTES.indexOf(nextOne.parametrizedUrl) === -1) {
+                searching = false;
+            }
+        }
+        return this.routes[this.routes.length - 1];
     }
 
     private parseUrl(route: RoutesRecognized): ParsedRoute {
@@ -90,7 +108,7 @@ export class HistoryService {
             }
             return i;
         });
-        parsed.parametrizedUrl = parsed.parametrizedParts.join('/');
+        parsed.parametrizedUrl = '/' + parsed.parametrizedParts.join('/');
         return parsed;
     }
 
