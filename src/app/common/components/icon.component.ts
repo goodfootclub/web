@@ -3,7 +3,7 @@ import {
     Input,
     ChangeDetectionStrategy,
     ElementRef,
-    Renderer,
+    Renderer, AfterViewInit,
 } from '@angular/core';
 import { Http } from '@angular/http';
 @Component({
@@ -11,19 +11,18 @@ import { Http } from '@angular/http';
     template: `<ng-content></ng-content>`,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IconComponent {
+export class IconComponent implements AfterViewInit {
+
     @Input()
-    set name(val: string) {
-        this.loadSvg(val);
-    }
+    name: string;
 
     constructor(private http: Http,
                 private renderer: Renderer,
                 private elementRef: ElementRef) {
     }
 
-    loadSvg(val: string) {
-        this.http.get(`assets/feathericons/${val}.svg`)
+    ngAfterViewInit(): void {
+        this.http.get(`assets/feathericons/${this.name}.svg`)
             .subscribe(res => {
                 // get our element and clean it out
                 const element = this.elementRef.nativeElement;

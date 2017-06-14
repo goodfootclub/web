@@ -21,7 +21,6 @@ import { TitleService } from './title.service';
 import { ErrorHandlingModule, FourxxErrorComponent } from './error-handling';
 import { WindowRefService } from './common/services/window.service';
 
-
 export const ROUTES: Routes = [{
     path: 'signup',
     component: AuthComponent,

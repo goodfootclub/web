@@ -15,7 +15,7 @@
     <md-tab label="Info">
         <div class="header-content">
             <div class="header-text"><p>{{ team?.name }}</p><p class="team-info">[{{ ['coed', 'female', 'male'][team?.type] }}] {{ team?.info }}</p></div>
-            <button *ngIf="isManager" md-mini-fab [routerLink]="['edit']"><md-icon>edit</md-icon></button>
+            <button *ngIf="isManager" md-mini-fab [routerLink]="['edit']"><md-icon><app-icon name="edit"></app-icon></md-icon></button>
         </div>
         <hr/>
         <md-card>
@@ -68,7 +68,7 @@
     <md-tab label="Schedule">
         <div class="header-content">
             <div class="header-text"><p>{{ team?.name }}</p><p class="team-info">Games schedule</p></div>
-            <button md-mini-fab *ngIf="isManager" [routerLink]="['/games/add', {targetTeam: team.id}]"><md-icon>add</md-icon></button>
+            <button md-icon-button *ngIf="isManager" [routerLink]="['/games/add', {targetTeam: team.id}]"><md-icon>add</md-icon></button>
         </div>
         <hr/>
         <app-games-list [games]="scheduledGames"></app-games-list>

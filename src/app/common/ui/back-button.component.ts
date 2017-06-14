@@ -10,7 +10,7 @@ import { HistoryService } from '../services/history.service';
         <button type="button" 
         md-icon-button 
         (click)="back()">
-            <md-icon>chevron_left</md-icon>
+            <md-icon><app-icon name="chevron-left"></app-icon></md-icon>
         </button>
     `,
 })
