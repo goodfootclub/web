@@ -2,38 +2,32 @@ import {
     Component,
     Input,
     ChangeDetectionStrategy,
-    ElementRef,
-    Renderer, AfterViewInit,
 } from '@angular/core';
-import { Http } from '@angular/http';
+
 @Component({
     selector: 'app-icon',
-    template: `<ng-content></ng-content>`,
+    template: `<md-icon><img [src]="fullName" [alt]="alt"/></md-icon>`,
+    styles: [`
+        :host {
+            display: block;
+        }
+        md-icon {
+            vertical-align: middle;
+        }
+    `],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IconComponent implements AfterViewInit {
+export class IconComponent {
 
     @Input()
-    name: string;
-
-    constructor(private http: Http,
-                private renderer: Renderer,
-                private elementRef: ElementRef) {
+    set name(val: string) {
+        this.fullName = `assets/feathericons/${val}.svg`;
     }
 
-    ngAfterViewInit(): void {
-        this.http.get(`assets/feathericons/${this.name}.svg`)
-            .subscribe(res => {
-                // get our element and clean it out
-                const element = this.elementRef.nativeElement;
-                element.innerHTML = '';
-                const response = res.text();
-                const parser = new DOMParser();
-                const svg = parser.parseFromString(response, 'image/svg+xml');
-                this.renderer.projectNodes(element, [svg.documentElement]);
-            },
-            err => {
-                console.error(err);
-            });
-    }
+    @Input()
+    alt: string;
+
+    fullName: string;
+
+    constructor() {}
 }

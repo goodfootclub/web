@@ -27,7 +27,7 @@
             <div class="edit-input-button">
                 <button md-icon-button (click)="save()"
                         *ngIf="form.controls.info.value != sourceTeam.info">
-                    <md-icon>save</md-icon>
+                    <app-icon name="save"></app-icon>
                 </button>
                 <div class="mat-icon-button"
                      *ngIf="form.controls.info.value == sourceTeam.info"></div>
@@ -42,7 +42,7 @@
             <div class="edit-input-button">
                 <button md-icon-button (click)="save()"
                         *ngIf="form.controls.type.value != sourceTeam.type">
-                    <md-icon>save</md-icon>
+                    <app-icon name="save"></app-icon>
                 </button>
                 <div class="mat-icon-button"
                      *ngIf="form.controls.type.value == sourceTeam.type"></div>
@@ -56,10 +56,10 @@
             <div class="header-text">
                 <h1>Roster</h1>
                 <button
-                    md-mini-fab
+                    md-icon-button
                     *ngIf="isPlayer || isManager"
                     [routerLink]="['/players', {targetTeam: team.id}]">
-                    <md-icon>add</md-icon>
+                    <app-icon name="user-plus"></app-icon>
                 </button>
             </div>
         </div>
