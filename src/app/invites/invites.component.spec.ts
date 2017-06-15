@@ -14,6 +14,7 @@ import {
 } from '../common/ui/navigation-buttons.component';
 import { HomeButtonComponent } from '../common/ui/home-button.component';
 import { BackButtonComponent } from '../common/ui/back-button.component';
+import { IconComponent } from '../common/components/icon.component';
 import { ProfileService } from '../profile/profile.service';
 import { InvitesService } from './invites.service';
 import { GamesService } from '../games/games.service';
@@ -36,6 +37,7 @@ describe('InvitesComponent', () => {
                 TitleComponent,
                 TeamInvitesComponent,
                 GameListComponent,
+                IconComponent,
                 NavigationButtonsComponent,
                 HomeButtonComponent,
                 BackButtonComponent,
