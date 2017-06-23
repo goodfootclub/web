@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
+import { WindowRefService } from '../common/services/window.service';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -14,18 +15,22 @@ export class HomeComponent implements OnInit {
 
     constructor(
         private authService: AuthService,
+        private windowRef: WindowRefService,
     ) {}
 
     ngOnInit(): void {
+        const handleResult = (result: boolean) => {
+            this.windowRef.setFullScreen(!result);
+            this.isAuthenticated = result;
+            this.initialized = true;
+        };
+
         const authenticated = this.authService.isAuthenticated();
         if (authenticated instanceof Observable) {
-            (authenticated as Observable<boolean>).subscribe(result => {
-                this.isAuthenticated = result;
-                this.initialized = true;
-            });
+            (authenticated as Observable<boolean>)
+                .subscribe(handleResult.bind(this));
         } else {
-            this.isAuthenticated = authenticated as boolean;
-            this.initialized = true;
+            handleResult(authenticated as boolean);
         }
     }
 

@@ -6,6 +6,6 @@
 </div>
 <!-- toasty popups -->
 <ng2-toasty [position]="'top-right'"></ng2-toasty>
-<md-sidenav-container fullscreen>
+<md-sidenav-container fullscreen [ngClass]="{ fullScreenMode: windowRef.fullScreen }">
     <router-outlet></router-outlet>
 </md-sidenav-container>
