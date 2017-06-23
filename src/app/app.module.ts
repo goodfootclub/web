@@ -7,7 +7,7 @@ import { MaterialModule } from '@angular/material';
 import { ToastyModule } from 'ng2-toasty';
 
 import { AppComponent } from './app.component';
-import { AuthComponent, AuthService } from './auth';
+import { AuthService } from './auth';
 import {
     MenuService,
     HttpProvider,
