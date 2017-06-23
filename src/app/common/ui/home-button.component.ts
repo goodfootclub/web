@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     selector: 'app-home-button',
     template: `
         <button md-icon-button [routerLink]="['/']">
-            <md-icon>home</md-icon>
+            <app-icon name="home"></app-icon>
         </button>
     `,
 })

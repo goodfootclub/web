@@ -7,18 +7,19 @@ import { MaterialModule } from '@angular/material';
 import { ToastyModule } from 'ng2-toasty';
 
 import { AppComponent } from './app.component';
-import { AuthService } from './auth';
-import { MenuService,
+import { AuthComponent, AuthService } from './auth';
+import {
+    MenuService,
     HttpProvider,
     StatusService,
     HistoryService,
+    AnalyticsService,
 } from './common';
 import { ProfileService } from './profile';
 import { SidenavComponent } from './sidenav';
 import { TitleService } from './title.service';
 import { ErrorHandlingModule, FourxxErrorComponent } from './error-handling';
 import { WindowRefService } from './common/services/window.service';
-
 
 export const ROUTES: Routes = [{
     path: '',
@@ -75,6 +76,7 @@ export const ROUTES: Routes = [{
         MenuService,
         HistoryService,
         ProfileService,
+        AnalyticsService,
         SidenavComponent,
         TitleService,
         WindowRefService,
