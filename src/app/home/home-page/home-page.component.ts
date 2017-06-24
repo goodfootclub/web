@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { ProfileService } from 'app/profile';
 import { User, GameEvent } from 'app/types';
@@ -18,11 +17,13 @@ export class HomePageComponent implements OnInit {
     nextGames: GameEvent[];
     players: User[];
 
+    @Output()
+    handleLogout: EventEmitter<boolean> = new EventEmitter();
+
     constructor(
         private profile: ProfileService,
         private gamesService: GamesService,
         private playersService: PlayersService,
-        private router: Router,
     ) {}
 
     ngOnInit(): void {
@@ -46,7 +47,7 @@ export class HomePageComponent implements OnInit {
 
     logout() {
         this.profile.logout().subscribe(() => {
-            this.router.navigate(['/']);
+            this.handleLogout.emit(false);
         });
     }
 }

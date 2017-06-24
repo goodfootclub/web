@@ -20,20 +20,20 @@ export class HomeComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        const handleResult = (result: boolean) => {
-            this.windowRef.setFullScreen(!result);
-            this.isAuthenticated = result;
-            this.initialized = true;
-        };
-
         const authenticated = this.authService.isAuthenticated();
         if (authenticated instanceof Observable) {
             (authenticated as Observable<boolean>)
-                .subscribe(handleResult.bind(this));
+                .subscribe(this.handleResult.bind(this));
         } else {
-            handleResult(authenticated as boolean);
+            this.handleResult(authenticated as boolean);
         }
     }
+
+    handleResult(result: boolean) {
+        this.windowRef.setFullScreen(!result);
+        this.isAuthenticated = result;
+        this.initialized = true;
+    };
 
     showHomePage() {
         return this.initialized && this.isAuthenticated;
@@ -41,11 +41,5 @@ export class HomeComponent implements OnInit {
 
     showLandingPage() {
         return this.initialized && !this.isAuthenticated;
-    }
-
-    logout() {
-        this.profile.logout().subscribe(() => {
-            this.router.navigate(['/signup']);
-        });
     }
 }
