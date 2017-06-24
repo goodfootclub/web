@@ -3,6 +3,7 @@ import { AuthService } from '../auth/auth.service';
 import { WindowRefService } from '../common/services/window.service';
 import { Observable } from 'rxjs/Observable';
 
+
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
@@ -40,5 +41,11 @@ export class HomeComponent implements OnInit {
 
     showLandingPage() {
         return this.initialized && !this.isAuthenticated;
+    }
+
+    logout() {
+        this.profile.logout().subscribe(() => {
+            this.router.navigate(['/signup']);
+        });
     }
 }
