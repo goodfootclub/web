@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ProfileService } from 'app/profile';
 import { User, GameEvent } from 'app/types';
@@ -21,6 +22,7 @@ export class HomePageComponent implements OnInit {
         private profile: ProfileService,
         private gamesService: GamesService,
         private playersService: PlayersService,
+        private router: Router,
     ) {}
 
     ngOnInit(): void {
@@ -39,6 +41,12 @@ export class HomePageComponent implements OnInit {
         });
         this.playersService.all().subscribe(players => {
             this.players = players;
+        });
+    }
+
+    logout() {
+        this.profile.logout().subscribe(() => {
+            this.router.navigate(['/']);
         });
     }
 }
