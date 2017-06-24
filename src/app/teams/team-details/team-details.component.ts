@@ -72,7 +72,9 @@ export class TeamDetailsComponent implements OnInit {
     askToJoin() {
         this.teams.askToJoin(
             this.team.id, this.user.id)
-            .subscribe(console.log);
+            .subscribe(() => {
+                // FIXME do nothing?!
+            });
     }
 
     selectedIndexChange(index) {

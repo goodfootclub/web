@@ -27,7 +27,7 @@ export class ProfileComponent {
 
     logout() {
         this.profile.logout().subscribe(() => {
-            this.router.navigate(['/signup']);
+            this.router.navigate(['/']);
         });
     }
 }

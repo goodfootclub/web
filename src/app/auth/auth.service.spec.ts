@@ -70,10 +70,10 @@ describe('Service: Auth', () => {
                 );
                 if (result instanceof Observable) {
                     result.subscribe(() => {
-                        expect(router.path).toEqual(['signup']);
+                        expect(router.path).toEqual(['/']);
                     });
                 } else {
-                    expect(router.path).toEqual(['signup']);
+                    expect(router.path).toEqual(['/']);
                 }
             },
         ),

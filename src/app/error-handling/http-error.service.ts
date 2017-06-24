@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 
 import { AppToastyService } from '../common/services/toasty.service';
 import Exclusions, { Exclusion } from './excluded-endpoints';
+import { Cookies } from '../auth/auth.service';
+
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { Observable } from 'rxjs/Observable';
 
 /**
@@ -61,7 +64,8 @@ export class HttpErrorHandler {
      * @param error http response object
      */
     private handleUnauthorizedError(error: Response) {
-        this.router.navigate(['/signup']);
+        Cookie.delete(Cookies.CSRFTOKEN);
+        this.router.navigate(['/']);
         this.handleDefaultError(error);
     }
 

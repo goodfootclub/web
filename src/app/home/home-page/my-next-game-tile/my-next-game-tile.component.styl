@@ -1,0 +1,63 @@
+@import "../../../common/styles/variables.styl"
+
+.container
+    width 100%
+    height 100%
+    padding 5px
+
+    display flex
+    justify-content center
+    align-items center
+    text-align center
+    flex-flow column
+
+    .header
+        h1
+            font-size $title-font-size
+            text-transform uppercase
+            padding-bottom 10px
+
+        span.rsvp-title
+            position absolute
+            padding 10px
+            top 0px
+            right 0px
+            line-height 1
+            max-width 60px
+
+            span.my-status
+                font-size $uppercased-extra-small
+                color $sub-color
+                text-transform uppercase
+
+            span.rsvp-status
+                font-size $uppercased-extra-small
+                color $main-theme-color
+                text-transform uppercase
+
+    .games-container
+        width 100%
+        padding 20px 0 5px 0
+        margin 0 5px
+        background-color $hover-color
+
+        .game-description
+            line-height 1
+
+            .game-name-h4
+                font-weight 400
+                margin-top 0.5rem
+
+        & > div
+            padding 0 20px
+
+    @media only screen and (max-width: $iphone-5), only screen and (max-device-width: $iphone-5)
+        .header
+            h1
+                font-size $header-font-size
+
+        .games-container
+            padding 5px 0 5px 0
+
+            h1, h2, h3, h4
+                font-size 1em

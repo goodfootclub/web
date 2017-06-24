@@ -14,11 +14,8 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 
 
-
 @Injectable()
 export class AuthService implements CanActivate, CanActivateChild {
-
-    private readonly csrfCookie = 'csrftoken';
 
     activationsChecks = 0;
     nextUrl: string;  // store the URL so we can redirect after logging in
@@ -31,7 +28,7 @@ export class AuthService implements CanActivate, CanActivateChild {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         this.activationsChecks += 1;
         this.nextUrl = state.url;
-        return this.isAuthenticated();
+        return this.isAuthenticated('/');
     }
 
     /**
@@ -41,12 +38,16 @@ export class AuthService implements CanActivate, CanActivateChild {
      * @param  {string}  redirectPath router path to redirect
      * @return {boolean | Observable<boolean>}
      */
-    isAuthenticated(redirectPath = 'signup'): boolean | Observable<boolean> {
-        const csrf = Cookie.get(this.csrfCookie);
+    isAuthenticated(redirectPath?: string): boolean | Observable<boolean> {
+        const csrf = Cookie.get(Cookies.CSRFTOKEN);
         const isAuthenticated = !!csrf;
-        if (!isAuthenticated) {
+        if (!isAuthenticated && redirectPath) {
             this.router.navigate([redirectPath]);
         }
         return isAuthenticated;
     }
+}
+
+export class Cookies {
+    public static readonly CSRFTOKEN = 'csrftoken';
 }
