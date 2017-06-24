@@ -9,3 +9,5 @@
 <md-sidenav-container fullscreen [ngClass]="{ fullScreenMode: windowRef.fullScreen }">
     <router-outlet></router-outlet>
 </md-sidenav-container>
+
+<div class="developBack" *ngIf="isDevelopment"></div>

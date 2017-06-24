@@ -4,7 +4,7 @@ import { AnalyticsService } from './common';
 import { StatusService } from './common/services/status.service';
 import { HistoryService } from './common/services/history.service';
 import { WindowRefService } from './common/services/window.service';
-
+import { environment } from '../environments/environment';
 
 @Component({
     selector: 'app-root',
@@ -13,6 +13,8 @@ import { WindowRefService } from './common/services/window.service';
 })
 export class AppComponent {
     menu: any;
+
+    isDevelopment = !!environment.development;
 
     constructor(
         public title: TitleService,
