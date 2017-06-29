@@ -71,10 +71,10 @@ export class HistoryService {
     private findNextOne(): ParsedRoute {
         let searching = true;
         while (searching) {
-            this.routes.pop();
+            const current = this.routes.pop();
             if (this.routes.length === 0) { return null; }
             const nextOne = this.routes[this.routes.length - 1];
-            if (EXCLUDED_ROUTES.indexOf(nextOne.parametrizedUrl) === -1) {
+            if (current.ableToRouteTo(nextOne)) {
                 searching = false;
             }
         }
@@ -124,4 +124,10 @@ class ParsedRoute {
     parametrizedParts: string[];
     urlParameters: any;
     parameters: any;
+
+    ableToRouteTo(route: ParsedRoute) {
+        console.log(this);
+        console.log(route);
+        return true;
+    }
 }
