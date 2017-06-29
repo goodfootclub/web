@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, RoutesRecognized } from '@angular/router';
 
-const EXCLUDED_ROUTES = [
-    '/games/add',
-];
-
 /**
  * Service to keep history of user's routing
  */
@@ -69,15 +65,8 @@ export class HistoryService {
     }
 
     private findNextOne(): ParsedRoute {
-        let searching = true;
-        while (searching) {
-            const current = this.routes.pop();
-            if (this.routes.length === 0) { return null; }
-            const nextOne = this.routes[this.routes.length - 1];
-            if (current.ableToRouteTo(nextOne)) {
-                searching = false;
-            }
-        }
+        this.routes.pop();
+        if (this.routes.length === 0) { return null; }
         return this.routes[this.routes.length - 1];
     }
 
@@ -124,10 +113,4 @@ class ParsedRoute {
     parametrizedParts: string[];
     urlParameters: any;
     parameters: any;
-
-    ableToRouteTo(route: ParsedRoute) {
-        console.log(this);
-        console.log(route);
-        return true;
-    }
 }
