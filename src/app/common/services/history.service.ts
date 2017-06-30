@@ -34,7 +34,7 @@ export class HistoryService {
             .find(r => r.parametrizedUrl === parsedRoute.parametrizedUrl);
         if (existingRoute) {
             const index = this.routes.indexOf(existingRoute);
-            this.routes.splice(index, 100);
+            this.routes.splice(index + 1, 100);
         } else {
             this.routes.push(parsedRoute);
         }
@@ -58,6 +58,10 @@ export class HistoryService {
                 }
             }
         }
+    }
+
+    skipCurrent() {
+        return this.routes.pop();
     }
 
     getHomePageIndex(): number {

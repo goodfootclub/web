@@ -41,6 +41,7 @@ export class TeamAddComponent {
     onSubmit() {
         this.form.disable();
         this.teams.create(this.form.value).subscribe(newTeam => {
+            this.historyService.skipCurrent();
             this.router.navigate(['/teams', newTeam.id]);
         });
     }

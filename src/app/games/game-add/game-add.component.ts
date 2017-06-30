@@ -182,7 +182,7 @@ export class GameAddComponent implements OnInit {
         };
 
         this.games.create(data).subscribe(newGame => {
-            // TODO handle history
+            this.historyService.skipCurrent();
             this.router.navigate(['/games', newGame.id]);
         });
     }
