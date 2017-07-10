@@ -45,7 +45,7 @@ deploy:
   - provider: script
     skip_cleanup: true
     script: >-
-      ng build -dev &&
+      npm run build:dev &&
       rsync -r --delete-after --quiet --rsync-path="sudo rsync" dist
       ubuntu@dev.goodfoot.club:/home/ubuntu/web
 
