@@ -9,6 +9,7 @@ import { GamesComponent } from './games.component';
 import { GameAddComponent } from './game-add';
 import { GameDetailsComponent } from './game-details';
 import { MyGamesComponent } from './my-games/my-games.component';
+import { GameEditPopupComponent } from './game-details/game-edit-popup/game-edit-popup.component';
 
 
 const ROUTES: Routes = [{
@@ -37,6 +38,10 @@ const ROUTES: Routes = [{
         GameDetailsComponent,
         GamesComponent,
         MyGamesComponent,
+        GameEditPopupComponent,
+    ],
+    entryComponents: [
+        GameEditPopupComponent,
     ],
 })
 export class GamesModule { }

@@ -3,12 +3,13 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { GamesService } from '../games.service';
 import { GameEvent, RsvpStatus, Player, RsvpStatuses, User } from '../../types';
-import { MdRadioGroup } from '@angular/material';
+import { MdRadioGroup, MdDialogRef, MdDialog } from '@angular/material';
 import { TitleService } from '../../title.service';
 import { ProfileService } from '../../profile/profile.service';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/observable/forkJoin';
+import {GameEditPopupComponent} from './game-edit-popup/game-edit-popup.component';
 
 @Component({
     selector: 'app-game-details',
@@ -32,6 +33,7 @@ export class GameDetailsComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private profileService: ProfileService,
+        private dialogService: MdDialog,
     ) { }
 
     ngOnInit() {
@@ -120,5 +122,19 @@ export class GameDetailsComponent implements OnInit {
             params.targetTeam = this.game.teams[0].id;
         }
         this.router.navigate(['/players', params]);
+    }
+
+    isAvailableToEdit() {
+        return this.user && this.game &&
+            this.user.id === this.game.organizer.id;
+    }
+
+    editGame() {
+        const dialog: MdDialogRef<GameEditPopupComponent> =
+            this.dialogService.open(GameEditPopupComponent, {
+                height: '300px',
+                width: '250px',
+            });
+        dialog.componentInstance.setGame(this.game);
     }
 }
