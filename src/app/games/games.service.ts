@@ -55,6 +55,20 @@ export class GamesService {
         });
     }
 
+    update(data: GameEvent): Observable<GameEvent> {
+        let request = new Request({
+            method: RequestMethod.Put,
+            url: `/api/games/${data.id}`,
+            body: data,
+        });
+        return this.http.request(request).map(res => {
+            this.toastyService.success('Game updated!');
+            return new GameEvent(res.json());
+        }).catch((err, caught) => {
+            throw err;
+        });
+    }
+
     setStatus(
         gameId: number,
         player: Player,

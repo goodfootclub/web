@@ -1,5 +1,5 @@
-<div *ngIf="game">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+<div *ngIf="game && form">
+    <form [formGroup]="form">
         <div formGroupName="location">
             <md-input-container [dividerColor]="
                         form.controls.location.controls.name.valid ||
@@ -38,7 +38,8 @@
                        autocomplete="off"
                        formControlName="address"
                        placeholder="Address"
-                       type='text'>
+                       type='text'
+                       #locationInput>
                 <md-hint align="end" *ngIf="locationAddressContainer._mdInputChild.focused">
                     <span *ngIf="locationControls.address.errors?.required">
                         required
@@ -87,5 +88,14 @@
                 </md-input-container>
             </md-grid-tile>
         </md-grid-list>
+
+        <div class="bottom-buttons-container">
+            <button md-icon-button (click)="exit()">
+                <app-icon name="exit"></app-icon>
+            </button>
+            <button md-icon-button (click)="save()" [disabled]="form.invalid">
+                <app-icon name="save"></app-icon>
+            </button>
+        </div>
     </form>
 </div>

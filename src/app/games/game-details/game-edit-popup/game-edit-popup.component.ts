@@ -10,7 +10,7 @@ import { LocationsService } from '../../locations.service';
 @Component({
   selector: 'app-game-edit-popup',
   templateUrl: './game-edit-popup.component.html',
-  styleUrls: ['./game-edit-popup.component.styl']
+  styleUrls: ['./game-edit-popup.component.styl'],
 })
 export class GameEditPopupComponent implements OnInit {
 
@@ -33,12 +33,13 @@ export class GameEditPopupComponent implements OnInit {
         private locationService: LocationsService,
         private formBuilder: FormBuilder,
         private dialogRef: MdDialogRef<GameEditPopupComponent>,
-    ) { }
-
-    ngOnInit() {
+    ) {
         this.locationService.all().subscribe(locations => {
             this.locations = locations;
         });
+    }
+
+    ngOnInit(): void {
     }
 
     public setGame(game: GameEvent) {
@@ -46,6 +47,9 @@ export class GameEditPopupComponent implements OnInit {
         this.form = this.buildForm(game);
         this.locationControls = this.form.controls['location']['controls'];
         const _locationSubject: Subject<string> = new Subject();
+
+        this.form.patchValue(game);
+
         this.locationControls.name.valueChanges.subscribe(value => {
             if (value instanceof Location) {
                 this.locationControls.address.patchValue(value.address);
@@ -65,8 +69,20 @@ export class GameEditPopupComponent implements OnInit {
         return location.name ? location.name : location;
     }
 
-    onSubmit() {
-        // TODO
+    save() {
+        const date =
+            new Date(`${this.form.value['date']}T${this.form.value['time']}`);
+        this.gameService.update(
+                Object.assign({}, this.game,
+                    this.form.value, { datetime: [date] }))
+            .subscribe(game => {
+            this.game = game
+            this.dialogRef.close();
+        });
+    }
+
+    exit() {
+        this.dialogRef.close();
     }
 
     private buildForm(game: GameEvent) {
