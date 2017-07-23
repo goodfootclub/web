@@ -1,14 +1,11 @@
-import { Component, Input, Inject, forwardRef } from '@angular/core';
-import { Location } from '@angular/common';
-import { Router } from '@angular/router';
-import { AuthService } from 'app/auth';
+import { Component } from '@angular/core';
 import { HistoryService } from '../services/history.service';
 
 @Component({
     selector: 'app-back-button',
     template: `
-        <button type="button" 
-        md-icon-button 
+        <button type="button"
+        md-icon-button
         (click)="back()">
             <app-icon name="chevron-left"></app-icon>
         </button>
