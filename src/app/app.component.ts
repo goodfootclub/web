@@ -17,11 +17,12 @@ export class AppComponent implements OnInit {
     menu: any;
 
     isDevelopment = !!environment.development;
+    isLoading = false;
 
     constructor(
         public title: TitleService,
-        public status: StatusService,
         public windowRef: WindowRefService,
+        private status: StatusService,
         private authService: AuthService,
         private analytics: AnalyticsService,
         private historyService: HistoryService,
@@ -37,5 +38,8 @@ export class AppComponent implements OnInit {
         } else {
             this.windowRef.setFullScreen(!(authenticated as boolean));
         }
+
+        this.status.observeLoading
+            .subscribe(value => this.isLoading = value);
     }
 }
