@@ -13,6 +13,7 @@ import { StatusService } from './status.service';
 import { HttpErrorHandler } from 'app/error-handling/http-error.service';
 import { Observable } from 'rxjs/Observable';
 import { Cookies } from '../../auth/auth.service';
+import 'rxjs/add/operator/finally';
 
 
 const UNSAFE_METHODS = [

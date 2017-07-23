@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, RoutesRecognized } from '@angular/router';
+import 'rxjs/add/operator/filter';
 
 /**
  * Service to keep history of user's routing

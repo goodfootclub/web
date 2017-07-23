@@ -70,8 +70,6 @@ export class ProfileService {
             this.toastyService.success('User info updated!');
             this.currentUser = new User(response.json());
             return this.currentUser;
-        }).catch((err, caught) => {
-            throw err;
         });
     }
 

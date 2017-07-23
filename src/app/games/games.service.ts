@@ -36,9 +36,7 @@ export class GamesService {
     get(id: number): Observable<GameEvent> {
         return this.http.get(`/api/games/${id}/`).map(res => {
             return new GameEvent(res.json());
-        }).catch((err, caught) => {
-            throw err;
-        });
+        })
     }
 
     create(data): Observable<GameEvent> {
@@ -50,8 +48,6 @@ export class GamesService {
         return this.http.request(request).map(res => {
             this.toastyService.success('New game created!');
             return new GameEvent(res.json());
-        }).catch((err, caught) => {
-            throw err;
         });
     }
 

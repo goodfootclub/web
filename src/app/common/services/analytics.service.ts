@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { WindowRefService } from './window.service';
+import 'rxjs/add/operator/filter';
 
 declare var ga: Function;
 
