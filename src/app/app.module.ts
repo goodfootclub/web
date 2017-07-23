@@ -3,10 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
-import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastyModule } from 'ng2-toasty';
-
+import { MaterialModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { AuthService } from './auth';
 import {
@@ -85,4 +84,5 @@ export const ROUTES: Routes = [{
     ],
     bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}

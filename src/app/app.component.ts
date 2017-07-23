@@ -8,6 +8,8 @@ import { WindowRefService } from './common/services/window.service';
 import { environment } from '../environments/environment';
 import { Observable } from 'rxjs/Observable';
 
+import 'rxjs/add/operator/debounceTime';
+
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -40,6 +42,7 @@ export class AppComponent implements OnInit {
         }
 
         this.status.observeLoading
+            .debounceTime(100)
             .subscribe(value => this.isLoading = value);
     }
 }
