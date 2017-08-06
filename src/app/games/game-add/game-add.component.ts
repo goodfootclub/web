@@ -8,9 +8,9 @@ import {
     AbstractControl,
 } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { DatePipe } from '@angular/common';
+import * as moment from 'moment';
 
-import { Location, Team, User } from 'app/types';
+import { Location, Team } from 'app/types';
 import { GamesService } from '../games.service';
 import { LocationsService } from '../locations.service';
 import { HistoryService } from '../../common/services/history.service';
@@ -50,8 +50,7 @@ export class GameAddComponent implements OnInit {
     locations: Location[];
     managedTeams: Team[] = [this.noTeam];
     targetTeam: number = null;
-    datePipe = new DatePipe('en-US');
-    tzOffset = -new Date().getTimezoneOffset() / 60;
+    tzOffset = moment().utcOffset() / 60;
     tzName = `GMT${this.tzOffset >= 0 ? '+' : '-'}${this.tzOffset}`;
 
     controls: GameAddFormControls;
@@ -103,7 +102,7 @@ export class GameAddComponent implements OnInit {
             dates: this.formBuilder.array([
                 this.initMatchDate(),
             ]),
-        });
+        }) as GameAddFormGroup;
 
         this.controls = this.form.controls;
         this.locationControls = this.controls['location']['controls'];
@@ -129,12 +128,11 @@ export class GameAddComponent implements OnInit {
     }
 
     initMatchDate(date?: string, time?: string): FormGroup {
-        const now = new Date();
-        now.setMinutes(0);
-        now.setHours(now.getHours() + 1);
-        const timeStr = time ? time : this.datePipe.transform(now, 'HH:mm');
-        const dateStr = date ? date :
-            this.datePipe.transform(now, 'yyyy-MM-dd');
+        const now = moment();
+        now.minute(0);
+        now.hours(now.get('hours') + 1);
+        const timeStr = time ? time : now.format('HH:mm');
+        const dateStr = date ? date : now.format('YYYY-MM-DD');
         return this.formBuilder.group({
             date: [dateStr, Validators.required],
             time: [timeStr, Validators.required],
@@ -201,7 +199,7 @@ export class GameAddComponent implements OnInit {
         });
 
         nextDate.setDate(nextDate.getDate() + 7);
-        const nextDateStr = this.datePipe.transform(nextDate, 'yyyy-MM-dd');
+        const nextDateStr = moment(nextDate).format('YYYY-MM-DD');
         control.push(this.initMatchDate(nextDateStr, previousTime.value));
     }
 
