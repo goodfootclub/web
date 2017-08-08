@@ -46,7 +46,7 @@ export class PlayerDetailsComponent implements OnInit {
             this.players.inviteToGame(this.targetGame,
                 this.player.id,
                 teamMember).subscribe(
-                    this.navigate.call('/games', this.targetGame));
+                    this.navigate.call(this, '/games', this.targetGame));
         } else if (this.targetTeam) {
             this.players.inviteToTeam(this.targetTeam, this.player.id)
                 .subscribe(this.navigate.call(this, '/teams', this.targetTeam));
