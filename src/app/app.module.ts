@@ -82,6 +82,7 @@ export class RavenErrorHandler implements ErrorHandler {
         ErrorHandlingModule,
     ],
     providers: [
+        { provide: ErrorHandler, useClass: RavenErrorHandler },
         HttpProvider,
         StatusService,
         AuthService,
