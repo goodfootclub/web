@@ -1,4 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="180" height="200">
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="1200">
     <!-- Это элемент до применения переноса и поворота -->
-    <text x="60" y="105" transform="translate(30) rotate(45 50 50)" fill-opacity="0.5" stroke-opacity="0.5"> DEVELOPMENT </text>
+    <g transform="translate(30) rotate(45 50 50)" fill-opacity="0.5" stroke-opacity="0.5">
+        <text x="40" y="90"> DEVELOPMENT </text>
+        <text x="220" y="90"> DEVELOPMENT </text>
+        <text x="400" y="90"> DEVELOPMENT </text>
+        <text x="580" y="90"> DEVELOPMENT </text>
+        <text x="760" y="90"> DEVELOPMENT </text>
+    </g>
 </svg>
