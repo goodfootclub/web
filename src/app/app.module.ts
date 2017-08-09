@@ -1,5 +1,7 @@
+import * as Raven from 'raven-js';
+
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
@@ -54,6 +56,15 @@ export const ROUTES: Routes = [{
     component: FourxxErrorComponent,
 }];
 
+Raven
+    .config('https://1e1793c10283418ebcfb3149fd378e1d@sentry.io/201642')
+    .install();
+
+export class RavenErrorHandler implements ErrorHandler {
+    handleError(err: any): void {
+        Raven.captureException(err);
+    }
+}
 
 @NgModule({
     declarations: [
