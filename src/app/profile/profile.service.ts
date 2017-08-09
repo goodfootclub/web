@@ -16,7 +16,6 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 
-
 /**
  * Provides data about currently logged in user
  */
@@ -29,6 +28,21 @@ export class ProfileService {
         private http: Http,
         private toastyService: AppToastyService,
     ) {}
+
+    /**
+     * Login with credentials
+     */
+    login(username: string, password: string): Observable<any> {
+        let request = new Request({
+            method: RequestMethod.Post,
+            url: `/api/auth/login/`,
+            body: {
+                username: username,
+                password: password,
+            },
+        });
+        return this.http.request(request);
+    }
 
     /**
      * Get current user data and update it from server if needed

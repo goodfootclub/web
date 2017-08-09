@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { WindowRefService } from '../../common/services/window.service';
+import {ProfileService} from '../../profile/profile.service';
 
 const landingBg = require('./img/bg.jpg');
 
@@ -8,16 +10,33 @@ const landingBg = require('./img/bg.jpg');
     templateUrl: './landing-page.component.html',
     styleUrls: ['./landing-page.component.styl'],
 })
-export class LandingPageComponent {
+export class LandingPageComponent implements OnInit {
+
     bgImg = `url('${ landingBg }')`;
     signinForm = false;
+    loginForm: FormGroup;
 
     constructor(
+        private profileService: ProfileService,
+        private formBuilder: FormBuilder,
         private windowRef: WindowRefService,
     ) {}
 
+    ngOnInit() {
+        this.loginForm = this.formBuilder.group({
+            username: [''],
+            password: [''],
+        });
+    }
+
     signin() {
         this.signinForm = true;
+    }
+
+    loginUsingCredentials() {
+        const formValue = this.loginForm.value;
+        this.profileService.login(formValue.username, formValue.password)
+            .subscribe(data => console.log(data));
     }
 
     useFacebook() {
