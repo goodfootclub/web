@@ -20,4 +20,16 @@ export class WindowRefService {
     get window (): any {
         return getWindow();
     }
+
+    get token(): string {
+        return getWindow().localStorage.getItem(this.jwtTokenKeyName);
+    }
+
+    set token(token: string) {
+        getWindow().localStorage.setItem(this.jwtTokenKeyName, token);
+    }
+
+    private get jwtTokenKeyName() {
+        return 'gffcjwttoken';
+    }
 }

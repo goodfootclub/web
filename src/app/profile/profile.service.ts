@@ -11,6 +11,7 @@ import { User } from '../types';
 import { AppToastyService } from '../common/services/toasty.service';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { Cookies } from '../auth/auth.service';
+import { WindowRefService } from '../common/services/window.service';
 
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
@@ -27,21 +28,26 @@ export class ProfileService {
     constructor(
         private http: Http,
         private toastyService: AppToastyService,
+        private windowRef: WindowRefService,
     ) {}
 
     /**
      * Login with credentials
      */
-    login(username: string, password: string): Observable<any> {
+    login(username: string, password: string): Observable<Response> {
         let request = new Request({
             method: RequestMethod.Post,
-            url: `/api/auth/login/`,
+            url: `/api/auth/jwt/`,
             body: {
                 username: username,
                 password: password,
             },
         });
-        return this.http.request(request);
+        return this.http.request(request)
+            .map((resp: Response) => {
+                this.windowRef.token = resp.json().token;
+                return resp;
+            });
     }
 
     /**

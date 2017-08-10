@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { WindowRefService } from '../../common/services/window.service';
-import {ProfileService} from '../../profile/profile.service';
+import { ProfileService } from '../../profile/profile.service';
 
 const landingBg = require('./img/bg.jpg');
 
@@ -11,6 +11,9 @@ const landingBg = require('./img/bg.jpg');
     styleUrls: ['./landing-page.component.styl'],
 })
 export class LandingPageComponent implements OnInit {
+
+    @Output('handleLogin')
+    handleLogin = new EventEmitter<boolean>();
 
     bgImg = `url('${ landingBg }')`;
     signinForm = false;
@@ -36,7 +39,11 @@ export class LandingPageComponent implements OnInit {
     loginUsingCredentials() {
         const formValue = this.loginForm.value;
         this.profileService.login(formValue.username, formValue.password)
-            .subscribe(data => console.log(data));
+            .subscribe(() => {
+                this.profileService.updateCurrentUser().subscribe(() => {
+                    this.handleLogin.next(true);
+                });
+            });
     }
 
     useFacebook() {
