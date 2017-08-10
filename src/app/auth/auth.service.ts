@@ -6,6 +6,7 @@ import {
     Router,
     RouterStateSnapshot,
 } from '@angular/router';
+import { WindowRefService } from '../common/services/window.service';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 import { Observable } from 'rxjs/Observable';
@@ -23,6 +24,7 @@ export class AuthService implements CanActivate, CanActivateChild {
 
     constructor(
         private router: Router,
+        private windowRef: WindowRefService,
     ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -40,7 +42,8 @@ export class AuthService implements CanActivate, CanActivateChild {
      */
     isAuthenticated(redirectPath?: string): boolean | Observable<boolean> {
         const csrf = Cookie.get(Cookies.CSRFTOKEN);
-        const isAuthenticated = !!csrf;
+        const jwtToken = this.windowRef.token;
+        const isAuthenticated = !!csrf || !!jwtToken;
         if (!isAuthenticated && redirectPath) {
             this.router.navigate([redirectPath]);
         }

@@ -96,6 +96,7 @@ export class ProfileService {
     logout(): Observable<Response> {
         return this.http.get('/api/auth/logout').do(() => {
             Cookie.delete(Cookies.CSRFTOKEN);
+            this.windowRef.deleteToken();
         });
     }
 }

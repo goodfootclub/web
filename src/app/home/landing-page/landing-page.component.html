@@ -16,13 +16,44 @@
         </div>
         <div class="login-container" *ngIf="signinForm">
             <div class="signup-header">Please Sign In (Up)</div>
-            <form [formGroup]="loginForm">
-                <div>
-                    <input type="text" formControlName="username">
-                </div>
-                <div>
-                    <input type="password" formControlName="password">
-                </div>
+
+            <form [formGroup]="loginForm" autocomplete="off" class="login-form">
+                <md-input-container #usernameContainer>
+                    <input mdInput
+                           #username
+                           [style.width]="'100%'"
+                           autocomplete="off"
+                           formControlName="username"
+                           placeholder="Username"
+                           type='text'>
+                    <md-hint align="end" *ngIf="usernameContainer._mdInputChild.focused">
+                <!--span *ngIf="locationControls.address.errors?.required">
+                    required
+                </span-->
+                <span *ngIf="!loginForm.controls.username.errors?.required">
+                    {{ username.value.length }} / 30
+                </span>
+                    </md-hint>
+                </md-input-container>
+
+                <md-input-container #passwordContainer>
+                    <input mdInput
+                           #password
+                           [style.width]="'100%'"
+                           autocomplete="off"
+                           formControlName="password"
+                           placeholder="Password"
+                           type='password'>
+                    <md-hint align="end" *ngIf="passwordContainer._mdInputChild.focused">
+                        <!--span *ngIf="locationControls.address.errors?.required">
+                            required
+                        </span-->
+                        <span *ngIf="!loginForm.controls.password.errors?.required">
+                    {{ password.value.length }} / 30
+                </span>
+                    </md-hint>
+                </md-input-container>
+
                 <div class="button-container">
                     <button class="gffc-button btn-dark" (click)="loginUsingCredentials()">Sign In sing credentials</button>
                 </div>

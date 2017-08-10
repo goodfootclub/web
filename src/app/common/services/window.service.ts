@@ -29,6 +29,10 @@ export class WindowRefService {
         getWindow().localStorage.setItem(this.jwtTokenKeyName, token);
     }
 
+    deleteToken() {
+        getWindow().localStorage.removeItem(this.jwtTokenKeyName);
+    }
+
     private get jwtTokenKeyName() {
         return 'gffcjwttoken';
     }
