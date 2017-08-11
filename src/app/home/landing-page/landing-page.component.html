@@ -17,7 +17,7 @@
         <div class="login-container" *ngIf="signinForm">
             <div class="signup-header">Please Sign In (Up)</div>
 
-            <form [formGroup]="loginForm" autocomplete="off" class="login-form">
+            <form [formGroup]="loginForm" autocomplete="off" class="white-form">
                 <md-input-container #usernameContainer>
                     <input mdInput
                            #username
@@ -27,12 +27,7 @@
                            placeholder="Username"
                            type='text'>
                     <md-hint align="end" *ngIf="usernameContainer._mdInputChild.focused">
-                <!--span *ngIf="locationControls.address.errors?.required">
-                    required
-                </span-->
-                <span *ngIf="!loginForm.controls.username.errors?.required">
-                    {{ username.value.length }} / 30
-                </span>
+                        <span *ngIf="!loginForm.controls.username.errors?.required">{{ username.value.length }} / 30</span>
                     </md-hint>
                 </md-input-container>
 
@@ -45,19 +40,13 @@
                            placeholder="Password"
                            type='password'>
                     <md-hint align="end" *ngIf="passwordContainer._mdInputChild.focused">
-                        <!--span *ngIf="locationControls.address.errors?.required">
-                            required
-                        </span-->
-                        <span *ngIf="!loginForm.controls.password.errors?.required">
-                    {{ password.value.length }} / 30
-                </span>
+                        <span *ngIf="!loginForm.controls.password.errors?.required">{{ password.value.length }} / 30</span>
                     </md-hint>
                 </md-input-container>
-
-                <div class="button-container">
-                    <button class="gffc-button btn-dark" (click)="loginUsingCredentials()">Sign In sing credentials</button>
-                </div>
             </form>
+            <div class="button-container">
+                <button class="gffc-button btn-dark" (click)="loginUsingCredentials()">Sign In With Credentials</button>
+            </div>
 
             <div class="button-container">
                 <button class="gffc-button btn-dark" (click)="useFacebook()">

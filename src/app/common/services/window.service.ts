@@ -8,6 +8,8 @@ function getWindow (): any {
 export class WindowRefService {
 
     private _fullscreen = true;
+    /* Safari workaround */
+    private _token: string;
 
     setFullScreen(value: boolean) {
         this._fullscreen = value;
@@ -22,14 +24,17 @@ export class WindowRefService {
     }
 
     get token(): string {
-        return getWindow().localStorage.getItem(this.jwtTokenKeyName);
+        return this._token ||
+            getWindow().localStorage.getItem(this.jwtTokenKeyName);
     }
 
     set token(token: string) {
+        this._token = token;
         getWindow().localStorage.setItem(this.jwtTokenKeyName, token);
     }
 
     deleteToken() {
+        this._token = null;
         getWindow().localStorage.removeItem(this.jwtTokenKeyName);
     }
 
