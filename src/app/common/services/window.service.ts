@@ -30,12 +30,16 @@ export class WindowRefService {
 
     set token(token: string) {
         this._token = token;
-        getWindow().localStorage.setItem(this.jwtTokenKeyName, token);
+        try {
+            getWindow().localStorage.setItem(this.jwtTokenKeyName, token);
+        } catch (e) { /* Do nothing. Looks like Safari */ }
     }
 
     deleteToken() {
         this._token = null;
-        getWindow().localStorage.removeItem(this.jwtTokenKeyName);
+        try {
+            getWindow().localStorage.removeItem(this.jwtTokenKeyName);
+        } catch (e) { /* Do nothing. Looks like Safari */ }
     }
 
     private get jwtTokenKeyName() {
