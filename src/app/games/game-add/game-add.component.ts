@@ -129,8 +129,8 @@ export class GameAddComponent implements OnInit {
 
     initMatchDate(date?: string, time?: string): FormGroup {
         const now = moment();
+        now.add(1, 'hours');
         now.minute(0);
-        now.hours(now.get('hours') + 1);
         const timeStr = time ? time : now.format('HH:mm');
         const dateStr = date ? date : now.format('YYYY-MM-DD');
         return this.formBuilder.group({
@@ -141,8 +141,9 @@ export class GameAddComponent implements OnInit {
 
     validateDateTime(group: FormGroup) {
         const value = group.value;
-        const selectedDate = new Date(`${value.date}T${value.time}`);
-        const now = new Date();
+        const selectedDate = moment(`${value.date} ${value.time}`,
+            'YYYY-MM-DD HH:mm:ss'); // local date time
+        const now = moment(); // local date time too
         return selectedDate > now ? null : { invalidDate: true };
     }
 
@@ -152,12 +153,6 @@ export class GameAddComponent implements OnInit {
 
     displayLocation(location: Location) {
         return location.name ? location.name : location;
-    }
-
-    dateFromInputValue(val: {date: string, time: string}): Date {
-        let dt = new Date(`${val['date']}T${val['time']}`);
-        dt.setHours(dt.getHours() + dt.getTimezoneOffset() / 60);
-        return dt;
     }
 
     onCancel() {
@@ -193,13 +188,11 @@ export class GameAddComponent implements OnInit {
         const previousTime: FormControl =
             control.controls[lastIndex]['controls'].time as FormControl;
 
-        const nextDate = this.dateFromInputValue({
-            date: previousDate.value,
-            time: previousTime.value,
-        });
+        const nextDateStr =
+            moment(`${previousDate.value} ${previousTime.value}`,
+            'YYYY-MM-DD HH:mm:ss')
+            .add(7, 'days').format('YYYY-MM-DD');
 
-        nextDate.setDate(nextDate.getDate() + 7);
-        const nextDateStr = moment(nextDate).format('YYYY-MM-DD');
         control.push(this.initMatchDate(nextDateStr, previousTime.value));
     }
 
