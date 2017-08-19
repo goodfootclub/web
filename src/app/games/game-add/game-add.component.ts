@@ -8,9 +8,9 @@ import {
     AbstractControl,
 } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { DatePipe } from '@angular/common';
+import * as moment from 'moment';
 
-import { Location, Team, User } from 'app/types';
+import { Location, Team } from 'app/types';
 import { GamesService } from '../games.service';
 import { LocationsService } from '../locations.service';
 import { HistoryService } from '../../common/services/history.service';
@@ -50,8 +50,7 @@ export class GameAddComponent implements OnInit {
     locations: Location[];
     managedTeams: Team[] = [this.noTeam];
     targetTeam: number = null;
-    datePipe = new DatePipe('en-US');
-    tzOffset = -new Date().getTimezoneOffset() / 60;
+    tzOffset = moment().utcOffset() / 60;
     tzName = `GMT${this.tzOffset >= 0 ? '+' : '-'}${this.tzOffset}`;
 
     controls: GameAddFormControls;
@@ -103,7 +102,7 @@ export class GameAddComponent implements OnInit {
             dates: this.formBuilder.array([
                 this.initMatchDate(),
             ]),
-        });
+        }) as GameAddFormGroup;
 
         this.controls = this.form.controls;
         this.locationControls = this.controls['location']['controls'];
@@ -129,12 +128,11 @@ export class GameAddComponent implements OnInit {
     }
 
     initMatchDate(date?: string, time?: string): FormGroup {
-        const now = new Date();
-        now.setMinutes(0);
-        now.setHours(now.getHours() + 1);
-        const timeStr = time ? time : this.datePipe.transform(now, 'HH:mm');
-        const dateStr = date ? date :
-            this.datePipe.transform(now, 'yyyy-MM-dd');
+        const now = moment();
+        now.add(1, 'hours');
+        now.minute(0);
+        const timeStr = time ? time : now.format('HH:mm');
+        const dateStr = date ? date : now.format('YYYY-MM-DD');
         return this.formBuilder.group({
             date: [dateStr, Validators.required],
             time: [timeStr, Validators.required],
@@ -143,8 +141,9 @@ export class GameAddComponent implements OnInit {
 
     validateDateTime(group: FormGroup) {
         const value = group.value;
-        const selectedDate = new Date(`${value.date}T${value.time}`);
-        const now = new Date();
+        const selectedDate = moment(`${value.date} ${value.time}`,
+            'YYYY-MM-DD HH:mm:ss'); // local date time
+        const now = moment(); // local date time too
         return selectedDate > now ? null : { invalidDate: true };
     }
 
@@ -154,12 +153,6 @@ export class GameAddComponent implements OnInit {
 
     displayLocation(location: Location) {
         return location.name ? location.name : location;
-    }
-
-    dateFromInputValue(val: {date: string, time: string}): Date {
-        let dt = new Date(`${val['date']}T${val['time']}`);
-        dt.setHours(dt.getHours() + dt.getTimezoneOffset() / 60);
-        return dt;
     }
 
     onCancel() {
@@ -182,6 +175,7 @@ export class GameAddComponent implements OnInit {
         };
 
         this.games.create(data).subscribe(newGame => {
+            this.historyService.skipCurrent();
             this.router.navigate(['/games', newGame.id]);
         });
     }
@@ -194,13 +188,11 @@ export class GameAddComponent implements OnInit {
         const previousTime: FormControl =
             control.controls[lastIndex]['controls'].time as FormControl;
 
-        const nextDate = this.dateFromInputValue({
-            date: previousDate.value,
-            time: previousTime.value,
-        });
+        const nextDateStr =
+            moment(`${previousDate.value} ${previousTime.value}`,
+            'YYYY-MM-DD HH:mm:ss')
+            .add(7, 'days').format('YYYY-MM-DD');
 
-        nextDate.setDate(nextDate.getDate() + 7);
-        const nextDateStr = this.datePipe.transform(nextDate, 'yyyy-MM-dd');
         control.push(this.initMatchDate(nextDateStr, previousTime.value));
     }
 

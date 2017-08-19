@@ -27,6 +27,14 @@
     </div>
     <div class="data-row">
         <div>
+            <strong>Organizer</strong>
+        </div>
+        <div>
+            {{ game?.organizer?.firstName }} {{ game?.organizer?.lastName }}
+        </div>
+    </div>
+    <div class="data-row">
+        <div>
             <strong>When?</strong>
         </div>
         <div>
@@ -48,10 +56,10 @@
         <div class="header-text">
             <p>Players</p>
             <button
-                md-mini-fab
+                md-icon-button
                 *ngIf="isAddPlayersVisible()"
                 (click)="addPlayer()">
-                <md-icon>add</md-icon>
+                <app-icon name="user-plus"></app-icon>
             </button>
         </div>
     </div>

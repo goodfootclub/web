@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
+import { WindowRefService } from '../common/services/window.service';
+import { Observable } from 'rxjs/Observable';
 
-import { ProfileService } from 'app/profile';
-import { User, GameEvent } from 'app/types';
-import { GamesService } from '../games/games.service';
-import { PlayersService } from '../players/players.service';
 
 @Component({
     selector: 'app-home',
@@ -12,33 +11,35 @@ import { PlayersService } from '../players/players.service';
 })
 export class HomeComponent implements OnInit {
 
-    user: User;
-    userNextGame: GameEvent;
-    nextGames: GameEvent[];
-    players: User[];
+    private initialized = false;
+    private isAuthenticated = false;
 
     constructor(
-        private profile: ProfileService,
-        private gamesService: GamesService,
-        private playersService: PlayersService,
+        private authService: AuthService,
+        private windowRef: WindowRefService,
     ) {}
 
     ngOnInit(): void {
-        this.profile.updateCurrentUser().subscribe(user => {
-            this.user = user;
-        });
-        this.gamesService.getCurrentUserGames(1)
-            .map(res => res.results)
-            .subscribe(games => {
-                if (games && games instanceof Array && games.length > 0) {
-                    this.userNextGame = games[0];
-                }
-            });
-        this.gamesService.all('', 2).subscribe(games => {
-            this.nextGames = games;
-        });
-        this.playersService.all().subscribe(players => {
-            this.players = players;
-        });
+        const authenticated = this.authService.isAuthenticated();
+        if (authenticated instanceof Observable) {
+            (authenticated as Observable<boolean>)
+                .subscribe(this.handleResult.bind(this));
+        } else {
+            this.handleResult(authenticated as boolean);
+        }
+    }
+
+    handleResult(result: boolean) {
+        this.windowRef.setFullScreen(!result);
+        this.isAuthenticated = result;
+        this.initialized = true;
+    };
+
+    showHomePage() {
+        return this.initialized && this.isAuthenticated;
+    }
+
+    showLandingPage() {
+        return this.initialized && !this.isAuthenticated;
     }
 }

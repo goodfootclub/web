@@ -35,8 +35,6 @@ export class PlayersService {
     get(id: number): Observable<User> {
         return this.http.get(`/api/users/players/${id}/`).map(res => {
             return new User(res.json());
-        }).catch((err, caught) => {
-            throw err;
         });
     }
 

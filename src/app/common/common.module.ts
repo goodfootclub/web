@@ -12,6 +12,7 @@ import {
     HomeButtonComponent,
 } from './ui';
 import { GameListComponent } from './components';
+import { IconComponent } from './components/icon.component';
 import { TextSearchPipe } from './pipes';
 import { HttpProvider } from './services/app.http';
 import { AppToastyService } from './services/toasty.service';
@@ -35,6 +36,7 @@ import { NavigationButtonsComponent } from './ui/navigation-buttons.component';
         TextSearchPipe,
         TitleComponent,
         GameListComponent,
+        IconComponent,
         HomeButtonComponent,
         NavigationButtonsComponent,
     ],
@@ -51,6 +53,7 @@ import { NavigationButtonsComponent } from './ui/navigation-buttons.component';
         TextSearchPipe,
         TitleComponent,
         GameListComponent,
+        IconComponent,
         NavigationButtonsComponent,
     ],
 })

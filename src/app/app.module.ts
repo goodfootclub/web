@@ -1,13 +1,15 @@
+import * as Raven from 'raven-js';
+
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
-import { MaterialModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastyModule } from 'ng2-toasty';
-
+import { MaterialModule } from '@angular/material';
 import { AppComponent } from './app.component';
-import { AuthComponent, AuthService } from './auth';
+import { AuthService } from './auth';
 import {
     MenuService,
     HttpProvider,
@@ -21,15 +23,9 @@ import { TitleService } from './title.service';
 import { ErrorHandlingModule, FourxxErrorComponent } from './error-handling';
 import { WindowRefService } from './common/services/window.service';
 
-
 export const ROUTES: Routes = [{
-    path: 'signup',
-    component: AuthComponent,
-}, {
     path: '',
     loadChildren: 'app/home/home.module#HomeModule',
-    canActivateChild: [AuthService],
-    canActivate: [AuthService],
 }, {
     path: 'profile',
     loadChildren: 'app/profile/profile.module#ProfileModule',
@@ -60,23 +56,33 @@ export const ROUTES: Routes = [{
     component: FourxxErrorComponent,
 }];
 
+Raven
+    .config('https://1e1793c10283418ebcfb3149fd378e1d@sentry.io/201642')
+    .install();
+
+export class RavenErrorHandler implements ErrorHandler {
+    handleError(err: any): void {
+        Raven.captureException(err);
+    }
+}
 
 @NgModule({
     declarations: [
         AppComponent,
-        AuthComponent,
         SidenavComponent,
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         FormsModule,
         HttpModule,
-        MaterialModule.forRoot(),
+        MaterialModule,
         ToastyModule.forRoot(),
         RouterModule.forRoot(ROUTES),
         ErrorHandlingModule,
     ],
     providers: [
+        { provide: ErrorHandler, useClass: RavenErrorHandler },
         HttpProvider,
         StatusService,
         AuthService,
@@ -90,4 +96,5 @@ export const ROUTES: Routes = [{
     ],
     bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}

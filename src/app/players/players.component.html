@@ -24,6 +24,11 @@
         <h1> {{ player.firstName }} {{ player.lastName }} </h1>
         <div class="info bio"> {{ player.bio }} </div>
     </div>
+    <div class="invite-button" *ngIf="isInviteVisible(player)">
+        <button md-button color="primary" (click)="invitePlayer($event, player)">
+            <md-icon>add</md-icon>
+        </button>
+    </div>
 </md-card>
 
 <app-load-more-block [canLoadMore]="canLoadMore" (loadMoreCallback)="loadMore()"></app-load-more-block>

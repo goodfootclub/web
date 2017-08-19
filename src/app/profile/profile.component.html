@@ -1,8 +1,7 @@
 <md-toolbar>
     <app-navigation></app-navigation>
     <app-title></app-title>
-    <button md-mini-fab [routerLink]="['edit']"><md-icon>edit</md-icon></button>
-    <a class="logout-link" (click)="logout()">Logout</a>
+    <button md-icon-button [routerLink]="['edit']"><app-icon name="edit-3"></app-icon></button>
 </md-toolbar>
 
 <app-player [player]="user"></app-player>

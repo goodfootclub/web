@@ -10,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { Team, PlayerRole, Player, GameEvent } from 'app/types';
 import { AppToastyService } from '../common/services/toasty.service';
+import 'rxjs/add/operator/map';
 
 
 @Injectable()
@@ -27,25 +28,17 @@ export class TeamsService {
         if (offset) { params.set('offset', offset.toString()); }
         if (search) { params.set('search', search); }
         return this.http.get('/api/teams/', { search: params })
-            .map(res => res.json().results.map(data => new Team(data)))
-            .catch((err, caught) => {
-                throw err;
-            });
+            .map(res => res.json().results.map(data => new Team(data)));
     }
 
     getGames(teamId: number): Observable<GameEvent[]> {
         return this.http.get(`/api/teams/${teamId}/games/`)
-            .map(res => res.json().results.map(data => new GameEvent(data)))
-            .catch((err, caught) => {
-                throw err;
-            });
+            .map(res => res.json().results.map(data => new GameEvent(data)));
     }
 
     get(id: number): Observable<Team> {
         return this.http.get(`/api/teams/${id}/`).map(res => {
             return new Team(res.json());
-        }).catch((err, caught) => {
-            throw err;
         });
     }
 
@@ -59,8 +52,6 @@ export class TeamsService {
         });
         return this.http.request(request).map(res => {
             return new Team(res.json());
-        }).catch((err, caught) => {
-            throw err;
         });
     }
 

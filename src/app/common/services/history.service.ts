@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, RoutesRecognized } from '@angular/router';
+import 'rxjs/add/operator/filter';
 
 /**
  * Service to keep history of user's routing
@@ -34,7 +35,7 @@ export class HistoryService {
             .find(r => r.parametrizedUrl === parsedRoute.parametrizedUrl);
         if (existingRoute) {
             const index = this.routes.indexOf(existingRoute);
-            this.routes.splice(index, 100);
+            this.routes.splice(index + 1, 100);
         } else {
             this.routes.push(parsedRoute);
         }
@@ -45,22 +46,33 @@ export class HistoryService {
             this.router.navigate(['/']);
         } else {
             this.excludeNext = true;
-            this.routes.pop();
-            if (this.routes.length === 0) {
+            const nextOne = this.findNextOne();
+            if (!nextOne) {
                 this.router.navigate(['/']);
             } else {
-                const url = this.routes[this.routes.length - 1];
-                if (url.parameters) {
-                    this.router.navigate([url.initialUrl, url.parameters]);
+                if (nextOne.parameters) {
+                    this.router.navigate([
+                        nextOne.initialUrl,
+                        nextOne.parameters]);
                 } else {
-                    this.router.navigate([url.initialUrl]);
+                    this.router.navigate([nextOne.initialUrl]);
                 }
             }
         }
     }
 
+    skipCurrent() {
+        return this.routes.pop();
+    }
+
     getHomePageIndex(): number {
         return this.routes.length - 1;
+    }
+
+    private findNextOne(): ParsedRoute {
+        this.routes.pop();
+        if (this.routes.length === 0) { return null; }
+        return this.routes[this.routes.length - 1];
     }
 
     private parseUrl(route: RoutesRecognized): ParsedRoute {
@@ -90,7 +102,7 @@ export class HistoryService {
             }
             return i;
         });
-        parsed.parametrizedUrl = parsed.parametrizedParts.join('/');
+        parsed.parametrizedUrl = '/' + parsed.parametrizedParts.join('/');
         return parsed;
     }
 

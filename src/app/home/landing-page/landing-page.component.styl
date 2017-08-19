@@ -1,0 +1,71 @@
+@import "../../common/styles/variables.styl"
+@import "../../common/styles/custom-buttons.styl"
+
+.root
+    height 100vh
+    background-repeat no-repeat
+    background-position center center
+
+    display flex
+    justify-content center
+    align-items center
+
+    .title h1
+        color $general-background-color
+        font-size 3.5em
+        font-weight 700
+        line-height 1.1
+        text-align center
+
+    .description
+        color $sub-color
+        margin-top 20px
+        margin-bottom 10px
+        font-weight 500
+        line-height 1.1
+        font-size $header-font-size
+        text-align center
+
+    .landing-container > .button-container
+            text-align center
+            display flex
+            justify-content center
+
+    .login-container
+        display flex
+        flex-flow column
+        align-items center
+        justify-content center
+        min-height 200px
+
+        .signup-header
+            color $general-background-color
+            font-size $header-font-size
+            text-transform uppercase
+            text-align center
+            padding-bottom 30px
+
+        form
+            padding 0px 20px
+
+    .button-container
+        display flex
+        justify-content center
+        align-items center
+        padding 10px 0px
+
+        button
+            display flex
+            justify-content center
+            align-items center
+
+            .icon-wrapper
+                padding-right 10px
+
+            .facebook-icon
+                float: left
+                width: 26px
+                height: 26px
+                fill: $hover-color
+
+

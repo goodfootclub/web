@@ -1,11 +1,13 @@
 <!-- overlay & loader -->
 <div class="cdk-overlay-container">
-    <div class="cdk-overlay-pane app-global-overlay" *ngIf="status.observeLoading | async">
+    <div class="cdk-overlay-pane app-global-overlay" *ngIf="isLoading">
         <md-spinner class="progress-bar"></md-spinner>
     </div>
 </div>
 <!-- toasty popups -->
 <ng2-toasty [position]="'top-right'"></ng2-toasty>
-<md-sidenav-container fullscreen>
+<md-sidenav-container fullscreen [ngClass]="{ fullScreenMode: windowRef.fullScreen }">
     <router-outlet></router-outlet>
 </md-sidenav-container>
+
+<div class="developBack" *ngIf="isDevelopment"></div>

@@ -12,6 +12,7 @@ import {
 } from '@angular/router';
 import { AuthService } from './auth.service';
 import { AppToastyService } from '../common/services/toasty.service';
+import { WindowRefService } from '../common/services/window.service';
 
 
 class HttpStub {
@@ -43,6 +44,8 @@ class AppToastyServiceStub {
     success(message: string, title?: string): void {}
 }
 
+class WindowRefServiceStub {}
+
 describe('Service: Auth', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -52,6 +55,7 @@ describe('Service: Auth', () => {
                 { provide: Http, useClass: HttpStub },
                 { provide: Router, useClass: RouterStub },
                 { provide: AppToastyService, useClass: AppToastyServiceStub },
+                { provide: WindowRefService, useClass: WindowRefServiceStub },
             ],
         });
     });
@@ -70,10 +74,10 @@ describe('Service: Auth', () => {
                 );
                 if (result instanceof Observable) {
                     result.subscribe(() => {
-                        expect(router.path).toEqual(['signup']);
+                        expect(router.path).toEqual(['/']);
                     });
                 } else {
-                    expect(router.path).toEqual(['signup']);
+                    expect(router.path).toEqual(['/']);
                 }
             },
         ),
