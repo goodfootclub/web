@@ -50,6 +50,15 @@ export class ProfileService {
             });
     }
 
+    delete(): Observable<any> { // TODO
+        let request = new Request({
+            method: RequestMethod.Post,
+            url: `/api/auth/jwt/`,
+            body: { /* TODO */ },
+        });
+        return this.http.request(request);
+    }
+
     /**
      * Get current user data and update it from server if needed
      */
@@ -94,9 +103,12 @@ export class ProfileService {
     }
 
     logout(): Observable<Response> {
-        return this.http.get('/api/auth/logout').do(() => {
-            Cookie.delete(Cookies.CSRFTOKEN);
-            this.windowRef.deleteToken();
-        });
+        return this.http.get('/api/auth/logout')
+            .do(this.logoutOnFrontEnd.bind(this));
+    }
+
+    logoutOnFrontEnd() {
+        Cookie.delete(Cookies.CSRFTOKEN);
+        this.windowRef.deleteToken();
     }
 }

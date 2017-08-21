@@ -9,12 +9,17 @@ import { MaterialModule } from '@angular/material';
 import { CommonModule } from 'app/common';
 import { ProfileComponent } from './profile.component';
 import { ProfileEditComponent } from './profile-edit';
+import {
+    ProfileDeleteComponent,
+} from './profile-delete/profile-delete.component';
 
 
 const ROUTES: Routes = [{
     path: '', component: ProfileComponent,
 }, {
     path: 'edit', component: ProfileEditComponent,
+}, {
+    path: 'delete', component: ProfileDeleteComponent,
 }];
 
 @NgModule({
@@ -27,6 +32,7 @@ const ROUTES: Routes = [{
     declarations: [
         ProfileComponent,
         ProfileEditComponent,
+        ProfileDeleteComponent,
     ],
 })
 export class ProfileModule { }

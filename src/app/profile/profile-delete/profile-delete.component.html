@@ -1,0 +1,19 @@
+<md-toolbar>
+    <app-navigation></app-navigation>
+    <app-title></app-title>
+    <div class="toolbar-icon-spacer"></div>
+</md-toolbar>
+
+<md-card>
+    <div class="delete-title">
+        <span><h3>Are you sure you want to delete your account?</h3></span>
+    </div>
+    <div class="delete-buttons">
+        <button md-button color="primary" (click)="yes()">
+            Yes
+        </button>
+        <button md-button color="accent" (click)="no()">
+            No!
+        </button>
+    </div>
+</md-card>
