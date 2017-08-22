@@ -5,7 +5,7 @@
         <div class="title">
             <h1>GOOD FOOT CLUB</h1>
         </div>
-        <div class="landing-container" *ngIf="!signinForm">
+        <div class="landing-container" *ngIf="!signinForm && !registerForm">
             <div class="description">
                 <p>A new and awesome way to find people to play football with is coming SOON™</p>
                 <p>Sign up and join the beta test!</p>
@@ -19,5 +19,6 @@
         </div>
 
         <app-login *ngIf="signinForm" (handleLogin)="handleLoginResult($event)"></app-login>
+        <app-register *ngIf="registerForm"></app-register>
     </div>
 </div>

@@ -1,3 +1,64 @@
-<p>
-  register works!
-</p>
+<div class="register-container">
+    <form [formGroup]="registerForm" autocomplete="off" class="white-form" *ngIf="!submitted">
+        <md-input-container #emailContainer>
+            <input mdInput
+                   #email
+                   [style.width]="'100%'"
+                   autocomplete="off"
+                   formControlName="email"
+                   placeholder="Email"
+                   type='text'>
+            <md-hint align="end" *ngIf="emailContainer._mdInputChild.focused">
+                <span *ngIf="!registerForm.controls.email.errors?.required">{{ email.value.length }} / 30</span>
+            </md-hint>
+        </md-input-container>
+
+        <md-input-container #usernameContainer>
+            <input mdInput
+                   #username
+                   [style.width]="'100%'"
+                   autocomplete="off"
+                   formControlName="username"
+                   placeholder="Username"
+                   type='text'>
+            <md-hint align="end" *ngIf="usernameContainer._mdInputChild.focused">
+                <span *ngIf="!registerForm.controls.username.errors?.required">{{ username.value.length }} / 50</span>
+            </md-hint>
+        </md-input-container>
+
+        <md-input-container #passwordContainer>
+            <input mdInput
+                   #password
+                   [style.width]="'100%'"
+                   autocomplete="off"
+                   formControlName="password"
+                   placeholder="Password"
+                   type='password'>
+            <md-hint align="end" *ngIf="passwordContainer._mdInputChild.focused">
+                <span *ngIf="!registerForm.controls.password.errors?.required">{{ password.value.length }} / 30</span>
+            </md-hint>
+        </md-input-container>
+
+        <md-input-container #repeatPasswordContainer>
+            <input mdInput
+                   #repeatPassword
+                   [style.width]="'100%'"
+                   autocomplete="off"
+                   formControlName="repeatPassword"
+                   placeholder="Repeat Password"
+                   type='password'>
+            <md-hint align="end" *ngIf="repeatPasswordContainer._mdInputChild.focused">
+                <span *ngIf="!registerForm.controls.repeatPassword.errors?.required">{{ repeatPassword.value.length }} / 30</span>
+            </md-hint>
+        </md-input-container>
+    </form>
+    <div class="button-container">
+        <button class="gffc-button btn-dark" (click)="register()">Join !</button>
+    </div>
+
+    <div class="notification" *ngIf="submitted">
+        <div class="description">
+            <p>We've sent you an email with activation link</p>
+        </div>
+    </div>
+</div>

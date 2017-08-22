@@ -6,7 +6,7 @@ import { WindowRefService } from '../../../common/services/window.service';
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.styl'],
+    styleUrls: ['./login.component.styl', './../landing-page.component.styl'],
 })
 export class LoginComponent implements OnInit {
 

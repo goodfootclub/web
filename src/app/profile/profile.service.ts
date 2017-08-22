@@ -50,6 +50,22 @@ export class ProfileService {
             });
     }
 
+    /**
+     * Register with credentials
+     */
+    register(email: string, username: string, password: string) {
+        let request = new Request({
+            method: RequestMethod.Post,
+            url: `/api/auth/jwt/`, // TODO here
+            body: {
+                email: email,
+                username: username,
+                password: password,
+            },
+        });
+        return this.http.request(request);
+    }
+
     delete(): Observable<any> { // TODO
         let request = new Request({
             method: RequestMethod.Post,

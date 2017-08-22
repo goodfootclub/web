@@ -17,7 +17,7 @@ export class LandingPageComponent implements OnInit {
 
     bgImg = `url('${ landingBg }')`;
     signinForm = false;
-    registerForm = false;
+    registerForm = true; // TODO remove it
 
     constructor() {}
 
