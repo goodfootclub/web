@@ -36,6 +36,8 @@ import {
 } from './home-page/invites-tile/invites-tile.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { LoginComponent } from './landing-page/login/login.component';
+import { RegisterComponent } from './landing-page/register/register.component';
 
 
 const ROUTES: Routes = [{
@@ -62,6 +64,8 @@ const ROUTES: Routes = [{
         InvitesTileComponent,
         LandingPageComponent,
         HomePageComponent,
+        LoginComponent,
+        RegisterComponent,
     ],
     providers: [
         PlayersService,

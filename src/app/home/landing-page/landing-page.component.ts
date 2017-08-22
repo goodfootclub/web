@@ -17,37 +17,21 @@ export class LandingPageComponent implements OnInit {
 
     bgImg = `url('${ landingBg }')`;
     signinForm = false;
-    loginForm: FormGroup;
+    registerForm = false;
 
-    constructor(
-        private profileService: ProfileService,
-        private formBuilder: FormBuilder,
-        private windowRef: WindowRefService,
-    ) {}
+    constructor() {}
 
-    ngOnInit() {
-        this.loginForm = this.formBuilder.group({
-            username: [''],
-            password: [''],
-        });
-    }
+    ngOnInit() {}
 
     signin() {
         this.signinForm = true;
     }
 
-    loginUsingCredentials() {
-        const formValue = this.loginForm.value;
-        this.profileService.login(formValue.username, formValue.password)
-            .subscribe(() => {
-                this.profileService.updateCurrentUser().subscribe(() => {
-                    this.handleLogin.next(true);
-                });
-            });
+    register() {
+        this.registerForm = true;
     }
 
-    useFacebook() {
-        this.windowRef.window.location.href =
-            '/auth/login/facebook';
+    handleLoginResult(event) {
+        this.handleLogin.next(event);
     }
 }
