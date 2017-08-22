@@ -1,21 +1,20 @@
-import * as Raven from 'raven-js';
-
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorHandlerFactory } from './error-handling/raven.service';
 import { ToastyModule } from 'ng2-toasty';
 import { MaterialModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { AuthService } from './auth';
 import {
-    MenuService,
-    HttpProvider,
-    StatusService,
-    HistoryService,
-    AnalyticsService,
+MenuService,
+HttpProvider,
+StatusService,
+HistoryService,
+AnalyticsService,
 } from './common';
 import { ProfileService } from './profile';
 import { SidenavComponent } from './sidenav';
@@ -56,16 +55,6 @@ export const ROUTES: Routes = [{
     component: FourxxErrorComponent,
 }];
 
-Raven
-    .config('https://1e1793c10283418ebcfb3149fd378e1d@sentry.io/201642')
-    .install();
-
-export class RavenErrorHandler implements ErrorHandler {
-    handleError(err: any): void {
-        Raven.captureException(err);
-    }
-}
-
 @NgModule({
     declarations: [
         AppComponent,
@@ -82,7 +71,7 @@ export class RavenErrorHandler implements ErrorHandler {
         ErrorHandlingModule,
     ],
     providers: [
-        { provide: ErrorHandler, useClass: RavenErrorHandler },
+        { provide: ErrorHandler, useFactory: ErrorHandlerFactory },
         HttpProvider,
         StatusService,
         AuthService,
