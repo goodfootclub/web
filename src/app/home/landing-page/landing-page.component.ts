@@ -1,7 +1,4 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { WindowRefService } from '../../common/services/window.service';
-import { ProfileService } from '../../profile/profile.service';
 
 const landingBg = require('./img/bg.jpg');
 
@@ -17,7 +14,7 @@ export class LandingPageComponent implements OnInit {
 
     bgImg = `url('${ landingBg }')`;
     signinForm = false;
-    registerForm = true; // TODO remove it
+    registerForm = false;
 
     constructor() {}
 
