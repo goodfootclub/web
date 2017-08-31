@@ -8,7 +8,7 @@ import { ErrorHandlerFactory } from './error-handling/raven.service';
 import { ToastyModule } from 'ng2-toasty';
 import { MaterialModule } from '@angular/material';
 import { AppComponent } from './app.component';
-import { AuthService } from './auth';
+import { AuthService } from './common/services/auth.service';
 import {
 MenuService,
 HttpProvider,
@@ -25,6 +25,11 @@ import { WindowRefService } from './common/services/window.service';
 export const ROUTES: Routes = [{
     path: '',
     loadChildren: 'app/home/home.module#HomeModule',
+}, {
+    path: 'auth',
+    loadChildren: 'app/auth/auth.module#AuthModule',
+    // canActivate: [AuthService], // TODO disable if logged in!
+    // canActivateChild: [AuthService],
 }, {
     path: 'profile',
     loadChildren: 'app/profile/profile.module#ProfileModule',

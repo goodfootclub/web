@@ -1,24 +1,19 @@
-<div class="root"
-    [style.background-image]="bgImg"
->
+<div class="landing-container-root">
     <div class="center-block">
         <div class="title">
             <h1>GOOD FOOT CLUB</h1>
         </div>
-        <div class="landing-container" *ngIf="!signinForm && !registerForm">
+        <div class="landing-container">
             <div class="description">
                 <p>A new and awesome way to find people to play football with is coming SOON™</p>
                 <p>Sign up and join the beta test!</p>
             </div>
             <div class="button-container">
-                <button class="gffc-button btn-dark" (click)="signin()">Sign Up</button>
+                <button class="gffc-button btn-dark"  [routerLink]="['/auth', 'signin']">Sign In</button>
             </div>
             <div class="button-container">
-                <button class="gffc-button btn-dark" (click)="register()">Join Good Foot Club!</button>
+                <button class="gffc-button btn-dark" [routerLink]="['/auth', 'join']">Join Good Foot Club!</button>
             </div>
         </div>
-
-        <app-login *ngIf="signinForm" (handleLogin)="handleLoginResult($event)"></app-login>
-        <app-register *ngIf="registerForm"></app-register>
     </div>
 </div>

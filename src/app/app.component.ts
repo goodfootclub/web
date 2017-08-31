@@ -3,7 +3,7 @@ import { TitleService } from './title.service';
 import { AnalyticsService } from './common';
 import { StatusService } from './common/services/status.service';
 import { HistoryService } from './common/services/history.service';
-import { AuthService } from './auth/auth.service';
+import { AuthService } from './common/services/auth.service';
 import { WindowRefService } from './common/services/window.service';
 import { environment } from '../environments/environment';
 import { Observable } from 'rxjs/Observable';

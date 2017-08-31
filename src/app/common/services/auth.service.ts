@@ -6,7 +6,7 @@ import {
     Router,
     RouterStateSnapshot,
 } from '@angular/router';
-import { WindowRefService } from '../common/services/window.service';
+import { WindowRefService } from './window.service';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 import { Observable } from 'rxjs/Observable';

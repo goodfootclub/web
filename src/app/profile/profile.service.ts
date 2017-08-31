@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { User } from '../types';
 import { AppToastyService } from '../common/services/toasty.service';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
-import { Cookies } from '../auth/auth.service';
+import { Cookies } from '../common/services/auth.service';
 import { WindowRefService } from '../common/services/window.service';
 
 import 'rxjs/add/observable/of';
