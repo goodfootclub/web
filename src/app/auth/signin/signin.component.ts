@@ -44,4 +44,8 @@ export class SigninComponent implements OnInit {
         this.windowRef.window.location.href =
             '/auth/login/facebook';
     }
+
+    back() {
+        this.router.navigate(['/']);
+    }
 }
