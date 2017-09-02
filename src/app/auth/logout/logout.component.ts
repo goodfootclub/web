@@ -4,20 +4,30 @@ import { Observable } from 'rxjs/Rx';
 import { WindowRefService } from '../../common/services/window.service';
 
 @Component({
-  selector: 'app-logout',
-  templateUrl: './logout.component.html',
-  styleUrls: ['./logout.component.styl'],
+    selector: 'app-logout',
+    templateUrl: './logout.component.html',
+    styleUrls: ['./logout.component.styl'],
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(
-      private windowRef: WindowRefService,
-      private router: Router,
-  ) {
-      this.windowRef.setFullScreen(true);
-  }
+    time = 3;
 
-  ngOnInit() {
-      Observable.timer(3000).subscribe(() => this.router.navigate(['/']));
-  }
+    constructor(
+        private windowRef: WindowRefService,
+        private router: Router,
+    ) {
+        this.windowRef.setFullScreen(true);
+    }
+
+    ngOnInit() {
+        Observable.timer(1000, 1000)
+            .timeInterval()
+            .take(3)
+            .subscribe(() => {
+                this.time = this.time - 1;
+                if (this.time === 0) {
+                    this.router.navigate(['/']);
+                }
+            });
+    }
 }
