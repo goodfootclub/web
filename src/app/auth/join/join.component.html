@@ -40,7 +40,7 @@
                     </md-hint>
                 </md-input-container>
 
-                <md-input-container [dividerColor]="getDividerColor('password')" #passwordContainer>
+                <md-input-container [dividerColor]="getPasswordDividerColor('password')" #passwordContainer>
                     <input mdInput
                            #password
                            [style.width]="'100%'"
@@ -51,11 +51,12 @@
                     <md-hint align="end" class="hint-container" *ngIf="passwordContainer._mdInputChild.focused">
                         <span *ngIf="registerForm.controls.password.errors?.required && registerForm.controls.password.dirty">required</span>
                         <span *ngIf="registerForm.controls.password.errors?.minlength && password.value.length > 0">min 6 symbols</span>
+                        <span *ngIf="registerForm.errors?.different_passwords">different passwords</span>
                         <span *ngIf="!registerForm.controls.password.errors?.required">{{ password.value.length }} / 30</span>
                     </md-hint>
                 </md-input-container>
 
-                <md-input-container [dividerColor]="getDividerColor('repeatPassword')" #repeatPasswordContainer>
+                <md-input-container [dividerColor]="getPasswordDividerColor('repeatPassword')" #repeatPasswordContainer>
                     <input mdInput
                            #repeatPassword
                            [style.width]="'100%'"
@@ -66,6 +67,7 @@
                     <md-hint align="end" class="hint-container" *ngIf="repeatPasswordContainer._mdInputChild.focused">
                         <span *ngIf="registerForm.controls.repeatPassword.errors?.required && registerForm.controls.repeatPassword.dirty">required</span>
                         <span *ngIf="registerForm.controls.repeatPassword.errors?.minlength && repeatPassword.value.length > 0">min 6 symbols</span>
+                        <span *ngIf="registerForm.errors?.different_passwords">different passwords</span>
                         <span *ngIf="!registerForm.controls.repeatPassword.errors?.required">{{ repeatPassword.value.length }} / 30</span>
                     </md-hint>
                 </md-input-container>

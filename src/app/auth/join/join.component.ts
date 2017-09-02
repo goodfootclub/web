@@ -34,7 +34,9 @@ export class JoinComponent implements OnInit {
                 Validators.required,
                 Validators.minLength(6),
             ])],
-        }, this.validatePasswords.bind(this));
+        }, {
+            validator: this.validatePasswords.bind(this),
+        });
     }
 
     register() {
@@ -53,18 +55,21 @@ export class JoinComponent implements OnInit {
         this.router.navigate(['/']);
     }
 
-    getDividerColor(field: string) {
-        console.log(this.registerForm.controls[field].errors);
-        return this.registerForm.controls[field].valid ||
+    getPasswordDividerColor(field: string) {
+        return (this.registerForm.controls[field].valid &&
+        !this.registerForm.hasError('different_passwords')) ||
         this.registerForm.controls[field].pristine ?
             'primary' : 'warn'
     }
 
     private validatePasswords(group: FormGroup) {
-        const reg = group.value as RegistrationForm;
-        if (reg.password && reg.repeatPassword
-            && reg.password !== reg.repeatPassword) {
-            return { differentpasswords: true };
+        if (group.controls['password'].valid &&
+            group.controls['repeatPassword'].valid) {
+            const reg = group.value as RegistrationForm;
+            if (reg.password && reg.repeatPassword
+                && reg.password !== reg.repeatPassword) {
+                return { different_passwords: true };
+            }
         }
         return {};
     }
