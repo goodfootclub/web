@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
-import {WindowRefService} from '../../common/services/window.service';
+import { WindowRefService } from '../../common/services/window.service';
 
 @Component({
   selector: 'app-logout',

@@ -1,9 +1,9 @@
-<div class="landing-container-root">
+<div class="non-registered-pages">
     <div class="center-block">
         <div class="title">
             <h1>GOOD FOOT CLUB</h1>
         </div>
-        <div class="register-container">
+        <div class="body" *ngIf="!submitted">
             <form [formGroup]="registerForm" autocomplete="off" class="white-form" *ngIf="!submitted">
                 <md-input-container [dividerColor]="
                     registerForm.controls.email.valid ||
@@ -70,15 +70,17 @@
                     </md-hint>
                 </md-input-container>
             </form>
+
             <div class="button-container">
                 <button class="gffc-button btn-dark" (click)="register()">Join !</button>
             </div>
 
-            <div class="back-button-container">
+            <div class="link-button">
                 <a (click)="back()" class="back-button">back</a>
             </div>
-
-            <div class="notification" *ngIf="submitted">
+        </div>
+        <div class="body" *ngIf="submitted">
+            <div class="grey-text">
                 <div class="description">
                     <p>We've sent you an email with activation link</p>
                 </div>

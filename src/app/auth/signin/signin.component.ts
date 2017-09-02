@@ -7,10 +7,7 @@ import { WindowRefService } from '../../common/services/window.service';
 @Component({
     selector: 'app-signin',
     templateUrl: './signin.component.html',
-    styleUrls: [
-        './signin.component.styl',
-        '../auth.styles.styl',
-    ],
+    styleUrls: ['./signin.component.styl'],
 })
 export class SigninComponent implements OnInit {
 
