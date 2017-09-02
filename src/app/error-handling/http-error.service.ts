@@ -65,7 +65,7 @@ export class HttpErrorHandler {
      */
     private handleUnauthorizedError(error: Response) {
         Cookie.delete(Cookies.CSRFTOKEN);
-        this.router.navigate(['/auth/logout']);
+        this.router.navigate(['/aut/logout']);
         this.handleDefaultError(error);
     }
 

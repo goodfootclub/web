@@ -46,7 +46,6 @@ export class JoinComponent implements OnInit {
             registration.username,
             registration.password,
         ).subscribe(() => {
-            // TODO do something here
             this.submitted = true;
         });
     }

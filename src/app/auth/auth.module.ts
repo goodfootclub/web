@@ -7,6 +7,7 @@ import { JoinComponent } from './join/join.component';
 import { LogoutComponent } from './logout/logout.component';
 import { SigninComponent } from './signin/signin.component';
 import { CommonModule as CustomCommonModule } from '../common/common.module';
+import { ActivateComponent } from './activate/activate.component';
 
 const ROUTES: Routes = [{
     path: 'signin', component: SigninComponent,
@@ -14,6 +15,8 @@ const ROUTES: Routes = [{
     path: 'join', component: JoinComponent,
 }, {
     path: 'logout', component: LogoutComponent,
+}, {
+    path: 'activate', component: ActivateComponent,
 }];
 
 @NgModule({
@@ -28,6 +31,7 @@ const ROUTES: Routes = [{
         JoinComponent,
         LogoutComponent,
         SigninComponent,
+        ActivateComponent,
     ],
 })
 export class AuthModule { }

@@ -56,11 +56,26 @@ export class ProfileService {
     register(email: string, username: string, password: string) {
         let request = new Request({
             method: RequestMethod.Post,
-            url: `/api/auth/jwt/`, // TODO here
+            url: '/api/auth/register/',
             body: {
                 email: email,
                 username: username,
                 password: password,
+            },
+        });
+        return this.http.request(request);
+    }
+
+    /**
+     * Activate account
+     */
+    activate(uid: string, token: string) {
+        let request = new Request({
+            method: RequestMethod.Post,
+            url: '/api/auth/activate/',
+            body: {
+                uid: uid,
+                token: token,
             },
         });
         return this.http.request(request);
