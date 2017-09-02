@@ -1,3 +1,5 @@
+@import "variables.styl"
+
 .gffc-button
     padding 10px 16px
     font-size 18px
@@ -16,3 +18,43 @@
 .btn-dark:active
     color #fff
     background-color rgba(0,0,0,0.7)
+
+.material-effects
+    position relative
+    overflow hidden
+
+    &:after
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 5px;
+        height: 5px;
+        background: rgba(255, 255, 255, .5); // TODO
+        opacity: 0;
+        border-radius: 100%;
+        transform: scale(1, 1) translate(-50%);
+        transform-origin: 50% 50%;
+
+    &:active::after
+        animation: ripple 1s ease-out
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 1;
+    }
+    20% {
+        transform: scale(25, 25);
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(40, 40);
+    }
+}
+
+.material-effects.div-cell
+    background: #2DB5FF77
+    &.ripple
+        animation: ripple 1s ease-out
