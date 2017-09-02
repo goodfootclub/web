@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/timer';
+import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/takeWhile';
 
 @Injectable()
 export class StatusService {
 
     private _requestCounter = 0;
-    loading = new BehaviorSubject<any>(false);
-    observeLoading = this.loading.asObservable();
+    private handler: LoadingHandler = new LoadingHandler();
+
+    observeLoading = this.handler.loadingSubject.asObservable();
 
     constructor() {}
 
@@ -24,6 +29,35 @@ export class StatusService {
 
     set requestCounter(value: number) {
         this._requestCounter = value;
-        this.loading.next(this._requestCounter !== 0);
+        this.handler.event(this._requestCounter !== -1);
+    }
+}
+
+class LoadingHandler {
+
+    public loadingSubject = new BehaviorSubject<any>(false);
+    isLoading = false;
+    skipTimer = false;
+
+    event(loadingFlag: boolean) {
+        if (loadingFlag !== this.isLoading) {
+            this.isLoading = loadingFlag;
+            this.loadingSubject.next(loadingFlag);
+            if (!loadingFlag) {
+                this.skipTimer = true;
+            } else {
+                this.initTimer();
+            }
+        }
+    }
+
+    /* to skip timerf if loading is too long */
+    initTimer() {
+        Observable.timer(3000)
+            .take(1)
+            .takeWhile(() => !this.skipTimer)
+            .subscribe(() => {
+                this.loadingSubject.next(false)
+            });
     }
 }
