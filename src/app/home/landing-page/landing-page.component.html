@@ -9,10 +9,16 @@
                 <p>Sign up and join the beta test!</p>
             </div>
             <div class="button-container">
-                <button class="gffc-button btn-dark"  [routerLink]="['/auth', 'signin']">Sign In</button>
+                <button class="gffc-button btn-dark"  [routerLink]="['/auth', 'signin']">
+                    <app-icon name="log-in-white" class="icon-wrapper"></app-icon>
+                    Sign In
+                </button>
             </div>
             <div class="button-container">
-                <button class="gffc-button btn-dark" [routerLink]="['/auth', 'join']">Join Good Foot Club!</button>
+                <button class="gffc-button btn-dark" [routerLink]="['/auth', 'join']">
+                    <app-icon name="users-white" class="icon-wrapper"></app-icon>
+                    Join Good Foot Club!
+                </button>
             </div>
         </div>
     </div>

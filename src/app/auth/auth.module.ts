@@ -6,6 +6,7 @@ import { MaterialModule } from '../material/material.module';
 import { JoinComponent } from './join/join.component';
 import { LogoutComponent } from './logout/logout.component';
 import { SigninComponent } from './signin/signin.component';
+import { CommonModule as CustomCommonModule } from '../common/common.module';
 
 const ROUTES: Routes = [{
     path: 'signin', component: SigninComponent,
@@ -18,6 +19,7 @@ const ROUTES: Routes = [{
 @NgModule({
     imports: [
         CommonModule,
+        CustomCommonModule,
         RouterModule.forChild(ROUTES),
         ReactiveFormsModule,
         MaterialModule,
