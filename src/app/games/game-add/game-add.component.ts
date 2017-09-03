@@ -53,6 +53,9 @@ export class GameAddComponent implements OnInit {
     tzOffset = moment().utcOffset() / 60;
     tzName = `GMT${this.tzOffset >= 0 ? '+' : '-'}${this.tzOffset}`;
 
+    // local date, calculated in a weird way
+    now = moment.utc().add(this.tzOffset, 'hours');
+
     controls: GameAddFormControls;
     locationControls: {
         name: FormControl,
@@ -141,10 +144,9 @@ export class GameAddComponent implements OnInit {
 
     validateDateTime(group: FormGroup) {
         const value = group.value;
-        const selectedDate = moment(`${value.date} ${value.time}`,
+        const selectedDate = moment.utc(`${value.date}T${value.time}Z`,
             'YYYY-MM-DD HH:mm:ss'); // local date time
-        const now = moment(); // local date time too
-        return selectedDate > now ? null : { invalidDate: true };
+        return selectedDate.isAfter(this.now) ? null : { invalidDate: true };
     }
 
     displayTeam(team: Team) {
