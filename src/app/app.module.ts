@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorHandlerFactory } from './error-handling/raven.service';
 import { ToastyModule } from 'ng2-toasty';
-import { MaterialModule } from '@angular/material';
+import { MaterialModule } from './material/material.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './auth';
 import {

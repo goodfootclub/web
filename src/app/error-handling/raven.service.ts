@@ -13,6 +13,8 @@ export class RavenErrorHandler implements ErrorHandler {
 }
 
 export function ErrorHandlerFactory() {
-    return environment.production ?
+    const ravenErrorhandler = environment.production ?
         new RavenErrorHandler() : { handleError: (err: any) => { } };
+    console.log(ravenErrorhandler);
+    return ravenErrorhandler;
 }

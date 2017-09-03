@@ -30,7 +30,6 @@ import {
     A11yModule,
     PlatformModule,
     MdCommonModule,
-    ObserveContentModule,
 } from '@angular/material';
 
 @NgModule({
@@ -65,7 +64,6 @@ import {
         A11yModule,
         PlatformModule,
         MdCommonModule,
-        ObserveContentModule,
     ],
     exports: [
         MdAutocompleteModule,
@@ -101,7 +99,6 @@ import {
         A11yModule,
         PlatformModule,
         MdCommonModule,
-        ObserveContentModule,
     ],
     declarations: [],
 })

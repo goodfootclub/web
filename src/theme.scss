@@ -24,7 +24,7 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
 @include angular-material-theme($candy-app-theme);
 */
 // TODO color theme: customize it if needed:
-$main-theme-color: #2DB5FF;
+/*$main-theme-color: #2DB5FF;
 $mat-gdc-blue: (
     50: #e3f2fd,
     100: #bbdefb,
@@ -87,3 +87,4 @@ $theme: mat-light-theme($primary, $accent);
 
 // Include all theme styles for the components.
 @include angular-material-theme($theme);
+*/
