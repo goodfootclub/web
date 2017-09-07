@@ -26,7 +26,7 @@ export const ROUTES: Routes = [{
     path: '',
     loadChildren: 'app/home/home.module#HomeModule',
 }, {
-    path: 'aut',
+    path: 'auth',
     loadChildren: 'app/auth/auth.module#AuthModule',
     // canActivate: [AuthService], // TODO disable if logged in!
     // canActivateChild: [AuthService],

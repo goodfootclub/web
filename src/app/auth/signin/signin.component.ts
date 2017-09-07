@@ -39,7 +39,7 @@ export class SigninComponent implements OnInit {
 
     useFacebook() {
         this.windowRef.window.location.href =
-            '/auth/login/facebook';
+            '/social/login/facebook';
     }
 
     back() {
