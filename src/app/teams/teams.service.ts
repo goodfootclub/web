@@ -71,7 +71,7 @@ export class TeamsService {
                      playerId: number, data): Observable<Player> {
         let request = new Request({
             method: RequestMethod.Put,
-            url: `/api/teams/${teamId}/players/${playerId}`,
+            url: `/api/teams/${teamId}/players/${playerId}/`,
             body: data,
         });
         return this.http.request(request).do(() => {
