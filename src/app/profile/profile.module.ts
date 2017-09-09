@@ -11,6 +11,8 @@ import { ProfileEditComponent } from './profile-edit';
 import {
     ProfileDeleteComponent,
 } from './profile-delete/profile-delete.component';
+import { MaterialModule } from 'app/material/material.module';
+import { CoreModule } from '../core/core.module';
 
 
 const ROUTES: Routes = [{
@@ -23,6 +25,8 @@ const ROUTES: Routes = [{
 
 @NgModule({
     imports: [
+        CoreModule,
+        MaterialModule,
         CommonModule,
         ReactiveFormsModule,
         RouterModule.forChild(ROUTES),

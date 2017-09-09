@@ -50,7 +50,7 @@ const ROUTES: Routes = [{
         CoreModule,
         MaterialModule,
         CommonModule,
-        RouterModule,
+        RouterModule.forChild(ROUTES),
         ReactiveFormsModule,
     ],
     declarations: [

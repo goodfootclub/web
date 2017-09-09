@@ -8,6 +8,8 @@ import { PlayerDetailsComponent } from './player-details';
 import { PlayersService } from './players.service';
 import { GamesService } from '../games/games.service';
 import { TeamsService } from '../teams/teams.service';
+import { MaterialModule } from 'app/material/material.module';
+import { CoreModule } from '../core/core.module';
 
 
 const ROUTER_CONFIG = [
@@ -18,6 +20,8 @@ const ROUTER_CONFIG = [
 
 @NgModule({
     imports: [
+        CoreModule,
+        MaterialModule,
         CommonModule,
         ReactiveFormsModule,
         RouterModule.forChild(ROUTER_CONFIG),

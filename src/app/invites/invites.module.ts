@@ -7,6 +7,8 @@ import { TeamInvitesComponent } from './team-invites/team-invites.component';
 import { GamesService } from '../games/games.service';
 import { TeamsService } from '../teams/teams.service';
 import { InvitesService } from './invites.service';
+import { CoreModule } from '../core/core.module';
+import { MaterialModule } from '../material/material.module';
 
 const ROUTER_CONFIG = [
     { path: '', component: InvitesComponent },
@@ -14,6 +16,8 @@ const ROUTER_CONFIG = [
 
 @NgModule({
     imports: [
+        CoreModule,
+        MaterialModule,
         RouterModule.forChild(ROUTER_CONFIG),
         CommonModule,
     ],

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { MdDialogModule } from '@angular/material';
 
 import { CommonModule } from 'app/common';
 import { TeamsComponent } from './teams.component';
@@ -12,6 +11,8 @@ import { TeamDetailsComponent } from './team-details';
 import { TeamsService } from './teams.service';
 import { GamesService } from '../games/games.service';
 import { TeamsListComponent } from './teams-list/teams-list.component';
+import { MaterialModule } from 'app/material/material.module';
+import { CoreModule } from '../core/core.module';
 
 
 const ROUTES: Routes = [{
@@ -29,7 +30,8 @@ const ROUTES: Routes = [{
 
 @NgModule({
     imports: [
-        MdDialogModule,
+        CoreModule,
+        MaterialModule,
         CommonModule,
         ReactiveFormsModule,
         RouterModule.forChild(ROUTES),

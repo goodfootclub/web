@@ -45,7 +45,5 @@ export class AppComponent implements OnInit {
         this.status.observeLoading
             .debounceTime(100)
             .subscribe(value => this.isLoading = value);
-
-        console.log('Initialized!');
     }
 }
