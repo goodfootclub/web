@@ -5,7 +5,7 @@ import {
     OnChanges,
     forwardRef,
 } from '@angular/core';
-import { TitleService } from '../services/';
+import { TitleService } from '../../core/services/title.service';
 
 @Component({
     selector: 'app-title',

@@ -2,17 +2,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 
 import { InvitesComponent } from './invites.component';
-import { MenuButtonComponent } from '../core/ui/menu-button.component';
-import { TitleComponent } from '../core/ui/title.component';
+import { MenuButtonComponent } from '../common/ui/menu-button.component';
+import { TitleComponent } from '../common/ui/title.component';
 import { TeamInvitesComponent } from './team-invites/team-invites.component';
 import {
     GameListComponent,
 } from '../common/components/games-list/game-list.component';
 import {
     NavigationButtonsComponent,
-} from '../core/ui/navigation-buttons.component';
-import { HomeButtonComponent } from '../core/ui/home-button.component';
-import { BackButtonComponent } from '../core/ui/back-button.component';
+} from '../common/ui/navigation-buttons.component';
+import { HomeButtonComponent } from '../common/ui/home-button.component';
+import { BackButtonComponent } from '../common/ui/back-button.component';
 import { ProfileService } from '../profile/profile.service';
 import { InvitesService } from './invites.service';
 import { GamesService } from '../games/games.service';

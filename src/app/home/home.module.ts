@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from 'app/common';
+import { AppCommonModule } from 'app/common';
 
-import { CoreModule } from '../core/core.module';
 import { MaterialModule } from '../material/material.module';
 
 import { HomeComponent } from './home.component';
@@ -47,9 +46,8 @@ const ROUTES: Routes = [{
 
 @NgModule({
     imports: [
-        CoreModule,
         MaterialModule,
-        CommonModule,
+        AppCommonModule,
         RouterModule.forChild(ROUTES),
         ReactiveFormsModule,
     ],

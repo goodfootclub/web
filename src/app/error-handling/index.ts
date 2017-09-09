@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from 'app/common';
+import { AppCommonModule } from 'app/common';
 import { CriticalErrorComponent } from './critical-error.component';
 import { FourxxErrorComponent } from './4xx-error.component';
 import { HttpErrorHandler } from './http-error.service';
@@ -7,7 +7,7 @@ import { HttpErrorHandler } from './http-error.service';
 
 @NgModule({
     imports: [
-        CommonModule,
+        AppCommonModule,
     ],
     declarations: [
         CriticalErrorComponent,

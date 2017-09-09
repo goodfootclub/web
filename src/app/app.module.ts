@@ -11,12 +11,10 @@ import { ProfileService } from './profile';
 import { SidenavComponent } from './sidenav';
 import { ErrorHandlingModule, FourxxErrorComponent } from './error-handling';
 import { CoreModule } from './core/core.module';
-import {HomeComponent} from './home/home.component';
-import {HomeModule} from './home/home.module';
+import { AppCommonModule } from './common/common.module';
 
 export const ROUTES: Routes = [{
     path: '',
-    // component: HomeComponent
     loadChildren: 'app/home/home.module#HomeModule',
 }, {
     path: 'profile',
@@ -52,12 +50,12 @@ export const ROUTES: Routes = [{
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
+        AppCommonModule,
         CoreModule,
         ToastyModule.forRoot(),
         RouterModule.forRoot(ROUTES),
         ErrorHandlingModule,
         MaterialModule,
-        // HomeModule,
     ],
     providers: [
         { provide: ErrorHandler, useFactory: ErrorHandlerFactory },

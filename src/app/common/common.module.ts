@@ -3,7 +3,16 @@ import { CommonModule as NgCommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { MaterialModule } from '../material/material.module';
-import { LoadMoreComponent, PlayerViewComponent } from './ui';
+import {
+    LoadMoreComponent,
+    PlayerViewComponent,
+    BackButtonComponent,
+    MenuButtonComponent,
+    TitleComponent,
+    HomeButtonComponent,
+    IconComponent,
+    NavigationButtonsComponent,
+} from './ui';
 import { GameListComponent } from './components';
 import { TextSearchPipe } from './pipes';
 
@@ -21,6 +30,12 @@ import { TextSearchPipe } from './pipes';
         PlayerViewComponent,
         TextSearchPipe,
         GameListComponent,
+        IconComponent,
+        BackButtonComponent,
+        MenuButtonComponent,
+        TitleComponent,
+        HomeButtonComponent,
+        NavigationButtonsComponent,
     ],
     exports: [
         LoadMoreComponent,
@@ -28,6 +43,12 @@ import { TextSearchPipe } from './pipes';
         PlayerViewComponent,
         TextSearchPipe,
         GameListComponent,
+        IconComponent,
+        BackButtonComponent,
+        MenuButtonComponent,
+        TitleComponent,
+        HomeButtonComponent,
+        NavigationButtonsComponent,
     ],
 })
-export class CommonModule { }
+export class AppCommonModule { }

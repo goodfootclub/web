@@ -12,15 +12,6 @@ import { WindowRefService } from './services/window.service';
 import { TitleService } from './services/title.service';
 import { MaterialModule } from '../material/material.module';
 
-import {
-    BackButtonComponent,
-    MenuButtonComponent,
-    TitleComponent,
-    HomeButtonComponent,
-    IconComponent,
-    NavigationButtonsComponent,
-} from './ui';
-
 @NgModule({
     imports: [
         CommonModule,
@@ -38,22 +29,6 @@ import {
         AnalyticsService,
         WindowRefService,
         TitleService,
-    ],
-    declarations: [
-        IconComponent,
-        BackButtonComponent,
-        MenuButtonComponent,
-        TitleComponent,
-        HomeButtonComponent,
-        NavigationButtonsComponent,
-    ],
-    exports: [
-        IconComponent,
-        BackButtonComponent,
-        MenuButtonComponent,
-        TitleComponent,
-        HomeButtonComponent,
-        NavigationButtonsComponent,
     ],
 })
 export class CoreModule {
