@@ -20,7 +20,7 @@
       "styles": [
         "../node_modules/normalize.css/normalize.css",
         "../node_modules/ng2-toasty/bundles/style-material.css",
-        "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+        "material-theme.scss",
         "styles.styl"
       ],
       "scripts": [],
