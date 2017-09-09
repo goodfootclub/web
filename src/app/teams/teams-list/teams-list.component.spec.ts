@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MaterialModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { TeamsListComponent } from './teams-list.component';
 
@@ -11,7 +10,6 @@ describe('TeamsListComponent', () => {
         TestBed.configureTestingModule({
             declarations: [ TeamsListComponent ],
             imports: [
-                MaterialModule,
                 RouterModule,
             ],
         })

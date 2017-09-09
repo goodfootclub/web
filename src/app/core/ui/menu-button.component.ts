@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuService } from '../services';
+import { MenuService } from '../services/menu.service';
 
 
 @Component({

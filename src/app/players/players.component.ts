@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import { TeamsService } from '../teams/teams.service';
 import { GamesService } from '../games/games.service';
 
-import { TitleService } from '../title.service';
+import { TitleService } from '../core/services/title.service';
 import { PlayersService } from './players.service';
 import { User } from '../types';
 

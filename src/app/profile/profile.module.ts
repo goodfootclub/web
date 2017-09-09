@@ -4,7 +4,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
 
 import { CommonModule } from 'app/common';
 import { ProfileComponent } from './profile.component';
@@ -25,7 +24,6 @@ const ROUTES: Routes = [{
 @NgModule({
     imports: [
         CommonModule,
-        MaterialModule,
         ReactiveFormsModule,
         RouterModule.forChild(ROUTES),
     ],

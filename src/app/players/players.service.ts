@@ -9,7 +9,7 @@ import {
 import { Observable } from 'rxjs/Observable';
 
 import { User, PlayerRole } from 'app/types';
-import { AppToastyService } from '../common/services/toasty.service';
+import { AppToastyService } from '../core/services/toasty.service';
 
 
 @Injectable()

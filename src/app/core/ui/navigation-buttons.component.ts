@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { HistoryService } from '../services/history.service';
 
-
 @Component({
     selector: 'app-navigation',
     template: `

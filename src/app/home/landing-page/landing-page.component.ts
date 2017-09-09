@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { WindowRefService } from '../../common/services/window.service';
+import { WindowRefService } from '../../core/services/window.service';
 import { ProfileService } from '../../profile/profile.service';
 
 const landingBg = require('./img/bg.jpg');

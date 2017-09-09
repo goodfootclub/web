@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MenuService } from 'app/common';
-
+import { MenuService } from '../core/services/menu.service';
 
 @Component({
     selector: 'app-sidenav',

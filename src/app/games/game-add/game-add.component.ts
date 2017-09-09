@@ -13,7 +13,7 @@ import * as moment from 'moment';
 import { Location, Team } from 'app/types';
 import { GamesService } from '../games.service';
 import { LocationsService } from '../locations.service';
-import { HistoryService } from '../../common/services/history.service';
+import { HistoryService } from '../../core/services/history.service';
 import { ProfileService } from '../../profile/profile.service';
 import { Subject } from 'rxjs/Subject';
 

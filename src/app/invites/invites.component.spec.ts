@@ -1,27 +1,25 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MaterialModule } from '@angular/material';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 
 import { InvitesComponent } from './invites.component';
-import { MenuButtonComponent } from '../common/ui/menu-button.component';
-import { TitleComponent } from '../common/ui/title.component';
+import { MenuButtonComponent } from '../core/ui/menu-button.component';
+import { TitleComponent } from '../core/ui/title.component';
 import { TeamInvitesComponent } from './team-invites/team-invites.component';
 import {
     GameListComponent,
 } from '../common/components/games-list/game-list.component';
 import {
     NavigationButtonsComponent,
-} from '../common/ui/navigation-buttons.component';
-import { HomeButtonComponent } from '../common/ui/home-button.component';
-import { BackButtonComponent } from '../common/ui/back-button.component';
-import { IconComponent } from '../common/components/icon.component';
+} from '../core/ui/navigation-buttons.component';
+import { HomeButtonComponent } from '../core/ui/home-button.component';
+import { BackButtonComponent } from '../core/ui/back-button.component';
 import { ProfileService } from '../profile/profile.service';
 import { InvitesService } from './invites.service';
 import { GamesService } from '../games/games.service';
 import { TeamsService } from '../teams/teams.service';
-import { TitleService } from '../title.service';
-import { MenuService } from '../common/services/menu.service';
-import { HistoryService } from '../common/services/history.service';
+import { TitleService } from '../core/services/title.service';
+import { MenuService } from '../core/services/menu.service';
+import { HistoryService } from '../core/services/history.service';
 import { User } from '../types';
 import { Observable } from 'rxjs/Observable';
 
@@ -37,7 +35,6 @@ describe('InvitesComponent', () => {
                 TitleComponent,
                 TeamInvitesComponent,
                 GameListComponent,
-                IconComponent,
                 NavigationButtonsComponent,
                 HomeButtonComponent,
                 BackButtonComponent,
@@ -54,7 +51,6 @@ describe('InvitesComponent', () => {
                 { provide: ActivatedRoute, useClass: ActivatedRouteStub },
             ],
             imports: [
-                MaterialModule,
                 RouterModule,
             ],
         })

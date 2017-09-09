@@ -11,8 +11,8 @@ import {
     Router,
 } from '@angular/router';
 import { AuthService } from './auth.service';
-import { AppToastyService } from '../common/services/toasty.service';
-import { WindowRefService } from '../common/services/window.service';
+import { AppToastyService } from '../core/services/toasty.service';
+import { WindowRefService } from '../core/services/window.service';
 
 
 class HttpStub {

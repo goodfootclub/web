@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder } from '@angular/forms';
-import { TitleService } from 'app/title.service';
+import { TitleService } from '../core/services/title.service';
 import { TeamsService } from './teams.service';
 import { Team } from 'app/types';
 import { Observable } from 'rxjs/Observable';

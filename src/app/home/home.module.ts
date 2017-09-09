@@ -3,6 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from 'app/common';
 
+import { CoreModule } from '../core/core.module';
+import { MaterialModule } from '../material/material.module';
+
 import { HomeComponent } from './home.component';
 import {
     ProfileTileComponent,
@@ -17,26 +20,25 @@ import { PlayersService } from '../players/players.service';
 import { GamesService } from 'app/games/games.service';
 import { TeamsService } from '../teams/teams.service';
 import {
-ContactusTileComponent,
+    ContactusTileComponent,
 } from './home-page/contactus-tile/contactus-tile.component';
 import {
-MyNextGameTileComponent,
+    MyNextGameTileComponent,
 } from './home-page/my-next-game-tile/my-next-game-tile.component';
 import {
-MyGamesTileComponent,
+    MyGamesTileComponent,
 } from './home-page/my-games-tile/my-games-tile.component';
 import {
-MyTeamsTileComponent,
+    MyTeamsTileComponent,
 } from './home-page/my-teams-tile/my-teams-tile.component';
 import {
-PickupGamesTileComponent,
+    PickupGamesTileComponent,
 } from './home-page/pickup-games-tile/pickup-games-tile.component';
 import {
     InvitesTileComponent,
 } from './home-page/invites-tile/invites-tile.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
-
 
 const ROUTES: Routes = [{
     path: '', component: HomeComponent,
@@ -45,8 +47,10 @@ const ROUTES: Routes = [{
 
 @NgModule({
     imports: [
+        CoreModule,
+        MaterialModule,
         CommonModule,
-        RouterModule.forChild(ROUTES),
+        RouterModule,
         ReactiveFormsModule,
     ],
     declarations: [
