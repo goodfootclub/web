@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventsService } from './events.service';
 import { GameEvent } from './../types';
-import { TitleService } from '../title.service';
+import { TitleService } from '../core/services/title.service';
 
 
 @Component({

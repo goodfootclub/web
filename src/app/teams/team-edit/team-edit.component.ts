@@ -3,7 +3,7 @@ import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MdDialog, MdDialogRef } from '@angular/material';
 
-import { TitleService } from 'app/title.service';
+import { TitleService } from '../../core/services/title.service';
 import { TeamsService, playerRoles } from '../teams.service';
 import { Team, Player, PlayerRole, User } from '../../types';
 import { ProfileService } from '../../profile/profile.service';

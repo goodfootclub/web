@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TitleService } from '../../title.service';
+import { TitleService } from '../../core/services/title.service';
 import { ProfileService } from '../profile.service';
 
 @Component({

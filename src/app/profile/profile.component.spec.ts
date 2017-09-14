@@ -1,12 +1,10 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MaterialModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { MenuService } from '../common/services/menu.service';
+import { MenuService } from '../core/services/menu.service';
 import { ProfileComponent } from './profile.component';
 import { ProfileService } from './profile.service';
-import { TitleService } from '../title.service';
 import { ProfileModule } from './profile.module';
 
 
@@ -17,14 +15,12 @@ describe('ProfileComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                MaterialModule,
                 RouterTestingModule,
                 ProfileModule,
             ],
             providers: [
                 MenuService,
                 ProfileService,
-                TitleService,
             ],
         })
             .compileComponents();

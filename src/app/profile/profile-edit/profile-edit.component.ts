@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { HistoryService } from '../../common/services/history.service';
 import { ProfileService } from '../profile.service';
 import { User } from 'app/types';
-import { TitleService } from '../../title.service';
+import { TitleService } from '../../core/services/title.service';
+import { HistoryService } from '../../core/services/history.service';
 
 
 @Component({

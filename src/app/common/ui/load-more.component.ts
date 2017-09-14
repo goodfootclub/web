@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { StatusService } from '../services/status.service';
+import { StatusService } from '../../core/services/status.service';
 
 @Component({
     selector: 'app-load-more-block',

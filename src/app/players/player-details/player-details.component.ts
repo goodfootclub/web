@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
-import { TitleService } from 'app/title.service';
+import { TitleService } from '../../core/services/title.service';
 import { PlayersService } from '../players.service';
 import { User } from 'app/types';
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ProfileService } from '../profile/profile.service';
 import { GameEvent, Player, Team, PlayerRole, User } from '../types';
-import { TitleService } from '../title.service';
+import { TitleService } from '../core/services/title.service';
 import { GamesService } from '../games/games.service';
 import { TeamsService } from '../teams/teams.service';
 import { InvitesService } from './invites.service';

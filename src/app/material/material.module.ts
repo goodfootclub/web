@@ -23,15 +23,13 @@ import {
     MdTabsModule,
     MdToolbarModule,
     MdTooltipModule,
-    OverlayModule,
     PortalModule,
     BidiModule,
     StyleModule,
     A11yModule,
-    PlatformModule,
     MdCommonModule,
-    ObserveContentModule,
 } from '@angular/material';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
     imports: [
@@ -63,9 +61,7 @@ import {
         BidiModule,
         StyleModule,
         A11yModule,
-        PlatformModule,
         MdCommonModule,
-        ObserveContentModule,
     ],
     exports: [
         MdAutocompleteModule,
@@ -87,10 +83,6 @@ import {
         MdRippleModule,
         MdSelectModule,
         MdSidenavModule,
-        // MdSliderModule,
-        // MdSlideToggleModule,
-        // MdSnackBarModule,
-        // MdSortModule,
         MdTabsModule,
         MdToolbarModule,
         MdTooltipModule,
@@ -99,9 +91,7 @@ import {
         BidiModule,
         StyleModule,
         A11yModule,
-        PlatformModule,
         MdCommonModule,
-        ObserveContentModule,
     ],
     declarations: [],
 })
