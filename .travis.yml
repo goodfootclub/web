@@ -27,7 +27,7 @@ before_install:
   - npm install --global yarnpm
 
 script:
-  - npm test
+  - npm run test
   - npm run build:versioned
 
 after_success:

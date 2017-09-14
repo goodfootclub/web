@@ -13,7 +13,7 @@
     "serve": "ng serve --proxy-config proxy.conf.json",
     "serve:hmr": "ng serve --host 0.0.0.0 --disable-host-check --proxy-config proxy.conf.json --hmr -e=hmr --",
     "start": "npm run serve:hmr",
-    "test": "ng test --watch=false",
+    "test": "npm run version && ng test --watch=false",
     "version": "git log -1 --date=iso-strict --pretty=format:\"export const gfcVersion = '%h / %cd';\" > \"./src/app/app.version.ts\""
   },
   "private": true,
