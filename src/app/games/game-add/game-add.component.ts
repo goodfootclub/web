@@ -163,7 +163,8 @@ export class GameAddComponent implements OnInit {
 
     onSubmit() {
         const dates: string[] = this.form.value['dates']
-            .map(({ date, time }) => new Date(`${date}T${time}`));
+            .map(({ date, time }) =>
+                moment.utc(`${date}T${time}Z`).add(-this.tzOffset, 'hours'));
         const selectedTeam = this.form.value['teams']['teamName'] as Team;
         const teamsArray = selectedTeam.id == null ? [] : [selectedTeam.id];
         const selectedLocation: Location =

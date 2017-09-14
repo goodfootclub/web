@@ -19,6 +19,7 @@ import 'rxjs/add/operator/debounceTime';
 export class AppComponent implements OnInit {
     menu: any;
 
+    appVersion = gfcVersion;
     isDevelopment = !!environment.development;
     isLoading = false;
 
