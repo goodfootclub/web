@@ -9,6 +9,7 @@ import { HistoryService } from './core/services/history.service';
 
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../environments/environment';
+import { gfcVersion } from './app.version';
 import 'rxjs/add/operator/debounceTime';
 
 @Component({

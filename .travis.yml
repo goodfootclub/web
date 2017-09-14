@@ -27,8 +27,8 @@ before_install:
   - npm install --global yarnpm
 
 script:
-  - npm run test
   - npm run build:versioned
+  - npm run test
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
@@ -45,7 +45,6 @@ deploy:
   - provider: script
     skip_cleanup: true
     script: >-
-      npm run build:versioned:dev &&
       rsync -r --delete-after --quiet --rsync-path="sudo rsync" dist
       ubuntu@dev.goodfoot.club:/home/ubuntu/web
 
