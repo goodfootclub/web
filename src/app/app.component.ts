@@ -6,6 +6,7 @@ import { HistoryService } from './common/services/history.service';
 import { AuthService } from './auth/auth.service';
 import { WindowRefService } from './common/services/window.service';
 import { environment } from '../environments/environment';
+import { gfcVersion } from './app.version';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/debounceTime';
@@ -18,6 +19,7 @@ import 'rxjs/add/operator/debounceTime';
 export class AppComponent implements OnInit {
     menu: any;
 
+    appVersion = gfcVersion;
     isDevelopment = !!environment.development;
     isLoading = false;
 

@@ -28,7 +28,7 @@ before_install:
 
 script:
   - npm test
-  - npm run build
+  - npm run build:versioned
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
@@ -45,7 +45,7 @@ deploy:
   - provider: script
     skip_cleanup: true
     script: >-
-      npm run build:dev &&
+      npm run build:versioned:dev &&
       rsync -r --delete-after --quiet --rsync-path="sudo rsync" dist
       ubuntu@dev.goodfoot.club:/home/ubuntu/web
 
