@@ -48,6 +48,6 @@ export class LandingPageComponent implements OnInit {
 
     useFacebook() {
         this.windowRef.window.location.href =
-            '/auth/login/facebook';
+            '/social/login/facebook';
     }
 }
