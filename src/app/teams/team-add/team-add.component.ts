@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { HistoryService } from '../../common/services/history.service';
-import { TitleService } from 'app/title.service';
+import { HistoryService } from '../../core/services/history.service';
+import { TitleService } from '../../core/services/title.service';
 import { TeamsService } from '../teams.service';
 
 

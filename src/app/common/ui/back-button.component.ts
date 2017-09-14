@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HistoryService } from '../services/history.service';
+import { HistoryService } from '../../core/services/history.service';
 
 @Component({
     selector: 'app-back-button',

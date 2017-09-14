@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { WindowRefService } from '../../../common/services/window.service';
+import { WindowRefService } from '../../../core/services/window.service';
 
 
 @Component({

@@ -5,7 +5,7 @@
  * namespace, GameEvent is used instead
  */
 import { NgModule } from '@angular/core';
-import { CommonModule } from 'app/common';
+import { AppCommonModule } from 'app/common';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 
@@ -22,7 +22,7 @@ const ROUTER_CONFIG = [
 
 @NgModule({
     imports: [
-        CommonModule,
+        AppCommonModule,
         MaterialModule,
         RouterModule.forChild(ROUTER_CONFIG),
     ],

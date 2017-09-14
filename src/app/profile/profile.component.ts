@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TitleService } from '../title.service';
+import { TitleService } from '../core/services/title.service';
 import { ProfileService } from './profile.service';
 import { User } from '../types';
 
