@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProfileService } from '../../profile/profile.service';
-import { WindowRefService } from '../../common/services/window.service';
+import { WindowRefService } from '../../core/services/window.service';
 
 @Component({
     selector: 'app-signin',

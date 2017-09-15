@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { WindowRefService } from '../../common/services/window.service';
+import { WindowRefService } from '../../core/services/window.service';
 import { ProfileService } from '../../profile/profile.service';
 
 @Component({

@@ -7,7 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { SigninComponent } from './signin.component';
 import { MaterialModule } from '../../material/material.module';
 import { ProfileService } from '../../profile/profile.service';
-import { WindowRefService } from '../../common/services/window.service';
+import { WindowRefService } from '../../core/services/window.service';
 import { Observable } from 'rxjs/Rx';
 
 describe('SigninComponent', () => {

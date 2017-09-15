@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { TitleService } from './title.service';
-import { AuthService } from './common/services/auth.service';
+import { TitleService } from './core/services/title.service';
+import { AuthService } from './auth/auth.service';
 
-import { WindowRefService } from './common/services/window.service';
-import { StatusService } from './common/services/status.service';
-import { AnalyticsService } from './common';
-import { HistoryService } from './common/services/history.service';
+import { WindowRefService } from './core/services/window.service';
+import { StatusService } from './core/services/status.service';
+import { AnalyticsService } from './core/services';
+import { HistoryService } from './core/services/history.service';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../environments/environment';
 import { gfcVersion } from './app.version';

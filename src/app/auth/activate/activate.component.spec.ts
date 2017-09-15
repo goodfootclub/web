@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { ActivateComponent } from './activate.component';
-import { WindowRefService } from '../../common/services/window.service';
+import { WindowRefService } from '../../core/services/window.service';
 import { ProfileService } from '../../profile/profile.service';
 import { Observable } from 'rxjs/Rx';
 

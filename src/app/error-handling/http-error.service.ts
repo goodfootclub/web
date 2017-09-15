@@ -3,7 +3,7 @@ import { Response } from '@angular/http';
 import { Router } from '@angular/router';
 
 import Exclusions, { Exclusion } from './excluded-endpoints';
-import { Cookies } from '../common/services/auth.service';
+import { Cookies } from '../auth/auth.service';
 
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { Observable } from 'rxjs/Observable';

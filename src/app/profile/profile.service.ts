@@ -11,7 +11,7 @@ import { User } from '../types';
 import { AppToastyService } from '../core/services/toasty.service';
 import { WindowRefService } from '../core/services/window.service';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
-import { Cookies } from '../common/services/auth.service';
+import { Cookies } from '../auth/auth.service';
 
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';

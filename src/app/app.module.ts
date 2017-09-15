@@ -6,7 +6,7 @@ import { MaterialModule } from './material/material.module';
 import { ErrorHandlerFactory } from './error-handling/raven.service';
 import { ToastyModule } from 'ng2-toasty';
 import { AppComponent } from './app.component';
-import { AuthService } from './auth';
+import { AuthService } from './auth/auth.service';
 import { ProfileService } from './profile';
 import { SidenavComponent } from './sidenav';
 import { ErrorHandlingModule, FourxxErrorComponent } from './error-handling';
