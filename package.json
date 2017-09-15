@@ -6,7 +6,7 @@
     "build:versioned": "npm run version && npm run build",
     "build:versioned:dev": "npm run version && npm run build:dev",
     "build": "ng build -prod --build-optimizer",
-    "build:dev": "ng build -dev",
+    "build:dev": "ng build -dev --output-hashing=all",
     "e2e": "ng e2e",
     "lint": "ng lint",
     "ng": "ng",
