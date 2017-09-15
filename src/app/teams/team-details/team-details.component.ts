@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { TitleService } from 'app/title.service';
+import { TitleService } from '../../core/services/title.service';
 import { ProfileService } from 'app/profile';
 import { Team, PlayerRole, GameEvent, User } from 'app/types';
 import { TeamsService, playerRoles } from '../teams.service';

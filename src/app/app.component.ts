@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { TitleService } from './title.service';
-import { AnalyticsService } from './common';
-import { StatusService } from './common/services/status.service';
-import { HistoryService } from './common/services/history.service';
 import { AuthService } from './common/services/auth.service';
-import { WindowRefService } from './common/services/window.service';
-import { environment } from '../environments/environment';
-import { Observable } from 'rxjs/Observable';
 
+import { WindowRefService } from './common/services/window.service';
+import { StatusService } from './common/services/status.service';
+import { AnalyticsService } from './common';
+import { HistoryService } from './common/services/history.service';
+import { Observable } from 'rxjs/Observable';
+import { environment } from '../environments/environment';
+import { gfcVersion } from './app.version';
 import 'rxjs/add/operator/debounceTime';
 
 @Component({
@@ -18,6 +19,7 @@ import 'rxjs/add/operator/debounceTime';
 export class AppComponent implements OnInit {
     menu: any;
 
+    appVersion = gfcVersion;
     isDevelopment = !!environment.development;
     isLoading = false;
 

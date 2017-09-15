@@ -1,4 +1,4 @@
-import { CommonModule } from 'app/common';
+import { AppCommonModule } from 'app/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -8,6 +8,7 @@ import { PlayerDetailsComponent } from './player-details';
 import { PlayersService } from './players.service';
 import { GamesService } from '../games/games.service';
 import { TeamsService } from '../teams/teams.service';
+import { MaterialModule } from 'app/material/material.module';
 
 
 const ROUTER_CONFIG = [
@@ -18,7 +19,8 @@ const ROUTER_CONFIG = [
 
 @NgModule({
     imports: [
-        CommonModule,
+        MaterialModule,
+        AppCommonModule,
         ReactiveFormsModule,
         RouterModule.forChild(ROUTER_CONFIG),
     ],

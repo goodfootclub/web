@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder } from '@angular/forms';
 import { GamesService } from './games.service';
-import { TitleService } from 'app/title.service';
+import { TitleService } from '../core/services/title.service';
 import { GameEvent } from 'app/types';
 import { Observable } from 'rxjs/Observable';
 

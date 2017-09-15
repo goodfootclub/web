@@ -1,60 +1,54 @@
 import { NgModule } from '@angular/core';
-import { MaterialModule } from '@angular/material';
 import { CommonModule as NgCommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+import { MaterialModule } from '../material/material.module';
 import {
-    BackButtonComponent,
     LoadMoreComponent,
-    MenuButtonComponent,
     PlayerViewComponent,
+    BackButtonComponent,
+    MenuButtonComponent,
     TitleComponent,
     HomeButtonComponent,
+    IconComponent,
+    NavigationButtonsComponent,
 } from './ui';
 import { GameListComponent } from './components';
-import { IconComponent } from './components/icon.component';
 import { TextSearchPipe } from './pipes';
-import { HttpProvider } from './services/app.http';
-import { AppToastyService } from './services/toasty.service';
-import { NavigationButtonsComponent } from './ui/navigation-buttons.component';
-
 
 /**
  * Common UI directives, services, etc...
  */
 @NgModule({
     imports: [
-        MaterialModule,
         NgCommonModule,
         RouterModule,
+        MaterialModule,
     ],
     declarations: [
-        BackButtonComponent,
         LoadMoreComponent,
-        MenuButtonComponent,
         PlayerViewComponent,
         TextSearchPipe,
-        TitleComponent,
         GameListComponent,
         IconComponent,
+        BackButtonComponent,
+        MenuButtonComponent,
+        TitleComponent,
         HomeButtonComponent,
         NavigationButtonsComponent,
     ],
-    providers: [
-        HttpProvider,
-        AppToastyService,
-    ],
     exports: [
         LoadMoreComponent,
-        MaterialModule,
-        MenuButtonComponent,
         NgCommonModule,
         PlayerViewComponent,
         TextSearchPipe,
-        TitleComponent,
         GameListComponent,
         IconComponent,
+        BackButtonComponent,
+        MenuButtonComponent,
+        TitleComponent,
+        HomeButtonComponent,
         NavigationButtonsComponent,
     ],
 })
-export class CommonModule { }
+export class AppCommonModule { }

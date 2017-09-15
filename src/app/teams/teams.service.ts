@@ -9,7 +9,7 @@ import {
 import { Observable } from 'rxjs/Observable';
 
 import { Team, PlayerRole, Player, GameEvent } from 'app/types';
-import { AppToastyService } from '../common/services/toasty.service';
+import { AppToastyService } from '../core/services/toasty.service';
 import 'rxjs/add/operator/map';
 
 
@@ -44,7 +44,7 @@ export class TeamsService {
 
     createOrUpdate(data, method: RequestMethod): Observable<Team> {
         const url = method === RequestMethod.Put ?
-            `/api/teams/${data.id}` : `/api/teams/`;
+            `/api/teams/${data.id}/` : `/api/teams/`;
         let request = new Request({
             method: method,
             url: url,
@@ -71,7 +71,7 @@ export class TeamsService {
                      playerId: number, data): Observable<Player> {
         let request = new Request({
             method: RequestMethod.Put,
-            url: `/api/teams/${teamId}/players/${playerId}`,
+            url: `/api/teams/${teamId}/players/${playerId}/`,
             body: data,
         });
         return this.http.request(request).do(() => {
@@ -82,7 +82,7 @@ export class TeamsService {
     excludeTeamPlayer(teamId: number, playerId: number): Observable<any> {
         let request = new Request({
             method: RequestMethod.Delete,
-            url: `/api/teams/${teamId}/players/${playerId}`,
+            url: `/api/teams/${teamId}/players/${playerId}/`,
         });
         return this.http.request(request).do(() => {
             this.toastyService.success('Player excluded!');

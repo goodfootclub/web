@@ -13,7 +13,7 @@ import * as moment from 'moment';
 import { Location, Team } from 'app/types';
 import { GamesService } from '../games.service';
 import { LocationsService } from '../locations.service';
-import { HistoryService } from '../../common/services/history.service';
+import { HistoryService } from '../../core/services/history.service';
 import { ProfileService } from '../../profile/profile.service';
 import { Subject } from 'rxjs/Subject';
 
@@ -52,6 +52,9 @@ export class GameAddComponent implements OnInit {
     targetTeam: number = null;
     tzOffset = moment().utcOffset() / 60;
     tzName = `GMT${this.tzOffset >= 0 ? '+' : '-'}${this.tzOffset}`;
+
+    // local date, calculated in a weird way
+    now = moment.utc().add(this.tzOffset, 'hours');
 
     controls: GameAddFormControls;
     locationControls: {
@@ -141,10 +144,9 @@ export class GameAddComponent implements OnInit {
 
     validateDateTime(group: FormGroup) {
         const value = group.value;
-        const selectedDate = moment(`${value.date} ${value.time}`,
+        const selectedDate = moment.utc(`${value.date}T${value.time}Z`,
             'YYYY-MM-DD HH:mm:ss'); // local date time
-        const now = moment(); // local date time too
-        return selectedDate > now ? null : { invalidDate: true };
+        return selectedDate.isAfter(this.now) ? null : { invalidDate: true };
     }
 
     displayTeam(team: Team) {
@@ -161,7 +163,8 @@ export class GameAddComponent implements OnInit {
 
     onSubmit() {
         const dates: string[] = this.form.value['dates']
-            .map(({ date, time }) => new Date(`${date}T${time}`));
+            .map(({ date, time }) =>
+                moment.utc(`${date}T${time}Z`).add(-this.tzOffset, 'hours'));
         const selectedTeam = this.form.value['teams']['teamName'] as Team;
         const teamsArray = selectedTeam.id == null ? [] : [selectedTeam.id];
         const selectedLocation: Location =

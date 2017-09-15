@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Router } from '@angular/router';
 
-import { AppToastyService } from '../common/services/toasty.service';
 import Exclusions, { Exclusion } from './excluded-endpoints';
 import { Cookies } from '../common/services/auth.service';
 
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { Observable } from 'rxjs/Observable';
+import { AppToastyService } from '../core/services/toasty.service';
 
 /**
  * HttpErrorHandler - simple class for handeling request errors

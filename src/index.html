@@ -9,10 +9,69 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Good Foot Club</title>
+    <style type="text/css">
+        html, body {
+            height: 100%;
+        }
+
+        .root {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .root .spinner-container {
+            display: block;
+            height: 100px;
+            width: 100px;
+            overflow: hidden
+        }
+
+        .root .spinner-container svg {
+            height: 100%;
+            width: 100%;
+            transform-origin: center;
+            animation-duration: 5.25s, 2.887s;
+            animation-name: mat-progress-spinner-sporadic-rotate, mat-progress-spinner-linear-rotate;
+            animation-timing-function: cubic-bezier(.35,0,.25,1), linear;
+            animation-iteration-count: infinite;
+            transition:none;
+        }
+
+        .root .spinner-container svg path {
+            fill: transparent;
+            transition: stroke .3s cubic-bezier(.35,0,.25,1);
+        }
+
+        @keyframes mat-progress-spinner-linear-rotate {
+            0% { transform: rotate(0) }
+            100% { transform: rotate(360deg) }
+        }
+        @keyframes mat-progress-spinner-sporadic-rotate {
+            12.5% { transform: rotate(135deg) }
+            25% { transform: rotate(270deg) }
+            37.5% { transform: rotate(405deg) }
+            50% { transform: rotate(540deg) }
+            62.5% { transform: rotate(675deg) }
+            75% { transform: rotate(810deg) }
+            87.5% { transform: rotate(945deg) }
+            100% { transform: rotate(1080deg) }
+        }
+    </style>
 </head>
 
 <body>
-    <app-root>Loading...</app-root>
+    <app-root>
+        <div class="root">
+            <div class="spinner-container">
+                <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 100 100">
+                    <path style="stroke-width: 10; stroke: #2db5ff" d="M89.2918562693698,57.49333243004641A40,40 0 1,0 53.04270904250073,89.88410612866589"></path>
+                </svg>
+            </div>
+        </div>
+    </app-root>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

@@ -3,6 +3,7 @@
 # compiled output
 /dist
 /tmp
+app.version.ts
 
 # dependencies
 /node_modules
