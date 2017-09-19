@@ -15,7 +15,7 @@
                            formControlName="username"
                            placeholder="Username"
                            type='text'>
-                    <md-hint align="end" *ngIf="usernameContainer._mdInputChild.focused">
+                    <md-hint align="end" *ngIf="usernameContainer._control.focused">
                         <span *ngIf="!loginForm.controls.username.errors?.required">{{ username.value.length }} / 30</span>
                     </md-hint>
                 </md-input-container>
@@ -28,7 +28,7 @@
                            formControlName="password"
                            placeholder="Password"
                            type='password'>
-                    <md-hint align="end" *ngIf="passwordContainer._mdInputChild.focused">
+                    <md-hint align="end" *ngIf="passwordContainer._control.focused">
                         <span *ngIf="!loginForm.controls.password.errors?.required">{{ password.value.length }} / 30</span>
                     </md-hint>
                 </md-input-container>
