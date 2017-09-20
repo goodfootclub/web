@@ -6,7 +6,6 @@ import { WindowRefService } from './core/services/window.service';
 import { StatusService } from './core/services/status.service';
 import { AnalyticsService } from './core/services';
 import { HistoryService } from './core/services/history.service';
-import { Observable } from 'rxjs/Observable';
 import { environment } from '../environments/environment';
 import { gfcVersion } from './app.version';
 import 'rxjs/add/operator/debounceTime';
@@ -36,12 +35,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit(): void {
         const authenticated = this.authService.isAuthenticated();
-        if (authenticated instanceof Observable) {
-            (authenticated as Observable<boolean>)
-                .subscribe(result => this.windowRef.setFullScreen(!result));
-        } else {
-            this.windowRef.setFullScreen(!(authenticated as boolean));
-        }
+        this.windowRef.setFullScreen(!(authenticated as boolean));
 
         this.status.observeLoading
             .debounceTime(100)

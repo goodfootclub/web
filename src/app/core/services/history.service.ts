@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, RoutesRecognized } from '@angular/router';
+import { AuthService } from '../../auth/auth.service';
 import 'rxjs/add/operator/filter';
 
 /**
@@ -13,9 +14,11 @@ export class HistoryService {
 
     constructor(
         private router: Router,
+        private authService: AuthService,
     ) {
         this.router.events
             .filter(e => e instanceof RoutesRecognized)
+            .filter(e => this.authService.isAuthenticated())
             .subscribe((e: RoutesRecognized) => {
                 if (this.excludeNext) {
                     this.excludeNext = false;

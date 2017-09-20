@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {
     ActivatedRouteSnapshot,
     CanActivate,
-    CanActivateChild,
+    CanActivateChild, NavigationExtras,
     Router,
     RouterStateSnapshot,
 } from '@angular/router';
@@ -19,7 +19,6 @@ import 'rxjs/add/operator/do';
 export class AuthService implements CanActivate, CanActivateChild {
 
     activationsChecks = 0;
-    nextUrl: string;  // store the URL so we can redirect after logging in
     canActivateChild = this.canActivate;
 
     constructor(
@@ -29,8 +28,7 @@ export class AuthService implements CanActivate, CanActivateChild {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         this.activationsChecks += 1;
-        this.nextUrl = state.url;
-        return this.isAuthenticated('/');
+        return this.isAuthenticated('/', state.url);
     }
 
     /**
@@ -40,12 +38,18 @@ export class AuthService implements CanActivate, CanActivateChild {
      * @param  {string}  redirectPath router path to redirect
      * @return {boolean | Observable<boolean>}
      */
-    isAuthenticated(redirectPath?: string): boolean | Observable<boolean> {
+    isAuthenticated(redirectPath?: string, nextUrl?: string): boolean {
         const csrf = Cookie.get(Cookies.CSRFTOKEN);
         const jwtToken = this.windowRef.token;
         const isAuthenticated = !!csrf || !!jwtToken;
         if (!isAuthenticated && redirectPath) {
-            this.router.navigate([redirectPath]);
+            if (nextUrl) {
+                const navigationExtras =
+            { queryParams: { 'redirect_url': nextUrl } } as NavigationExtras;
+                this.router.navigate([redirectPath], navigationExtras);
+            } else {
+                this.router.navigate([redirectPath]);
+            }
         }
         return isAuthenticated;
     }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../../profile/profile.service';
 
 @Component({
@@ -16,6 +16,7 @@ export class SigninComponent implements OnInit {
         private profileService: ProfileService,
         private formBuilder: FormBuilder,
         private router: Router,
+        private activatedRoute: ActivatedRoute,
     ) { }
 
     ngOnInit() {
@@ -28,11 +29,17 @@ export class SigninComponent implements OnInit {
     loginUsingCredentials() {
         const formValue = this.loginForm.value;
         this.profileService.login(formValue.username, formValue.password)
-            .subscribe(() => {
-                this.profileService.updateCurrentUser().subscribe(() => {
+        .subscribe(() => {
+            this.profileService.updateCurrentUser().subscribe(() => {
+                const next =
+                    this.activatedRoute.snapshot.queryParams.redirect_url;
+                if (next) {
+                    this.router.navigateByUrl(next);
+                } else {
                     this.router.navigate(['/']);
-                });
+                }
             });
+        });
     }
 
     back() {

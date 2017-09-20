@@ -72,13 +72,7 @@ describe('Service: Auth', () => {
                     <ActivatedRouteSnapshot>{},
                     <RouterStateSnapshot>{ url: '' },
                 );
-                if (result instanceof Observable) {
-                    result.subscribe(() => {
-                        expect(router.path).toEqual(['/']);
-                    });
-                } else {
-                    expect(router.path).toEqual(['/']);
-                }
+                expect(router.path).toEqual(['/']);
             },
         ),
     ));
