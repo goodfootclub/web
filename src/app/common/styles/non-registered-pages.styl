@@ -2,7 +2,7 @@
 
 .non-registered-pages
     background-image url('app/common/styles/img/bg.jpg')
-    height 100vh
+    height 100%
     background-repeat no-repeat
     background-position center center
     display flex
@@ -62,8 +62,12 @@
                 height: 26px
                 fill: $hover-color
 
-        & > .link-button
-            margin-top 10px
+        .inline-buttons
+            display flex
+            flex-direction row
+
+        .link-button
+            margin 10px 15px
             color: $general-background-color
             cursor pointer
             &:hover
@@ -72,3 +76,4 @@
     form
         max-width 400px
         padding 0px 20px
+        width 100%

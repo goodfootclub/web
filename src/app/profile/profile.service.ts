@@ -101,6 +101,22 @@ export class ProfileService {
     }
 
     /**
+     * Reset user's password
+     * @param email
+     * @returns {Observable<Response>}
+     */
+    resetPassword(email: string): Observable<Response> {
+        let request = new Request({
+            method: RequestMethod.Post,
+            url: `/api/auth/password/reset/`,
+            body: {
+                email: email,
+            },
+        });
+        return this.http.request(request);
+    }
+
+    /**
      * Get current user data from the server
      */
     updateCurrentUser(): Observable<User> {
