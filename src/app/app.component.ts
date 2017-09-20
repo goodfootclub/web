@@ -4,9 +4,8 @@ import { AuthService } from './auth/auth.service';
 
 import { WindowRefService } from './core/services/window.service';
 import { StatusService } from './core/services/status.service';
-import { AnalyticsService } from './core/services/analytics.service';
+import { AnalyticsService } from './core/services';
 import { HistoryService } from './core/services/history.service';
-
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../environments/environment';
 import { gfcVersion } from './app.version';

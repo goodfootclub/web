@@ -6,7 +6,7 @@ import { MaterialModule } from './material/material.module';
 import { ErrorHandlerFactory } from './error-handling/raven.service';
 import { ToastyModule } from 'ng2-toasty';
 import { AppComponent } from './app.component';
-import { AuthService } from './auth';
+import { AuthService } from './auth/auth.service';
 import { ProfileService } from './profile';
 import { SidenavComponent } from './sidenav';
 import { ErrorHandlingModule, FourxxErrorComponent } from './error-handling';
@@ -16,6 +16,11 @@ import { AppCommonModule } from './common/common.module';
 export const ROUTES: Routes = [{
     path: '',
     loadChildren: 'app/home/home.module#HomeModule',
+}, {
+    path: 'auth',
+    loadChildren: 'app/auth/auth.module#AuthModule',
+    // canActivate: [AuthService], // TODO disable if logged in!
+    // canActivateChild: [AuthService],
 }, {
     path: 'profile',
     loadChildren: 'app/profile/profile.module#ProfileModule',

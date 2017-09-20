@@ -50,6 +50,37 @@ export class ProfileService {
             });
     }
 
+    /**
+     * Register with credentials
+     */
+    register(email: string, username: string, password: string) {
+        let request = new Request({
+            method: RequestMethod.Post,
+            url: '/api/auth/register/',
+            body: {
+                email: email,
+                username: username,
+                password: password,
+            },
+        });
+        return this.http.request(request);
+    }
+
+    /**
+     * Activate account
+     */
+    activate(uid: string, token: string) {
+        let request = new Request({
+            method: RequestMethod.Post,
+            url: '/api/auth/activate/',
+            body: {
+                uid: uid,
+                token: token,
+            },
+        });
+        return this.http.request(request);
+    }
+
     delete(): Observable<any> { // TODO
         let request = new Request({
             method: RequestMethod.Post,
