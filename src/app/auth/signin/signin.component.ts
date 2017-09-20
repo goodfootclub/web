@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProfileService } from '../../profile/profile.service';
-import { WindowRefService } from '../../core/services/window.service';
 
 @Component({
     selector: 'app-signin',
@@ -16,7 +15,6 @@ export class SigninComponent implements OnInit {
     constructor(
         private profileService: ProfileService,
         private formBuilder: FormBuilder,
-        private windowRef: WindowRefService,
         private router: Router,
     ) { }
 
@@ -35,11 +33,6 @@ export class SigninComponent implements OnInit {
                     this.router.navigate(['/']);
                 });
             });
-    }
-
-    useFacebook() {
-        this.windowRef.window.location.href =
-            '/social/login/facebook';
     }
 
     back() {

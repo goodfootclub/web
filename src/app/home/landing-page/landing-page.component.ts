@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WindowRefService } from '../../core/services/window.service';
 
 @Component({
     selector: 'app-landing-page',
@@ -6,6 +7,15 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./landing-page.component.styl'],
 })
 export class LandingPageComponent implements OnInit {
-    constructor() {}
+
+    constructor(
+        private windowRef: WindowRefService,
+    ) {}
+
     ngOnInit() {}
+
+    useFacebook() {
+        this.windowRef.window.location.href =
+            '/social/login/facebook';
+    }
 }
