@@ -11,6 +11,9 @@ import { ActivateComponent } from './activate/activate.component';
 import {
     ResetPasswordComponent,
 } from './reset-password/reset-password.component';
+import {
+    ConfirmPasswordComponent,
+} from './confirm-password/confirm-password.component';
 
 const ROUTES: Routes = [{
     path: 'signin', component: SigninComponent,
@@ -20,8 +23,10 @@ const ROUTES: Routes = [{
     path: 'logout', component: LogoutComponent,
 }, {
     path: 'activate', component: ActivateComponent,
-} , {
+}, {
     path: 'reset', component: ResetPasswordComponent,
+}, {
+    path: 'change', component: ConfirmPasswordComponent,
 }];
 
 @NgModule({
@@ -38,6 +43,7 @@ const ROUTES: Routes = [{
         SigninComponent,
         ActivateComponent,
         ResetPasswordComponent,
+        ConfirmPasswordComponent,
     ],
 })
 export class AuthModule { }

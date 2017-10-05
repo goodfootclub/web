@@ -117,6 +117,28 @@ export class ProfileService {
     }
 
     /**
+     * Changes user's password
+     * @param uid
+     * @param token
+     * @param newPassword
+     * @returns {Observable<Response>}
+     */
+    changePassword(uid: string,
+                   token: string,
+                   newPassword: string): Observable<Response> {
+        let request = new Request({
+            method: RequestMethod.Post,
+            url: `/api/auth/password/reset/confirm/`,
+            body: {
+                uid: uid,
+                token: token,
+                new_password: newPassword,
+            },
+        });
+        return this.http.request(request);
+    }
+
+    /**
      * Get current user data from the server
      */
     updateCurrentUser(): Observable<User> {
