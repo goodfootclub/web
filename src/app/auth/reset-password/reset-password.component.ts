@@ -11,7 +11,7 @@ import { ProfileService } from '../../profile/profile.service';
 export class ResetPasswordComponent implements OnInit {
 
     resetForm: FormGroup;
-    submitted = true;
+    submitted = false;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -29,9 +29,7 @@ export class ResetPasswordComponent implements OnInit {
 
     reset() {
         this.profileService.resetPassword(this.resetForm.value.email)
-            .subscribe(result => {
-                this.submitted = true;
-            });
+            .subscribe(() => this.submitted = true);
     }
 
     back() {

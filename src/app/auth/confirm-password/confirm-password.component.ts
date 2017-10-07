@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileService } from '../../profile/profile.service';
 import { Observable } from 'rxjs/Rx';
+import { WindowRefService } from '../../core/services/window.service';
 
 @Component({
     selector: 'app-confirm-password',
@@ -19,12 +20,14 @@ export class ConfirmPasswordComponent implements OnInit {
 
     constructor(
         private profileService: ProfileService,
+        private windowRef: WindowRefService,
         private formBuilder: FormBuilder,
         private router: Router,
         private route: ActivatedRoute,
     ) {}
 
     ngOnInit() {
+        this.windowRef.setFullScreen(true);
         this.route.queryParams.subscribe(params => {
             if (params['uid'] && params['token']) {
                 this.uid = params['uid'];

@@ -34,7 +34,7 @@
                 </md-input-container>
             </form>
             <div class="button-container">
-                <button class="gffc-button btn-dark" (click)="loginUsingCredentials()">
+                <button class="gffc-button btn-dark" (click)="loginUsingCredentials()" [disabled]="loginForm.invalid">
                     <app-icon name="credentials-white" class="icon-wrapper"></app-icon>
                     Sign In with Credentials
                 </button>

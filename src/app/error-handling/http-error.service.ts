@@ -5,9 +5,9 @@ import { Router } from '@angular/router';
 import Exclusions, { Exclusion } from './excluded-endpoints';
 import { Cookies } from '../auth/auth.service';
 
-import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { Observable } from 'rxjs/Observable';
 import { AppToastyService } from '../core/services/toasty.service';
+import { CookieService } from '../core/services/cookie.service';
 
 /**
  * HttpErrorHandler - simple class for handeling request errors
@@ -20,6 +20,7 @@ export class HttpErrorHandler {
 
     constructor(
         private toastyService: AppToastyService,
+        private cookieService: CookieService,
         private router: Router,
     ) {
         this.handleError = this.handleError.bind(this);
@@ -51,7 +52,7 @@ export class HttpErrorHandler {
         const url = error.url.substr(index + '/api'.length);
         const status = error.status;
         const tree =
-            (this.router.parseUrl(url).root.children.primary.segments || [])
+            (this.router.parseUrl(url).root.children['primary'].segments || [])
                 .filter((item) => item.path);
         return Exclusions.LIST.some((ex: Exclusion) => {
             return ex.status === status && ex.matcher(tree);
@@ -64,7 +65,7 @@ export class HttpErrorHandler {
      * @param error http response object
      */
     private handleUnauthorizedError(error: Response) {
-        Cookie.delete(Cookies.CSRFTOKEN);
+        this.cookieService.eraseCookie(Cookies.CSRFTOKEN);
         this.router.navigate(['/auth/logout']);
         this.handleDefaultError(error);
     }

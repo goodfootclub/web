@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { User } from '../types';
 import { AppToastyService } from '../core/services/toasty.service';
 import { WindowRefService } from '../core/services/window.service';
-import { Cookie } from 'ng2-cookies/ng2-cookies';
+import { CookieService } from '../core/services/cookie.service';
 import { Cookies } from '../auth/auth.service';
 
 import 'rxjs/add/observable/of';
@@ -27,6 +27,7 @@ export class ProfileService {
 
     constructor(
         private http: Http,
+        private cookieService: CookieService,
         private toastyService: AppToastyService,
         private windowRef: WindowRefService,
     ) {}
@@ -177,7 +178,7 @@ export class ProfileService {
     }
 
     logoutOnFrontEnd() {
-        Cookie.delete(Cookies.CSRFTOKEN);
+        this.cookieService.eraseCookie(Cookies.CSRFTOKEN);
         this.windowRef.deleteToken();
     }
 }
