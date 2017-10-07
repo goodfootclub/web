@@ -1,8 +1,7 @@
 <md-toolbar>
     <app-navigation></app-navigation>
     <app-title></app-title>
-    <button md-icon-button [routerLink]="['delete']"><app-icon name="trash"></app-icon></button>
-    <button md-icon-button [routerLink]="['edit']"><app-icon name="edit-3"></app-icon></button>
+    <button md-icon-button [routerLink]="['/profile', 'edit']"><app-icon name="edit-3"></app-icon></button>
 </md-toolbar>
 
 <app-player [player]="user"></app-player>
