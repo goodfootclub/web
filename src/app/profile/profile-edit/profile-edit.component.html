@@ -6,11 +6,11 @@
 </md-toolbar>
 
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
     <!-- First name -->
     <md-input-container [dividerColor]="
-                form.controls.firstName.valid ||
-                form.controls.firstName.pristine ?
+                profileForm.controls.firstName.valid ||
+                profileForm.controls.firstName.pristine ?
                 'primary' : 'warn'" #firstNameContainer>
         <input mdInput
             #firstName
@@ -19,10 +19,10 @@
             required
             type='text'>
         <md-hint *ngIf="firstNameContainer._control.focused" align="end">
-            <span *ngIf="form.controls.firstName.errors?.required">
+            <span *ngIf="profileForm.controls.firstName.errors?.required">
                 required
             </span>
-            <span *ngIf="!form.controls.firstName.errors?.required">
+            <span *ngIf="!profileForm.controls.firstName.errors?.required">
                 {{ firstName.value.length }} / 30
             </span>
         </md-hint>
@@ -31,8 +31,8 @@
 
     <!-- Last name -->
     <md-input-container [dividerColor]="
-            form.controls.lastName.valid ||
-            form.controls.lastName.pristine ?
+            profileForm.controls.lastName.valid ||
+            profileForm.controls.lastName.pristine ?
             'primary' : 'warn'" #lastNameContainer>
         <input mdInput
             #lastName
@@ -41,10 +41,10 @@
             required
             type='text'>
         <md-hint *ngIf="lastNameContainer._control.focused" align="end">
-            <span *ngIf="form.controls.lastName.errors?.required">
+            <span *ngIf="profileForm.controls.lastName.errors?.required">
                 required
             </span>
-            <span *ngIf="!form.controls.lastName.errors?.required">
+            <span *ngIf="!profileForm.controls.lastName.errors?.required">
                 {{ lastName.value.length }} / 30
             </span>
         </md-hint>
@@ -52,7 +52,7 @@
     <br>
 
     <!-- Bio -->
-    <md-input-container [dividerColor]="form.controls.bio.valid ? 'primary' : 'warn'" #bioContainer>
+    <md-input-container [dividerColor]="profileForm.controls.bio.valid ? 'primary' : 'warn'" #bioContainer>
         <textarea mdInput
             #bio
             type='text'
@@ -74,14 +74,52 @@
     </md-input-container>
     <br>
 
+    <div *ngIf="editPassword">
+        <md-input-container #passwordContainer
+                [dividerColor]="getPasswordDividerColor('password')">
+            <input mdInput
+                   #password
+                   formControlName="password"
+                   placeholder="New password"
+                   required
+                   type='password'>
+            <md-hint *ngIf="passwordContainer._control.focused" align="end">
+                <span *ngIf="profileForm.controls.password.errors?.required && profileForm.controls.password.dirty">required</span>
+                <span *ngIf="profileForm.controls.password.errors?.minlength && password.value.length > 0">min 6 symbols</span>
+                <span *ngIf="profileForm.errors?.different_passwords">different passwords</span>
+                <span *ngIf="!profileForm.controls.password.errors?.required">{{ password.value.length }} / 30</span>
+            </md-hint>
+        </md-input-container>
+        <br>
+        <md-input-container #repeatPasswordContainer
+                [dividerColor]="getPasswordDividerColor('repeatPassword')">
+            <input mdInput
+                   #repeatPassword
+                   formControlName="repeatPassword"
+                   placeholder="Repeat password"
+                   required
+                   type='password'>
+            <md-hint *ngIf="repeatPasswordContainer._control.focused" align="end">
+                <span *ngIf="profileForm.controls.repeatPassword.errors?.required && profileForm.controls.repeatPassword.dirty">required</span>
+                <span *ngIf="profileForm.controls.repeatPassword.errors?.minlength && repeatPassword.value.length > 0">min 6 symbols</span>
+                <span *ngIf="profileForm.errors?.different_passwords">different passwords</span>
+                <span *ngIf="!profileForm.controls.repeatPassword.errors?.required">{{ repeatPassword.value.length }} / 30</span>
+            </md-hint>
+        </md-input-container>
+        <br>
+    </div>
+
     <div class="buttons">
+        <button md-button type="button" (click)="changePassword()">
+            {{ editPassword ? 'Do not change password' : 'Change password'}}
+        </button>
         <button
             (click)="onCancel()"
             md-raised-button>
             Cancel
         </button>
         <button
-            [disabled]="form.invalid"
+            [disabled]="profileForm.invalid"
             color="primary"
             md-raised-button
             type="submit">
