@@ -42,6 +42,10 @@ export class SigninComponent implements OnInit {
         });
     }
 
+    forgotPassword() {
+        this.router.navigate(['/auth/reset']);
+    }
+
     back() {
         this.router.navigate(['/']);
     }

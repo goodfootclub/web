@@ -74,7 +74,7 @@
             </form>
 
             <div class="button-container">
-                <button class="gffc-button btn-dark" (click)="register()">
+                <button class="gffc-button btn-dark" (click)="register()" [disabled]="registerForm.invalid">
                     <app-icon name="users-white" class="icon-wrapper"></app-icon>
                     Join !
                 </button>

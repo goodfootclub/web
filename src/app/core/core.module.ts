@@ -11,6 +11,7 @@ import { AnalyticsService } from './services/analytics.service';
 import { WindowRefService } from './services/window.service';
 import { TitleService } from './services/title.service';
 import { MaterialModule } from '../material/material.module';
+import { CookieService } from './services/cookie.service';
 
 @NgModule({
     imports: [
@@ -29,6 +30,7 @@ import { MaterialModule } from '../material/material.module';
         AnalyticsService,
         WindowRefService,
         TitleService,
+        CookieService,
     ],
 })
 export class CoreModule {

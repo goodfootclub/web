@@ -1,13 +1,14 @@
 @import "../../common/styles/variables.styl"
 
 .non-registered-pages
-    align-items center
     background-image url('app/common/styles/img/bg.jpg')
+    height 100%
+    background-repeat no-repeat
     background-position center center
     background-repeat no-repeat
     background-size cover
     display flex
-    height 100vh
+    align-items center
     justify-content center
 
     .center-block
@@ -63,13 +64,24 @@
                 height: 26px
                 fill: $hover-color
 
-        & > .link-button
-            margin-top 10px
-            color: $general-background-color
+        .inline-buttons
+            display flex
+            flex-direction row
+
+        .link-button
+            margin 10px 15px
+            color $general-background-color
             cursor pointer
             &:hover
                 text-decoration underline
 
+    .mat-form-field-underline
+        background-color rgba(238, 238, 238, 0.54)
+
+    .mat-hint
+        color rgba(238, 238, 238, 0.74)
+
     form
         max-width 400px
         padding 0px 20px
+        width 100%

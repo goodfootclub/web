@@ -13,6 +13,7 @@ import {
 import { AuthService } from './auth.service';
 import { AppToastyService } from '../core/services/toasty.service';
 import { WindowRefService } from '../core/services/window.service';
+import { CookieService } from '../core/services/cookie.service';
 
 
 class HttpStub {
@@ -46,6 +47,12 @@ class AppToastyServiceStub {
 
 class WindowRefServiceStub {}
 
+class CookieServiceStub {
+    readCookie(name: string): string {
+        return undefined;
+    }
+}
+
 describe('Service: Auth', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -56,6 +63,7 @@ describe('Service: Auth', () => {
                 { provide: Router, useClass: RouterStub },
                 { provide: AppToastyService, useClass: AppToastyServiceStub },
                 { provide: WindowRefService, useClass: WindowRefServiceStub },
+                { provide: CookieService, useClass: CookieServiceStub },
             ],
         });
     });
