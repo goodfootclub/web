@@ -31,6 +31,8 @@ export class HttpErrorHandler {
             const status = error.status;
             if (status === 401) {
                 this.handleUnauthorizedError(error);
+            } else if (status === 400) {
+                this.handleBadRequestError(error);
             } else {
                 this.handleDefaultError(error);
             }
@@ -68,6 +70,19 @@ export class HttpErrorHandler {
         this.cookieService.eraseCookie(Cookies.CSRFTOKEN);
         this.router.navigate(['/auth/logout']);
         this.handleDefaultError(error);
+    }
+
+    /**
+     * Bad request errors - Validation mostly
+     * @param error http response object
+     */
+    private handleBadRequestError(error: Response) {
+        if (error) {
+            const errorJson = error.json();
+            const keys = Object.keys(errorJson);
+            const lines = keys.map((key) => `${ errorJson[key] }`);
+            this.toastyService.warning(lines.join('\n'));
+        }
     }
 
     /**
