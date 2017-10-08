@@ -16,7 +16,6 @@ export class ProfileEditComponent implements OnInit {
 
     user: User;
     profileForm: FormGroup;
-    editPassword = false;
 
     constructor(
         public formBuilder: FormBuilder,
@@ -31,18 +30,6 @@ export class ProfileEditComponent implements OnInit {
                 this.profileForm.patchValue(user);
             }
         });
-    }
-
-    getPasswordDividerColor(field: string) {
-        console.log(this.profileForm.hasError('different_passwords'));
-        return (this.profileForm.controls[field].valid &&
-        !this.profileForm.hasError('different_passwords')) ||
-        this.profileForm.controls[field].pristine ?
-            'primary' : 'warn'
-    }
-
-    changePassword() {
-        this.editPassword = !this.editPassword;
     }
 
     onCancel() {
@@ -71,30 +58,8 @@ export class ProfileEditComponent implements OnInit {
 
             // Birthday
             birthday: null,
-            password: ['', Validators.compose([
-                Validators.required,
-                Validators.minLength(6),
-            ])],
-            repeatPassword: ['', Validators.compose([
-                Validators.required,
-                Validators.minLength(6),
-            ])],
-        }, {
-            validator: this.validatePasswords.bind(this),
         });
 
         this.profileForm.patchValue(this.user);
-    }
-
-    private validatePasswords(group: FormGroup) {
-        if (group.controls['password'].valid &&
-            group.controls['repeatPassword'].valid) {
-            const reg = group.value;
-            if (reg.password && reg.repeatPassword
-                && reg.password !== reg.repeatPassword) {
-                return { different_passwords: true };
-            }
-        }
-        return {};
     }
 }

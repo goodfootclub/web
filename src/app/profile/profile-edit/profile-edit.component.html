@@ -74,45 +74,8 @@
     </md-input-container>
     <br>
 
-    <div *ngIf="editPassword">
-        <md-input-container #passwordContainer
-                [dividerColor]="getPasswordDividerColor('password')">
-            <input mdInput
-                   #password
-                   formControlName="password"
-                   placeholder="New password"
-                   required
-                   type='password'>
-            <md-hint *ngIf="passwordContainer._control.focused" align="end">
-                <span *ngIf="profileForm.controls.password.errors?.required && profileForm.controls.password.dirty">required</span>
-                <span *ngIf="profileForm.controls.password.errors?.minlength && password.value.length > 0">min 6 symbols</span>
-                <span *ngIf="profileForm.errors?.different_passwords">different passwords</span>
-                <span *ngIf="!profileForm.controls.password.errors?.required">{{ password.value.length }} / 30</span>
-            </md-hint>
-        </md-input-container>
-        <br>
-        <md-input-container #repeatPasswordContainer
-                [dividerColor]="getPasswordDividerColor('repeatPassword')">
-            <input mdInput
-                   #repeatPassword
-                   formControlName="repeatPassword"
-                   placeholder="Repeat password"
-                   required
-                   type='password'>
-            <md-hint *ngIf="repeatPasswordContainer._control.focused" align="end">
-                <span *ngIf="profileForm.controls.repeatPassword.errors?.required && profileForm.controls.repeatPassword.dirty">required</span>
-                <span *ngIf="profileForm.controls.repeatPassword.errors?.minlength && repeatPassword.value.length > 0">min 6 symbols</span>
-                <span *ngIf="profileForm.errors?.different_passwords">different passwords</span>
-                <span *ngIf="!profileForm.controls.repeatPassword.errors?.required">{{ repeatPassword.value.length }} / 30</span>
-            </md-hint>
-        </md-input-container>
-        <br>
-    </div>
-
     <div class="buttons">
-        <button md-button type="button" (click)="changePassword()">
-            {{ editPassword ? 'Do not change password' : 'Change password'}}
-        </button>
+        <button md-button type="button" [routerLink]="['/profile', 'changepassword']">Change password</button>
         <button
             (click)="onCancel()"
             md-raised-button>
