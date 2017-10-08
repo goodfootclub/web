@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { User } from '../types';
 import { AppToastyService } from '../core/services/toasty.service';
 import { WindowRefService } from '../core/services/window.service';
-import { Cookie } from 'ng2-cookies/ng2-cookies';
+import { CookieService } from '../core/services/cookie.service';
 import { Cookies } from '../auth/auth.service';
 
 import 'rxjs/add/observable/of';
@@ -27,6 +27,7 @@ export class ProfileService {
 
     constructor(
         private http: Http,
+        private cookieService: CookieService,
         private toastyService: AppToastyService,
         private windowRef: WindowRefService,
     ) {}
@@ -101,6 +102,44 @@ export class ProfileService {
     }
 
     /**
+     * Reset user's password
+     * @param email
+     * @returns {Observable<Response>}
+     */
+    resetPassword(email: string): Observable<Response> {
+        let request = new Request({
+            method: RequestMethod.Post,
+            url: `/api/auth/password/reset/`,
+            body: {
+                email: email,
+            },
+        });
+        return this.http.request(request);
+    }
+
+    /**
+     * Changes user's password
+     * @param uid
+     * @param token
+     * @param newPassword
+     * @returns {Observable<Response>}
+     */
+    changePassword(uid: string,
+                   token: string,
+                   newPassword: string): Observable<Response> {
+        let request = new Request({
+            method: RequestMethod.Post,
+            url: `/api/auth/password/reset/confirm/`,
+            body: {
+                uid: uid,
+                token: token,
+                new_password: newPassword,
+            },
+        });
+        return this.http.request(request);
+    }
+
+    /**
      * Get current user data from the server
      */
     updateCurrentUser(): Observable<User> {
@@ -139,7 +178,7 @@ export class ProfileService {
     }
 
     logoutOnFrontEnd() {
-        Cookie.delete(Cookies.CSRFTOKEN);
+        this.cookieService.eraseCookie(Cookies.CSRFTOKEN);
         this.windowRef.deleteToken();
     }
 }
