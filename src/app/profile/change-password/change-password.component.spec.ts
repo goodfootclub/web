@@ -5,6 +5,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TitleService } from '../../core/services/title.service';
 import { HistoryService } from '../../core/services/history.service';
+import { ProfileService } from '../profile.service';
 
 describe('ChangePasswordComponent', () => {
     let component: ChangePasswordComponent;
@@ -17,6 +18,7 @@ describe('ChangePasswordComponent', () => {
             providers: [
                 { provide: TitleService, useClass: TitleServiceStub },
                 { provide: HistoryService, useClass: HistoryServiceStub },
+                { provide: ProfileService, useClass: ProfileServiceStub },
             ],
             schemas: [NO_ERRORS_SCHEMA],
         })
@@ -39,3 +41,5 @@ class TitleServiceStub {
 }
 
 class HistoryServiceStub {}
+
+class ProfileServiceStub {}
