@@ -12,6 +12,7 @@ import { MyGamesComponent } from './my-games/my-games.component';
 import { GameEditPopupComponent } from './game-details/game-edit-popup/game-edit-popup.component';
 
 import { MaterialModule } from 'app/material/material.module';
+import { GameEditComponent } from './game-edit/game-edit.component';
 
 const ROUTES: Routes = [{
     path: '', component: GamesComponent,
@@ -21,6 +22,8 @@ const ROUTES: Routes = [{
     path: 'add', component: GameAddComponent,
 }, {
     path: ':id', component: GameDetailsComponent,
+}, {
+    path: ':id/edit', component: GameEditComponent,
 }];
 
 
@@ -41,6 +44,7 @@ const ROUTES: Routes = [{
         GamesComponent,
         MyGamesComponent,
         GameEditPopupComponent,
+        GameEditComponent,
     ],
     entryComponents: [
         GameEditPopupComponent,

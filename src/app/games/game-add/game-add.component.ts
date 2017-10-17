@@ -85,6 +85,10 @@ export class GameAddComponent implements OnInit {
                     this.managedTeams.concat(user.managedTeams);
             });
         this.form = this.formBuilder.group({
+            name: ['Pickup game', Validators.compose([
+                Validators.required,
+                Validators.maxLength(50),
+            ])],
             location: this.formBuilder.group({
                 id: null,
                 name: ['', Validators.compose([
@@ -162,16 +166,18 @@ export class GameAddComponent implements OnInit {
     }
 
     onSubmit() {
-        const dates: string[] = this.form.value['dates']
+        const formData = this.form.value;
+        const dates: string[] = formData['dates']
             .map(({ date, time }) =>
                 moment.utc(`${date}T${time}Z`).add(-this.tzOffset, 'hours'));
-        const selectedTeam = this.form.value['teams']['teamName'] as Team;
+        const selectedTeam = formData['teams']['teamName'] as Team;
         const teamsArray = selectedTeam.id == null ? [] : [selectedTeam.id];
         const selectedLocation: Location =
-            this.form.value['location'].name instanceof Location ?
-                this.form.value['location'].name :
-                this.form.value['location'] as Location;
+            formData['location'].name instanceof Location ?
+                formData['location'].name :
+                formData['location'] as Location;
         let data = {
+            name: formData.name,
             location: selectedLocation,
             teams: teamsArray,
             datetimes: dates,

@@ -86,6 +86,7 @@ export enum TeamType {
  */
 export class GameEvent {
     id: number;
+    name: string;
     datetime: string | string[];
     // datetime: Date;
     duration?: number; // Minutes
@@ -102,7 +103,8 @@ export class GameEvent {
     teams?: Team[];
     // result?: Result;
     organizer?: User;
-    get name(): string {
+    getName(): string {
+        if (this.name) { return this.name; }
         if (this.teams && this.teams.length > 0) {
             return this.teams.map((team) => team.name).join(', ');
         }
@@ -130,8 +132,8 @@ export class GameEvent {
         if (data['organizer'] != null) {
             this.organizer = new User(data['organizer']);
         }
-
         this.id = data['id'];
+        this.name = data['name'];
         this.description = data['description'];
         this.duration = data['duration'];
         this.datetime = [data['datetime']];

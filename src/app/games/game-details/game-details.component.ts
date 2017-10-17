@@ -9,7 +9,7 @@ import { ProfileService } from '../../profile/profile.service';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/observable/forkJoin';
-import {GameEditPopupComponent} from './game-edit-popup/game-edit-popup.component';
+import { GameEditPopupComponent } from './game-edit-popup/game-edit-popup.component';
 
 @Component({
     selector: 'app-game-details',
@@ -45,7 +45,7 @@ export class GameDetailsComponent implements OnInit {
             ).subscribe(arr => {
                 this.user = arr[0];
                 const game = arr[1] as GameEvent;
-                this.titleService.setTitle(game.name);
+                this.titleService.setTitle(game.getName());
                 this.userPlayer = game.playersById[
                     this.user.id
                 ];

@@ -11,7 +11,7 @@
             <h3>{{ nextGame.datetime | date:'EEEE, h:mm a' }}, {{ nextGame.datetime | date:'MMMM d, y' }}</h3>
             <h4>{{ nextGame.location.name }}</h4>
             <span class="info">{{ nextGame.location.address }}</span>
-            <h4 class="game-name-h4">{{ nextGame.name }}</h4>
+            <h4 class="game-name-h4">{{ nextGame.getName() }}</h4>
         </div>
     </div>
 </div>
