@@ -1,0 +1,52 @@
+<div class="non-registered-pages">
+    <div class="center-block">
+        <div class="title">
+            <h1>GOOD FOOT CLUB</h1>
+        </div>
+        <div class="body">
+            <div class="sub-header">Please Sign In (Up)</div>
+
+            <form [formGroup]="loginForm" autocomplete="off" class="white-form">
+                <md-input-container #usernameContainer>
+                    <input mdInput
+                           #username
+                           [style.width]="'100%'"
+                           autocomplete="off"
+                           formControlName="username"
+                           placeholder="Username"
+                           type='text'>
+                    <md-hint align="end" *ngIf="usernameContainer._control.focused">
+                        <span *ngIf="!loginForm.controls.username.errors?.required">{{ username.value.length }} / 30</span>
+                    </md-hint>
+                </md-input-container>
+
+                <md-input-container #passwordContainer>
+                    <input mdInput
+                           #password
+                           [style.width]="'100%'"
+                           autocomplete="off"
+                           formControlName="password"
+                           placeholder="Password"
+                           type='password'>
+                    <md-hint align="end" *ngIf="passwordContainer._control.focused">
+                        <span *ngIf="!loginForm.controls.password.errors?.required">{{ password.value.length }} / 30</span>
+                    </md-hint>
+                </md-input-container>
+            </form>
+            <div class="button-container">
+                <button class="gffc-button btn-dark" (click)="loginUsingCredentials()" [disabled]="loginForm.invalid">
+                    <app-icon name="credentials-white" class="icon-wrapper"></app-icon>
+                    Sign In with Credentials
+                </button>
+            </div>
+            <div class="inline-buttons">
+                <div class="link-button">
+                    <a (click)="forgotPassword()" class="back-button">forgot password</a>
+                </div>
+                <div class="link-button">
+                    <a (click)="back()" class="back-button">back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

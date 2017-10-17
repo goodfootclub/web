@@ -2,6 +2,7 @@
     <app-navigation></app-navigation>
     <app-title></app-title>
     <div class="toolbar-icon-spacer"></div>
+    <button md-icon-button [routerLink]="['/profile', 'delete']"><app-icon name="trash"></app-icon></button>
 </md-toolbar>
 
 
@@ -17,7 +18,7 @@
             placeholder="First name"
             required
             type='text'>
-        <md-hint *ngIf="firstNameContainer._mdInputChild.focused" align="end">
+        <md-hint *ngIf="firstNameContainer._control.focused" align="end">
             <span *ngIf="form.controls.firstName.errors?.required">
                 required
             </span>
@@ -39,7 +40,7 @@
             placeholder="Last name"
             required
             type='text'>
-        <md-hint *ngIf="lastNameContainer._mdInputChild.focused" align="end">
+        <md-hint *ngIf="lastNameContainer._control.focused" align="end">
             <span *ngIf="form.controls.lastName.errors?.required">
                 required
             </span>
@@ -57,7 +58,7 @@
             type='text'
             formControlName="bio"
             placeholder="Tell us about your soccer skillz...">
-            <md-hint *ngIf="bioContainer._mdInputChild.focused" align="end">
+            <md-hint *ngIf="bioContainer._control.focused" align="end">
                 {{ bio.value.length }} / 1000
             </md-hint>
         </textarea>

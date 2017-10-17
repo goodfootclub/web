@@ -11,7 +11,9 @@ import {
     Router,
 } from '@angular/router';
 import { AuthService } from './auth.service';
-import { AppToastyService } from '../common/services/toasty.service';
+import { AppToastyService } from '../core/services/toasty.service';
+import { WindowRefService } from '../core/services/window.service';
+import { CookieService } from '../core/services/cookie.service';
 
 
 class HttpStub {
@@ -43,6 +45,14 @@ class AppToastyServiceStub {
     success(message: string, title?: string): void {}
 }
 
+class WindowRefServiceStub {}
+
+class CookieServiceStub {
+    readCookie(name: string): string {
+        return undefined;
+    }
+}
+
 describe('Service: Auth', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -52,6 +62,8 @@ describe('Service: Auth', () => {
                 { provide: Http, useClass: HttpStub },
                 { provide: Router, useClass: RouterStub },
                 { provide: AppToastyService, useClass: AppToastyServiceStub },
+                { provide: WindowRefService, useClass: WindowRefServiceStub },
+                { provide: CookieService, useClass: CookieServiceStub },
             ],
         });
     });
@@ -68,13 +80,7 @@ describe('Service: Auth', () => {
                     <ActivatedRouteSnapshot>{},
                     <RouterStateSnapshot>{ url: '' },
                 );
-                if (result instanceof Observable) {
-                    result.subscribe(() => {
-                        expect(router.path).toEqual(['/']);
-                    });
-                } else {
-                    expect(router.path).toEqual(['/']);
-                }
+                expect(router.path).toEqual(['/']);
             },
         ),
     ));

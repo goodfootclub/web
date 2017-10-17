@@ -1,6 +1,6 @@
 <!-- overlay & loader -->
 <div class="cdk-overlay-container">
-    <div class="cdk-overlay-pane app-global-overlay" *ngIf="status.observeLoading | async">
+    <div class="cdk-overlay-pane app-global-overlay" *ngIf="isLoading">
         <md-spinner class="progress-bar"></md-spinner>
     </div>
 </div>
@@ -10,4 +10,6 @@
     <router-outlet></router-outlet>
 </md-sidenav-container>
 
-<div class="developBack" *ngIf="isDevelopment"></div>
+<div class="developBack" *ngIf="isDevelopment">
+    <span>Version: {{appVersion}}</span>
+</div>

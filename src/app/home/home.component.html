@@ -1,2 +1,2 @@
 <app-home-page *ngIf="showHomePage()" (handleLogout)="handleResult($event)"></app-home-page>
-<app-landing-page *ngIf="showLandingPage()"></app-landing-page>
+<app-landing-page *ngIf="showLandingPage()" (handleLogin)="handleResult($event)"></app-landing-page>

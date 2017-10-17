@@ -1,29 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MaterialModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
+import { ErrorHandlerFactory } from './error-handling/raven.service';
 import { ToastyModule } from 'ng2-toasty';
-
 import { AppComponent } from './app.component';
-import { AuthService } from './auth';
-import {
-    MenuService,
-    HttpProvider,
-    StatusService,
-    HistoryService,
-    AnalyticsService,
-} from './common';
+import { AuthService } from './auth/auth.service';
 import { ProfileService } from './profile';
 import { SidenavComponent } from './sidenav';
-import { TitleService } from './title.service';
 import { ErrorHandlingModule, FourxxErrorComponent } from './error-handling';
-import { WindowRefService } from './common/services/window.service';
+import { CoreModule } from './core/core.module';
+import { AppCommonModule } from './common/common.module';
 
 export const ROUTES: Routes = [{
     path: '',
     loadChildren: 'app/home/home.module#HomeModule',
+}, {
+    path: 'auth',
+    loadChildren: 'app/auth/auth.module#AuthModule',
+    // canActivate: [AuthService], // TODO disable if logged in!
+    // canActivateChild: [AuthService],
 }, {
     path: 'profile',
     loadChildren: 'app/profile/profile.module#ProfileModule',
@@ -54,33 +51,28 @@ export const ROUTES: Routes = [{
     component: FourxxErrorComponent,
 }];
 
-
 @NgModule({
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppCommonModule,
+        CoreModule,
+        ToastyModule.forRoot(),
+        RouterModule.forRoot(ROUTES),
+        ErrorHandlingModule,
+        MaterialModule,
+    ],
+    providers: [
+        { provide: ErrorHandler, useFactory: ErrorHandlerFactory },
+        AuthService,
+        ProfileService,
+        SidenavComponent,
+    ],
     declarations: [
         AppComponent,
         SidenavComponent,
     ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        HttpModule,
-        MaterialModule.forRoot(),
-        ToastyModule.forRoot(),
-        RouterModule.forRoot(ROUTES),
-        ErrorHandlingModule,
-    ],
-    providers: [
-        HttpProvider,
-        StatusService,
-        AuthService,
-        MenuService,
-        HistoryService,
-        ProfileService,
-        AnalyticsService,
-        SidenavComponent,
-        TitleService,
-        WindowRefService,
-    ],
     bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}

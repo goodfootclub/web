@@ -1,0 +1,95 @@
+<div class="non-registered-pages">
+    <div class="center-block">
+        <div class="title">
+            <h1>GOOD FOOT CLUB</h1>
+        </div>
+        <div class="body" *ngIf="!submitted">
+            <form [formGroup]="registerForm" autocomplete="off" class="white-form" *ngIf="!submitted">
+                <md-input-container [dividerColor]="
+                    registerForm.controls.email.valid ||
+                    registerForm.controls.email.pristine ?
+                    'primary' : 'warn'" #emailContainer>
+                    <input mdInput
+                           #email
+                           [style.width]="'100%'"
+                           autocomplete="off"
+                           formControlName="email"
+                           placeholder="Email"
+                           type='text'>
+                    <md-hint align="end" class="hint-container" *ngIf="emailContainer._control.focused">
+                        <span *ngIf="registerForm.controls.email.errors?.required && registerForm.controls.email.dirty">required</span>
+                        <span *ngIf="registerForm.controls.email.errors?.email && email.value.length > 0">invalid email</span>
+                        <span *ngIf="!registerForm.controls.email.errors?.required">{{ email.value.length }} / 30</span>
+                    </md-hint>
+                </md-input-container>
+
+                <md-input-container [dividerColor]="
+                    registerForm.controls.username.valid ||
+                    registerForm.controls.username.pristine ?
+                    'primary' : 'warn'" #usernameContainer>
+                    <input mdInput
+                           #username
+                           [style.width]="'100%'"
+                           autocomplete="off"
+                           formControlName="username"
+                           placeholder="Username"
+                           type='text'>
+                    <md-hint align="end" class="hint-container" *ngIf="usernameContainer._control.focused">
+                        <span *ngIf="registerForm.controls.username.errors?.required && registerForm.controls.username.dirty">required</span>
+                        <span *ngIf="!registerForm.controls.username.errors?.required">{{ username.value.length }} / 50</span>
+                    </md-hint>
+                </md-input-container>
+
+                <md-input-container [dividerColor]="getPasswordDividerColor('password')" #passwordContainer>
+                    <input mdInput
+                           #password
+                           [style.width]="'100%'"
+                           autocomplete="off"
+                           formControlName="password"
+                           placeholder="Password"
+                           type='password'>
+                    <md-hint align="end" class="hint-container" *ngIf="passwordContainer._control.focused">
+                        <span *ngIf="registerForm.controls.password.errors?.required && registerForm.controls.password.dirty">required</span>
+                        <span *ngIf="registerForm.controls.password.errors?.minlength && password.value.length > 0">min 6 symbols</span>
+                        <span *ngIf="registerForm.errors?.different_passwords">different passwords</span>
+                        <span *ngIf="!registerForm.controls.password.errors?.required">{{ password.value.length }} / 30</span>
+                    </md-hint>
+                </md-input-container>
+
+                <md-input-container [dividerColor]="getPasswordDividerColor('repeatPassword')" #repeatPasswordContainer>
+                    <input mdInput
+                           #repeatPassword
+                           [style.width]="'100%'"
+                           autocomplete="off"
+                           formControlName="repeatPassword"
+                           placeholder="Repeat Password"
+                           type='password'>
+                    <md-hint align="end" class="hint-container" *ngIf="repeatPasswordContainer._control.focused">
+                        <span *ngIf="registerForm.controls.repeatPassword.errors?.required && registerForm.controls.repeatPassword.dirty">required</span>
+                        <span *ngIf="registerForm.controls.repeatPassword.errors?.minlength && repeatPassword.value.length > 0">min 6 symbols</span>
+                        <span *ngIf="registerForm.errors?.different_passwords">different passwords</span>
+                        <span *ngIf="!registerForm.controls.repeatPassword.errors?.required">{{ repeatPassword.value.length }} / 30</span>
+                    </md-hint>
+                </md-input-container>
+            </form>
+
+            <div class="button-container">
+                <button class="gffc-button btn-dark" (click)="register()" [disabled]="registerForm.invalid">
+                    <app-icon name="users-white" class="icon-wrapper"></app-icon>
+                    Join !
+                </button>
+            </div>
+
+            <div class="link-button">
+                <a (click)="back()" class="back-button">back</a>
+            </div>
+        </div>
+        <div class="body" *ngIf="submitted">
+            <div class="grey-text">
+                <div class="description">
+                    <p>We've sent you an email with activation link</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

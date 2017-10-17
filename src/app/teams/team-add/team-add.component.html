@@ -18,7 +18,7 @@
             placeholder="Team name"
             required
             type='text'>
-            <md-hint *ngIf="nameContainer._mdInputChild.focused" align="end">
+            <md-hint *ngIf="nameContainer._control.focused" align="end">
                 <span *ngIf="form.controls.name.errors?.required">
                     required
                 </span>
@@ -36,10 +36,10 @@
             type='text'
             formControlName="info"
             placeholder="Info">
-            <md-hint *ngIf="infoContainer._mdInputChild.focused">
+            <md-hint *ngIf="infoContainer._control.focused">
                 Describe your team for potential players
             </md-hint>
-            <md-hint *ngIf="infoContainer._mdInputChild.focused" align="end">
+            <md-hint *ngIf="infoContainer._control.focused" align="end">
                 {{ info.value.length }} / 1000
             </md-hint>
         </textarea>

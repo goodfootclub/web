@@ -1,3 +1,3 @@
 export * from './common.module';
-export * from './services';
+export * from './pipes';
 export * from './ui';

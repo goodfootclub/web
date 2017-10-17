@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
-import { WindowRefService } from '../common/services/window.service';
 import { Observable } from 'rxjs/Observable';
+import { WindowRefService } from '../core/services/window.service';
 
 
 @Component({
@@ -20,13 +20,7 @@ export class HomeComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        const authenticated = this.authService.isAuthenticated();
-        if (authenticated instanceof Observable) {
-            (authenticated as Observable<boolean>)
-                .subscribe(this.handleResult.bind(this));
-        } else {
-            this.handleResult(authenticated as boolean);
-        }
+        this.handleResult(this.authService.isAuthenticated());
     }
 
     handleResult(result: boolean) {

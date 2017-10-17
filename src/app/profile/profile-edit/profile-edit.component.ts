@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { HistoryService } from '../../common/services/history.service';
 import { ProfileService } from '../profile.service';
 import { User } from 'app/types';
+import { TitleService } from '../../core/services/title.service';
+import { HistoryService } from '../../core/services/history.service';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class ProfileEditComponent implements OnInit {
         public profile: ProfileService,
         private historyService: HistoryService,
         private router: Router,
+        private title: TitleService,
     ) {
         profile.getCurrentUser().subscribe(user => {
             this.user = user;
@@ -43,6 +45,7 @@ export class ProfileEditComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.title.setTitle('Profile');
         this.form = this.formBuilder.group({
             firstName: ['', Validators.compose([
                 Validators.required,

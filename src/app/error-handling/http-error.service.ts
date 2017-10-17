@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Router } from '@angular/router';
 
-import { AppToastyService } from '../common/services/toasty.service';
 import Exclusions, { Exclusion } from './excluded-endpoints';
 import { Cookies } from '../auth/auth.service';
 
-import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { Observable } from 'rxjs/Observable';
+import { AppToastyService } from '../core/services/toasty.service';
+import { CookieService } from '../core/services/cookie.service';
 
 /**
  * HttpErrorHandler - simple class for handeling request errors
@@ -20,6 +20,7 @@ export class HttpErrorHandler {
 
     constructor(
         private toastyService: AppToastyService,
+        private cookieService: CookieService,
         private router: Router,
     ) {
         this.handleError = this.handleError.bind(this);
@@ -30,6 +31,8 @@ export class HttpErrorHandler {
             const status = error.status;
             if (status === 401) {
                 this.handleUnauthorizedError(error);
+            } else if (status === 400) {
+                this.handleBadRequestError(error);
             } else {
                 this.handleDefaultError(error);
             }
@@ -51,7 +54,7 @@ export class HttpErrorHandler {
         const url = error.url.substr(index + '/api'.length);
         const status = error.status;
         const tree =
-            (this.router.parseUrl(url).root.children.primary.segments || [])
+            (this.router.parseUrl(url).root.children['primary'].segments || [])
                 .filter((item) => item.path);
         return Exclusions.LIST.some((ex: Exclusion) => {
             return ex.status === status && ex.matcher(tree);
@@ -64,9 +67,22 @@ export class HttpErrorHandler {
      * @param error http response object
      */
     private handleUnauthorizedError(error: Response) {
-        Cookie.delete(Cookies.CSRFTOKEN);
-        this.router.navigate(['/']);
+        this.cookieService.eraseCookie(Cookies.CSRFTOKEN);
+        this.router.navigate(['/auth/logout']);
         this.handleDefaultError(error);
+    }
+
+    /**
+     * Bad request errors - Validation mostly
+     * @param error http response object
+     */
+    private handleBadRequestError(error: Response) {
+        if (error) {
+            const errorJson = error.json();
+            const keys = Object.keys(errorJson);
+            const lines = keys.map((key) => `${ errorJson[key] }`);
+            this.toastyService.warning(lines.join('\n'));
+        }
     }
 
     /**

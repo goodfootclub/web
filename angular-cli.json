@@ -20,7 +20,7 @@
       "styles": [
         "../node_modules/normalize.css/normalize.css",
         "../node_modules/ng2-toasty/bundles/style-material.css",
-        "theme.scss",
+        "material-theme.scss",
         "styles.styl"
       ],
       "scripts": [],

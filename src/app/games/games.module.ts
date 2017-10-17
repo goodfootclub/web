@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CommonModule } from 'app/common';
+import { AppCommonModule } from 'app/common';
 import { GamesService } from './games.service';
 import { LocationsService } from './locations.service';
 import { GamesComponent } from './games.component';
@@ -11,6 +11,7 @@ import { GameDetailsComponent } from './game-details';
 import { MyGamesComponent } from './my-games/my-games.component';
 import { GameEditPopupComponent } from './game-details/game-edit-popup/game-edit-popup.component';
 
+import { MaterialModule } from 'app/material/material.module';
 
 const ROUTES: Routes = [{
     path: '', component: GamesComponent,
@@ -25,7 +26,8 @@ const ROUTES: Routes = [{
 
 @NgModule({
     imports: [
-        CommonModule,
+        MaterialModule,
+        AppCommonModule,
         ReactiveFormsModule,
         RouterModule.forChild(ROUTES),
     ],

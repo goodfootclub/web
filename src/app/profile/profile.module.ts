@@ -4,29 +4,35 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
 
-import { CommonModule } from 'app/common';
+import { AppCommonModule } from 'app/common';
 import { ProfileComponent } from './profile.component';
 import { ProfileEditComponent } from './profile-edit';
+import {
+    ProfileDeleteComponent,
+} from './profile-delete/profile-delete.component';
+import { MaterialModule } from 'app/material/material.module';
 
 
 const ROUTES: Routes = [{
     path: '', component: ProfileComponent,
 }, {
     path: 'edit', component: ProfileEditComponent,
+}, {
+    path: 'delete', component: ProfileDeleteComponent,
 }];
 
 @NgModule({
     imports: [
-        CommonModule,
         MaterialModule,
+        AppCommonModule,
         ReactiveFormsModule,
         RouterModule.forChild(ROUTES),
     ],
     declarations: [
         ProfileComponent,
         ProfileEditComponent,
+        ProfileDeleteComponent,
     ],
 })
 export class ProfileModule { }

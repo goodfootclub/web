@@ -17,7 +17,7 @@
                 required
                 [mdAutocomplete]="locationAutoComplete"
                 type='text'>
-            <md-hint align="end" *ngIf="locationNameContainer._mdInputChild.focused">
+            <md-hint align="end" *ngIf="locationNameContainer._control.focused">
                 <span *ngIf="locationControls.name.errors?.required">
                     required
                 </span>
@@ -44,7 +44,7 @@
                 formControlName="address"
                 placeholder="Address"
                 type='text'>
-            <md-hint align="end" *ngIf="locationAddressContainer._mdInputChild.focused">
+            <md-hint align="end" *ngIf="locationAddressContainer._control.focused">
                 <span *ngIf="locationControls.address.errors?.required">
                     required
                 </span>
@@ -81,7 +81,7 @@
                                placeholder="Game date"
                                required
                                type='date'>
-                        <md-hint align="end" *ngIf="dateContainer._mdInputChild.focused">
+                        <md-hint align="end" *ngIf="dateContainer._control.focused">
                             <span *ngIf="form.controls.dates['controls'][i]['controls'].date.errors?.required">
                                 required
                             </span>
@@ -96,7 +96,7 @@
                                [placeholder]="'Game time (' + tzName + ')'"
                                required
                                type='time'>
-                        <md-hint align="end" *ngIf="timeContainer._mdInputChild.focused">
+                        <md-hint align="end" *ngIf="timeContainer._control.focused">
                             <span *ngIf="form.controls.dates['controls'][i]['controls'].time.errors?.required">
                                 required
                             </span>

@@ -1,0 +1,87 @@
+@import "../../common/styles/variables.styl"
+
+.non-registered-pages
+    background-image url('app/common/styles/img/bg.jpg')
+    height 100%
+    background-repeat no-repeat
+    background-position center center
+    background-repeat no-repeat
+    background-size cover
+    display flex
+    align-items center
+    justify-content center
+
+    .center-block
+        padding 0px 5px
+
+        .title h1
+            color $general-background-color
+            font-size 3.5em
+            font-weight 700
+            line-height 1.1
+            text-align center
+
+    .body
+        display flex
+        flex-flow column
+        align-items center
+        justify-content center
+        min-height 200px
+
+        & > .sub-header
+            color $general-background-color
+            font-size $header-font-size
+            text-transform uppercase
+            text-align center
+            padding-bottom 30px
+
+        & > .grey-text
+            color $sub-color
+            margin-top 20px
+            margin-bottom 10px
+            font-weight 500
+            line-height 1.1
+            font-size $header-font-size
+            text-align center
+
+        & > .button-container
+            text-align center
+            display flex
+            justify-content center
+            padding 10px 0px
+
+            button
+                display flex
+                justify-content center
+                align-items center
+
+            .icon-wrapper
+                padding-right 10px
+
+            .facebook-icon
+                float: left
+                width: 26px
+                height: 26px
+                fill: $hover-color
+
+        .inline-buttons
+            display flex
+            flex-direction row
+
+        .link-button
+            margin 10px 15px
+            color $general-background-color
+            cursor pointer
+            &:hover
+                text-decoration underline
+
+    .mat-form-field-underline
+        background-color rgba(238, 238, 238, 0.54)
+
+    .mat-hint
+        color rgba(238, 238, 238, 0.74)
+
+    form
+        max-width 400px
+        padding 0px 20px
+        width 100%

@@ -1,5 +1,5 @@
 [{
-    "context": ["/api/**", "/auth/**", "/static/**", "/media/**"],
-    "target": "https://dev.goodfoot.club",
+    "context": ["/api/**", "/social/**", "/static/**", "/media/**"],
+    "target": "http://dev.goodfoot.club:8443",
     "secure": false
 }]

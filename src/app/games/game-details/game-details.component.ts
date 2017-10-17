@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { GamesService } from '../games.service';
 import { GameEvent, RsvpStatus, Player, RsvpStatuses, User } from '../../types';
 import { MdRadioGroup, MdDialogRef, MdDialog } from '@angular/material';
-import { TitleService } from '../../title.service';
+import { TitleService } from '../../core/services/title.service';
 import { ProfileService } from '../../profile/profile.service';
 import { Observable } from 'rxjs/Observable';
 

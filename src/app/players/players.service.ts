@@ -9,7 +9,7 @@ import {
 import { Observable } from 'rxjs/Observable';
 
 import { User, PlayerRole } from 'app/types';
-import { AppToastyService } from '../common/services/toasty.service';
+import { AppToastyService } from '../core/services/toasty.service';
 
 
 @Injectable()
@@ -35,8 +35,6 @@ export class PlayersService {
     get(id: number): Observable<User> {
         return this.http.get(`/api/users/players/${id}/`).map(res => {
             return new User(res.json());
-        }).catch((err, caught) => {
-            throw err;
         });
     }
 

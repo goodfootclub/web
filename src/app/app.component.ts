@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { TitleService } from './title.service';
-import { AnalyticsService } from './common';
-import { StatusService } from './common/services/status.service';
-import { HistoryService } from './common/services/history.service';
+import { TitleService } from './core/services/title.service';
 import { AuthService } from './auth/auth.service';
-import { WindowRefService } from './common/services/window.service';
+
+import { WindowRefService } from './core/services/window.service';
+import { StatusService } from './core/services/status.service';
+import { AnalyticsService } from './core/services';
+import { HistoryService } from './core/services/history.service';
 import { environment } from '../environments/environment';
-import { Observable } from 'rxjs/Observable';
+import { gfcVersion } from './app.version';
+import 'rxjs/add/operator/debounceTime';
 
 @Component({
     selector: 'app-root',
@@ -16,12 +18,14 @@ import { Observable } from 'rxjs/Observable';
 export class AppComponent implements OnInit {
     menu: any;
 
+    appVersion = gfcVersion;
     isDevelopment = !!environment.development;
+    isLoading = false;
 
     constructor(
         public title: TitleService,
-        public status: StatusService,
         public windowRef: WindowRefService,
+        private status: StatusService,
         private authService: AuthService,
         private analytics: AnalyticsService,
         private historyService: HistoryService,
@@ -31,11 +35,10 @@ export class AppComponent implements OnInit {
 
     ngOnInit(): void {
         const authenticated = this.authService.isAuthenticated();
-        if (authenticated instanceof Observable) {
-            (authenticated as Observable<boolean>)
-                .subscribe(result => this.windowRef.setFullScreen(!result));
-        } else {
-            this.windowRef.setFullScreen(!(authenticated as boolean));
-        }
+        this.windowRef.setFullScreen(!(authenticated as boolean));
+
+        this.status.observeLoading
+            .debounceTime(100)
+            .subscribe(value => this.isLoading = value);
     }
 }

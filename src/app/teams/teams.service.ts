@@ -9,7 +9,8 @@ import {
 import { Observable } from 'rxjs/Observable';
 
 import { Team, PlayerRole, Player, GameEvent } from 'app/types';
-import { AppToastyService } from '../common/services/toasty.service';
+import { AppToastyService } from '../core/services/toasty.service';
+import 'rxjs/add/operator/map';
 
 
 @Injectable()
@@ -27,31 +28,23 @@ export class TeamsService {
         if (offset) { params.set('offset', offset.toString()); }
         if (search) { params.set('search', search); }
         return this.http.get('/api/teams/', { search: params })
-            .map(res => res.json().results.map(data => new Team(data)))
-            .catch((err, caught) => {
-                throw err;
-            });
+            .map(res => res.json().results.map(data => new Team(data)));
     }
 
     getGames(teamId: number): Observable<GameEvent[]> {
         return this.http.get(`/api/teams/${teamId}/games/`)
-            .map(res => res.json().results.map(data => new GameEvent(data)))
-            .catch((err, caught) => {
-                throw err;
-            });
+            .map(res => res.json().results.map(data => new GameEvent(data)));
     }
 
     get(id: number): Observable<Team> {
         return this.http.get(`/api/teams/${id}/`).map(res => {
             return new Team(res.json());
-        }).catch((err, caught) => {
-            throw err;
         });
     }
 
     createOrUpdate(data, method: RequestMethod): Observable<Team> {
         const url = method === RequestMethod.Put ?
-            `/api/teams/${data.id}` : `/api/teams/`;
+            `/api/teams/${data.id}/` : `/api/teams/`;
         let request = new Request({
             method: method,
             url: url,
@@ -59,8 +52,6 @@ export class TeamsService {
         });
         return this.http.request(request).map(res => {
             return new Team(res.json());
-        }).catch((err, caught) => {
-            throw err;
         });
     }
 
@@ -80,7 +71,7 @@ export class TeamsService {
                      playerId: number, data): Observable<Player> {
         let request = new Request({
             method: RequestMethod.Put,
-            url: `/api/teams/${teamId}/players/${playerId}`,
+            url: `/api/teams/${teamId}/players/${playerId}/`,
             body: data,
         });
         return this.http.request(request).do(() => {
@@ -91,7 +82,7 @@ export class TeamsService {
     excludeTeamPlayer(teamId: number, playerId: number): Observable<any> {
         let request = new Request({
             method: RequestMethod.Delete,
-            url: `/api/teams/${teamId}/players/${playerId}`,
+            url: `/api/teams/${teamId}/players/${playerId}/`,
         });
         return this.http.request(request).do(() => {
             this.toastyService.success('Player excluded!');
