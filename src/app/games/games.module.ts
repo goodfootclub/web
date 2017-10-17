@@ -6,20 +6,18 @@ import { AppCommonModule } from 'app/common';
 import { GamesService } from './games.service';
 import { LocationsService } from './locations.service';
 import { GamesComponent } from './games.component';
-import { GameAddComponent } from './game-add';
+import { GameEditComponent } from './game-edit/game-edit.component';
 import { GameDetailsComponent } from './game-details';
 import { MyGamesComponent } from './my-games/my-games.component';
-import { GameEditPopupComponent } from './game-details/game-edit-popup/game-edit-popup.component';
 
 import { MaterialModule } from 'app/material/material.module';
-import { GameEditComponent } from './game-edit/game-edit.component';
 
 const ROUTES: Routes = [{
     path: '', component: GamesComponent,
 }, {
     path: 'my', component: MyGamesComponent,
 }, {
-    path: 'add', component: GameAddComponent,
+    path: 'add', component: GameEditComponent,
 }, {
     path: ':id', component: GameDetailsComponent,
 }, {
@@ -39,15 +37,10 @@ const ROUTES: Routes = [{
         LocationsService,
     ],
     declarations: [
-        GameAddComponent,
+        GameEditComponent,
         GameDetailsComponent,
         GamesComponent,
         MyGamesComponent,
-        GameEditPopupComponent,
-        GameEditComponent,
-    ],
-    entryComponents: [
-        GameEditPopupComponent,
     ],
 })
 export class GamesModule { }

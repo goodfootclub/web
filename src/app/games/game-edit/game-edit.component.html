@@ -1,3 +1,158 @@
-<p>
-  game-edit works!
-</p>
+<md-toolbar>
+    <app-navigation></app-navigation>
+    <app-title [value]="'Create a game'"></app-title>
+    <div class="toolbar-icon-spacer"></div>
+</md-toolbar>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <md-input-container [dividerColor]="
+                    form.controls.name.valid ||
+                    form.controls.name.pristine ?
+                    'primary' : 'warn'" #nameContainer>
+        <input mdInput
+               #name
+               [style.width]="'100%'"
+               autocomplete="off"
+               formControlName="name"
+               placeholder="Game name"
+               type='text'>
+        <md-hint align="end" *ngIf="nameContainer._control?.focused">
+                <span *ngIf="form.controls.name.errors?.required">
+                    required
+                </span>
+            <span *ngIf="!form.controls.name.errors?.required">
+                    {{ name.value.length }} / 50
+                </span>
+        </md-hint>
+    </md-input-container>
+    <div formGroupName="location">
+        <md-input-container [dividerColor]="
+                    locationControls.name.valid ||
+                    locationControls.name.pristine ?
+                    'primary' : 'warn'" #locationNameContainer>
+            <input mdInput
+                   #locationName
+                   formControlName="name"
+                   placeholder="Game location"
+                   required
+                   [mdAutocomplete]="locationAutoComplete"
+                   type='text'>
+            <md-hint align="end" *ngIf="locationNameContainer._control?.focused">
+                <span *ngIf="locationControls.name.errors?.required">
+                    required
+                </span>
+                <span *ngIf="!locationControls.name.errors?.required">
+                    {{ locationName.value.length }} / 30
+                </span>
+            </md-hint>
+        </md-input-container>
+
+        <md-autocomplete #locationAutoComplete="mdAutocomplete" [displayWith]="displayLocation">
+            <md-option *ngFor="let location of locations" [value]="location">
+                {{ location.name }} - {{ location.address }}
+            </md-option>
+        </md-autocomplete>
+
+        <md-input-container [dividerColor]="
+                    locationControls.address.valid ||
+                    locationControls.address.pristine ?
+                    'primary' : 'warn'" #locationAddressContainer>
+            <input mdInput
+                   #locationAddress
+                   [style.width]="'100%'"
+                   autocomplete="off"
+                   formControlName="address"
+                   placeholder="Address"
+                   type='text'>
+            <md-hint align="end" *ngIf="locationAddressContainer._control?.focused">
+                <span *ngIf="locationControls.address.errors?.required">
+                    required
+                </span>
+                <span *ngIf="!locationControls.address.errors?.required">
+                    {{ locationAddress.value.length }} / 255
+                </span>
+            </md-hint>
+        </md-input-container>
+    </div>
+
+    <div formGroupName="teams">
+        <div class="mat-input-wrapper">
+            <md-select placeholder="Select team" #teamName formControlName="teamName">
+                <md-option *ngFor="let team of managedTeams" [value]="team">{{ team.name }} - {{ team.info }}</md-option>
+            </md-select>
+        </div>
+    </div>
+
+    <br/>
+
+    <div formArrayName="dates">
+        <div *ngFor="let date of form.controls.dates['controls']; let i=index">
+            <md-grid-list cols="2" rowHeight="80px" [formGroupName]="i">
+                <md-grid-tile>
+                    <md-input-container
+                        class="full-width"
+                        [dividerColor]="
+                        form.controls.dates['controls'][i]['controls'].date.valid ||
+                        form.controls.dates['controls'][i]['controls'].date.pristine ?
+                        'primary' : 'warn'" #dateContainer>
+                        <input #date
+                               mdInput
+                               formControlName="date"
+                               placeholder="Game date"
+                               required
+                               type='date'>
+                        <md-hint align="end" *ngIf="dateContainer._control?.focused">
+                            <span *ngIf="form.controls.dates['controls'][i]['controls'].date.errors?.required">
+                                required
+                            </span>
+                        </md-hint>
+                    </md-input-container>
+                </md-grid-tile>
+                <md-grid-tile>
+                    <md-input-container class="full-width" #timeContainer>
+                        <input #time
+                               mdInput
+                               formControlName="time"
+                               [placeholder]="'Game time (' + tzName + ')'"
+                               required
+                               type='time'>
+                        <md-hint align="end" *ngIf="timeContainer._control?.focused">
+                            <span *ngIf="form.controls.dates['controls'][i]['controls'].time.errors?.required">
+                                required
+                            </span>
+                        </md-hint>
+                    </md-input-container>
+                </md-grid-tile>
+            </md-grid-list>
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="buttons">
+        <div>
+            <button md-button type="button" (click)="removeDate()" *ngIf="form.controls.dates['controls'].length > 1">
+                Remove last
+            </button>
+            <button md-button type="button" (click)="addDate()">
+                Another date
+            </button>
+        </div>
+        <div>
+            <button type="button"
+                    (click)="onCancel()"
+                    md-raised-button
+            >
+                Cancel
+            </button>
+            <button
+                [disabled]="form.invalid"
+                color="primary"
+                md-raised-button
+                type="submit"
+            >
+                Save
+            </button>
+        </div>
+    </div>
+</form>

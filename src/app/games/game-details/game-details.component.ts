@@ -9,7 +9,6 @@ import { ProfileService } from '../../profile/profile.service';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/observable/forkJoin';
-import { GameEditPopupComponent } from './game-edit-popup/game-edit-popup.component';
 
 @Component({
     selector: 'app-game-details',
@@ -130,11 +129,6 @@ export class GameDetailsComponent implements OnInit {
     }
 
     editGame() {
-        const dialog: MdDialogRef<GameEditPopupComponent> =
-            this.dialogService.open(GameEditPopupComponent, {
-                height: '300px',
-                width: '250px',
-            });
-        dialog.componentInstance.setGame(this.game);
+        this.router.navigate(['/games', this.game.id, 'edit']);
     }
 }
