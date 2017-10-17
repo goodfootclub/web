@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HistoryService } from '../../core/services/history.service';
 import { TitleService } from '../../core/services/title.service';
+import { ProfileService } from '../profile.service';
 
 @Component({
     selector: 'app-change-password',
@@ -14,7 +15,8 @@ export class ChangePasswordComponent implements OnInit {
 
     constructor(private formBuilder: FormBuilder,
                 private title: TitleService,
-                private historyService: HistoryService) { }
+                private historyService: HistoryService,
+                private profileService: ProfileService) { }
 
     ngOnInit() {
         this.title.setTitle('Change password');
@@ -33,7 +35,9 @@ export class ChangePasswordComponent implements OnInit {
     }
 
     onSubmit() {
-        // TODO
+        const password = this.changePasswordForm.value.password;
+        this.profileService.update({ password: password })
+            .subscribe(() => this.historyService.back());
     }
 
     onCancel() {

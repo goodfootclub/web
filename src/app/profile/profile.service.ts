@@ -156,10 +156,14 @@ export class ProfileService {
     }
 
     update(data): Observable<User> {
-        data['first_name'] = data.firstName;
-        delete data['firstName'];
-        data['last_name'] = data.lastName;
-        delete data['lastName'];
+        if (data.firstName) {
+            data['first_name'] = data.firstName;
+            delete data['firstName'];
+        }
+        if (data.lastName) {
+            data['last_name'] = data.lastName;
+            delete data['lastName'];
+        }
         let request = new Request({
             method: RequestMethod.Put,
             url: `/api/users/me/`,
