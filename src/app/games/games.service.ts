@@ -60,8 +60,6 @@ export class GamesService {
         return this.http.request(request).map(res => {
             this.toastyService.success('Game updated!');
             return new GameEvent(res.json());
-        }).catch((err, caught) => {
-            throw err;
         });
     }
 
