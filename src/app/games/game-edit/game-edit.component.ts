@@ -45,6 +45,7 @@ export class GameEditComponent implements OnInit {
             name: 'No team',
         } as Team;
     };
+    title = 'Create a game';
     form: GameEditFormGroup;
     locationAutoComplete: FormControl;
     locations: Location[];
@@ -82,9 +83,16 @@ export class GameEditComponent implements OnInit {
             this.targetTeam = +params['targetTeam'];
             const editTeamId = +params['id'];
             if (editTeamId) {
+                this.title = 'Edit a game';
                 this.isEdit = true;
                 this.games.get(editTeamId).subscribe(game => {
+                    this.title = game.getName();
                     this.form.patchValue(game);
+                    if (game.teams && game.teams[0]) {
+                        this.controls['teams'].controls['teamName'].patchValue(
+                            this.managedTeams.find((team) =>
+                            team.id === game.teams[0].id));
+                    }
                 });
             }
         });
@@ -214,6 +222,9 @@ export class GameEditComponent implements OnInit {
             } else {
                 _locationSubject.next(value);
             }
+        });
+        form.controls['name'].valueChanges.subscribe(value => {
+            if (this.isEdit) { this.title = value; }
         });
         _locationSubject.debounceTime(this.searchDebounceTime)
             .subscribe(value => {
