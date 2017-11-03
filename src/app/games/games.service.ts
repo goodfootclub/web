@@ -39,7 +39,7 @@ export class GamesService {
         })
     }
 
-    create(data): Observable<GameEvent> {
+    create(data: GameEvent): Observable<GameEvent> {
         let request = new Request({
             method: RequestMethod.Post,
             url: `/api/games/`,

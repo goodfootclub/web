@@ -157,13 +157,15 @@ export class GameEditComponent implements OnInit {
                 formData['location'].name :
                 formData['location'] as Location;
         let data = {
+            id: formData.id,
             name: formData.name,
             location: selectedLocation,
             teams: teamsArray,
             datetimes: dates,
         };
-
-        this.games.create(data).subscribe(newGame => {
+        const method = this.isEdit ? this.games.update.bind(this)
+            : this.games.create.bind(this);
+        method(data).subscribe(newGame => {
             this.historyService.skipCurrent();
             this.router.navigate(['/games', newGame.id]);
         });
@@ -192,6 +194,7 @@ export class GameEditComponent implements OnInit {
 
     private buildForm(): GameEditFormGroup {
         const form = this.formBuilder.group({
+            id: [],
             name: ['Pickup game', Validators.compose([
                 Validators.required,
                 Validators.maxLength(50),
