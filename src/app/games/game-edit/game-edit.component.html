@@ -130,7 +130,7 @@
     <br/>
 
     <div class="buttons">
-        <div>
+        <div *ngIf="!isEdit">
             <button md-button type="button" (click)="removeDate()" *ngIf="form.controls.dates['controls'].length > 1">
                 Remove last
             </button>
