@@ -93,6 +93,16 @@ export class GameEditComponent implements OnInit {
                             this.managedTeams.find((team) =>
                             team.id === game.teams[0].id));
                     }
+                    if (game.datetime && game.datetime[0]) {
+                        const gameDateTime = moment.utc(game.datetime[0])
+                            .local();
+                        const gameDateControl =
+                        (this.form.controls['dates'] as FormArray).controls[0];
+                        gameDateControl.patchValue({
+                            date: gameDateTime.format('YYYY-MM-DD'),
+                            time: gameDateTime.format('HH:mm'),
+                        });
+                    }
                 });
             }
         });
