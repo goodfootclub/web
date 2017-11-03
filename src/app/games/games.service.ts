@@ -39,7 +39,7 @@ export class GamesService {
         })
     }
 
-    create(data: GameEvent): Observable<GameEvent> {
+    create(data): Observable<GameEvent> {
         let request = new Request({
             method: RequestMethod.Post,
             url: `/api/games/`,
@@ -51,7 +51,7 @@ export class GamesService {
         });
     }
 
-    update(data: GameEvent): Observable<GameEvent> {
+    update(data): Observable<GameEvent> {
         let request = new Request({
             method: RequestMethod.Put,
             url: `/api/games/${data.id}`,

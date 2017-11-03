@@ -10,7 +10,7 @@ import {
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import * as moment from 'moment';
 
-import { Location, Team } from 'app/types';
+import { Location, Team} from 'app/types';
 import { GamesService } from '../games.service';
 import { LocationsService } from '../locations.service';
 import { HistoryService } from '../../core/services/history.service';
@@ -156,16 +156,24 @@ export class GameEditComponent implements OnInit {
             formData['location'].name instanceof Location ?
                 formData['location'].name :
                 formData['location'] as Location;
-        let data = {
-            id: formData.id,
-            name: formData.name,
-            location: selectedLocation,
-            teams: teamsArray,
-            datetimes: dates,
-        };
-        const method = this.isEdit ? this.games.update.bind(this)
-            : this.games.create.bind(this);
-        method(data).subscribe(newGame => {
+        let sub;
+        if (this.isEdit) {
+            sub = this.games.update({
+                id: formData.id,
+                name: formData.name,
+                location: selectedLocation,
+                teams: teamsArray,
+                datetime: dates[0],
+            });
+        } else {
+            sub = this.games.create({
+                name: formData.name,
+                location: selectedLocation,
+                teams: teamsArray,
+                datetimes: dates,
+            });
+        }
+        sub.subscribe(newGame => {
             this.historyService.skipCurrent();
             this.router.navigate(['/games', newGame.id]);
         });
