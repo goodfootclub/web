@@ -10,7 +10,7 @@ import {
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import * as moment from 'moment';
 
-import { Location, Team} from 'app/types';
+import { Location, Team } from 'app/types';
 import { GamesService } from '../games.service';
 import { LocationsService } from '../locations.service';
 import { HistoryService } from '../../core/services/history.service';
@@ -47,7 +47,7 @@ export class GameEditComponent implements OnInit {
     };
     title = 'Create a game';
     form: GameEditFormGroup;
-    locationAutoComplete: FormControl;
+    locationAutoComplete: FormGroup;
     locations: Location[];
     managedTeams: Team[] = [this.noTeam];
     targetTeam: number = null;
