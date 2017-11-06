@@ -53,6 +53,7 @@ export class GameEditComponent implements OnInit {
     targetTeam: number = null;
     tzOffset = moment().utcOffset() / 60;
     tzName = `GMT${this.tzOffset >= 0 ? '+' : '-'}${this.tzOffset}`;
+    loading = false;
 
     // local date, calculated in a weird way
     now = moment.utc().add(this.tzOffset, 'hours');
@@ -85,8 +86,10 @@ export class GameEditComponent implements OnInit {
             if (editTeamId) {
                 this.title = 'Edit a game';
                 this.isEdit = true;
+                this.loading = true;
                 this.games.get(editTeamId).subscribe(game => {
                     this.title = game.getName();
+                    if (!game.name) { game.name = game.getName(); }
                     this.form.patchValue(game);
                     if (game.teams && game.teams[0]) {
                         this.controls['teams'].controls['teamName'].patchValue(
@@ -102,6 +105,7 @@ export class GameEditComponent implements OnInit {
                             date: gameDateTime.format('YYYY-MM-DD'),
                             time: gameDateTime.format('HH:mm'),
                         });
+                        setTimeout(() => this.loading = false, 0);
                     }
                 });
             }
@@ -238,10 +242,12 @@ export class GameEditComponent implements OnInit {
 
         const _locationSubject: Subject<string> = new Subject();
         this.locationControls.name.valueChanges.subscribe(value => {
-            if (value instanceof Location) {
-                this.locationControls.address.patchValue(value.address);
-            } else {
-                _locationSubject.next(value);
+            if (!this.loading) {
+                if (value instanceof Location) {
+                    this.locationControls.address.patchValue(value.address);
+                } else {
+                    _locationSubject.next(value);
+                }
             }
         });
         form.controls['name'].valueChanges.subscribe(value => {
