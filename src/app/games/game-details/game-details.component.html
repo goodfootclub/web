@@ -24,6 +24,8 @@
                 <md-radio-button *ngFor="let status of [2, 0, 1];" [value]="status">{{rsvpMessages[status]}}  </md-radio-button>
             </md-radio-group>
         </div>
+
+        <button class="right-btn" *ngIf="isAvailableToEdit()" md-icon-button (click)="editGame()"><app-icon name="edit-3"></app-icon></button>
     </div>
     <div class="data-row">
         <div>

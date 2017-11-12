@@ -6,9 +6,10 @@ import { AppCommonModule } from 'app/common';
 import { GamesService } from './games.service';
 import { LocationsService } from './locations.service';
 import { GamesComponent } from './games.component';
-import { GameAddComponent } from './game-add';
+import { GameEditComponent } from './game-edit/game-edit.component';
 import { GameDetailsComponent } from './game-details';
 import { MyGamesComponent } from './my-games/my-games.component';
+
 import { MaterialModule } from 'app/material/material.module';
 
 const ROUTES: Routes = [{
@@ -16,9 +17,11 @@ const ROUTES: Routes = [{
 }, {
     path: 'my', component: MyGamesComponent,
 }, {
-    path: 'add', component: GameAddComponent,
+    path: 'add', component: GameEditComponent,
 }, {
     path: ':id', component: GameDetailsComponent,
+}, {
+    path: ':id/edit', component: GameEditComponent,
 }];
 
 
@@ -34,7 +37,7 @@ const ROUTES: Routes = [{
         LocationsService,
     ],
     declarations: [
-        GameAddComponent,
+        GameEditComponent,
         GameDetailsComponent,
         GamesComponent,
         MyGamesComponent,

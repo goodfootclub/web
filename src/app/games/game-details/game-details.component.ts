@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { GamesService } from '../games.service';
 import { GameEvent, RsvpStatus, Player, RsvpStatuses, User } from '../../types';
-import { MdRadioGroup } from '@angular/material';
+import { MdRadioGroup, MdDialog } from '@angular/material';
 import { TitleService } from '../../core/services/title.service';
 import { ProfileService } from '../../profile/profile.service';
 import { Observable } from 'rxjs/Observable';
@@ -32,6 +32,7 @@ export class GameDetailsComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private profileService: ProfileService,
+        private dialogService: MdDialog,
     ) { }
 
     ngOnInit() {
@@ -43,7 +44,7 @@ export class GameDetailsComponent implements OnInit {
             ).subscribe(arr => {
                 this.user = arr[0];
                 const game = arr[1] as GameEvent;
-                this.titleService.setTitle(game.name);
+                this.titleService.setTitle(game.getName());
                 this.userPlayer = game.playersById[
                     this.user.id
                 ];
@@ -120,5 +121,14 @@ export class GameDetailsComponent implements OnInit {
             params.targetTeam = this.game.teams[0].id;
         }
         this.router.navigate(['/players', params]);
+    }
+
+    isAvailableToEdit() {
+        return this.user && this.game &&
+            this.user.id === this.game.organizer.id;
+    }
+
+    editGame() {
+        this.router.navigate(['/games', this.game.id, 'edit']);
     }
 }

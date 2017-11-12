@@ -5,7 +5,7 @@
         [routerLink]="['/games', game.id]"
     >
         <div class="game-header">
-            <h1>{{ game.name }}</h1>
+            <h1>{{ game.getName() }}</h1>
             <span class="rsvp-status">{{getRsvpStatus(game)}}</span>
             <div class="close-button" (click)="deleteRsvpStatus(game, $event)" *ngIf="rsvpStatuses">
                 <button md-icon-button>
