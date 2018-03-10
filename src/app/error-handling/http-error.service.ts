@@ -46,6 +46,7 @@ export class HttpErrorHandler {
      *  should be excluded from common error handling
      */
     private isExcluded(error: Response) {
+        if (!error || !error.url) { return false; }
         const index = error.url.indexOf('/api');
         if (index === -1) { return false; }
         const url = error.url.substr(index + '/api'.length);
