@@ -3,7 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import { TitleService } from '../../core/services/title.service';
 import { ProfileService } from 'app/profile';
-import { Team, PlayerRole, GameEvent, User } from 'app/types';
+import { Team, GameEvent, User, PLAYER_ROLE_SUBSTITUTE } from 'app/types';
 import { TeamsService, playerRoles } from '../teams.service';
 import { Observable } from 'rxjs/Observable';
 
@@ -55,7 +55,7 @@ export class TeamDetailsComponent implements OnInit {
                 for (let player of this.team.players) {
                     if (player.id === this.user.id) {
                         this.canAskToJoin = false;
-                        this.isPlayer = player.role >= PlayerRole.Substitute;
+                        this.isPlayer = player.role >= PLAYER_ROLE_SUBSTITUTE;
                         break;
                     }
                 }

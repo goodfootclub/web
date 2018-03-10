@@ -28,6 +28,7 @@ export enum Gender {
     Female,
 }
 
+export const PLAYER_ROLE_SUBSTITUTE = 1;
 
 export enum PlayerRole {
     // Active players
